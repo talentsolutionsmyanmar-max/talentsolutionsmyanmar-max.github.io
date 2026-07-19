@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Landing Demo — Hero Cluster + Recruiter Pathway (S318 revise)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=Padauk:wght@400;700&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #001F3F; --dark: #001229; --gold: #D4AF37; --teal: #0D9488;
+  --slate: #64748B; --slate-lt: #94A3B8;
+  --elev: 0 1px 2px rgba(0,31,63,.04), 0 16px 40px rgba(0,31,63,.10);
+  --elev-border: 1px solid rgba(0,31,63,.08);
+  --radius: 8px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', 'Padauk', sans-serif; background: #FFFFFF; color: var(--navy); }
+.sec { max-width: 1120px; margin: 0 auto; padding-left: clamp(20px,4vw,48px); padding-right: clamp(20px,4vw,48px); }
+.demoTag { background: var(--dark); color: var(--slate-lt); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .08em; padding: 8px 16px; text-align: center; }
+.demoTag b { color: var(--gold); font-weight: 700; }
+
+.heroSection { position: relative; overflow: hidden; }
+.heroMesh { position: absolute; inset: -20% -10%; pointer-events: none; background:
+  radial-gradient(ellipse 42% 36% at 78% 18%, rgba(13,148,136,.14), transparent 65%),
+  radial-gradient(ellipse 36% 32% at 92% 62%, rgba(212,175,55,.12), transparent 65%),
+  radial-gradient(ellipse 48% 42% at 55% 85%, rgba(0,31,63,.07), transparent 70%); }
+.heroGrid { position: relative; display: grid; grid-template-columns: 1fr; gap: 40px; padding-top: clamp(40px,6vw,80px); padding-bottom: clamp(40px,6vw,72px); }
+@media (min-width: 1024px) { .heroGrid { grid-template-columns: 11fr 9fr; gap: 32px; align-items: center; } }
+.heroCopy > * { max-width: 600px; }
+.soulBanner { font-size: 13px; font-style: italic; color: #9CA3AF; letter-spacing: .01em; line-height: 1.6; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #E5E7EB; }
+.soulBanner b { font-style: normal; color: var(--gold); font-weight: 600; }
+.heroEyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--teal); border: 1px solid rgba(13,148,136,.35); background: rgba(255,255,255,.7); border-radius: 4px; padding: 6px 12px; margin-bottom: 24px; }
+.heroH { font-family: 'Sora', sans-serif; font-size: clamp(34px,6vw,56px); font-weight: 800; letter-spacing: -.03em; line-height: 1.06; margin-bottom: 14px; color: var(--navy); }
+.heroMm { font-family: 'Padauk', 'DM Sans', sans-serif; font-size: 16px; line-height: 1.8; color: var(--slate); margin-bottom: 16px; }
+.heroSub { font-size: 16px; color: var(--slate); line-height: 1.7; margin-bottom: 28px; max-width: 520px; }
+.heroCtas { display: flex; gap: 12px; flex-wrap: wrap; }
+.heroBtn { font-size: 15px; font-weight: 600; min-height: 48px; display: inline-flex; align-items: center; padding: 0 26px; border-radius: 8px; text-decoration: none; }
+.heroBtnGold { background: var(--gold); color: var(--navy); box-shadow: 0 4px 14px rgba(212,175,55,.35); }
+.heroBtnOutline { background: rgba(255,255,255,.7); color: var(--navy); border: 1.5px solid var(--navy); }
+.heroNote { font-size: 13px; color: var(--slate); margin-top: 14px; }
+
+.heroVisual { position: relative; padding: 8px 0 24px; }
+@media (min-width: 1024px) { .heroVisual { padding: 0 8px 32px 0; } }
+@keyframes clusterFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+.cluster { position: relative; max-width: 340px; margin: 0 auto; animation: clusterFloat 8s ease-in-out infinite; }
+@media (min-width: 1024px) { .cluster { margin: 0 0 0 auto; } }
+.jobCard { position: relative; z-index: 1; background: #FFFFFF; border: var(--elev-border); border-radius: var(--radius); box-shadow: var(--elev); padding: 20px; }
+.jobCardTop { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+.jobChip { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--teal); background: rgba(13,148,136,.1); border: 1px solid rgba(13,148,136,.25); padding: 3px 8px; border-radius: 4px; }
+.jobSalary { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; color: var(--navy); }
+.jobTitle { font-family: 'Sora', sans-serif; font-size: 17px; font-weight: 700; letter-spacing: -.01em; }
+.jobMeta { font-size: 12px; color: var(--slate); margin-top: 4px; }
+.jobFoot { display: flex; align-items: center; gap: 12px; margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(0,31,63,.07); }
+.trinityRing { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 3px solid var(--gold); font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 700; color: var(--navy); }
+.jobFootText { display: flex; flex-direction: column; }
+.jobFootLabel { font-size: 12px; font-weight: 700; color: var(--navy); }
+.jobFootSub { font-size: 11px; color: var(--slate-lt); }
+.mayaCard { position: relative; z-index: 2; display: flex; align-items: center; gap: 10px; width: 82%; margin: -16px auto 0; background: #FFFFFF; border: var(--elev-border); border-radius: var(--radius); box-shadow: var(--elev); padding: 12px 16px; }
+.mayaOrb { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--teal); font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 800; color: #FFF; }
+.mayaText { font-family: 'Padauk', 'DM Sans', sans-serif; font-size: 13px; line-height: 1.8; color: var(--navy); }
+.clusterCaption { text-align: center; font-size: 11px; color: var(--slate-lt); margin-top: 18px; }
+
+.statBand { background: var(--navy); }
+.statGrid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px 16px; padding-top: 32px; padding-bottom: 32px; }
+@media (min-width: 768px) { .statGrid { grid-template-columns: repeat(4,1fr); } }
+.statItem { border-left: 2px solid var(--gold); padding-left: 14px; }
+.statNum { display: block; font-family: 'JetBrains Mono', monospace; font-size: 30px; font-weight: 700; line-height: 1.2; color: var(--gold); }
+.statLabel { font-size: 12px; color: #B9C7D6; line-height: 1.5; margin-top: 2px; }
+
+.earnBand { background: #F8FAFC; padding: clamp(56px,8vw,80px) 0; }
+.sectionLabel { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.sectionLine { width: 20px; height: 1.5px; background: var(--teal); border-radius: 1px; }
+.sectionH { font-family: 'Sora', sans-serif; font-size: clamp(24px,3.2vw,32px); font-weight: 700; letter-spacing: -.02em; line-height: 1.18; color: var(--navy); max-width: 640px; margin-bottom: 28px; }
+.onrampGrid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 12px; }
+@media (min-width: 700px) { .onrampGrid { grid-template-columns: 1fr 1fr; } }
+.onrampCard { background: #FFF; border: 1px solid rgba(0,31,63,.07); border-radius: var(--radius); box-shadow: 0 1px 2px rgba(0,31,63,.03), 0 8px 24px rgba(0,31,63,.05); padding: 20px; display: flex; gap: 14px; align-items: flex-start; }
+.onrampIcon { flex: none; width: 40px; height: 40px; border-radius: 8px; background: rgba(13,148,136,.1); color: var(--teal); display: grid; place-items: center; }
+.onrampTag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--teal); background: rgba(13,148,136,.08); border: 1px solid rgba(13,148,136,.2); padding: 3px 8px; border-radius: 4px; display: inline-block; margin-bottom: 6px; }
+.onrampTitle { font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.onrampDesc { font-size: 13px; color: var(--slate); line-height: 1.65; }
+.certCard { background: #FFF; border: 1px solid rgba(212,175,55,.4); border-radius: var(--radius); box-shadow: 0 1px 2px rgba(0,31,63,.04), 0 12px 32px rgba(0,31,63,.07); padding: clamp(22px,3vw,32px); display: grid; grid-template-columns: 1fr; gap: 24px; margin-bottom: 12px; }
+@media (min-width: 900px) { .certCard { grid-template-columns: 5fr 6fr; gap: 32px; } }
+.certTag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--navy); background: rgba(212,175,55,.18); border: 1px solid rgba(212,175,55,.45); padding: 4px 10px; border-radius: 4px; display: inline-block; margin-bottom: 10px; }
+.certTitle { font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -.01em; margin-bottom: 16px; }
+.certSteps { display: flex; flex-direction: column; gap: 10px; }
+.certStep { display: flex; align-items: center; gap: 12px; }
+.certStepIcon { flex: none; width: 34px; height: 34px; border-radius: 8px; background: rgba(13,148,136,.1); color: var(--teal); display: grid; place-items: center; }
+.certStepIcon.gold { background: rgba(212,175,55,.15); color: #B8960F; }
+.certStepText { font-size: 13px; font-weight: 600; color: var(--navy); line-height: 1.5; }
+.certBody { display: flex; flex-direction: column; gap: 14px; }
+.certDesc { font-size: 14px; color: var(--slate); line-height: 1.75; }
+.certDescMm { font-family: 'Padauk', 'DM Sans', sans-serif; font-size: 14px; color: var(--slate); line-height: 2; padding-top: 14px; border-top: 1px dashed rgba(0,31,63,.12); }
+.pathGrid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 700px) { .pathGrid { grid-template-columns: 1fr 1fr; } }
+.pathCard { background: #FFF; border: 1px solid rgba(0,31,63,.07); border-radius: var(--radius); box-shadow: 0 1px 2px rgba(0,31,63,.03), 0 8px 24px rgba(0,31,63,.05); padding: 20px; }
+.pathTag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--teal); background: rgba(13,148,136,.08); border: 1px solid rgba(13,148,136,.2); padding: 3px 8px; border-radius: 4px; display: inline-block; margin-bottom: 10px; }
+.pathTitle { font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.pathDesc { font-size: 13px; color: var(--slate); line-height: 1.65; }
+@media (prefers-reduced-motion: reduce) { .cluster { animation: none; } }
+</style>
+</head>
+<body>
+
+<div class="demoTag">DEMO BLOCK A — <b>recomposed hero cluster</b> · one elevation system · real JDE job · soul banner restored</div>
+
+<section class="heroSection">
+  <div class="heroMesh" aria-hidden="true"></div>
+  <div class="heroGrid sec">
+    <div class="heroCopy">
+      <p class="soulBanner">Real career wisdom, <b>freely shared</b> — for every Myanmar worker, every student, every generation.</p>
+      <p class="heroEyebrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Licensed by Ministry of Labour · License No. 211/2024
+      </p>
+      <h1 class="heroH">Your next career starts with someone who knows you.</h1>
+      <p lang="my" class="heroMm">သင့်အသက်မွေးဝမ်းကျောင်း ခရီးစဉ် — သင့်ကို နားလည်သူတစ်ယောက်နှင့် စတင်ပါ။</p>
+      <p class="heroSub">Real jobs from licensed employers, 190+ free bilingual courses, and an AI career advisor who answers in Myanmar and English.</p>
+      <div class="heroCtas">
+        <a href="#" class="heroBtn heroBtnGold">Start free</a>
+        <a href="#" class="heroBtn heroBtnOutline">Browse jobs</a>
+      </div>
+      <p class="heroNote">No account needed to look around.</p>
+    </div>
+
+    <div class="heroVisual">
+      <div class="cluster">
+        <div class="jobCard">
+          <div class="jobCardTop">
+            <span class="jobChip">Active</span>
+            <span class="jobSalary">800,000–1,000,000 MMK</span>
+          </div>
+          <div class="jobTitle">HR Executive</div>
+          <div class="jobMeta">JDE Coffee Myanmar · Yangon</div>
+          <div class="jobFoot">
+            <span class="trinityRing">87</span>
+            <span class="jobFootText">
+              <span class="jobFootLabel">Trinity match</span>
+              <span class="jobFootSub">Your profile vs this role</span>
+            </span>
+          </div>
+        </div>
+        <div class="mayaCard">
+          <span class="mayaOrb">M</span>
+          <span lang="my" class="mayaText">Salary negotiation ကို မည်သို့ ပြင်ဆင်ရပါမည်နည်း</span>
+        </div>
+      </div>
+      <p class="clusterCaption">Live job from a licensed employer · match score is an illustrative preview</p>
+    </div>
+  </div>
+</section>
+
+<div class="demoTag">DEMO BLOCK B — <b>stat band, 240+ ruling applied</b></div>
+
+<section class="statBand">
+  <div class="statGrid sec">
+    <div class="statItem"><span class="statNum">240+</span><span class="statLabel">active jobs right now</span></div>
+    <div class="statItem"><span class="statNum">190+</span><span class="statLabel">free bilingual courses</span></div>
+    <div class="statItem"><span class="statNum">60+</span><span class="statLabel">companies hiring now</span></div>
+    <div class="statItem"><span class="statNum">Free</span><span class="statLabel">for job seekers — always</span></div>
+  </div>
+</section>
+
+<div class="demoTag">DEMO BLOCK C — <b>recruiter pathway restored</b> · full mechanics EN + MM (byte-identical) · on-ramp cards reinstated</div>
+
+<section class="earnBand">
+  <div class="sec">
+    <p class="sectionLabel"><span class="sectionLine"></span> From pocket money to profession</p>
+    <h2 class="sectionH">Your network is worth more than you think</h2>
+
+    <div class="onrampGrid">
+      <div class="onrampCard">
+        <span class="onrampIcon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg></span>
+        <span>
+          <span class="onrampTag">Free tier</span>
+          <div class="onrampTitle">Pocket Money</div>
+          <div class="onrampDesc">Share a job link. Your friend gets hired. You earn 70% of the placement fee. No training needed.</div>
+        </span>
+      </div>
+      <div class="onrampCard">
+        <span class="onrampIcon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
+        <span>
+          <span class="onrampTag">Active Referrer +2%</span>
+          <div class="onrampTitle">Side Income</div>
+          <div class="onrampDesc">Complete 3 Academy modules. Learn to screen candidates. Your conversion rate goes up.</div>
+        </span>
+      </div>
+    </div>
+
+    <div class="certCard">
+      <div>
+        <span class="certTag">Certified Recruiter</span>
+        <div class="certTitle">Career — recruit professionally, independently</div>
+        <div class="certSteps">
+          <div class="certStep">
+            <span class="certStepIcon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+            <span class="certStepText">Complete all 4 modules of the Recruiter's Path</span>
+          </div>
+          <div class="certStep">
+            <span class="certStepIcon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+            <span class="certStepText">Finish a Capstone on one real Search Cycle</span>
+          </div>
+          <div class="certStep">
+            <span class="certStepIcon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></span>
+            <span class="certStepText">Be assessed against the published Rubric</span>
+          </div>
+          <div class="certStep">
+            <span class="certStepIcon gold"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.5 13 17 22l-5-3-5 3 1.5-9"/></svg></span>
+            <span class="certStepText">Receive a Certificate with a Verification Code</span>
+          </div>
+        </div>
+      </div>
+      <div class="certBody">
+        <p class="certDesc">Certified Recruiter — Complete the Recruiter's Path. Complete all 4 modules, finish a Capstone on one real Search Cycle, and be assessed against the published Rubric. Pass to submit Candidates directly to Clients without a Reviewer and receive a Certificate with a Verification Code.</p>
+        <p lang="my" class="certDescMm">Certified Recruiter — Recruiter's Path ကိုပြီးအောင်လုပ်ပါ။ Module 4 ခုကိုပြီးစီးပြီး တကယ့် Search Cycle တစ်ခုအပေါ် Capstone လုပ်ကာ ကြေညာထားတဲ့ Rubric အတိုင်း အကဲဖြတ်ခံရပါမယ်။ Pass ဖြစ်ရင် Client ဆီ Candidate ကို Reviewer မဖြတ်ဘဲ တိုက်ရိုက်တင်ခွင့်ရပြီး Verification Code ပါတဲ့ Certificate ရရှိပါမယ်။</p>
+      </div>
+    </div>
+
+    <div class="pathGrid">
+      <div class="pathCard">
+        <span class="pathTag">Pro Referrer Graduate</span>
+        <div class="pathTitle">Lock in 80%</div>
+        <div class="pathDesc">Complete the Academy program and close 5 positions. You keep 80% of every placement fee after that — regardless of subscription tier.</div>
+      </div>
+      <div class="pathCard">
+        <span class="pathTag">BD Freelancer</span>
+        <div class="pathTitle">Build a business</div>
+        <div class="pathDesc">Bring new employer clients to ReferTRM and earn recurring commission on every payroll contract.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
