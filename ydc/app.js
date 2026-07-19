@@ -150,6 +150,70 @@ const PROGRESS = {
   working:    { done: 3,  total: 10, active: 'w-4' },
 };
 
+/* ---------- R4 — band = world, not label ----------
+   Per-band module libraries: same 4-tier ladder canon, different contents.
+   Basic = simpler titles, 3–4-lesson modules, picture-first types.
+   Middle = intermediate. High / out-of-school = the current library.
+   Five majors canon unchanged in every world. Invented shapes — real
+   band libraries are HA/CCO curriculum work (demo shows the shape).   */
+const BAND_MODULES = {
+  basic: {
+    foundation: [
+      { id:'b-f-1', title:'Plants Around Us',              major:'biology' },
+      { id:'b-f-2', title:'Animals Near Home',             major:'biology' },
+      { id:'b-f-3', title:'My Body Works',                 major:'biology' },
+      { id:'b-f-4', title:'Water, Air & Mixing',           major:'chemistry' },
+      { id:'b-f-5', title:'Things That Move',              major:'physics' },
+      { id:'b-f-6', title:'Words for My Day',              major:'english' },
+      { id:'b-f-7', title:'Listen & Say It',               major:'english' },
+      { id:'b-f-8', title:'Counting & Shapes',             major:'math' },
+    ],
+    working: [
+      { id:'b-w-1', title:'Talk About Your Day',           major:'english' },
+      { id:'b-w-2', title:'Draw & Tell: A Plant You Found',major:'biology' },
+      { id:'b-w-3', title:'Measure It',                    major:'math' },
+      { id:'b-w-4', title:'Mix & Watch',                   major:'chemistry' },
+      { id:'b-w-5', title:'Push, Pull, Roll',              major:'physics' },
+      { id:'b-w-6', title:'Capstone: My Nature Project',   major:'biology' },
+    ],
+  },
+  middle: {
+    foundation: [
+      { id:'m-f-1', title:'Cells: Tiny Building Blocks',   major:'biology' },
+      { id:'m-f-2', title:'How Plants Make Food',          major:'biology' },
+      { id:'m-f-3', title:'Body Systems',                  major:'biology' },
+      { id:'m-f-4', title:'Habitats & Food Chains',        major:'biology' },
+      { id:'m-f-5', title:'Matter & Mixtures',             major:'chemistry' },
+      { id:'m-f-6', title:'Simple Reactions',              major:'chemistry' },
+      { id:'m-f-7', title:'Pushes, Pulls & Motion',        major:'physics' },
+      { id:'m-f-8', title:'Everyday English: Clear Sentences', major:'english' },
+      { id:'m-f-9', title:'Reading Short Texts',           major:'english' },
+      { id:'m-f-10', title:'Numbers, Fractions & Patterns',major:'math' },
+    ],
+    working: [
+      { id:'m-w-1', title:'Everyday English II: Conversations', major:'english' },
+      { id:'m-w-2', title:'Scientific Reading: Short Articles', major:'english' },
+      { id:'m-w-3', title:'Lab Basics & Safety',           major:'chemistry' },
+      { id:'m-w-4', title:'Writing Short Reports',         major:'english' },
+      { id:'m-w-5', title:'Ecosystems Around You',         major:'biology' },
+      { id:'m-w-6', title:'Energy at Home',                major:'physics' },
+      { id:'m-w-7', title:'Data Around Me',                major:'math' },
+      { id:'m-w-8', title:'Capstone: My Community Project',major:'biology' },
+    ],
+  },
+};
+
+/* per-band progress (invented) — same learner journey shape, sized to the world */
+const BAND_PROGRESS = {
+  basic:  { foundation: { done: 8,  total: 8 },  working: { done: 1, total: 6, active: 'b-w-2' } },
+  middle: { foundation: { done: 10, total: 10 }, working: { done: 3, total: 8, active: 'm-w-4' } },
+};
+
+function bandKey(band){ return band==='basic' ? 'basic' : band==='middle' ? 'middle' : 'high'; }
+function libraryFor(band){ return band==='basic' ? BAND_MODULES.basic : band==='middle' ? BAND_MODULES.middle : MODULES; }
+function progressFor(band){ return band==='basic' ? BAND_PROGRESS.basic : band==='middle' ? BAND_PROGRESS.middle : PROGRESS; }
+function bandFromModId(id){ return id.startsWith('b-') ? 'basic' : id.startsWith('m-') ? 'middle' : 'high'; }
+
 const LESSONS = {
   'w-4': [
     { n:1, title:'Structuring a Report',      state:'done',    dur:25, type:'reading' },
@@ -158,6 +222,21 @@ const LESSONS = {
     { n:4, title:'Data Tables & Figures',     state:'current', dur:35, type:'sim' },
     { n:5, title:'Peer Review Practice',      state:'todo',    dur:30, type:'scenario' },
     { n:6, title:'Final Draft & Submission',  state:'todo',    dur:40, type:'speaking' },
+  ],
+  /* R4 — Basic world active module: 3–4 lessons, picture-first */
+  'b-w-2': [
+    { n:1, title:'Watch: Plants Near You',  state:'done',    dur:10, type:'video' },
+    { n:2, title:'Parts of a Plant',        state:'done',    dur:12, type:'video' },
+    { n:3, title:'Draw What You See',       state:'current', dur:15, type:'scenario' },
+    { n:4, title:'Say the Names Aloud',     state:'todo',    dur:10, type:'speaking' },
+  ],
+  /* R4 — Middle world active module */
+  'm-w-4': [
+    { n:1, title:'The Shape of a Report',   state:'done',    dur:20, type:'reading' },
+    { n:2, title:'Facts & Where They Live', state:'done',    dur:25, type:'video' },
+    { n:3, title:'Short, Clear Sentences',  state:'current', dur:20, type:'reading' },
+    { n:4, title:'Tables & Pictures',       state:'todo',    dur:25, type:'sim' },
+    { n:5, title:'Share Your Draft',        state:'todo',    dur:20, type:'speaking' },
   ],
 };
 
@@ -173,6 +252,7 @@ const TYPE_META = {
 };
 const TYPE_KEYS = Object.keys(TYPE_META);
 const TYPE_ENGLISH = ['speaking','scenario','speaking','scenario','video','reading'];
+const TYPE_BASIC = ['video','sim','video','scenario','video','sim'];   // R4 — picture-first for the youngest world
 
 /* ---------- assignment loop (designed, not wired — honest footers apply) ---------- */
 const RUBRIC = [
@@ -203,6 +283,7 @@ function assignTask(m){
   if(t.includes('biology') || t.includes('cells') || t.includes('plants') || t.includes('ecosystems')) return 'Film a plant near where you live. Identify 3 parts and label them in your video.';
   if(t.includes('chemistry') || t.includes('mixing')) return 'With an adult present, mix vinegar and baking soda. Photograph the reaction and explain the gas it makes.';
   if(t.includes('physics') || t.includes('motion') || t.includes('forces')) return 'Drop 3 different objects. Record what you see. Explain in your own words why they fall the way they do.';
+  if(t.includes('energy')) return 'Find 5 things at home that use energy. Order them from least to most — guess first, then check the labels.';
   if(t.includes('lab')) return 'Run the measurement drill from this module at home. Photograph your setup and your recorded results.';
   if(t.includes('english') || t.includes('writing') || t.includes('reading') || t.includes('aloud')) return 'Read your latest draft aloud. Record 2 minutes of audio, then write 3 lines rating your own clarity.';
   if(t.includes('presentation')) return 'Record a 2-minute talk on any topic from this module. Watch it once, then re-record one improvement.';
@@ -212,6 +293,19 @@ function assignTask(m){
   if(t.includes('digital')) return 'Audit your own phone: list every app permission you have granted. Photograph your notes.';
   return 'Apply this module\u2019s skill in the real world, then submit your evidence.';
 }
+
+/* R4 — Basic-world DO tasks, phrased for a child. Sealed rubric unchanged. */
+function basicTask(m){
+  const t = m.title.toLowerCase();
+  if(t.includes('plant') || t.includes('animals') || t.includes('body') || t.includes('nature')) return 'Draw the plant you found. Name 3 parts.';
+  if(t.includes('mix') || t.includes('water')) return 'With a grown-up, mix salt into water. Watch what happens. Draw what you see.';
+  if(t.includes('move') || t.includes('push') || t.includes('roll')) return 'Roll 3 things. Which one goes far? Draw them in a row.';
+  if(t.includes('word') || t.includes('listen') || t.includes('talk') || t.includes('say')) return 'Tell a grown-up about your day. Use 5 sentences.';
+  if(t.includes('count') || t.includes('measure') || t.includes('shapes')) return 'Find 3 things at home. Which is longest? Draw them in order.';
+  if(t.includes('project') || t.includes('capstone')) return 'Draw your idea for the nature project on one page.';
+  return 'Show what you learned — a drawing or a photo.';
+}
+function taskFor(band, m){ return bandKey(band)==='basic' ? basicTask(m) : assignTask(m); }
 
 /* assignment flavors — the two-AI disagreement task is the verification
    reflex made into a task; available in every major */
@@ -224,21 +318,48 @@ const DISAGREE_GHOST = {
 function flavorFor(modId){
   return modId === 'w-5' ? 'two_ai_disagreement' : 'do_task';
 }
-function assignState(tierId, modId){
+/* R4 — assignment state + mentor register follow the band's world */
+const REVISION_ID = { basic:'b-w-1', middle:'m-w-3', high:'w-3' };
+const REVISION_QUOTE = {
+  basic:  '\u201CNice try! Now tell me one thing you saw, in your own words.\u201D',
+  middle: '\u201CGood start. Add what you measured \u2014 and one thing that surprised you.\u201D',
+  high:   '\u201CGood measurements. Add units to every value and say what surprised you.\u201D',
+};
+function assignState(tierId, modId, band){
   if(tierId === 'foundation') return 'scored';      // completed tier → certificates earned
-  if(modId === 'w-3') return 'revision';            // ties to home needs-attention
-  if(modId === 'w-4') return 'awaiting';            // 1 of 2 peer reviews in
+  if(modId === REVISION_ID[bandKey(band)]) return 'revision';   // ties to home needs-attention
+  if(modId === progressFor(band).working.active) return 'awaiting';   // 1 of 2 peer reviews in
   return 'notsub';
 }
 
-const ATTENTION = [
-  { icon:'fileText', kind:'warn', href:'#/module/w-3',
-    title:'Assignment returned',
-    sub:'Your Lab Methods & Safety assignment came back with mentor feedback — one more pass.' },
-  { icon:'clock', kind:'warn', href:'#/module/w-10',
-    title:'Capstone proposal not started',
-    sub:'W-10 opens soon — outline your community project idea.' },
-];
+/* needs-attention drawn from the band's own library (R4) */
+const ATTENTIONS = {
+  basic: [
+    { icon:'fileText', kind:'warn', href:'#/module/b-w-1',
+      title:'Your recording came back',
+      sub:'Your mentor left a note — one more try.' },
+    { icon:'clock', kind:'warn', href:'#/module/b-w-6',
+      title:'Project idea not started',
+      sub:'Your nature project opens soon — start thinking about it.' },
+  ],
+  middle: [
+    { icon:'fileText', kind:'warn', href:'#/module/m-w-3',
+      title:'Assignment returned',
+      sub:'Your Lab Basics & Safety assignment came back with mentor feedback — one more pass.' },
+    { icon:'clock', kind:'warn', href:'#/module/m-w-8',
+      title:'Capstone proposal not started',
+      sub:'M-W-8 opens soon — outline your community project idea.' },
+  ],
+  high: [
+    { icon:'fileText', kind:'warn', href:'#/module/w-3',
+      title:'Assignment returned',
+      sub:'Your Lab Methods & Safety assignment came back with mentor feedback — one more pass.' },
+    { icon:'clock', kind:'warn', href:'#/module/w-10',
+      title:'Capstone proposal not started',
+      sub:'W-10 opens soon — outline your community project idea.' },
+  ],
+};
+function attentionFor(band){ return ATTENTIONS[bandKey(band)]; }
 
 /* module durations — seeded, stable across reloads */
 const MOD_META = {};
@@ -246,13 +367,24 @@ Object.values(MODULES).flat().forEach(m => {
   MOD_META[m.id] = { lessons: 4 + Math.floor(rng() * 4) };   // 4–7 lessons
 });
 MOD_META['w-4'].lessons = 6;   // matches authored LESSONS['w-4']
+/* R4 band libraries — shorter modules for younger worlds */
+Object.values(BAND_MODULES.basic).flat().forEach(m => {
+  MOD_META[m.id] = { lessons: 3 + Math.floor(rng() * 2) };   // 3–4 lessons
+});
+Object.values(BAND_MODULES.middle).flat().forEach(m => {
+  MOD_META[m.id] = { lessons: 4 + Math.floor(rng() * 2) };   // 4–5 lessons
+});
+MOD_META['b-w-2'].lessons = 4;   // matches authored LESSONS['b-w-2']
+MOD_META['m-w-4'].lessons = 5;   // matches authored LESSONS['m-w-4']
 
-/* module row state resolver */
-function moduleState(tierId, idx){
+/* module row state resolver — band-aware (R4) */
+function moduleState(tierId, idx, band){
+  const lib = libraryFor(band);
+  const prog = progressFor(band);
   if(tierId === 'foundation') return 'done';
   if(tierId === 'working'){
-    if(idx < PROGRESS.working.done) return 'done';
-    if(MODULES.working[idx].id === PROGRESS.working.active) return 'active';
+    if(idx < prog.working.done) return 'done';
+    if(lib.working[idx].id === prog.working.active) return 'active';
     return 'upcoming';
   }
   return 'locked';
@@ -275,7 +407,7 @@ const ICON = {
   grad:      I('<path d="M22 10v6"/><path d="M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>'),
   clock:     I('<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'),
   alert:     I('<circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/>'),
-  fileText:  I('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/>'),
+  fileText:  I('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/>'),
   shield:    I('<path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>'),
   flag:      I('<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/>'),
   play:      I('<polygon points="6 3 20 12 6 21 6 3"/>'),
@@ -283,7 +415,7 @@ const ICON = {
   flask:     I('<path d="M10 2v7.5a2 2 0 0 1-.2.9L4.7 20.5a1 1 0 0 0 .9 1.5h12.8a1 1 0 0 0 .9-1.5L14.2 10.4a2 2 0 0 1-.2-.9V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/>'),
   msgSquare: I('<path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/>'),
   video:     I('<path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/>'),
-  camera:    I('<path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/>'),
+  camera:    I('<path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/>'),
   pen:       I('<path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>'),
   upload:    I('<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/>'),
   award:     I('<circle cx="12" cy="8" r="6"/><path d="M15.5 12.9 17 22l-5-3-5 3 1.5-9.1"/>'),
@@ -357,8 +489,8 @@ function tierBadge(tier){
   return `<span class="pill gold">${ICON.grad} ${tier.name} tier</span>`;
 }
 
-function moduleRow(tierId, m, idx){
-  const st = moduleState(tierId, idx);
+function moduleRow(tierId, m, idx, band){
+  const st = moduleState(tierId, idx, band);
   const meta = MOD_META[m.id];
   const inner = `
     <span class="mi">${st==='done' ? ICON.check : st==='locked'||st==='upcoming' ? (st==='locked'?ICON.lock:String(idx+1)) : ICON.play}</span>
@@ -380,8 +512,12 @@ function moduleRow(tierId, m, idx){
 /* ---------- screen 1 · learner home ---------- */
 function viewHome(){
   const tier = TIERS.find(t=>t.id===LEARNER.tierId);
-  const reg = registerFor(getBand());
-  const mod = MODULES.working.find(m=>m.id===PROGRESS.working.active);
+  const band = getBand();
+  const reg = registerFor(band);
+  const lib = libraryFor(band);
+  const prog = progressFor(band);
+  const modIdx = lib.working.findIndex(m=>m.id===prog.working.active);
+  const mod = lib.working[modIdx];
   const lessons = LESSONS[mod.id];
   const cur = lessons.find(l=>l.state==='current');
   const doneCount = lessons.filter(l=>l.state==='done').length;
@@ -393,7 +529,7 @@ function viewHome(){
     return `<div class="rung ${cls}"><span class="node">${node}</span><span class="t">${t.name}</span><span class="d">${d}</span></div>`;
   }).join('');
 
-  const attn = ATTENTION.map(a=>`
+  const attn = attentionFor(band).map(a=>`
     <div class="attn">
       <span class="icobox ${a.kind}">${ICON[a.icon]}</span>
       <span><span class="t">${a.title}</span><span class="s" style="display:block">${a.sub}</span></span>
@@ -427,7 +563,7 @@ function viewHome(){
             <span class="pill teal">${ICON.play} In progress</span>
           </div>
           <h2 class="h2" style="margin-top:12px">${mod.title}</h2>
-          <p class="mut sm" style="margin-top:4px">Working tier · Module 4 · ${doneCount} of ${lessons.length} lessons complete</p>
+          <p class="mut sm" style="margin-top:4px">Working tier · Module ${modIdx+1} · ${doneCount} of ${lessons.length} lessons complete</p>
           <div class="track" style="margin-top:14px"><i style="width:${Math.round(doneCount/lessons.length*100)}%"></i></div>
           <div class="row" style="margin-top:16px;justify-content:space-between;flex-wrap:wrap">
             <span class="sm dim">Next: Lesson ${cur.n} — ${cur.title} · <span class="num">${cur.dur} min</span></span>
@@ -445,7 +581,7 @@ function viewHome(){
         <section class="panel pad">
           <span class="label">Up next</span>
           <div class="stack12" style="margin-top:12px">
-            ${MODULES.working.slice(4,6).map((m,i)=>`
+            ${lib.working.slice(modIdx+1, modIdx+3).map((m,i)=>`
               <div class="row" style="gap:12px">
                 <span class="icobox">${ICON.book}</span>
                 <span><span class="sm" style="font-weight:600;display:block">${m.title}</span>
@@ -474,6 +610,8 @@ function viewHome(){
 
 /* ---------- screen 2 · roadmap / ladder ---------- */
 function viewRoadmap(){
+  const band = getBand();
+  const lib = libraryFor(band);
   const tiers = TIERS.map(t=>{
     const cls = t.status==='done' ? 'done' : t.status==='current' ? 'current' : 'locked';
     const statePill = t.status==='done'
@@ -499,8 +637,8 @@ function viewRoadmap(){
         </div>
       </div>`;
     } else {
-      const mods = MODULES[t.id];
-      const done = mods.filter((m,i)=>moduleState(t.id,i)==='done').length;
+      const mods = lib[t.id];
+      const done = mods.filter((m,i)=>moduleState(t.id,i,band)==='done').length;
       const rails = MAJOR_ORDER.map(mj=>{
         const inRail = mods.map((m,i)=>({m,i})).filter(x=>x.m.major===mj);
         if(!inRail.length) return '';
@@ -510,7 +648,7 @@ function viewRoadmap(){
             <span class="mc">${MAJORS[mj].cap}</span>
             <span class="mcount num">${inRail.length} modules</span>
           </div>
-          ${inRail.map(x=>moduleRow(t.id, x.m, x.i)).join('')}
+          ${inRail.map(x=>moduleRow(t.id, x.m, x.i, band)).join('')}
         </div>`;
       }).join('');
       body = `<div class="tier-body">
@@ -540,7 +678,7 @@ function viewRoadmap(){
   <main class="page" style="max-width:860px">
     <div class="label">Roadmap</div>
     <h1 class="h1" style="margin-top:6px">The ladder</h1>
-    <p class="mut" style="margin-top:6px;max-width:60ch">${registerFor(getBand()).roadIntro}</p>
+    <p class="mut" style="margin-top:6px;max-width:60ch">${registerFor(band).roadIntro}</p>
     <p class="langline">Learning happens in your language. The earning tiers train the room's language.</p>
     <div class="stack16" style="margin-top:24px">${tiers}</div>
   </main>`;
@@ -558,7 +696,8 @@ function lessonsFor(modId, state, major){
   const seed = modId.split('').reduce((a,c)=>a + c.charCodeAt(0)*7, 13);
   const r = mulberry32(seed);
   const n = MOD_META[modId].lessons;
-  const pool = major === 'english' ? TYPE_ENGLISH : TYPE_KEYS;
+  const band = bandFromModId(modId);
+  const pool = band==='basic' ? TYPE_BASIC : major === 'english' ? TYPE_ENGLISH : TYPE_KEYS;
   const used = new Set();
   return Array.from({length:n}, (_,i)=>{
     let t; do { t = LESSON_BANK[Math.floor(r()*LESSON_BANK.length)]; } while(used.has(t));
@@ -615,11 +754,21 @@ function assignSteps(state){
   }).join('')}</div>`;
 }
 
-function assignBlock(tierId, m){
-  const st = assignState(tierId, m.id);
+function assignBlock(tierId, m, band){
+  const st = assignState(tierId, m.id, band);
   const flavor = flavorFor(m.id);
-  const task = flavor === 'two_ai_disagreement' ? DISAGREE_TASK : assignTask(m);
+  const task = flavor === 'two_ai_disagreement' ? DISAGREE_TASK : taskFor(band, m);
   const peers = peersFor(m.id);
+
+  /* submission formats follow the world: Basic submits drawings/photos */
+  const typepickHtml = flavor === 'two_ai_disagreement'
+    ? `<span>${ICON.pen} Written</span><span>${ICON.camera} Photo</span>`
+    : bandKey(band) === 'basic'
+      ? `<span>${ICON.pen} Drawing</span><span>${ICON.camera} Photo</span>`
+      : `<span>${ICON.video} Video</span>
+        <span>${ICON.camera} Photo</span>
+        <span>${ICON.pen} Written</span>
+        <span>${ICON.flask} Experiment</span>`;
 
   const statePill = {
     notsub:   `<span class="pill dim">Not submitted</span>`,
@@ -642,11 +791,7 @@ function assignBlock(tierId, m){
       <p class="sm mut" style="margin-top:14px">${task}</p>
       ${disagreeVisual}
       <div class="typepick">
-        ${flavor === 'two_ai_disagreement' ? `<span>${ICON.pen} Written</span><span>${ICON.camera} Photo</span>` : `
-        <span>${ICON.video} Video</span>
-        <span>${ICON.camera} Photo</span>
-        <span>${ICON.pen} Written</span>
-        <span>${ICON.flask} Experiment</span>`}
+        ${typepickHtml}
       </div>
       ${flavor === 'two_ai_disagreement' ? `<div style="margin-top:16px">${rubricBars(null, flavor)}</div>` : ''}`;
   } else if(st === 'awaiting'){
@@ -684,15 +829,12 @@ function assignBlock(tierId, m){
         <span class="icobox warn">${ICON.refresh}</span>
         <span>
           <span class="t" style="display:block">One more pass</span>
-          <span class="s" style="display:block">${LEARNER.mentor} — “Good measurements. Add units to every value and say what surprised you.”</span>
+          <span class="s" style="display:block">${LEARNER.mentor} — ${REVISION_QUOTE[bandKey(band)]}</span>
         </span>
       </div>
       <p class="sm mut" style="margin-top:14px">${task}</p>
       <div class="typepick">
-        <span>${ICON.video} Video</span>
-        <span>${ICON.camera} Photo</span>
-        <span>${ICON.pen} Written</span>
-        <span>${ICON.flask} Experiment</span>
+        ${typepickHtml}
       </div>`;
   }
 
@@ -737,15 +879,17 @@ function companionBlock(){
 }
 
 function viewModule(modId){
-  const tierId = modId.startsWith('f-') ? 'foundation' : 'working';
+  const band = getBand();
+  const lib = libraryFor(band);
+  const tierId = modId.split('-').includes('f') ? 'foundation' : 'working';
   const tier = TIERS.find(t=>t.id===tierId);
-  const idx = MODULES[tierId].findIndex(m=>m.id===modId);
-  const mod = MODULES[tierId][idx];
-  if(!mod) return viewRoadmap();
-  const st = moduleState(tierId, idx);
+  const idx = lib[tierId].findIndex(m=>m.id===modId);
+  const mod = idx >= 0 ? lib[tierId][idx] : undefined;
+  if(!mod) return viewRoadmap();   // id from another world's library → back to this world's roadmap
+  const st = moduleState(tierId, idx, band);
   const lessons = lessonsFor(modId, st, mod.major);
   const done = lessons.filter(l=>l.state==='done').length;
-  const nextMod = MODULES[tierId][idx+1];
+  const nextMod = lib[tierId][idx+1];
 
   const lessonRows = lessons.map(l=>{
     const tm = TYPE_META[l.type];
@@ -795,7 +939,7 @@ function viewModule(modId){
           <div style="padding:8px 10px">${lessonRows}</div>
         </section>
         ${companionBlock()}
-        ${assignBlock(tierId, mod)}
+        ${assignBlock(tierId, mod, band)}
       </div>
 
       <aside class="stack16">
@@ -803,7 +947,7 @@ function viewModule(modId){
           <span class="label">Next action</span>
           <p class="sm mut" style="margin-top:10px">${
             st==='active' ? `Lesson ${lessons.find(l=>l.state==='current').n} — ${lessons.find(l=>l.state==='current').title}. About ${lessons.find(l=>l.state==='current').dur} minutes.` :
-            st==='done'   ? (assignState(tierId, modId)==='revision'
+            st==='done'   ? (assignState(tierId, modId, band)==='revision'
                             ? 'Lessons complete — your assignment needs one more pass, below.'
                             : 'This module is complete and verified by your mentor.') :
                             `Lesson 1 — ${lessons[0].title}. About ${lessons[0].dur} minutes.`
