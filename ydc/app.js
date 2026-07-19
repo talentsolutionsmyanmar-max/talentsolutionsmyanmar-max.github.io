@@ -34,49 +34,80 @@ const LEARNER = {
 const TIERS = [
   { id:'foundation',   name:'Foundation',   n:1, status:'done',
     summary:'Core study skills and subject foundations.',
-    topics:[] },
+    topicsByMajor:[] },
   { id:'working',      name:'Working',      n:2, status:'current',
     summary:'Applied skills: reading, writing, lab method, presentation.',
-    topics:[] },
+    topicsByMajor:[] },
   { id:'professional', name:'Professional', n:3, status:'locked',
     summary:'Independent project work and specialist subject tracks.',
-    topics:['Research Methods','Advanced Composition','Data Analysis','Subject Specialisation','Mentored Project'] },
+    topicsByMajor:[
+      ['english',['Advanced Composition','Live Client Calls']],
+      ['math',['Data Analysis']],
+      ['physics',['Specialist Track']],
+      ['chemistry',['Specialist Track']],
+      ['biology',['Research Methods','Mentored Project']],
+    ] },
   { id:'advanced',     name:'Advanced',     n:4, status:'locked',
     summary:'Mastery portfolio and community leadership.',
-    topics:['Portfolio Capstone','Peer Teaching','Community Leadership'] },
+    topicsByMajor:[
+      ['english',['Peer Teaching']],
+      ['math',['Portfolio Capstone']],
+      ['biology',['Community Leadership']],
+    ] },
 ];
 
-/* module shape mirrors YDC Foundation: 10 modules per foundation tier */
+/* ---------- five majors (SEALED R3) — reasoning trainers, not warehouses ---------- */
+const MAJORS = {
+  english:   { name:'English',   cap:'Live communication — speaking, listening, being trusted in the room' },
+  math:      { name:'Math',      cap:'Formal reasoning' },
+  physics:   { name:'Physics',   cap:'Causal reasoning' },
+  chemistry: { name:'Chemistry', cap:'Process reasoning' },
+  biology:   { name:'Biology',   cap:'Systems reasoning' },
+};
+const MAJOR_ORDER = ['english','math','physics','chemistry','biology'];
+
+/* language policy per tier (design indicator — CCO authors the language later) */
+function langChip(tierId){
+  const mm = tierId === 'foundation' || tierId === 'working';
+  return `<span class="pill lang">${ICON.msgSquare} ${mm ? 'MM-first · AI-translated · CCO-gated' : 'English-medium'}</span>`;
+}
+
+/* Foundation mirrors the real 10-module science shape (Bio 6 / Chem 2 / Phys 2);
+   English + Math rails are seeded invented SHAPES — structure, not data. */
 const MODULES = {
   foundation: [
-    { id:'f-1',  title:'Orientation: How YDC Works' },
-    { id:'f-2',  title:'Study Habits & Note-Taking' },
-    { id:'f-3',  title:'Scientific Reading I' },
-    { id:'f-4',  title:'Everyday English I' },
-    { id:'f-5',  title:'Numbers & Data Basics' },
-    { id:'f-6',  title:'Biology Foundations: Cells' },
-    { id:'f-7',  title:'Chemistry Foundations: Matter' },
-    { id:'f-8',  title:'Physics Foundations: Motion' },
-    { id:'f-9',  title:'Digital Literacy & Safety' },
-    { id:'f-10', title:'Capstone: My Learning Plan' },
+    { id:'f-1',  title:'Cells: The Smallest Units of Life',        major:'biology' },
+    { id:'f-2',  title:'Plants & Photosynthesis',                  major:'biology' },
+    { id:'f-3',  title:'The Human Body',                           major:'biology' },
+    { id:'f-4',  title:'Ecosystems & Food Webs',                   major:'biology' },
+    { id:'f-5',  title:'Genetics: What You Inherit',               major:'biology' },
+    { id:'f-6',  title:'Capstone: The Living World',               major:'biology' },
+    { id:'f-7',  title:'Chemistry Foundations: Matter',            major:'chemistry' },
+    { id:'f-8',  title:'Chemistry Foundations: Mixing & Reactions',major:'chemistry' },
+    { id:'f-9',  title:'Physics Foundations: Motion',              major:'physics' },
+    { id:'f-10', title:'Physics Foundations: Forces Around You',   major:'physics' },
+    { id:'f-11', title:'Everyday English: First Words in the Room',major:'english' },
+    { id:'f-12', title:'Read Aloud: Sounds & Sentences',           major:'english' },
+    { id:'f-13', title:'Numbers & Data Basics',                    major:'math' },
+    { id:'f-14', title:'Shapes, Patterns & Logic',                 major:'math' },
   ],
   working: [
-    { id:'w-1',  title:'Scientific Reading II' },
-    { id:'w-2',  title:'Everyday English II' },
-    { id:'w-3',  title:'Lab Methods & Safety' },
-    { id:'w-4',  title:'Writing Clear Reports' },
-    { id:'w-5',  title:'Biology: Ecosystems' },
-    { id:'w-6',  title:'Chemistry: Reactions' },
-    { id:'w-7',  title:'Physics: Energy' },
-    { id:'w-8',  title:'Presentation Skills' },
-    { id:'w-9',  title:'Research Basics' },
-    { id:'w-10', title:'Capstone: Community Project' },
+    { id:'w-1',  title:'Everyday English II',        major:'english' },
+    { id:'w-2',  title:'Scientific Reading II',      major:'english' },
+    { id:'w-3',  title:'Lab Methods & Safety',       major:'chemistry' },
+    { id:'w-4',  title:'Writing Clear Reports',      major:'english' },
+    { id:'w-5',  title:'Biology: Ecosystems',        major:'biology' },
+    { id:'w-6',  title:'Chemistry: Reactions',       major:'chemistry' },
+    { id:'w-7',  title:'Physics: Energy',            major:'physics' },
+    { id:'w-8',  title:'Presentation Skills',        major:'english' },
+    { id:'w-9',  title:'Data, Evidence & Estimation',major:'math' },
+    { id:'w-10', title:'Capstone: Community Project',major:'biology' },
   ],
 };
 
 /* learner progress state (invented) */
 const PROGRESS = {
-  foundation: { done: 10, total: 10 },     // complete → promoted
+  foundation: { done: 14, total: 14 },    // complete → promoted
   working:    { done: 3,  total: 10, active: 'w-4' },
 };
 
@@ -84,23 +115,25 @@ const LESSONS = {
   'w-4': [
     { n:1, title:'Structuring a Report',      state:'done',    dur:25, type:'reading' },
     { n:2, title:'Evidence & Sources',        state:'done',    dur:30, type:'video' },
-    { n:3, title:'Clear Sentences',           state:'done',    dur:20, type:'scenario' },
+    { n:3, title:'Clear Sentences',           state:'done',    dur:20, type:'speaking' },
     { n:4, title:'Data Tables & Figures',     state:'current', dur:35, type:'sim' },
     { n:5, title:'Peer Review Practice',      state:'todo',    dur:30, type:'scenario' },
-    { n:6, title:'Final Draft & Submission',  state:'todo',    dur:40, type:'scenario' },
+    { n:6, title:'Final Draft & Submission',  state:'todo',    dur:40, type:'speaking' },
   ],
 };
 
 /* lesson-type system — her #2: "show me pictures, not paragraphs"
-   scenario-first where the subject allows it */
+   scenario-first where the subject allows it; English reads speaking-first */
 const TYPE_META = {
   sim:        { icon:'atom',      label:'Sim' },
   video:      { icon:'play',      label:'Video' },
   experiment: { icon:'flask',     label:'Experiment' },
   reading:    { icon:'book',      label:'Reading' },
   scenario:   { icon:'msgSquare', label:'Scenario' },
+  speaking:   { icon:'mic',       label:'Speaking' },
 };
 const TYPE_KEYS = Object.keys(TYPE_META);
+const TYPE_ENGLISH = ['speaking','scenario','speaking','scenario','video','reading'];
 
 /* ---------- assignment loop (designed, not wired — honest footers apply) ---------- */
 const RUBRIC = [
@@ -128,16 +161,29 @@ function earnedFor(modId){
 /* per-subject DO tasks — the experiential cycle, her #1 demand */
 function assignTask(m){
   const t = m.title.toLowerCase();
-  if(t.includes('biology')) return 'Film a plant near where you live. Identify 3 parts and label them in your video.';
-  if(t.includes('chemistry')) return 'With an adult present, mix vinegar and baking soda. Photograph the reaction and explain the gas it makes.';
-  if(t.includes('physics')) return 'Drop 3 different objects. Record what you see. Explain in your own words why they fall the way they do.';
+  if(t.includes('biology') || t.includes('cells') || t.includes('plants') || t.includes('ecosystems')) return 'Film a plant near where you live. Identify 3 parts and label them in your video.';
+  if(t.includes('chemistry') || t.includes('mixing')) return 'With an adult present, mix vinegar and baking soda. Photograph the reaction and explain the gas it makes.';
+  if(t.includes('physics') || t.includes('motion') || t.includes('forces')) return 'Drop 3 different objects. Record what you see. Explain in your own words why they fall the way they do.';
   if(t.includes('lab')) return 'Run the measurement drill from this module at home. Photograph your setup and your recorded results.';
-  if(t.includes('english') || t.includes('writing') || t.includes('reading')) return 'Read your latest draft aloud. Record 2 minutes of audio, then write 3 lines rating your own clarity.';
+  if(t.includes('english') || t.includes('writing') || t.includes('reading') || t.includes('aloud')) return 'Read your latest draft aloud. Record 2 minutes of audio, then write 3 lines rating your own clarity.';
   if(t.includes('presentation')) return 'Record a 2-minute talk on any topic from this module. Watch it once, then re-record one improvement.';
   if(t.includes('research')) return 'Ask 3 people one question from your research plan. Write down their answers and what surprised you.';
+  if(t.includes('data') || t.includes('numbers') || t.includes('shapes')) return 'Collect 10 real numbers from your home — prices, weights, times. Order them, find the middle value, and explain what it tells you.';
   if(t.includes('capstone') || t.includes('project')) return 'Draft your project proposal on one page. Photograph it or type it — your mentor reads the real thing.';
   if(t.includes('digital')) return 'Audit your own phone: list every app permission you have granted. Photograph your notes.';
   return 'Apply this module\u2019s skill in the real world, then submit your evidence.';
+}
+
+/* assignment flavors — the two-AI disagreement task is the verification
+   reflex made into a task; available in every major */
+const DISAGREE_TASK = 'Ask two different AIs the same question. Find where they disagree. Resolve it with an experiment or the textbook. Submit your verdict.';
+const DISAGREE_GHOST = {
+  a: 'AI A — “Earthworms improve soil for every plant, everywhere.”',
+  b: 'AI B — “Earthworms can harm forest soils where they are not native.”',
+  resolve: 'Resolve it: your textbook chapter, or the soil-pot experiment from Lesson 2. Submit your verdict — written or photo.',
+};
+function flavorFor(modId){
+  return modId === 'w-5' ? 'two_ai_disagreement' : 'do_task';
 }
 function assignState(tierId, modId){
   if(tierId === 'foundation') return 'scored';      // completed tier → certificates earned
@@ -206,6 +252,9 @@ const ICON = {
   compass:   I('<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>'),
   refresh:   I('<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/>'),
   checkC:    I('<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>'),
+  mic:       I('<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/>'),
+  bot:       I('<rect width="18" height="10" x="3" y="11" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" x2="8" y1="16" y2="16"/><line x1="16" x2="16" y1="16" y2="16"/>'),
+  help:      I('<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" x2="12.01" y1="17" y2="17"/>'),
 };
 
 /* ---------- shell ---------- */
@@ -307,6 +356,7 @@ function viewHome(){
       </div>
       ${tierBadge(tier)}
     </div>
+    <p class="posline">AI is the tutor. YDC is the proof.</p>
 
     <div class="panel pad" style="margin-top:20px">
       <div class="between">
@@ -381,7 +431,7 @@ function viewRoadmap(){
 
     let body = '';
     if(t.status === 'locked'){
-      /* honest empty state — Q3 discipline */
+      /* honest empty state — Q3 discipline; topic previews per major */
       const gate = TIERS[t.n-2].name;
       body = `<div class="tier-body">
         <div class="locked-state">
@@ -389,19 +439,33 @@ function viewRoadmap(){
           <div class="txt">
             <div class="t">This tier is not open yet</div>
             <div class="s">Complete the ${gate} tier to unlock ${t.name}. Your mentor reviews every gate — nothing unlocks early, nothing is skipped.</div>
-            <div class="topic-preview">${t.topics.map(x=>`<span>${x}</span>`).join('')}</div>
+            ${t.topicsByMajor.map(([mj, items])=>`
+              <span class="lmj">${MAJORS[mj].name}</span>
+              <div class="topic-preview" style="margin-top:6px">${items.map(x=>`<span>${x}</span>`).join('')}</div>`).join('')}
           </div>
         </div>
       </div>`;
     } else {
       const mods = MODULES[t.id];
       const done = mods.filter((m,i)=>moduleState(t.id,i)==='done').length;
+      const rails = MAJOR_ORDER.map(mj=>{
+        const inRail = mods.map((m,i)=>({m,i})).filter(x=>x.m.major===mj);
+        if(!inRail.length) return '';
+        return `<div class="major-rail">
+          <div class="major-head">
+            <span class="mn">${MAJORS[mj].name}</span>
+            <span class="mc">${MAJORS[mj].cap}</span>
+            <span class="mcount num">${inRail.length} modules</span>
+          </div>
+          ${inRail.map(x=>moduleRow(t.id, x.m, x.i)).join('')}
+        </div>`;
+      }).join('');
       body = `<div class="tier-body">
-        <div class="between" style="margin-bottom:12px">
+        <div class="between" style="margin-bottom:6px">
           <span class="sm dim num">${done} of ${mods.length} modules complete</span>
           <div class="track ${t.status==='done'?'gold':''}" style="width:140px"><i style="width:${Math.round(done/mods.length*100)}%"></i></div>
         </div>
-        ${mods.map((m,i)=>moduleRow(t.id, m, i)).join('')}
+        ${rails}
       </div>`;
     }
 
@@ -411,6 +475,7 @@ function viewRoadmap(){
         <div style="flex:1;min-width:0">
           <div class="h2">${t.name}</div>
           <div class="sm dim" style="margin-top:2px">${t.summary}</div>
+          <div style="margin-top:8px">${langChip(t.id)}</div>
         </div>
         ${statePill}
       </div>
@@ -422,7 +487,8 @@ function viewRoadmap(){
   <main class="page" style="max-width:860px">
     <div class="label">Roadmap</div>
     <h1 class="h1" style="margin-top:6px">The ladder</h1>
-    <p class="mut" style="margin-top:6px;max-width:60ch">Four tiers. Every tier ends with a mastery gate reviewed by your mentor. The ladder is the progress — there is nothing else to chase.</p>
+    <p class="mut" style="margin-top:6px;max-width:60ch">Four tiers, five majors. Every tier ends with a mastery gate reviewed by your mentor. The ladder is the progress — there is nothing else to chase.</p>
+    <p class="langline">Learning happens in your language. The earning tiers train the room's language.</p>
     <div class="stack16" style="margin-top:24px">${tiers}</div>
   </main>`;
   return shell(content, 'roadmap');
@@ -433,12 +499,13 @@ const LESSON_BANK = [
   'Guided Reading','Core Concepts','Worked Examples','Practice Task',
   'Discussion Prep','Applied Exercise','Review & Reflection','Mastery Check',
 ];
-function lessonsFor(modId, state){
+function lessonsFor(modId, state, major){
   if(LESSONS[modId]) return LESSONS[modId];
   /* procedural, stable per module — seeded PRNG, not random per render */
   const seed = modId.split('').reduce((a,c)=>a + c.charCodeAt(0)*7, 13);
   const r = mulberry32(seed);
   const n = MOD_META[modId].lessons;
+  const pool = major === 'english' ? TYPE_ENGLISH : TYPE_KEYS;
   const used = new Set();
   return Array.from({length:n}, (_,i)=>{
     let t; do { t = LESSON_BANK[Math.floor(r()*LESSON_BANK.length)]; } while(used.has(t));
@@ -447,7 +514,7 @@ function lessonsFor(modId, state){
       n:i+1, title:t,
       state: state==='done' ? 'done' : 'todo',
       dur: 15 + Math.floor(r()*6)*5,
-      type: TYPE_KEYS[Math.floor(r()*TYPE_KEYS.length)],
+      type: pool[Math.floor(r()*pool.length)],
     };
   });
 }
@@ -469,12 +536,15 @@ function embedBlock(lesson){
 }
 
 /* ---------- assignment card — 4 states, sealed rubric, certificate ---------- */
-function rubricBars(earned){
+function rubricBars(earned, flavor){
   return RUBRIC.map(([name, w], i)=>{
+    /* sealed rubric unchanged; on the disagreement flavor the first
+       criterion carries the CCO-flagged caption "verification quality" */
+    const label = (flavor === 'two_ai_disagreement' && i === 0) ? `${name} — verification quality` : name;
     const e = earned ? earned[i] : 0;
     const pct = earned ? Math.round(e / w * 100) : 0;
     return `<div class="crit">
-      <div class="between"><span class="sm">${name}</span><span class="sm dim num">${earned ? e + ' / ' + w : '— / ' + w}</span></div>
+      <div class="between"><span class="sm">${label}</span><span class="sm dim num">${earned ? e + ' / ' + w : '— / ' + w}</span></div>
       <div class="track ${earned ? 'gold' : ''}" style="margin-top:5px"><i style="width:${pct}%"></i></div>
     </div>`;
   }).join('');
@@ -494,7 +564,8 @@ function assignSteps(state){
 
 function assignBlock(tierId, m){
   const st = assignState(tierId, m.id);
-  const task = assignTask(m);
+  const flavor = flavorFor(m.id);
+  const task = flavor === 'two_ai_disagreement' ? DISAGREE_TASK : assignTask(m);
   const peers = peersFor(m.id);
 
   const statePill = {
@@ -504,16 +575,27 @@ function assignBlock(tierId, m){
     revision: `<span class="pill warn">${ICON.refresh} Revision requested</span>`,
   }[st];
 
+  /* two-column disagreement visual — ghost content, invented */
+  const disagreeVisual = flavor === 'two_ai_disagreement' ? `
+      <div class="disagree">
+        <div class="col"><span class="h">AI A claims</span><p class="q">${DISAGREE_GHOST.a}</p></div>
+        <div class="col"><span class="h">AI B claims</span><p class="q">${DISAGREE_GHOST.b}</p></div>
+        <div class="col verdict"><span class="h">Your verification</span><p class="q">${DISAGREE_GHOST.resolve}</p></div>
+      </div>` : '';
+
   let body = '';
   if(st === 'notsub'){
     body = `
       <p class="sm mut" style="margin-top:14px">${task}</p>
+      ${disagreeVisual}
       <div class="typepick">
+        ${flavor === 'two_ai_disagreement' ? `<span>${ICON.pen} Written</span><span>${ICON.camera} Photo</span>` : `
         <span>${ICON.video} Video</span>
         <span>${ICON.camera} Photo</span>
         <span>${ICON.pen} Written</span>
-        <span>${ICON.flask} Experiment</span>
-      </div>`;
+        <span>${ICON.flask} Experiment</span>`}
+      </div>
+      ${flavor === 'two_ai_disagreement' ? `<div style="margin-top:16px">${rubricBars(null, flavor)}</div>` : ''}`;
   } else if(st === 'awaiting'){
     body = `
       <div class="peer" style="border-top:0">
@@ -575,6 +657,32 @@ function assignBlock(tierId, m){
   </section>`;
 }
 
+/* ---------- AI-guidance companion — "Learn this with AI" ----------
+   Anti-profiling law (hardest form): never "based on your history…",
+   never age, never scores near identity. A tool the learner picks up. */
+function companionBlock(){
+  return `
+  <section class="panel">
+    <div class="pad between" style="border-bottom:1px solid var(--line)">
+      <span class="label">Learn this with AI</span>
+      <span class="pill teal">${ICON.bot} Maya</span>
+    </div>
+    <div class="pad">
+      <div class="row" style="gap:12px">
+        <span class="icobox teal">${ICON.bot}</span>
+        <span><span class="sm" style="font-weight:600;display:block">Maya — AI study companion</span>
+        <span class="sm dim">Text-first · works on slow connections</span></span>
+      </div>
+      <div class="cslots">
+        <span>${ICON.book} Explain at my level</span>
+        <span>${ICON.msgSquare} Explain in my language</span>
+        <span>${ICON.help} Quiz me before the assignment</span>
+      </div>
+      <div class="assign-foot">AI companion designed — not wired. Maya guardrails + CCO gate apply in production.</div>
+    </div>
+  </section>`;
+}
+
 function viewModule(modId){
   const tierId = modId.startsWith('f-') ? 'foundation' : 'working';
   const tier = TIERS.find(t=>t.id===tierId);
@@ -582,7 +690,7 @@ function viewModule(modId){
   const mod = MODULES[tierId][idx];
   if(!mod) return viewRoadmap();
   const st = moduleState(tierId, idx);
-  const lessons = lessonsFor(modId, st);
+  const lessons = lessonsFor(modId, st, mod.major);
   const done = lessons.filter(l=>l.state==='done').length;
   const nextMod = MODULES[tierId][idx+1];
 
@@ -616,11 +724,12 @@ function viewModule(modId){
     <a class="sm dim row" href="#/roadmap" style="gap:6px">${ICON.map} Roadmap <span style="opacity:.5">/</span> ${tier.name}</a>
     <div class="between" style="margin-top:12px;align-items:flex-end;flex-wrap:wrap">
       <div>
-        <span class="label">Module ${String(idx+1).padStart(2,'0')} · ${tier.name} tier</span>
+        <span class="label">Module ${String(idx+1).padStart(2,'0')} · ${tier.name} tier · ${MAJORS[mod.major].name}</span>
         <h1 class="h1" style="margin-top:6px">${mod.title}</h1>
       </div>
       ${statusPill}
     </div>
+    <div class="row" style="margin-top:12px;gap:8px">${langChip(tierId)}</div>
 
     <div class="grid2" style="margin-top:22px">
       <div class="stack16">
@@ -632,6 +741,7 @@ function viewModule(modId){
           </div>
           <div style="padding:8px 10px">${lessonRows}</div>
         </section>
+        ${companionBlock()}
         ${assignBlock(tierId, mod)}
       </div>
 
@@ -700,16 +810,16 @@ const CAREER = {
   stages: [
     { band:'14–15', name:'Explore',
       copy:'Try everything. No choosing yet — curiosity is the work.',
-      gates:[], kind:'families' },
+      gates:[], lang:null, kind:'families' },
     { band:'16–17', name:'Focus',
       copy:'Two families go deeper. Real projects begin.',
-      gates:['English L1'], kind:'focus' },
+      gates:['English L1'], lang:'Learning tiers · MM-first · AI-translated · CCO-gated', kind:'focus' },
     { band:'18–20', name:'Specialize',
       copy:'Skills sharpen into evidence others can trust.',
-      gates:['Portfolio','Mentorship','English L2'], kind:'specialize' },
+      gates:['Portfolio','Mentorship','English L2'], lang:'Earning tiers · English-medium', kind:'specialize' },
     { band:'20+', name:'Transition',
       copy:'Move to the adult platform — referrals, real roles, the full network.',
-      gates:[], kind:'transition' },
+      gates:[], lang:null, kind:'transition' },
   ],
 };
 
@@ -753,6 +863,7 @@ function viewCareer(){
       <div class="nm">${s.name}</div>
       <div class="ds">${s.copy}</div>
       ${s.gates.length ? `<div class="gates">${s.gates.map(g=>`<span>${ICON.flag} Gate · ${g}</span>`).join('')}</div>` : ''}
+      ${s.lang ? `<div style="margin-top:8px"><span class="pill lang">${ICON.msgSquare} ${s.lang}</span></div>` : ''}
       <div class="body">${stageBody(s)}</div>
     </div>`).join('');
 
@@ -782,6 +893,7 @@ function viewCareer(){
         <span>
           <span style="font-size:16px;font-weight:700;color:var(--gold);display:block">Career Ready — Verified by ReferTRM</span>
           <span class="sm mut" style="display:block;margin-top:2px">The top of the road. Every gate below passed, every certificate real.</span>
+          <span class="posline" style="display:block;margin-top:8px">AI is the tutor. YDC is the proof.</span>
         </span>
       </div>
     </section>
