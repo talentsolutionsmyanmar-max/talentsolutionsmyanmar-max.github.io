@@ -541,3 +541,74 @@ a.mrow:hover, button.mrow:hover{ border-color:color-mix(in srgb, var(--ink) 28%,
   .typepick span{ padding:7px 11px; font-size:12.5px; }
   .stage{ padding-left:28px; }
 }
+
+/* ============================================================
+   R3 — AI-era curriculum pass
+   ============================================================ */
+
+/* ---------- major rails ---------- */
+.major-rail{ margin-top:16px; }
+.major-head{ display:flex; align-items:baseline; gap:10px; margin-bottom:9px; }
+.major-head .mn{ font-size:13px; font-weight:700; letter-spacing:.02em; }
+.major-head .mc{ font-size:11.5px; color:var(--dim); flex:1; min-width:0; }
+.major-head .mcount{ font-size:11px; color:var(--dim); flex:none; }
+
+/* ---------- language policy chip ---------- */
+.pill.lang{ color:var(--mut); }
+
+.langline{
+  font-size:13px; color:var(--dim); margin-top:10px;
+  padding-left:12px; border-left:2px solid var(--line);
+}
+
+/* ---------- positioning line ---------- */
+.posline{
+  font-size:12px; font-weight:600; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--dim); margin-top:12px;
+}
+
+/* ---------- AI companion slots ---------- */
+.cslots{ display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+.cslots span{
+  display:inline-flex; align-items:center; gap:7px;
+  padding:9px 14px; border-radius:var(--r);
+  border:1px solid color-mix(in srgb, var(--teal) 30%, transparent);
+  background:color-mix(in srgb, var(--teal) 5%, transparent);
+  font-size:13px; font-weight:550; color:var(--mut);
+  pointer-events:none;   /* inert by design — honest footer applies */
+}
+.cslots svg{ width:14px; height:14px; color:var(--teal); }
+
+/* ---------- two-AI disagreement visual ---------- */
+.disagree{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px; }
+.disagree .col{
+  border:1px solid var(--line); border-radius:var(--r);
+  padding:12px 14px;
+  background:color-mix(in srgb, var(--ink) 2%, transparent);
+}
+.disagree .col .h{
+  font-size:10.5px; font-weight:700; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--dim);
+}
+.disagree .col .q{ font-size:13px; color:var(--mut); margin-top:5px; }
+.disagree .verdict{
+  grid-column:1 / -1;
+  border-style:dashed;
+  border-color:color-mix(in srgb, var(--teal) 40%, transparent);
+  background:color-mix(in srgb, var(--teal) 4%, transparent);
+}
+.disagree .verdict .h{ color:var(--teal); }
+
+/* locked-tier per-major labels */
+.lmj{
+  display:block; font-size:10.5px; font-weight:700;
+  letter-spacing:.12em; text-transform:uppercase;
+  color:var(--dim); margin-top:14px;
+}
+
+/* ---------- 390px · R3 ---------- */
+@media (max-width: 560px){
+  .major-head .mc{ display:none; }
+  .disagree{ grid-template-columns:1fr; }
+  .posline{ font-size:11px; }
+}
