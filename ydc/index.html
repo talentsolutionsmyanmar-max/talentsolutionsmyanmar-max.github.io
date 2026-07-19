@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>YDC — Youth Development Center</title>
+<meta name="description" content="Youth Development Center — learner demo surface. Seeded invented data.">
+<link rel="stylesheet" href="styles.css">
+<script>
+/* Theme boot before first paint — no flash */
+(function(){try{
+  var t = localStorage.getItem('ydc-theme');
+  if(!t){ t = 'dark'; }
+  document.documentElement.setAttribute('data-theme', t);
+}catch(e){ document.documentElement.setAttribute('data-theme','dark'); }})();
+</script>
+</head>
+<body>
+<div id="app" class="app"><!-- rendered by app.js --></div>
+<script src="app.js"></script>
+</body>
+</html>
