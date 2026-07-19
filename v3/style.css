@@ -231,3 +231,11 @@ footer{border-top:1px solid var(--line);padding:56px 0 32px;background:var(--bg)
   .rv3{opacity:1;transform:none}
   .grain,.tick2T,.orbBig,.chipA::before,.heroLic .dotp,.scrollCue .bar{animation:none}
 }
+.noanim .h1 .ln>span,.lite .h1 .ln>span{transform:none}
+.noanim .jPin,.lite .jPin{min-height:0;display:block;padding:40px 0}
+.noanim .jTrack,.lite .jTrack{flex-wrap:wrap;width:auto}
+.noanim .jCard,.lite .jCard{width:100%}
+.noanim .jBar,.lite .jBar{display:none}
+.noanim .rungBar i,.lite .rungBar i{width:70%}
+.lite .grain{display:none}
+@media(max-width:860px){.grain{display:none}}
