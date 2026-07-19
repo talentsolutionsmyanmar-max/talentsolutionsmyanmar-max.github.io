@@ -1,7 +1,14 @@
 (function(){
 "use strict";
-var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection || {};
+var ect = conn.effectiveType || '';
+var slowNet = !!conn.saveData || ect === 'slow-2g' || ect === '2g' || ect === '3g';
+var lowMem = typeof navigator.deviceMemory === 'number' && navigator.deviceMemory <= 4;
+var qs = new URLSearchParams(location.search);
+var lite = qs.get('lite')==='1' || (qs.get('full')!=='1' && (slowNet || lowMem));
+var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches || lite;
 var hasGsap = typeof gsap !== 'undefined';
+if(lite){ document.body.classList.add('lite'); }
 if(!hasGsap || reduced){ document.body.classList.add('noanim'); }
 
 var NAMES=['KBZ Life Insurance','NielsenIQ Myanmar','Otsuka Myanmar','Unicharm Myanmar','Connect Gateway','Yangoods','Thadoe Mahar','RK Yangon Steel','Electronic City','Wagon Links','Myanmar IndoBest','AMI Life Insurance','HTI Myanmar','Power Link','Marga Global','Real Aid Microfinance','GK International','Kozicol Intertrade','TOMO','Wave Plus','WOW Sports','Shwe Taung Htun','Pacific Dragon','Rebirth Hair','Royal Care Plus','Sal Pyar','Sankoyo Frontier','Universal Energy','Innopex','Minn Shwe Htee','Shwe Chan'];
@@ -43,7 +50,11 @@ if(fine && !reduced){
 
 var typeEl=document.getElementById('typeHero');
 var MM_WORDS='Salary negotiation ကို မည်သို့ ပြင်ဆင်ရပါမည်နည်း'.split(' ');
-if(reduced){ typeEl.textContent=MM_WORDS.join(' '); }
+if(reduced){
+  typeEl.textContent=MM_WORDS.join(' ');
+  var rn=document.getElementById('ringNum'); if(rn){ rn.textContent='87'; }
+  var ra=document.getElementById('ringArc'); if(ra){ ra.setAttribute('stroke-dashoffset','20'); }
+}
 else{
   var wi=0;
   (function typeNext(){
@@ -108,5 +119,9 @@ if(hasGsap && !reduced){
 
   gsap.to('#h1',{yPercent:-14,opacity:.35,ease:'none',
     scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+}
+else{
+  document.querySelectorAll('[data-count]').forEach(function(el){ el.textContent=el.dataset.count; });
+  document.querySelectorAll('.rungBar i').forEach(function(bar){ bar.style.width=bar.dataset.w+'%'; });
 }
 })();
