@@ -52,10 +52,12 @@ var typeEl=document.getElementById('typeHero');
 var MM_WORDS='Salary negotiation ကို မည်သို့ ပြင်ဆင်ရပါမည်နည်း'.split(' ');
 if(reduced){
   typeEl.textContent=MM_WORDS.join(' ');
+}
+if(reduced || !hasGsap){
   var rn=document.getElementById('ringNum'); if(rn){ rn.textContent='87'; }
   var ra=document.getElementById('ringArc'); if(ra){ ra.setAttribute('stroke-dashoffset','20'); }
 }
-else{
+if(!reduced){
   var wi=0;
   (function typeNext(){
     if(wi<=MM_WORDS.length){
