@@ -184,6 +184,61 @@ const LESSONS = {
   ],
 };
 
+/* ============================================================
+   THE LADDER LAW (mechanical spine — nothing decorative):
+   · every module is a QUEST that proves one MASTERY (a DO-thing)
+   · a tier's GATE checks every mastery + the English test
+   · passing the gate PROMOTES you a tier
+   The gate is always visible on the trail before it is reachable.
+   ============================================================ */
+const PROOFS = {
+  /* high — foundation (all proven) */
+  'f-1':'See how living things are built',       'f-2':'Explain how plants eat light',
+  'f-3':'Map the body’s systems',                'f-4':'Trace who eats whom',
+  'f-5':'Read what you inherit',                 'f-6':'Present the living world',
+  'f-7':'Tell matter apart — and why',           'f-8':'Mix safely, observe honestly',
+  'f-9':'Describe how things move',              'f-10':'Find the forces around you',
+  'f-11':'Say your first English sentences',     'f-12':'Read English out loud',
+  'f-13':'Count, compare, record',               'f-14':'See patterns and prove them',
+  /* high — working */
+  'w-1':'Hold a real conversation',              'w-2':'Read science and explain it',
+  'w-3':'Run a safe, measured experiment',       'w-4':'Write a report others trust',
+  'w-5':'Verify a claim with evidence',          'w-6':'Predict and show a reaction',
+  'w-7':'Measure energy in your home',           'w-8':'Speak so people follow',
+  'w-9':'Prove a point with numbers',            'w-10':'Deliver a project for your community',
+  /* basic — foundation */
+  'b-f-1':'Name the plants near you',            'b-f-2':'Know the animals near home',
+  'b-f-3':'Name what your body does',            'b-f-4':'See what mixing does',
+  'b-f-5':'Show how things move',                'b-f-6':'Say words for your day',
+  'b-f-7':'Listen and answer',                   'b-f-8':'Count and find shapes',
+  /* basic — working */
+  'b-w-1':'Talk about your day in English',      'b-w-2':'Show and name what you found',
+  'b-w-3':'Measure real things',                 'b-w-4':'Watch a change and say what happened',
+  'b-w-5':'Make things move and explain',        'b-w-6':'Finish your nature project',
+  /* middle — foundation */
+  'm-f-1':'Name the tiny building blocks',       'm-f-2':'Explain how plants make food',
+  'm-f-3':'Explain your body systems',           'm-f-4':'Follow a food chain',
+  'm-f-5':'Sort matter and mixtures',            'm-f-6':'Spot a simple reaction',
+  'm-f-7':'Measure pushes and pulls',            'm-f-8':'Write clear sentences',
+  'm-f-9':'Read and retell short texts',         'm-f-10':'Work with fractions and patterns',
+  /* middle — working */
+  'm-w-1':'Keep a conversation going',           'm-w-2':'Read an article and retell it',
+  'm-w-3':'Do a safe lab drill',                 'm-w-4':'Write a short clear report',
+  'm-w-5':'Explain an ecosystem near you',       'm-w-6':'Track energy at home',
+  'm-w-7':'Use data from your life',             'm-w-8':'Run a community project',
+};
+function proofFor(id){ return PROOFS[id] || 'Master this module'; }
+
+/* the gate, stated plainly — visible before reachable */
+function gateCard(tierName, doneCount, total){
+  return `<div class="gatecard rv">
+    <div class="t">The ${tierName} Gate — two keys, both earned</div>
+    <div class="key"><span class="em">🔑</span><span><b>Every ${tierName} mastery proven.</b><br>${doneCount} of ${total} so far — each one checked by your mentor and two friends.</span></div>
+    <div class="key"><span class="em">📖</span><span><b>The English gate.</b><br>Level 1 → Level 2 — its own test, opened when your masteries are ready.</span></div>
+    <div class="s">Nothing here is given. Everything is checked. That is why it means something.</div>
+  </div>`;
+}
+
 /* lesson types — canon + emoji */
 const TYPE_META = {
   sim:        { em:'🎮', label:'Sim' },
@@ -432,7 +487,7 @@ function footNote(text){
 
 /* ---------- trail renderer (the heart) ---------- */
 function trailHtml(items, opts){
-  /* items: [{em, color, state:'done'|'current'|'todo', label, href}] */
+  /* items: [{em, color, state:'done'|'current'|'todo'|'gate'|'gatepassed', label, href}] */
   const spacing = opts && opts.tight ? 108 : 128;
   const H = items.length * spacing + 90;
   const pts = items.map((it, i)=>({
@@ -487,6 +542,9 @@ function viewHome(){
       label: m.title, href: `#/module/${m.id}`,
     };
   });
+  const doneW = trailItems.filter(t=>t.state==='done').length;
+  /* the next gate, ON the trail — visible before reachable */
+  trailItems.push({ em:'🔒', color:'var(--c-gold)', state:'gate', label:'The Working Gate', href:'#/map' });
 
   const circle = circleFor(band);
   const attn = attentionFor(band);
@@ -506,6 +564,7 @@ function viewHome(){
         <div class="qk">Tonight's quest · ${mj.name}</div>
         <h2>${mj.em} ${mod.title}</h2>
         <div class="qs">${tier.name} tier · Module ${modIdx+1} · ${doneCount} of ${lessons.length} lessons done</div>
+        <div class="qproof">Proving: ${proofFor(mod.id)}</div>
         <div class="qbar"><i style="width:${Math.round(doneCount/lessons.length*100)}%"></i></div>
         <div class="qdots">${lessons.map(l=>`<span class="qd ${l.state}"></span>`).join('')}</div>
         <div class="qrow">
@@ -525,15 +584,16 @@ function viewHome(){
     <div class="sechead rv"><h3>Your trail</h3><a class="more" href="#/map">Full map →</a></div>
     <section class="trailwrap rv">
       <div class="summit" style="margin-bottom:18px">
-        <span class="medal">🌱</span>
-        <span><span class="t">Foundation summit — complete!</span><br>
-        <span class="s">Every module done, every one verified by your mentor.</span></span>
+        <span class="medal">🏅</span>
+        <span><span class="t">Foundation Gate — passed!</span><br>
+        <span class="s">Every Foundation mastery proven and verified. The gate opened; you walked through.</span></span>
       </div>
       ${trailHtml(trailItems)}
-      <div class="fogzone" style="margin-top:6px">
+      ${gateCard('Working', doneW, lib.working.length)}
+      <div class="fogzone" style="margin-top:14px">
         <div class="mist"></div>
-        <div class="t">☁️ Professional tier</div>
-        <div class="s">Finish your Working trail + pass the English gate to clear the mist. Nothing unlocks early — that's what makes it real.</div>
+        <div class="t">☁️ Professional tier — beyond the gate</div>
+        <div class="s">The mist clears when the Working Gate and the English gate are both behind you. Nothing unlocks early — that's what makes it real.</div>
         <div class="peeks"><span>Advanced Composition</span><span>Data Analysis</span><span>Research Methods</span></div>
       </div>
     </section>
@@ -594,7 +654,11 @@ function viewMap(){
           label: m.title, href: `#/module/${m.id}`,
         };
       });
+      /* gates are physical: a monument where one passed, a beacon where one waits */
+      if(t.status==='done') items.push({ em:'🏅', color:'var(--c-gold)', state:'gatepassed', label:`${t.name} Gate — passed`, href:'#/promotion' });
+      if(t.status==='current') items.push({ em:'🔒', color:'var(--c-gold)', state:'gate', label:`The ${t.name} Gate`, href:'#/map' });
       body = trailHtml(items, { tight: t.status==='done' });
+      if(t.status==='current') body += gateCard(t.name, progressFor(band).working.done, lib.working.length);
     }
     return `<section class="zone rv">
       <div class="zone-head ${headCls}">
@@ -611,6 +675,11 @@ function viewMap(){
     <section class="hero rv">
       <h1>The trail map <span class="em">📍</span></h1>
       <p class="sub">Four zones. Five colors. Every step is real.</p>
+    </section>
+    <section class="maplegend rv">
+      <span><b>🎯 Quest</b> proves one mastery</span>
+      <span><b>🏁 Gate</b> checks them all — with the English test</span>
+      <span><b>🏆 Pass</b> and you rise a tier</span>
     </section>
     ${zones}
     ${footNote()}
@@ -653,6 +722,7 @@ function viewModule(modId){
       <div class="qhero" style="--qc1:${mj.c1};--qc2:${mj.c2}">
         <div class="crumb"><a href="#/map">Trail map</a> · ${tier.name} zone · ${mj.name}</div>
         <h1><span class="qem">${mj.em}</span> ${mod.title}</h1>
+        <div class="qproof">🎯 ${st==='done' ? 'Mastery proven' : 'Proving'}: ${proofFor(mod.id)}</div>
         <div class="qmeta">
           <span class="chip">${done} of ${lessons.length} lessons</span>
           <span class="chip">${langLine(tierId)}</span>
@@ -694,15 +764,15 @@ function unlockCard(tierId, idx, band, mj){
   if(!next){
     return `<div class="horizon-tease press" style="padding:22px 20px">
       <span class="sun"></span>
-      <h3 style="font-size:19px">The ${tier.name} mastery gate 🏁</h3>
-      <p>Finish every lesson in this zone and your mentor opens the gate review. Nothing skipped, nothing rushed.</p>
+      <h3 style="font-size:19px">The ${tier.name} Gate waits at the top 🏁</h3>
+      <p>Finish every quest in this zone and the gate checks them all — plus the English test. Nothing skipped, nothing rushed.</p>
     </div>`;
   }
   const nm = MAJORS[next.major];
   return `<a class="lcard press" href="#/module/${next.id}" style="--lc:${nm.c};text-decoration:none">
     <span class="lem">${nm.em}</span>
     <span class="lt"><span class="t">${next.title}</span>
-    <span class="s">Module ${idx+2} · ${MOD_META[next.id].lessons} lessons · opens when this one is done</span></span>
+    <span class="s">Proves: ${proofFor(next.id)} · opens when this one is done</span></span>
     <span class="stamp" style="color:var(--dim);border:1px dashed var(--line)">NEXT →</span>
   </a>`;
 }
@@ -763,8 +833,8 @@ function assignCard(tierId, m, band){
     statusHtml = `
       ${rubric(earnedFor(m.id))}
       <div class="cert"><span class="medal">🏅</span>
-        <span><span class="t">Module Certificate earned!</span><br>
-        <span class="s">${m.title} · verified by ${LEARNER.mentor} · counts toward your tier gate</span></span></div>`;
+        <span><span class="t">Mastery proven!</span><br>
+        <span class="s">${proofFor(m.id)} — verified by ${LEARNER.mentor} · counts toward your tier gate</span></span></div>`;
   }
 
   const stateChip = {
@@ -895,7 +965,7 @@ function viewPromotion(){
       <div class="bigmedal">🎓</div>
       <h1>Gate passed!</h1>
       <div class="tierbig">Working tier</div>
-      <p class="quiet">Your Foundation work is complete and verified — every module reviewed, nothing skipped. Promotions here are earned, and this one is yours.</p>
+      <p class="quiet">The Foundation Gate checked every proof — all verified, English Level 1 cleared. Promotions here are earned, and this one is yours.</p>
       <p class="quiet" style="margin-top:10px;font-size:13px;color:var(--dim)">Verified by ${LEARNER.mentor}, your mentor · every tier gate includes the English test</p>
       <div class="ctas">
         <a class="btn warm" href="#/map">Keep climbing 📍</a>
