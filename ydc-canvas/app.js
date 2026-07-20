@@ -239,6 +239,73 @@ function gateCard(tierName, doneCount, total){
   </div>`;
 }
 
+/* ============================================================
+   THE SOUL — every mechanic means one of two things humanly:
+   CURIOSITY (wondering is rewarded, never walled) and
+   GENEROSITY (we give before we ask; learners give each other).
+   ============================================================ */
+/* curiosity: asking “why” is never a dead end — every mastery answers it */
+const WHY_MAJOR = {
+  english:  'because people who say it clearly get heard — in class, at work, anywhere.',
+  math:     'because numbers stop being scary the moment you can make them talk.',
+  physics:  'because the world runs on rules you can see — once you know where to look.',
+  chemistry:'because your kitchen is already a lab. This teaches you to read it.',
+  biology:  'because once you see how living things work, you can’t unsee it.',
+};
+function whyFor(major){ return WHY_MAJOR[major]; }
+
+/* curiosity: side paths — free wonders, always open, cost nothing */
+const WONDERS = {
+  light: {
+    q:'Why do plants reach for light?', tag:'Biology',
+    a:'A plant is a solar panel with roots. Its leaves carry tiny engines that eat light — light is dinner. So it reaches, bends, leans its whole body, because moving toward light is how it eats. Next time you see a plant tilted toward a window, you are watching dinner time in slow motion.',
+    quest:['f-2','Plants & Photosynthesis'],
+  },
+  sky: {
+    q:'Why is the sky blue?', tag:'Physics',
+    a:'Sunlight looks white, but it is a crowd of colors traveling together. Air bumps the blue part of the crowd sideways more than the rest — so blue light gets scattered everywhere, and the whole sky glows with it. At sunset the light takes a longer road, the blue gets lost along the way, and the reds arrive instead.',
+    quest:null,
+  },
+  dream: {
+    q:'Why do we dream?', tag:'Biology',
+    a:'Your brain does not fully switch off at night — it sorts the day. Memories get replayed, mixed, and filed, and dreams are what that filing feels like from the inside. Scientists still argue about the details. That is not a dead end — that is an open door with your name on it.',
+    quest:null,
+  },
+};
+
+/* curiosity: free tastes of locked tiers — looking costs nothing */
+const PEEKS = {
+  composition: { name:'Advanced Composition', zone:'Professional',
+    taste:'One idea, three drafts. You take a rough paragraph and rebuild it until a stranger cannot misunderstand it — then until they cannot forget it. Professional tier work is slower, deeper, and entirely yours.' },
+  data: { name:'Data Analysis', zone:'Professional',
+    taste:'You stop asking “what do the numbers say?” and start asking “what are they hiding?” Real datasets, real mess, real conclusions you defend out loud.' },
+  research: { name:'Research Methods', zone:'Professional',
+    taste:'A question you are genuinely curious about, a method to chase it honestly, and a mentor who keeps you truthful. It ends with findings you present to people who matter.' },
+};
+
+/* generosity: sharing — the trail is meant to travel */
+const SHARE_URL = 'https://talentsolutionsmyanmar-max.github.io/ydc-canvas/';
+function doShare(payload){
+  if(navigator.share){ navigator.share({ title:payload.title, text:payload.text, url:SHARE_URL }).catch(()=>{}); }
+  else if(navigator.clipboard){ navigator.clipboard.writeText(payload.text + ' ' + SHARE_URL).then(()=>toast('Copied — paste it anywhere 💛')).catch(()=>toast(payload.text)); }
+  else toast(payload.text);
+}
+function shareIt(kind){
+  if(kind === 'promotion') doShare({ title:'Gate passed!', text:'I just passed the Foundation Gate on my Night Trail — every mastery proven, English Level 1 cleared. ✨' });
+  if(kind === 'keepsake') doShare({ title:'My first keepsake', text:'My very first session on the Night Trail already made something I can keep and show — a field sketch. 🌿' });
+}
+function shareCert(el){ doShare({ title:'Mastery proven', text:'I proved a mastery on my Night Trail: ' + (el.dataset.proof || '') + ' — verified by my mentor. 🏅' }); }
+function boostMate(btn, name){
+  btn.textContent = 'sent 💛'; btn.disabled = true; btn.classList.add('sent');
+  toast('Boost sent to ' + name + ' — they will see it tonight');
+}
+function toast(msg){
+  const t = document.createElement('div');
+  t.className = 'toast'; t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(), 2300);
+}
+
 /* lesson types — canon + emoji */
 const TYPE_META = {
   sim:        { em:'🎮', label:'Sim' },
@@ -284,6 +351,7 @@ const CIRCLE_ACTS = [
   ['🧪','tried the kitchen-sink reaction'],
   ['🏅','earned a module certificate'],
   ['🎮','solved the sim’s hardest level'],
+  ['🎁','shared her notes with the circle'],
   ['📖','read two lessons before dinner'],
 ];
 function circleFor(band){
@@ -502,11 +570,27 @@ function trailHtml(items, opts){
     return `C ${a.x*100} ${my}, ${b.x*100} ${my}, ${b.x*100} ${b.y}`;
   }).join(' ');
   const first = pts[0];
+  /* curiosity: a side path branches off the current node — free, always open */
+  let branchPath = '', sideNode = '';
+  if(opts && opts.side){
+    const ci = pts.findIndex(p=>p.it.state==='current');
+    if(ci >= 0){
+      const c = pts[ci];
+      const dir = c.x > 0.5 ? -1 : 1;
+      const sx = c.x + dir * 0.27;
+      branchPath = `<path class="branch" d="M ${c.x*100} ${c.y} L ${sx*100} ${c.y+8}" vector-effect="non-scaling-stroke"/>`;
+      sideNode = `<a class="tnode sidepath" href="${opts.side.href}" style="left:${(sx*100).toFixed(1)}%;top:${c.y+8}px;--nc:var(--c-teal)">
+        <span class="orb">✨</span>
+        <span class="tn">${opts.side.label}</span>
+      </a>`;
+    }
+  }
   return `
   <div class="trail" style="height:${H}px">
     <svg class="path" viewBox="0 0 100 ${H}" preserveAspectRatio="none">
       <path d="M ${first.x*100} ${first.y} ${pathD}" vector-effect="non-scaling-stroke"/>
       <path class="pulse" pathLength="100" d="M ${first.x*100} ${first.y} ${pathD}" vector-effect="non-scaling-stroke"/>
+      ${branchPath}
     </svg>
     ${pts.map(p=>`
       <a class="tnode ${p.it.state}" href="${p.it.href}" style="left:${(p.x*100).toFixed(1)}%;top:${p.y}px;--nc:${p.it.color}">
@@ -514,6 +598,7 @@ function trailHtml(items, opts){
         <span class="orb">${p.it.state==='done' ? '✓' : p.it.em}</span>
         <span class="tn">${p.it.label}</span>
       </a>`).join('')}
+    ${sideNode}
   </div>`;
 }
 
@@ -563,7 +648,7 @@ function viewHome(){
       <div class="quest press" style="--qc1:${mj.c1};--qc2:${mj.c2}">
         <div class="qk">Tonight's quest · ${mj.name}</div>
         <h2>${mj.em} ${mod.title}</h2>
-        <div class="qs">${tier.name} tier · Module ${modIdx+1} · ${doneCount} of ${lessons.length} lessons done</div>
+        <div class="qs">Module ${modIdx+1} · ${doneCount} of ${lessons.length} lessons done · ${tier.name} tier</div>
         <div class="qproof">Proving: ${proofFor(mod.id)}</div>
         <div class="qbar"><i style="width:${Math.round(doneCount/lessons.length*100)}%"></i></div>
         <div class="qdots">${lessons.map(l=>`<span class="qd ${l.state}"></span>`).join('')}</div>
@@ -581,6 +666,15 @@ function viewHome(){
       </a>
     </section>`).join('')}
 
+    <section class="rv" style="margin-top:14px">
+      <div class="keepsake">
+        <span class="art"><svg width="38" height="38" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 34 C20 26 20 18 20 10" stroke="#4ADE80" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M20 24 C14 22 11 17 11 12 C16 13 20 17 20 24" fill="#4ADE80" opacity=".8"/><path d="M20 20 C26 18 29 13 29 8 C24 9 20 13 20 20" fill="#4ADE80" opacity=".6"/><circle cx="20" cy="8" r="2.5" fill="#FFD166"/></svg></span>
+        <span><span class="t">From your very first session</span>
+        <span class="s">Your first field sketch — kept forever, yours to show. The platform gives before it asks.</span></span>
+        <button class="sharepill" onclick="shareIt('keepsake')">Show it off</button>
+      </div>
+    </section>
+
     <div class="sechead rv"><h3>Your trail</h3><a class="more" href="#/map">Full map →</a></div>
     <section class="trailwrap rv">
       <div class="summit" style="margin-bottom:18px">
@@ -588,13 +682,13 @@ function viewHome(){
         <span><span class="t">Foundation Gate — passed!</span><br>
         <span class="s">Every Foundation mastery proven and verified. The gate opened; you walked through.</span></span>
       </div>
-      ${trailHtml(trailItems)}
+      ${trailHtml(trailItems, { side:{ label:'Side path · free wonder', href:'#/wonder/light' } })}
       ${gateCard('Working', doneW, lib.working.length)}
       <div class="fogzone" style="margin-top:14px">
         <div class="mist"></div>
         <div class="t">☁️ Professional tier — beyond the gate</div>
-        <div class="s">The mist clears when the Working Gate and the English gate are both behind you. Nothing unlocks early — that's what makes it real.</div>
-        <div class="peeks"><span>Advanced Composition</span><span>Data Analysis</span><span>Research Methods</span></div>
+        <div class="s">The mist clears when the Working Gate and the English gate are both behind you. Nothing unlocks early — but looking costs nothing.</div>
+        <div class="peeks"><a href="#/peek/composition">Advanced Composition</a><a href="#/peek/data">Data Analysis</a><a href="#/peek/research">Research Methods</a></div>
       </div>
     </section>
 
@@ -605,6 +699,7 @@ function viewHome(){
           <div class="hd"><span class="ava" style="--ac:${c.color}">${c.nm.split(' ').map(w=>w[0]).join('')}</span>
           <span class="nm">${c.nm}</span></div>
           <div class="act"><span class="em">${c.em}</span>${c.text}</div>
+          <button class="boost" onclick="boostMate(this,'${c.nm}')">💛 boost</button>
         </div>`).join('')}
       <div class="mate" style="display:grid;place-items:center;text-align:center">
         <div class="act">💬<br>Study circles open<br>when your mentor<br>pairs you up.</div>
@@ -641,8 +736,8 @@ function viewMap(){
       body = `<div class="fogzone">
         <div class="mist"></div>
         <div class="t">☁️ Still in the mist</div>
-        <div class="s">Complete the ${TIERS[t.n-2].name} tier and pass the gate to enter ${t.name}.</div>
-        <div class="peeks"><span>Specialist tracks</span><span>Mentored projects</span></div>
+        <div class="s">Complete the ${TIERS[t.n-2].name} tier and pass the gate to enter ${t.name} — but looking costs nothing.</div>
+        <div class="peeks"><a href="#/peek/composition">Advanced Composition</a><a href="#/peek/data">Data Analysis</a><a href="#/peek/research">Research Methods</a></div>
       </div>`;
     } else {
       const items = lib[t.id].map((m,i)=>{
@@ -723,6 +818,7 @@ function viewModule(modId){
         <div class="crumb"><a href="#/map">Trail map</a> · ${tier.name} zone · ${mj.name}</div>
         <h1><span class="qem">${mj.em}</span> ${mod.title}</h1>
         <div class="qproof">🎯 ${st==='done' ? 'Mastery proven' : 'Proving'}: ${proofFor(mod.id)}</div>
+        <div class="qwhy">Why this mastery? ${whyFor(mod.major)}</div>
         <div class="qmeta">
           <span class="chip">${done} of ${lessons.length} lessons</span>
           <span class="chip">${langLine(tierId)}</span>
@@ -834,7 +930,8 @@ function assignCard(tierId, m, band){
       ${rubric(earnedFor(m.id))}
       <div class="cert"><span class="medal">🏅</span>
         <span><span class="t">Mastery proven!</span><br>
-        <span class="s">${proofFor(m.id)} — verified by ${LEARNER.mentor} · counts toward your tier gate</span></span></div>`;
+        <span class="s">${proofFor(m.id)} — verified by ${LEARNER.mentor} · counts toward your tier gate</span></span></div>
+      <button class="sharepill" data-proof="${proofFor(m.id)}" onclick="shareCert(this)">Share this mastery 🎉</button>`;
   }
 
   const stateChip = {
@@ -968,12 +1065,61 @@ function viewPromotion(){
       <p class="quiet">The Foundation Gate checked every proof — all verified, English Level 1 cleared. Promotions here are earned, and this one is yours.</p>
       <p class="quiet" style="margin-top:10px;font-size:13px;color:var(--dim)">Verified by ${LEARNER.mentor}, your mentor · every tier gate includes the English test</p>
       <div class="ctas">
+        <button class="btn primary" onclick="shareIt('promotion')">Share this moment ✨</button>
         <a class="btn warm" href="#/map">Keep climbing 📍</a>
         <a class="btn ghost" href="#/">Back home</a>
       </div>
     </div>
   </main>`;
   return shell(content, 'promo');
+}
+
+/* ============================================================
+   WONDER & PEEK — curiosity, open to every band, costs nothing
+   ============================================================ */
+function viewWonder(id){
+  const w = WONDERS[id] || WONDERS.light;
+  const quest = w.quest ? `<a class="wquest press" href="#/module/${w.quest[0]}">Follow this wonder into a quest: ${w.quest[1]} →</a>`
+                        : `<span class="wquest dim">No gate on this one — wondering was the whole point.</span>`;
+  const content = `
+  <main class="page">
+    <section class="rv">
+      <div class="qhero" style="--qc1:#0D9488;--qc2:#155E75">
+        <div class="crumb"><a href="#/">Home</a> · side path · free wonder</div>
+        <h1><span class="qem">✨</span> ${w.q}</h1>
+        <div class="qproof">Asked by learners · ${w.tag}</div>
+        <div class="qwhy">Open to every band, forever — no wonder is locked behind a wall.</div>
+      </div>
+    </section>
+    <section class="card rv wcard"><div class="wanswer">${w.a}</div>${quest}</section>
+    <section class="card rv wcard"><div class="wlist-t">Keep wondering — it costs nothing</div><div class="wonders">
+      <a href="#/wonder/light">🌿 Why do plants reach for light?</a>
+      <a href="#/wonder/sky">🌌 Why is the sky blue?</a>
+      <a href="#/wonder/dream">🌙 Why do we dream?</a>
+    </div></section>
+    <a class="btn ghost" href="#/">Back to the trail</a>
+    ${footNote()}
+  </main>`;
+  return shell(content, 'home');
+}
+function viewPeek(id){
+  const p = PEEKS[id] || PEEKS.composition;
+  const content = `
+  <main class="page">
+    <section class="rv">
+      <div class="qhero" style="--qc1:#B45309;--qc2:#92400E">
+        <div class="crumb"><a href="#/">Home</a> · a look ahead · ${p.zone} tier</div>
+        <h1><span class="qem">🔭</span> ${p.name}</h1>
+        <div class="qproof">Locked for now — but looking costs nothing</div>
+        <div class="qwhy">Curiosity has no gate. Every peek is free.</div>
+      </div>
+    </section>
+    <section class="card rv wcard"><div class="wanswer">${p.taste}</div>
+      <span class="wquest dim">This mastery waits at the ${p.zone} Gate — every quest on your trail walks toward it.</span></section>
+    <a class="btn ghost" href="#/">Back to the trail</a>
+    ${footNote()}
+  </main>`;
+  return shell(content, 'home');
 }
 
 /* ---------- router + reveal ---------- */
@@ -996,6 +1142,8 @@ function route(){
   else if(h === 'map') html = viewMap();
   else if(h === 'horizon') html = viewHorizon();
   else if(h === 'promotion') html = viewPromotion();
+  else if(h.startsWith('wonder/')) html = viewWonder(h.split('/')[1]);
+  else if(h.startsWith('peek/')) html = viewPeek(h.split('/')[1]);
   else html = viewHome();
   app.innerHTML = html;
   renderThemeBtn();
