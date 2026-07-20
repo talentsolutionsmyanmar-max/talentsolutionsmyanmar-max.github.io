@@ -293,6 +293,7 @@ select.pillbtn option{ background:var(--panel); color:var(--ink); }
 .quest .qk{ font-size:12px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; opacity:.85; }
 .quest h2{ font-size:24px; font-weight:800; letter-spacing:-.02em; margin-top:8px; line-height:1.15; }
 .quest .qs{ margin-top:6px; font-size:14px; opacity:.92; }
+.quest .qproof{ position:relative; margin-top:9px; font-size:13px; font-weight:800; letter-spacing:.04em; opacity:.95; }
 .quest .qbar{
   margin-top:16px; height:8px; border-radius:99px;
   background:rgba(255,255,255,.28); overflow:hidden;
@@ -398,6 +399,47 @@ select.pillbtn option{ background:var(--panel); color:var(--ink); }
 }
 @keyframes bob{ 0%,100%{ transform:translateX(-50%) translateY(0);} 50%{ transform:translateX(-50%) translateY(-4px);} }
 .trail-cap{ text-align:center; padding:6px 0 2px; }
+
+/* gate nodes — the trail's state changes, made physical */
+.tnode.gate .orb{
+  border-color:var(--c-gold); border-style:dashed;
+  background:color-mix(in srgb, var(--c-gold) 10%, var(--panel));
+  animation:gatepulse 2.6s ease-in-out infinite;
+}
+@keyframes gatepulse{
+  0%,100%{ box-shadow:0 0 0 5px color-mix(in srgb, var(--c-gold) 14%, transparent), 0 0 20px color-mix(in srgb, var(--c-gold) 30%, transparent); }
+  50%{ box-shadow:0 0 0 10px color-mix(in srgb, var(--c-gold) 7%, transparent), 0 0 30px color-mix(in srgb, var(--c-gold) 45%, transparent); }
+}
+.tnode.gate .tn{ color:var(--c-gold); font-weight:800; }
+.tnode.gatepassed .orb{
+  background:radial-gradient(circle at 35% 30%, #FFE9A8, var(--c-gold) 70%);
+  border-color:var(--c-gold);
+  box-shadow:0 0 22px color-mix(in srgb, var(--c-gold) 55%, transparent);
+}
+.tnode.gatepassed .tn{ color:var(--c-gold); font-weight:800; }
+
+/* gate card — the two keys, stated plainly */
+.gatecard{
+  margin-top:16px;
+  border-radius:var(--r-lg);
+  border:1.5px dashed color-mix(in srgb, var(--c-gold) 45%, transparent);
+  background:linear-gradient(160deg, color-mix(in srgb, var(--c-gold) 9%, var(--panel)), var(--panel));
+  padding:18px 20px;
+}
+.gatecard .t{ font-size:16px; font-weight:800; color:var(--c-gold); }
+.gatecard .key{ display:flex; gap:12px; align-items:flex-start; margin-top:12px; font-size:13.5px; color:var(--mut); line-height:1.45; }
+.gatecard .key .em{ font-size:20px; line-height:1.3; }
+.gatecard .key b{ color:var(--ink); }
+.gatecard .s{ margin-top:14px; font-size:12.5px; color:var(--dim); font-style:italic; }
+
+/* map legend — the world states its law */
+.maplegend{
+  margin-top:16px; display:grid; gap:8px;
+  border:1px solid var(--line); border-radius:var(--r-md);
+  background:color-mix(in srgb, var(--panel) 80%, transparent);
+  padding:14px 18px; font-size:13.5px; color:var(--mut);
+}
+.maplegend b{ color:var(--ink); }
 
 /* summit card (finished tier) */
 .summit{
@@ -528,6 +570,7 @@ select.pillbtn option{ background:var(--panel); color:var(--ink); }
 .qhero > *{ position:relative; }
 .qhero .crumb{ font-size:12.5px; font-weight:700; opacity:.85; }
 .qhero h1{ font-size:26px; font-weight:800; letter-spacing:-.02em; margin-top:6px; line-height:1.12; }
+.qhero .qproof{ margin-top:7px; font-size:13.5px; font-weight:800; letter-spacing:.03em; opacity:.95; }
 .qhero .qem{ font-size:34px; }
 .qhero .qmeta{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
 .qhero .chip{ background:rgba(255,255,255,.16); border-color:rgba(255,255,255,.25); color:#FFF; }
