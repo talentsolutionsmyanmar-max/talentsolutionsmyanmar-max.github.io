@@ -827,6 +827,131 @@ select.pillbtn option{ background:var(--panel); color:var(--ink); }
 .promo .ctas{ margin-top:30px; display:flex; gap:10px; flex-wrap:wrap; justify-content:center; animation:rise2 .7s .45s cubic-bezier(.2,.8,.25,1) both; }
 @keyframes rise2{ from{ opacity:0; transform:translateY(16px);} to{ opacity:1; transform:none; } }
 
+/* ============================================================
+   THE SOUL — curiosity & generosity, made visible
+   ============================================================ */
+/* side path — a free wonder branching off the current node */
+.trail svg.path path.branch{
+  stroke:color-mix(in srgb, var(--c-teal) 60%, transparent);
+  stroke-dasharray:2 7;
+}
+.tnode.sidepath .orb{
+  width:52px; height:52px; font-size:22px;
+  border-style:dashed;
+  background:color-mix(in srgb, var(--c-teal) 8%, var(--panel));
+  animation:sideglow 3s ease-in-out infinite;
+}
+@keyframes sideglow{
+  0%,100%{ box-shadow:0 0 0 4px color-mix(in srgb, var(--c-teal) 12%, transparent), 0 0 14px color-mix(in srgb, var(--c-teal) 25%, transparent); }
+  50%{ box-shadow:0 0 0 8px color-mix(in srgb, var(--c-teal) 7%, transparent), 0 0 22px color-mix(in srgb, var(--c-teal) 40%, transparent); }
+}
+.tnode.sidepath .tn{ color:var(--c-teal); font-weight:800; }
+
+/* the "why" line — asking why is never a dead end */
+.qhero .qwhy{
+  margin-top:10px;
+  font-size:13px; font-weight:600; line-height:1.45;
+  color:rgba(255,255,255,.88);
+  border-left:3px solid rgba(255,255,255,.45);
+  padding-left:10px;
+}
+
+/* fogzone peeks — locked, but looking costs nothing */
+.fogzone .peeks a{
+  font-size:11.5px; font-weight:700; color:var(--c-teal);
+  border:1px solid color-mix(in srgb, var(--c-teal) 40%, transparent);
+  border-radius:999px; padding:3px 10px;
+  text-decoration:none; position:relative;
+  transition:background .15s ease;
+}
+.fogzone .peeks a:hover{ background:color-mix(in srgb, var(--c-teal) 12%, transparent); }
+
+/* the keepsake — the platform gives before it asks */
+.keepsake{
+  display:flex; align-items:center; gap:12px;
+  border-radius:var(--r-lg);
+  border:1.5px solid color-mix(in srgb, var(--c-teal) 35%, transparent);
+  background:linear-gradient(135deg, color-mix(in srgb, var(--c-teal) 10%, var(--panel)), var(--panel));
+  padding:14px 16px;
+  box-shadow:var(--shadow);
+}
+.keepsake .art{
+  flex:0 0 52px; width:52px; height:52px; border-radius:16px;
+  display:grid; place-items:center;
+  background:color-mix(in srgb, var(--c-teal) 14%, transparent);
+}
+.keepsake > span:nth-child(2){ flex:1; min-width:0; }
+.keepsake .t{ display:block; font-weight:800; font-size:13.5px; color:var(--ink); }
+.keepsake .s{ display:block; font-size:12px; color:var(--mut); line-height:1.4; margin-top:2px; }
+
+/* share pill — generosity travels */
+.sharepill{
+  flex:0 0 auto;
+  border:1.5px solid color-mix(in srgb, var(--c-teal) 50%, transparent);
+  background:color-mix(in srgb, var(--c-teal) 12%, transparent);
+  color:var(--c-teal);
+  font-family:inherit; font-size:12px; font-weight:800;
+  padding:8px 14px; border-radius:999px; cursor:pointer;
+  transition:transform .12s ease, background .15s ease;
+}
+.sharepill:hover{ background:color-mix(in srgb, var(--c-teal) 20%, transparent); }
+.sharepill:active{ transform:scale(.94); }
+.rwquest .sharepill{ display:block; width:100%; margin-top:12px; }
+
+/* boost — generosity between youth */
+.boost{
+  margin-top:10px;
+  border:1px solid var(--line);
+  background:transparent; color:var(--mut);
+  font-family:inherit; font-size:11.5px; font-weight:700;
+  padding:5px 12px; border-radius:999px; cursor:pointer;
+  transition:all .15s ease;
+}
+.boost:hover{ border-color:color-mix(in srgb, #FF7A85 50%, transparent); color:#FF7A85; }
+.boost.sent, .boost:disabled{
+  border-color:color-mix(in srgb, #FF7A85 50%, transparent);
+  background:color-mix(in srgb, #FF7A85 12%, transparent);
+  color:#FF7A85; cursor:default;
+}
+
+/* toast — small, warm confirmations */
+.toast{
+  position:fixed; left:50%; bottom:96px; transform:translateX(-50%);
+  z-index:60;
+  background:var(--panel); color:var(--ink);
+  border:1px solid var(--line); border-radius:999px;
+  padding:10px 18px; font-size:13px; font-weight:700;
+  box-shadow:0 12px 40px rgba(0,0,0,.35);
+  animation:toastin 2.3s ease both;
+  max-width:86vw; text-align:center;
+}
+@keyframes toastin{
+  0%{ opacity:0; transform:translateX(-50%) translateY(12px); }
+  10%,82%{ opacity:1; transform:translateX(-50%) translateY(0); }
+  100%{ opacity:0; transform:translateX(-50%) translateY(8px); }
+}
+
+/* wonder & peek pages */
+.wcard{ padding:20px 18px; margin-top:14px; }
+.wanswer{ font-size:15px; line-height:1.65; color:var(--ink); }
+.wquest{
+  display:block; margin-top:14px;
+  font-size:13.5px; font-weight:800; color:var(--c-teal);
+  text-decoration:none;
+  border-top:1px dashed var(--line); padding-top:14px;
+}
+.wquest.dim{ color:var(--dim); font-weight:600; }
+.wlist-t{ font-weight:800; font-size:13.5px; color:var(--ink); margin-bottom:10px; }
+.wonders{ display:grid; gap:8px; }
+.wonders a{
+  display:block;
+  padding:11px 14px; border-radius:14px;
+  border:1px solid var(--line);
+  color:var(--mut); font-size:13.5px; font-weight:700; text-decoration:none;
+  transition:border-color .15s ease, color .15s ease;
+}
+.wonders a:hover{ border-color:color-mix(in srgb, var(--c-teal) 45%, transparent); color:var(--ink); }
+
 @media (prefers-reduced-motion: reduce){
   *, *::before, *::after{ animation:none !important; transition:none !important; }
   .rv{ opacity:1; transform:none; }
@@ -839,6 +964,9 @@ select.pillbtn option{ background:var(--panel); color:var(--ink); }
   .quest h2{ font-size:21px; }
   .tnode{ width:96px; }
   .tnode .tn{ max-width:96px; font-size:11px; }
+  .tnode.sidepath .tn{ font-size:10.5px; }
+  .keepsake{ flex-wrap:wrap; }
+  .keepsake .sharepill{ flex:1 1 100%; }
   .mate{ flex-basis:186px; }
   .horizon-hero .cap-badge{ font-size:12.5px; padding:8px 14px; }
   .horizon-hero .posline{ letter-spacing:.1em; }
