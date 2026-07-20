@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ReferTRM Brand Visual System v1 — design tokens, components, trust system. Internal demo for rating before productionization.">
+<title>ReferTRM — Brand Visual System v1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0B0B10; --bg-2:#101018;
+  --card:#16161E; --card-2:#1C1C26; --glass:rgba(255,255,255,.035);
+  --line:rgba(255,255,255,.09); --line-strong:rgba(255,255,255,.16);
+  --text:#F4F4F6; --text-2:#A9A9B4; --text-3:#6E6E7A;
+  --blue:#3B82F6; --blue-dim:rgba(59,130,246,.14);
+  --gold:#C9A84C; --gold-dim:rgba(201,168,76,.14);
+  --trust:#2FBF8F; --trust-dim:rgba(47,191,143,.12);
+  --danger:#E5484D; --danger-dim:rgba(229,72,77,.12);
+  --mm-slot:#8E8E9A;
+  --radius:2px; --maxw:1160px;
+  --shadow:0 8px 32px rgba(0,0,0,.35);
+  --font:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+}
+[data-theme="light"]{
+  --bg:#F5F5F8; --bg-2:#EEEEF3;
+  --card:#FFFFFF; --card-2:#FAFAFC; --glass:rgba(22,22,30,.03);
+  --line:rgba(22,22,30,.10); --line-strong:rgba(22,22,30,.20);
+  --text:#16161E; --text-2:#55555F; --text-3:#8A8A94;
+  --blue-dim:rgba(59,130,246,.10); --gold-dim:rgba(201,168,76,.14);
+  --trust-dim:rgba(47,191,143,.12);
+  --mm-slot:#7A7A86;
+  --shadow:0 8px 28px rgba(22,22,30,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;transition:background .25s,color .25s}
+::selection{background:var(--gold);color:#16161E}
+.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:16px;padding:12px 24px;background:var(--bg);border-bottom:1px solid var(--line)}
+.wordmark{font-weight:800;font-size:18px;letter-spacing:-.03em;text-decoration:none;color:var(--text)}
+.wordmark .tm{font-size:.55em;vertical-align:super;color:var(--gold);font-weight:700;letter-spacing:0}
+.topbar .doc-title{font-size:13px;color:var(--text-3);font-weight:500;letter-spacing:.02em}
+.gate-badge{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--gold);border:1px solid var(--gold);padding:5px 10px;border-radius:var(--radius);background:var(--gold-dim);white-space:nowrap}
+.gate-badge .dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.theme-toggle{cursor:pointer;border:1px solid var(--line-strong);background:var(--card);color:var(--text);font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:6px 12px;border-radius:var(--radius);display:inline-flex;align-items:center;gap:7px;transition:border-color .2s}
+.theme-toggle:hover{border-color:var(--gold)}
+.shell{display:grid;grid-template-columns:230px 1fr;max-width:var(--maxw);margin:0 auto;gap:48px;padding:0 24px}
+.sidenav{position:sticky;top:76px;align-self:start;height:calc(100vh - 76px);overflow:auto;padding:32px 0;font-size:13px}
+.sidenav a{display:block;color:var(--text-3);text-decoration:none;padding:6px 0 6px 14px;border-left:1px solid var(--line);transition:color .15s,border-color .15s}
+.sidenav a:hover,.sidenav a.active{color:var(--text);border-left-color:var(--gold)}
+.sidenav .nav-kicker{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--text-3);padding:0 0 10px 14px}
+main{padding:32px 0 96px;min-width:0}
+section{margin-bottom:88px;scroll-margin-top:84px}
+.sec-num{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.18em;display:block;margin-bottom:8px}
+h2{font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1.15;margin-bottom:10px}
+.sec-lede{color:var(--text-2);max-width:640px;margin-bottom:32px;font-size:15px}
+h3{font-size:17px;font-weight:700;margin:32px 0 14px;letter-spacing:-.01em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;position:relative}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.note{font-size:13px;color:var(--text-3);margin-top:10px}
+.rule-tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;padding:3px 8px;border:1px solid var(--line-strong);border-radius:var(--radius);color:var(--text-2);margin:2px 4px 2px 0}
+.rule-tag.ok{color:var(--trust);border-color:var(--trust)}
+.rule-tag.no{color:var(--danger);border-color:var(--danger)}
+.rule-tag.gold{color:var(--gold);border-color:var(--gold)}
+.hero{padding:72px 0 56px;border-bottom:1px solid var(--line);margin-bottom:64px}
+.hero .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--gold);margin-bottom:20px}
+.hero h1{font-size:clamp(34px,5.4vw,58px);font-weight:800;letter-spacing:-.035em;line-height:1.04;max-width:16ch}
+.hero h1 .accent{background:linear-gradient(100deg,var(--blue),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{margin-top:20px;color:var(--text-2);max-width:60ch;font-size:16px}
+.hero .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.swatch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.swatch{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;cursor:pointer;background:var(--card);transition:transform .15s}
+.swatch:hover{transform:translateY(-2px)}
+.swatch .chip{height:72px}
+.swatch .sw-info{padding:10px 12px}
+.swatch .sw-name{font-size:12px;font-weight:600}
+.swatch .sw-hex{font-family:var(--mono);font-size:11px;color:var(--text-3)}
+.token-table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
+.token-table th{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--text-3);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line-strong)}
+.token-table td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+.token-table .tok{font-family:var(--mono);font-size:12px;color:var(--gold)}
+.mini-chip{display:inline-block;width:26px;height:16px;border:1px solid var(--line-strong);border-radius:1px;vertical-align:middle;margin-right:8px}
+.type-spec{display:flex;align-items:baseline;gap:20px;padding:16px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.type-spec .spec-meta{font-family:var(--mono);font-size:11px;color:var(--text-3);width:180px;flex-shrink:0}
+.type-spec .spec-label{font-family:var(--mono);font-size:11px;color:var(--gold);width:110px;flex-shrink:0}
+.mm-slot-demo{border:1px dashed var(--mm-slot);border-radius:var(--radius);padding:14px 16px;margin-top:12px;background:var(--glass)}
+.mm-slot-demo .mm-tag{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--mm-slot);display:block;margin-bottom:6px}
+.mm-slot-demo .mm-body{font-size:14px;color:var(--text-2);font-style:italic}
+.lockup-stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);min-height:180px;display:flex;align-items:center;justify-content:center;position:relative;padding:40px}
+.lockup-stage .clearspace{position:absolute;inset:18px;border:1px dashed var(--line-strong);pointer-events:none}
+.lockup-stage .cs-label{position:absolute;top:6px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--text-3)}
+.lockup-platform{font-size:34px;font-weight:800;letter-spacing:-.03em}
+.lockup-platform .tm{font-size:.5em;vertical-align:super;color:var(--gold)}
+.lockup-human{font-size:24px;font-weight:600;letter-spacing:-.01em}
+.lockup-human em{font-style:normal;color:var(--gold)}
+.lockup-pair{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;justify-content:center}
+.lockup-pair .by{font-family:var(--mono);font-size:11px;color:var(--text-3);letter-spacing:.1em}
+.trust-strip{display:flex;align-items:center;gap:12px;background:var(--trust-dim);border:1px solid var(--trust);border-radius:var(--radius);padding:12px 16px}
+.trust-strip svg{flex-shrink:0}
+.trust-strip .ts-text{font-size:13px;font-weight:600;color:var(--trust);letter-spacing:.01em}
+.anatomy{display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
+.anatomy-list{list-style:none;font-size:14px}
+.anatomy-list li{padding:12px 0;border-bottom:1px solid var(--line);display:flex;gap:12px}
+.anatomy-list .n{font-family:var(--mono);color:var(--gold);font-size:12px;padding-top:2px}
+.comp-label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--text-3);margin:36px 0 4px}
+.comp-name{font-size:16px;font-weight:700;margin-bottom:4px}
+.comp-use{font-size:13px;color:var(--text-2);margin-bottom:16px;max-width:60ch}
+.comp-stage{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:32px;display:flex;justify-content:center}
+.social-card{width:100%;max-width:400px;background:var(--card);border:1px solid var(--line-strong);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.social-card .sc-head{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.social-card .sc-badge{font-family:var(--mono);font-size:9px;letter-spacing:.14em;padding:3px 8px;border-radius:var(--radius)}
+.sc-badge.verified{background:var(--trust-dim);color:var(--trust);border:1px solid var(--trust)}
+.sc-badge.sample{background:var(--gold-dim);color:var(--gold);border:1px solid var(--gold)}
+.sc-badge.earn{background:var(--gold-dim);color:var(--gold);border:1px solid var(--gold)}
+.sc-badge.learn{background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue)}
+.social-card .sc-body{padding:18px 16px}
+.sc-role{font-size:19px;font-weight:800;letter-spacing:-.02em;line-height:1.25}
+.sc-employer{font-size:13px;color:var(--text-2);margin-top:3px;font-weight:500}
+.sc-facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.sc-fact{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--text-2);border:1px solid var(--line);padding:5px 10px;border-radius:var(--radius);background:var(--glass)}
+.sc-fact svg{opacity:.75}
+.sc-salary{margin-top:14px;padding:12px 14px;background:var(--glass);border-left:2px solid var(--trust);border-radius:var(--radius)}
+.sc-salary .sal-label{font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--text-3)}
+.sc-salary .sal-value{font-size:17px;font-weight:800;color:var(--trust);letter-spacing:-.01em}
+.sc-cta{display:block;text-align:center;margin:16px 16px 0;padding:12px;background:var(--blue);color:#fff;font-weight:700;font-size:14px;border-radius:var(--radius);text-decoration:none;letter-spacing:.01em}
+.sc-cta.gold{background:var(--gold);color:#16161E}
+.sc-cta.dark{background:var(--card-2);color:var(--text);border:1px solid var(--line-strong)}
+.sc-trust{padding:12px 16px;margin:16px 16px 0;display:flex;align-items:center;gap:9px;background:var(--trust-dim);border:1px solid var(--trust);border-radius:var(--radius)}
+.sc-trust span{font-size:11.5px;font-weight:600;color:var(--trust);line-height:1.45}
+.sc-mm{margin:16px 16px 0}
+.sc-foot{padding:10px 16px;border-top:1px solid var(--line);margin-top:16px;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;color:var(--text-3);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.carousel-frames{display:flex;gap:12px;overflow-x:auto;padding:4px;width:100%;max-width:460px}
+.carousel-frame{flex:0 0 200px;background:var(--card);border:1px solid var(--line-strong);border-radius:var(--radius);padding:16px;min-height:230px;display:flex;flex-direction:column}
+.carousel-frame .cf-num{font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.14em}
+.carousel-frame .cf-big{font-size:30px;font-weight:800;letter-spacing:-.03em;margin:8px 0 4px}
+.carousel-frame .cf-sub{font-size:12px;color:var(--text-2)}
+.carousel-frame .cf-foot{margin-top:auto;font-family:var(--mono);font-size:9px;color:var(--text-3);letter-spacing:.08em;padding-top:12px;border-top:1px solid var(--line)}
+.stat-row{display:flex;gap:24px;margin-top:16px;flex-wrap:wrap}
+.stat .st-v{font-size:22px;font-weight:800;letter-spacing:-.02em}
+.stat .st-l{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--text-3)}
+.src-req{font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.06em}
+.lang-pair{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:16px}
+.lang-pair .lp-en{padding:18px 20px;background:var(--card)}
+.lang-pair .lp-mm{padding:14px 20px;background:var(--glass);border-top:1px dashed var(--mm-slot)}
+.lang-pair .lp-tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;display:block;margin-bottom:6px}
+.lp-tag.en{color:var(--blue)}
+.lp-tag.mm{color:var(--mm-slot)}
+.lp-en .lp-text{font-size:16px;font-weight:600;color:var(--text)}
+.lp-mm .lp-text{font-size:14px;color:var(--text-2);font-style:italic}
+.motion-demo{display:flex;gap:16px;flex-wrap:wrap}
+.motion-chip{border:1px solid var(--line-strong);border-radius:var(--radius);padding:16px 20px;background:var(--card);text-align:center;min-width:150px;transition:transform .25s cubic-bezier(.2,.8,.2,1),border-color .25s}
+.motion-chip:hover{transform:translateY(-3px);border-color:var(--gold)}
+.motion-chip .mc-name{font-weight:700;font-size:13px}
+.motion-chip .mc-spec{font-family:var(--mono);font-size:10px;color:var(--text-3);margin-top:4px}
+.shimmer-demo{font-size:26px;font-weight:800;letter-spacing:-.02em;background:linear-gradient(100deg,var(--text) 40%,var(--gold) 50%,var(--text) 60%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 3.2s linear infinite;display:inline-block}
+@keyframes shimmer{0%{background-position:120% 0}100%{background-position:-120% 0}}
+.emoji-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.emoji-cell{width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:24px;border:1px solid var(--line-strong);border-radius:var(--radius);background:var(--card)}
+.zero-emoji{border:1px solid var(--danger);background:var(--danger-dim);border-radius:var(--radius);padding:16px 20px;color:var(--danger);font-weight:600;font-size:14px;display:flex;gap:10px;align-items:center}
+.cuts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.cut{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);padding:14px;text-align:center}
+.cut .frame{margin:0 auto 12px;border:1px solid var(--line-strong);background:var(--bg-2);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:var(--text-3)}
+.cut .c-name{font-size:13px;font-weight:700}
+.cut .c-spec{font-family:var(--mono);font-size:10px;color:var(--text-3);margin-top:3px;line-height:1.5}
+.f916{width:72px;height:128px}.f11{width:110px;height:110px}.f45{width:96px;height:120px}.f169{width:128px;height:72px}.fvb{width:110px;height:62px}
+.gate-flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:0;border:1px solid var(--line-strong);border-radius:var(--radius);overflow:hidden}
+.gate-step{padding:20px 18px;border-right:1px solid var(--line);background:var(--card)}
+.gate-step:last-child{border-right:none}
+.gate-step .gs-n{font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.14em}
+.gate-step .gs-t{font-weight:700;font-size:14px;margin:6px 0 4px}
+.gate-step .gs-d{font-size:12px;color:var(--text-2);line-height:1.5}
+footer{border-top:1px solid var(--line);padding:40px 24px 64px;max-width:var(--maxw);margin:0 auto;font-size:12px;color:var(--text-3)}
+footer .f-mark{font-weight:800;color:var(--text-2);letter-spacing:-.02em;font-size:15px}
+footer .f-mark .tm{font-size:.55em;vertical-align:super;color:var(--gold)}
+@media (max-width:900px){
+  .shell{grid-template-columns:1fr;gap:0}
+  .sidenav{display:none}
+  .anatomy{grid-template-columns:1fr}
+  .grid2{grid-template-columns:1fr}
+  .gate-step{border-right:none;border-bottom:1px solid var(--line)}
+  .doc-title{display:none}
+  .topbar{padding:10px 14px;gap:10px;flex-wrap:wrap}
+  .gate-badge{margin-left:0;font-size:9px;padding:4px 7px;letter-spacing:.05em}
+  .theme-toggle{margin-left:auto}
+  .comp-stage{padding:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="wordmark" href="#top">ReferTRM<span class="tm">TM</span></a>
+  <span class="doc-title">Brand Visual System · v1</span>
+  <span class="gate-badge"><span class="dot"></span>DEMO — AWAITING KOKO RATING</span>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    THEME
+  </button>
+</header>
+
+<div class="shell" id="top">
+  <nav class="sidenav" aria-label="Styleguide sections">
+    <div class="nav-kicker">SYSTEM v1</div>
+    <a href="#principles">01 · Principles</a>
+    <a href="#color">02 · Color</a>
+    <a href="#type">03 · Typography</a>
+    <a href="#naming">04 · Naming &amp; Lockups</a>
+    <a href="#trust">05 · Trust System</a>
+    <a href="#components">06 · Components</a>
+    <a href="#bilingual">07 · Bilingual Rules</a>
+    <a href="#motion">08 · Motion</a>
+    <a href="#voice">09 · Voice &amp; Emoji</a>
+    <a href="#channels">10 · Channel Cuts</a>
+    <a href="#gates">11 · Gates &amp; Handoff</a>
+  </nav>
+
+  <main>
+    <div class="hero">
+      <div class="eyebrow">REFERTRM · THE RECRUITER MYANMAR · INTERNAL STYLEGUIDE</div>
+      <h1>Creative that makes a <span class="accent">cheap Android screen</span> feel world-class.</h1>
+      <p>This system is the foundation for every asset the Content Factory and Brand seats produce: job cards, walk-in cards, roundups, referral creative, employer proof, and the Pro-Referrer flagship. Every rule here exists for one reason — a young person in Myanmar, on 3G, on a low-end device, must be able to tell in one glance that this is real, verified, and built for them.</p>
+      <div class="meta-row">
+        <span class="rule-tag gold">EN MASTER — MM SLOTS FOR CCO</span>
+        <span class="rule-tag gold">DEMO HOST ONLY — NO PROD</span>
+        <span class="rule-tag gold">HUMAN HAND PUBLISHES</span>
+        <span class="rule-tag ok">MOTHER-TEST FRAMING</span>
+      </div>
+    </div>
+
+    <section id="principles">
+      <span class="sec-num">01</span>
+      <h2>Principles</h2>
+      <p class="sec-lede">Six laws. Every asset is checked against all six before it leaves the studio. An asset that fails one does not ship.</p>
+      <div class="grid2">
+        <div class="card">
+          <h3 style="margin-top:0">1 · Trust at a glance</h3>
+          <p style="font-size:14px;color:var(--text-2)">The anti-scam signals — verified employer, honest salary, never pay a fee — are not fine print. They are a designed, locked component that appears on every job asset, in the same place, in the same words. Familiarity is the moat against fake recruiters.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">2 · Worker as hero</h3>
+          <p style="font-size:14px;color:var(--text-2)">The Mother Test: would a worker's mother feel proud, not pitied? No desperation imagery, no "escape poverty" tropes, no charity framing. Our people are professionals building livelihoods.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">3 · Mobile-light, always</h3>
+          <p style="font-size:14px;color:var(--text-2)">3G-first. Low-end Android first. Type stays legible at small sizes, contrast survives cheap panels, assets stay light. If it is heavy, it is wrong.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">4 · Edge, not decoration</h3>
+          <p style="font-size:14px;color:var(--text-2)">Sharp corners, disciplined spacing, glass used sparingly over dark. Nothing cute, nothing soft-focus. The product is trust; the design behaves like it.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">5 · Two registers, never mixed</h3>
+          <p style="font-size:14px;color:var(--text-2)">Youth-facing B2C may use the curated emoji set. Employer-facing B2B uses zero emoji. English primary, Myanmar secondary, always in separate blocks. Registers never blur.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">6 · Honest numbers only</h3>
+          <p style="font-size:14px;color:var(--text-2)">Every figure in an asset traces to a registered source query. No invented salaries, no unverifiable claims, no vanity metrics. If the source is not registered, the number does not appear.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="color">
+      <span class="sec-num">02</span>
+      <h2>Color</h2>
+      <p class="sec-lede">Dark-first, with a full light theme — frame, borders, and chrome theme together with the content, never a split appearance. Tap any swatch to copy the hex. Meaning is assigned to color and never improvised: blue is learning, gold is earning, green is verified trust.</p>
+      <h3>Core palette</h3>
+      <div class="swatch-grid">
+        <div class="swatch" data-hex="#0B0B10"><div class="chip" style="background:#0B0B10;border-bottom:1px solid var(--line)"></div><div class="sw-info"><div class="sw-name">Ink · Base</div><div class="sw-hex">#0B0B10</div></div></div>
+        <div class="swatch" data-hex="#16161E"><div class="chip" style="background:#16161E"></div><div class="sw-info"><div class="sw-name">Card · Surface</div><div class="sw-hex">#16161E</div></div></div>
+        <div class="swatch" data-hex="#1C1C26"><div class="chip" style="background:#1C1C26"></div><div class="sw-info"><div class="sw-name">Surface · Raised</div><div class="sw-hex">#1C1C26</div></div></div>
+        <div class="swatch" data-hex="#F4F4F6"><div class="chip" style="background:#F4F4F6"></div><div class="sw-info"><div class="sw-name">Text · Primary</div><div class="sw-hex">#F4F4F6</div></div></div>
+        <div class="swatch" data-hex="#A9A9B4"><div class="chip" style="background:#A9A9B4"></div><div class="sw-info"><div class="sw-name">Text · Secondary</div><div class="sw-hex">#A9A9B4</div></div></div>
+        <div class="swatch" data-hex="#3B82F6"><div class="chip" style="background:#3B82F6"></div><div class="sw-info"><div class="sw-name">Blue · Learn</div><div class="sw-hex">#3B82F6</div></div></div>
+        <div class="swatch" data-hex="#C9A84C"><div class="chip" style="background:#C9A84C"></div><div class="sw-info"><div class="sw-name">Gold · Earn</div><div class="sw-hex">#C9A84C</div></div></div>
+        <div class="swatch" data-hex="#2FBF8F"><div class="chip" style="background:#2FBF8F"></div><div class="sw-info"><div class="sw-name">Trust · Verified</div><div class="sw-hex">#2FBF8F</div></div></div>
+        <div class="swatch" data-hex="#E5484D"><div class="chip" style="background:#E5484D"></div><div class="sw-info"><div class="sw-name">Danger · Scam alert</div><div class="sw-hex">#E5484D</div></div></div>
+      </div>
+      <h3>Semantic assignment</h3>
+      <div class="card" style="padding:0;overflow:auto">
+        <table class="token-table">
+          <thead><tr><th>TOKEN</th><th>VALUE</th><th>MEANING</th><th>RULE</th></tr></thead>
+          <tbody>
+            <tr><td class="tok">--blue</td><td><span class="mini-chip" style="background:#3B82F6"></span>#3B82F6</td><td>Academy, learning, skill content</td><td>Never used for earnings or money claims</td></tr>
+            <tr><td class="tok">--gold</td><td><span class="mini-chip" style="background:#C9A84C"></span>#C9A84C</td><td>Referral, earnings, Pro-Referrer, premium</td><td>Earnings figures must be server-verified before gold is applied</td></tr>
+            <tr><td class="tok">--trust</td><td><span class="mini-chip" style="background:#2FBF8F"></span>#2FBF8F</td><td>Verified employer, honest salary, no-fee signals</td><td>Reserved exclusively for the trust system — never decorative</td></tr>
+            <tr><td class="tok">--danger</td><td><span class="mini-chip" style="background:#E5484D"></span>#E5484D</td><td>Scam-awareness education, warnings</td><td>Never used on our own CTAs — no urgency pressure</td></tr>
+            <tr><td class="tok">--mm-slot</td><td><span class="mini-chip" style="background:#8E8E9A"></span>#8E8E9A</td><td>Myanmar copy slots awaiting CCO</td><td>Dashed treatment = not yet authored. CCO fills; studio never writes MM</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Contrast: text pairings meet WCAG AA at 14px+ on both themes. Checked at 320px width on low-brightness panels.</p>
+    </section>
+
+    <section id="type">
+      <span class="sec-num">03</span>
+      <h2>Typography</h2>
+      <p class="sec-lede">One family: Inter. Strict scale on the 8px grid, tight tracking on display sizes only. English is always primary; Myanmar is always secondary, in its own block, at 14px in the secondary tone — the two languages never share a line or a block.</p>
+      <div class="card">
+        <div class="type-spec"><span class="spec-label">DISPLAY</span><span style="font-size:44px;font-weight:800;letter-spacing:-.035em;line-height:1.1">Master the skill.</span><span class="spec-meta">44–58px / 800 / -0.035em</span></div>
+        <div class="type-spec"><span class="spec-label">H1</span><span style="font-size:36px;font-weight:800;letter-spacing:-.03em;line-height:1.12">Verified jobs, weekly.</span><span class="spec-meta">36px / 800 / -0.03em</span></div>
+        <div class="type-spec"><span class="spec-label">H2</span><span style="font-size:28px;font-weight:800;letter-spacing:-.02em">Walk-in interviews</span><span class="spec-meta">28px / 800 / -0.02em</span></div>
+        <div class="type-spec"><span class="spec-label">H3</span><span style="font-size:22px;font-weight:700;letter-spacing:-.01em">Production Operator</span><span class="spec-meta">22px / 700 / -0.01em</span></div>
+        <div class="type-spec"><span class="spec-label">BODY-L</span><span style="font-size:18px;font-weight:500">The employer is verified. The salary is real.</span><span class="spec-meta">18px / 500</span></div>
+        <div class="type-spec"><span class="spec-label">BODY</span><span style="font-size:16px">Apply through the official channel only. You never pay a fee — not to us, not to anyone.</span><span class="spec-meta">16px / 400 — EN primary size</span></div>
+        <div class="type-spec"><span class="spec-label">SMALL</span><span style="font-size:14px;color:var(--text-2)">Secondary information, captions, and the Myanmar block.</span><span class="spec-meta">14px / 400 — MM block size</span></div>
+        <div class="type-spec" style="border-bottom:none"><span class="spec-label">MONO</span><span style="font-size:12px;font-family:var(--mono);letter-spacing:.12em">VERIFIED EMPLOYER · EST. 2019</span><span class="spec-meta">11–12px / labels, provenance</span></div>
+      </div>
+      <h3>The Myanmar slot — how it is marked</h3>
+      <p class="sec-lede" style="margin-bottom:16px">The studio never authors Myanmar — not drafts, not placeholders, not transliteration. Every MM block ships as a dashed, clearly-marked slot. CCO (the sole Myanmar author) fills it. The treatment below is the exact marking convention:</p>
+      <div class="card">
+        <p style="font-size:16px;font-weight:600">This week: 12 verified openings across Yangon and Mandalay.</p>
+        <div class="mm-slot-demo">
+          <span class="mm-tag">MM SLOT — CCO TO FILL · 14px · SECONDARY TONE</span>
+          <span class="mm-body">[ Myanmar rendering of the EN line above — authored by CCO only. Never mixed into the EN block; always its own block directly beneath it. ]</span>
+        </div>
+      </div>
+      <p class="note">Rendering note for CCO handoff: MM blocks must be tested on low-end Android for font fallback and line-breaking before publish. Line height for MM script: minimum 1.8.</p>
+    </section>
+
+    <section id="naming">
+      <span class="sec-num">04</span>
+      <h2>Naming &amp; Lockups</h2>
+      <p class="sec-lede">Exactly two names exist. <strong>ReferTRM</strong> is the platform. <strong>The Recruiter Myanmar</strong> is the human brand. No sub-brands, no campaign brands, no derived names — ever. Lockups are typographic only; no new marks are drawn.</p>
+      <div class="grid2">
+        <div>
+          <h3 style="margin-top:0">Platform lockup</h3>
+          <div class="lockup-stage">
+            <span class="cs-label">CLEAR SPACE = CAP HEIGHT</span>
+            <div class="clearspace"></div>
+            <span class="lockup-platform">ReferTRM<span class="tm">TM</span></span>
+          </div>
+          <p class="note">Inter 800, tracking -0.03em. TM superscript in Gold. Minimum render width: 96px.</p>
+        </div>
+        <div>
+          <h3 style="margin-top:0">Human brand lockup</h3>
+          <div class="lockup-stage">
+            <span class="cs-label">CLEAR SPACE = CAP HEIGHT</span>
+            <div class="clearspace"></div>
+            <span class="lockup-human">The Recruiter <em>Myanmar</em></span>
+          </div>
+          <p class="note">Inter 600, tracking -0.01em. "Myanmar" in Gold. Used on community, Viber/Telegram, and human-voice content.</p>
+        </div>
+      </div>
+      <h3>Paired lockup — when both appear</h3>
+      <div class="lockup-stage" style="min-height:140px">
+        <div class="lockup-pair">
+          <span class="lockup-human" style="font-size:20px">The Recruiter <em>Myanmar</em></span>
+          <span class="by">POWERED BY</span>
+          <span class="lockup-platform" style="font-size:22px">ReferTRM<span class="tm">TM</span></span>
+        </div>
+      </div>
+      <p class="note">The human brand leads on people-facing surfaces; the platform supports. Never reversed on community content.</p>
+      <div class="card" style="margin-top:24px">
+        <span class="rule-tag ok">ALWAYS</span>
+        <span style="font-size:14px;color:var(--text-2)"> Exact spelling and casing: "ReferTRM" (capital R, T, R, M) · "The Recruiter Myanmar" · TM on first or most prominent use per asset.</span>
+        <div style="height:10px"></div>
+        <span class="rule-tag no">NEVER</span>
+        <span style="font-size:14px;color:var(--text-2)"> "ReferTRM Academy" as a separate brand · "TRM" alone · campaign names with their own lockups · localized respellings · logo redraws or effects (shadows, gradients on the mark itself).</span>
+      </div>
+    </section>
+
+    <section id="trust">
+      <span class="sec-num">05</span>
+      <h2>The Trust System — anti-scam by design</h2>
+      <p class="sec-lede">This is the most important component in the system. Our content must be instantly distinguishable from the fake-recruiter scams the platform exists to defeat. The trust strip is locked: same words, same order, same placement, every job asset, every channel.</p>
+      <h3>The locked trust strip</h3>
+      <div class="trust-strip" style="max-width:560px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2FBF8F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        <span class="ts-text">Verified employer &nbsp;·&nbsp; Honest salary &nbsp;·&nbsp; You never pay a fee</span>
+      </div>
+      <p class="note">Trust green (#2FBF8F) is reserved for this system alone. The strip is never reworded, reordered, translated by the studio, recolored, or removed. CCO authors the official MM rendering once; it is then locked identically.</p>
+      <div class="anatomy" style="margin-top:32px">
+        <div class="card">
+          <h3 style="margin-top:0">Anatomy of every job asset</h3>
+          <ul class="anatomy-list">
+            <li><span class="n">01</span><span><strong>Named, verified employer.</strong> Real company name, verification badge. Anonymous "a leading company" posts are banned — anonymity is the scammer's costume.</span></li>
+            <li><span class="n">02</span><span><strong>Honest salary range.</strong> Real figures in MMK, stated up front. "Attractive salary" is a scam phrase and never appears in our assets.</span></li>
+            <li><span class="n">03</span><span><strong>The no-fee line.</strong> "You never pay a fee" on every asset, without exception. Fees are the mechanism of every job scam in this market.</span></li>
+            <li><span class="n">04</span><span><strong>Official channels only.</strong> Applies route to the official domain, official handles, or the listing's own apply channel. Never to a personal DM.</span></li>
+            <li><span class="n">05</span><span><strong>No urgency pressure.</strong> No "only 2 seats left!", no countdowns, no fear. Real jobs do not need panic to fill.</span></li>
+            <li><span class="n">06</span><span><strong>Source attribution on board listings.</strong> Aggregated listings name their source, never imply the employer is a ReferTRM client, and route only to the listing's official apply channel.</span></li>
+          </ul>
+        </div>
+        <div class="card" style="background:var(--danger-dim);border-color:var(--danger)">
+          <h3 style="margin-top:0;color:var(--danger)">Scam signals we never use</h3>
+          <ul class="anatomy-list" style="font-size:13px">
+            <li><span class="n" style="color:var(--danger)">×</span><span>"DM to apply" / "inbox your CV"</span></li>
+            <li><span class="n" style="color:var(--danger)">×</span><span>Registration, training, or "slot booking" fees</span></li>
+            <li><span class="n" style="color:var(--danger)">×</span><span>Unnamed employers, stock office photos</span></li>
+            <li><span class="n" style="color:var(--danger)">×</span><span>Guaranteed income, "earn from your phone"</span></li>
+            <li><span class="n" style="color:var(--danger)">×</span><span>Countdown pressure, artificial scarcity</span></li>
+            <li style="border-bottom:none"><span class="n" style="color:var(--danger)">×</span><span>Salary hidden until contact</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="components">
+      <span class="sec-num">06</span>
+      <h2>Social Component Library</h2>
+      <p class="sec-lede">The six production components. Rendered here at feed width (max 400px) exactly as they will appear on a phone. All employer names, figures, and details below are <strong>SAMPLE DATA for design review only</strong> — production assets carry real verified listings with registered sources.</p>
+      <div class="comp-label">COMPONENT 01</div>
+      <div class="comp-name">Job Card — the daily workhorse</div>
+      <p class="comp-use">Single verified vacancy. Powers the "job of the day" format and both Job-Post template forms. Feeds Track B and the Board-Content Engine.</p>
+      <div class="comp-stage">
+        <div class="social-card">
+          <div class="sc-head">
+            <span class="sc-badge verified">VERIFIED EMPLOYER</span>
+            <span class="sc-badge sample">SAMPLE DATA</span>
+          </div>
+          <div class="sc-body">
+            <div class="sc-role">Production Operator</div>
+            <div class="sc-employer">Sample Manufacturing Co. — Yangon</div>
+            <div class="sc-facts">
+              <span class="sc-fact"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Hlaing Tharyar, Yangon</span>
+              <span class="sc-fact"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Full-time</span>
+              <span class="sc-fact"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>No experience needed</span>
+            </div>
+            <div class="sc-salary">
+              <div class="sal-label">MONTHLY SALARY — STATED UP FRONT</div>
+              <div class="sal-value">MMK 350,000 – 450,000</div>
+            </div>
+          </div>
+          <div class="sc-trust">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2FBF8F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>Verified employer · Honest salary · You never pay a fee</span>
+          </div>
+          <a class="sc-cta" href="#components">Apply via official channel</a>
+          <div class="sc-mm">
+            <div class="mm-slot-demo" style="margin-top:16px">
+              <span class="mm-tag">MM SLOT — CCO TO FILL</span>
+              <span class="mm-body">[ Role, employer, salary, and no-fee line in Myanmar — CCO authors. ]</span>
+            </div>
+          </div>
+          <div class="sc-foot"><span>QUESTIONS? VIBER / TELEGRAM — OFFICIAL HANDLES ONLY</span><span>REF-2026-0000</span></div>
+        </div>
+      </div>
+      <div class="comp-label">COMPONENT 02</div>
+      <div class="comp-name">Walk-In Card — event hiring</div>
+      <p class="comp-use">Walk-in interview announcements. Date, venue, what to bring — the three things a worker plans their day around.</p>
+      <div class="comp-stage">
+        <div class="social-card">
+          <div class="sc-head">
+            <span class="sc-badge verified">VERIFIED EMPLOYER</span>
+            <span class="sc-badge sample">SAMPLE DATA</span>
+          </div>
+          <div class="sc-body">
+            <div class="sc-role">Walk-In Interviews — Service Crew</div>
+            <div class="sc-employer">Sample Foods Group — Mandalay</div>
+            <div class="sc-facts">
+              <span class="sc-fact"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Sat 09 Aug · 9:00–15:00</span>
+              <span class="sc-fact"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Sample Convention Hall, Chanmyathazi</span>
+            </div>
+            <div class="sc-salary">
+              <div class="sal-label">STARTING SALARY</div>
+              <div class="sal-value">MMK 300,000 + overtime</div>
+            </div>
+            <p style="font-size:13px;color:var(--text-2);margin-top:14px"><strong style="color:var(--text)">Bring:</strong> NRC card, one photo, CV if available. Training provided after hiring.</p>
+          </div>
+          <div class="sc-trust">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2FBF8F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>Verified employer · Honest salary · You never pay a fee</span>
+          </div>
+          <div class="sc-mm">
+            <div class="mm-slot-demo" style="margin-top:16px">
+              <span class="mm-tag">MM SLOT — CCO TO FILL</span>
+              <span class="mm-body">[ Date, venue, bring-list in Myanmar — CCO authors. ]</span>
+            </div>
+          </div>
+          <div class="sc-foot"><span>THE RECRUITER MYANMAR · POWERED BY REFERTRM</span><span>WI-2026-000</span></div>
+        </div>
+      </div>
+      <div class="comp-label">COMPONENT 03</div>
+      <div class="comp-name">Weekly Roundup Carousel — the rhythm asset</div>
+      <p class="comp-use">The weekly anchor post. Frame 1 hooks with the verified count (registered source required); frames 2–4 spotlight categories; final frame pulls to chat. Counts shown here are sample placeholders.</p>
+      <div class="comp-stage">
+        <div class="carousel-frames">
+          <div class="carousel-frame">
+            <span class="cf-num">FRAME 1 · HOOK</span>
+            <div class="cf-big">12 <span style="font-size:15px;color:var(--text-2);font-weight:600">openings</span></div>
+            <div class="cf-sub">Verified this week across Yangon &amp; Mandalay <span class="src-req">[SOURCE-REGISTERED COUNT]</span></div>
+            <div class="cf-foot">WEEKLY ROUNDUP · W32</div>
+          </div>
+          <div class="carousel-frame">
+            <span class="cf-num">FRAME 2 · CATEGORY</span>
+            <div class="cf-big" style="font-size:20px">Factory &amp; Production</div>
+            <div class="cf-sub">5 roles · MMK 350k–480k · No experience needed for 3</div>
+            <div class="cf-foot">SWIPE →</div>
+          </div>
+          <div class="carousel-frame">
+            <span class="cf-num">FRAME 3 · CATEGORY</span>
+            <div class="cf-big" style="font-size:20px">Freshers Welcome</div>
+            <div class="cf-sub">4 roles · First-job friendly · Training provided</div>
+            <div class="cf-foot">SWIPE →</div>
+          </div>
+          <div class="carousel-frame" style="border-color:var(--trust)">
+            <span class="cf-num" style="color:var(--trust)">FRAME 4 · PULL TO CHAT</span>
+            <div class="cf-big" style="font-size:20px">Questions?</div>
+            <div class="cf-sub">Viber / Telegram us — official handles only. You never pay a fee.</div>
+            <div class="cf-foot">MM SLOT ON EVERY FRAME — CCO</div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-label">COMPONENT 04</div>
+      <div class="comp-name">Referral Card — earn register (gold)</div>
+      <p class="comp-use">Referral Bonus template. Gold marks earning. Bonus figures are server-verified only — never estimated, never "up to" without the real range.</p>
+      <div class="comp-stage">
+        <div class="social-card" style="border-color:var(--gold)">
+          <div class="sc-head">
+            <span class="sc-badge earn">REFERRAL BONUS</span>
+            <span class="sc-badge sample">SAMPLE DATA</span>
+          </div>
+          <div class="sc-body">
+            <div class="sc-role">Know someone perfect for this role?</div>
+            <div class="sc-employer">Refer them. If they are hired and pass probation, you earn.</div>
+            <div class="sc-salary" style="border-left-color:var(--gold)">
+              <div class="sal-label">YOUR BONUS — SERVER-VERIFIED FIGURE</div>
+              <div class="sal-value" style="color:var(--gold)">MMK 50,000 <span style="font-size:11px;font-weight:500;color:var(--text-2)">per successful referral</span></div>
+            </div>
+            <p style="font-size:13px;color:var(--text-2);margin-top:14px">Paid to you directly after probation. Your friend pays nothing. You pay nothing.</p>
+          </div>
+          <a class="sc-cta gold" href="#components">Refer a friend</a>
+          <div class="sc-mm">
+            <div class="mm-slot-demo" style="margin-top:16px">
+              <span class="mm-tag">MM SLOT — CCO TO FILL</span>
+              <span class="mm-body">[ Referral mechanics in Myanmar — CCO authors. ]</span>
+            </div>
+          </div>
+          <div class="sc-foot"><span>OFFICIAL REFERRAL CHANNEL ONLY</span><span>RB-2026-000</span></div>
+        </div>
+      </div>
+      <div class="comp-label">COMPONENT 05</div>
+      <div class="comp-name">Employer-Proof Card — B2B register (zero emoji)</div>
+      <p class="comp-use">Speaks to employers, not seekers. Strictly professional register: zero emoji, muted palette, every stat source-registered. Placeholders shown pending real registered figures.</p>
+      <div class="comp-stage">
+        <div class="social-card">
+          <div class="sc-head">
+            <span class="sc-badge" style="background:var(--glass);color:var(--text-2);border:1px solid var(--line-strong)">FOR EMPLOYERS</span>
+          </div>
+          <div class="sc-body">
+            <div class="sc-role" style="font-size:17px">Hire verified, work-ready talent in Myanmar.</div>
+            <div class="sc-employer">ReferTRM Employer Partnership</div>
+            <div class="stat-row">
+              <div class="stat"><div class="st-v">—<span class="src-req"> [REG. SOURCE]</span></div><div class="st-l">SCREENED CANDIDATES</div></div>
+              <div class="stat"><div class="st-v">—<span class="src-req"> [REG. SOURCE]</span></div><div class="st-l">AVG. DAYS TO SHORTLIST</div></div>
+              <div class="stat"><div class="st-v">—<span class="src-req"> [REG. SOURCE]</span></div><div class="st-l">PROBATION PASS RATE</div></div>
+            </div>
+          </div>
+          <a class="sc-cta dark" href="#components">Book an employer call</a>
+          <div class="sc-foot"><span>REFERTRM · OFFICIAL DOMAIN ONLY</span><span>NO EMOJI — B2B REGISTER</span></div>
+        </div>
+      </div>
+      <div class="comp-label">COMPONENT 06</div>
+      <div class="comp-name">Pro-Referrer Card — the flagship register</div>
+      <p class="comp-use">The strongest story the platform owns: an ordinary person building a professional livelihood through referrals, climbing to 50→70% of placement fees. Mother-Test framing — a professional, never a hustler. Earnings shown are server-verified only; the figure below is a marked placeholder. Real episodes require real consent.</p>
+      <div class="comp-stage">
+        <div class="social-card" style="border-color:var(--gold)">
+          <div class="sc-head">
+            <span class="sc-badge earn">PRO-REFERRER STORY</span>
+            <span class="sc-badge sample">CONCEPT — PLACEHOLDER</span>
+          </div>
+          <div class="sc-body">
+            <div class="sc-role" style="font-size:17px">"I started by referring one friend. Now this is my profession."</div>
+            <div class="sc-employer">Episode format · Real person · Real consent · Told with dignity</div>
+            <div class="sc-salary" style="border-left-color:var(--gold)">
+              <div class="sal-label">EARNINGS — SERVER-VERIFIED ONLY</div>
+              <div class="sal-value" style="color:var(--gold)"><span class="src-req">[VERIFIED FIGURE INSERTED AT PRODUCTION]</span></div>
+            </div>
+            <p style="font-size:13px;color:var(--text-2);margin-top:14px">Shown honestly: the work, the timeline, the setbacks. Never a get-rich frame. Never "anyone can do it overnight."</p>
+          </div>
+          <a class="sc-cta gold" href="#components">Watch the episode</a>
+          <div class="sc-mm">
+            <div class="mm-slot-demo" style="margin-top:16px">
+              <span class="mm-tag">MM SLOT — CCO TO FILL</span>
+              <span class="mm-body">[ Episode title and pull-quote in Myanmar — CCO authors. ]</span>
+            </div>
+          </div>
+          <div class="sc-foot"><span>YOUTUBE LONG-FORM + TIKTOK CUTS</span><span>PR-EP-000</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="bilingual">
+      <span class="sec-num">07</span>
+      <h2>Bilingual Rules</h2>
+      <p class="sec-lede">English primary, Myanmar secondary — always. The two languages live in separate blocks with a visible boundary, never mixed within a sentence, a line, or a block. The studio ships EN masters with marked MM slots; CCO authors every Myanmar word.</p>
+      <div class="lang-pair">
+        <div class="lp-en">
+          <span class="lp-tag en">EN — PRIMARY · 16px · FULL-WEIGHT COLOR</span>
+          <span class="lp-text">Verified this week: 12 openings with salaries stated up front.</span>
+        </div>
+        <div class="lp-mm">
+          <span class="lp-tag mm">MM — SECONDARY · 14px · SECONDARY TONE · CCO-AUTHORED</span>
+          <span class="lp-text">[ Myanmar rendering — CCO fills this slot. Dashed boundary marks the language separation. ]</span>
+        </div>
+      </div>
+      <div class="card">
+        <span class="rule-tag ok">CORRECT</span>
+        <span style="font-size:14px;color:var(--text-2)"> Full EN block above, full MM block below · Section-level language toggle on long-form surfaces · MM line-height ≥ 1.8 · MM render-tested on low-end Android.</span>
+        <div style="height:10px"></div>
+        <span class="rule-tag no">WRONG</span>
+        <span style="font-size:14px;color:var(--text-2)"> Language mixing inside a sentence · MM smaller than 14px · MM as an afterthought in tiny grey text · studio-authored MM of any kind — including placeholders and transliteration.</span>
+      </div>
+    </section>
+
+    <section id="motion">
+      <span class="sec-num">08</span>
+      <h2>Motion</h2>
+      <p class="sec-lede">Restrained and functional. Motion guides attention; it never performs. Everything respects reduced-motion settings, and nothing on this system requires animation to be understood.</p>
+      <div class="motion-demo">
+        <div class="motion-chip"><div class="mc-name">Micro</div><div class="mc-spec">150ms · ease-out<br>hovers, taps</div></div>
+        <div class="motion-chip"><div class="mc-name">Standard</div><div class="mc-spec">250ms · cubic-bezier(.2,.8,.2,1)<br>cards, reveals</div></div>
+        <div class="motion-chip"><div class="mc-name">Emphasis</div><div class="mc-spec">400ms · entrances only<br>never loops</div></div>
+        <div class="motion-chip"><div class="mc-name">Lift</div><div class="mc-spec">translateY(-2→3px)<br>hover — try me</div></div>
+      </div>
+      <h3>Headline shimmer — the one signature effect</h3>
+      <div class="card" style="text-align:center;padding:40px 24px">
+        <span class="shimmer-demo">Verified. Honest. Yours.</span>
+        <p class="note" style="margin-top:14px">Single gradient sweep across key headlines, 3.2s, gold midpoint. Used on hero moments only — never on job data, never on the trust strip.</p>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <span style="font-size:14px;color:var(--text-2)"><strong>Video cuts (TikTok/Reels):</strong> text-on-screen appears word-group by word-group at reading pace; cuts on beat but never faster than 1.5s per hold; captions always on (most viewing is muted); workplace footage only with employer consent on file.</span>
+      </div>
+    </section>
+
+    <section id="voice">
+      <span class="sec-num">09</span>
+      <h2>Voice &amp; Emoji Policy</h2>
+      <p class="sec-lede">Two audiences, two registers — and the boundary is absolute.</p>
+      <div class="grid2">
+        <div class="card">
+          <h3 style="margin-top:0">Youth-facing B2C — curated emoji allowed</h3>
+          <p style="font-size:13px;color:var(--text-2)">Maximum 2 per asset, never in the headline, never inside the trust strip, never replacing information. The full allowed set — chosen for dignity and reliable rendering on low-end Android:</p>
+          <div class="emoji-row">
+            <div class="emoji-cell" title="Verified / done">✅</div>
+            <div class="emoji-cell" title="Location">📍</div>
+            <div class="emoji-cell" title="Salary / money">💰</div>
+            <div class="emoji-cell" title="Time / schedule">🕘</div>
+            <div class="emoji-cell" title="Learning / Academy">🎓</div>
+            <div class="emoji-cell" title="Referral / partnership">🤝</div>
+            <div class="emoji-cell" title="Work / role">💼</div>
+            <div class="emoji-cell" title="Celebration (badges only)">🎉</div>
+          </div>
+          <p class="note">Anything outside this set requires a brand-lint exception. No faces showing distress, no praying hands, no fire/money-with-wings hype marks.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Employer-facing B2B — zero emoji</h3>
+          <p style="font-size:13px;color:var(--text-2)">Not one. Not in posts, not in decks, not in outreach DMs drafted by the studio. Professional register carries credibility; emoji undercut it in this market's B2B context.</p>
+          <div class="zero-emoji" style="margin-top:14px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg>
+            Zero-emoji register on every employer, client, and partner asset.
+          </div>
+          <p class="note">Voice in both registers: direct, warm, concrete. Short sentences. Real numbers. No hype adjectives ("amazing", "incredible opportunity"), no pity, no pressure.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="channels">
+      <span class="sec-num">10</span>
+      <h2>Channel Cut Specs</h2>
+      <p class="sec-lede">One content unit, five designed cuts — built platform-agnostic so a channel collapse is a reschedule, not a rebuild. Every cut pulls to chat, because the Myanmar funnel is see → chat → trust → signup, not click-to-landing.</p>
+      <div class="cuts">
+        <div class="cut"><div class="frame f916">9:16</div><div class="c-name">TikTok</div><div class="c-spec">15–30s vertical<br>text-on-screen<br>captions always on</div></div>
+        <div class="cut"><div class="frame f45">4:5</div><div class="c-name">Facebook</div><div class="c-spec">roundup + card posts<br>Messenger pull<br>primary reach channel</div></div>
+        <div class="cut"><div class="frame fvb">BLURB</div><div class="c-name">Viber</div><div class="c-spec">community blurb<br>1 card + 2 lines<br>official community only</div></div>
+        <div class="cut"><div class="frame f11">1:1</div><div class="c-name">Telegram</div><div class="c-spec">light daily post<br>single card format<br>channel, not group spam</div></div>
+        <div class="cut"><div class="frame f169">16:9</div><div class="c-name">YouTube</div><div class="c-spec">long-form home<br>Pro-Referrer episodes<br>feeds TikTok cuts</div></div>
+      </div>
+      <div class="card" style="margin-top:20px">
+        <span style="font-size:14px;color:var(--text-2)"><strong>The chat pull is mandatory on every cut:</strong> "Questions? Viber / Telegram us — official handles only." Trust is built in conversation, and conversation is where scams are disarmed in person.</span>
+      </div>
+    </section>
+
+    <section id="gates">
+      <span class="sec-num">11</span>
+      <h2>Gates &amp; Handoff — disclosed in full</h2>
+      <p class="sec-lede">Every gate this work sits behind, stated plainly. Nothing here is published, production, or final. This page is a design-review artifact on the isolated demo host.</p>
+      <div class="gate-flow">
+        <div class="gate-step"><div class="gs-n">YOU ARE HERE</div><div class="gs-t">Studio demo</div><div class="gs-d">EN master on the isolated demo host. MM slots marked. Sample data only.</div></div>
+        <div class="gate-step"><div class="gs-n">GATE 1</div><div class="gs-t">Brand lint</div><div class="gs-d">Dignity, anti-scam, naming, apolitical, emoji-register checklist on every asset.</div></div>
+        <div class="gate-step"><div class="gs-n">GATE 2</div><div class="gs-t">KoKo rates</div><div class="gs-d">This styleguide and every interactive surface is rated before anything routes onward.</div></div>
+        <div class="gate-step"><div class="gs-n">GATE 3</div><div class="gs-t">CCO fills MM</div><div class="gs-d">CCOPACK handoff. CCO is the sole Myanmar author. Slots return filled, never studio-written.</div></div>
+        <div class="gate-step"><div class="gs-n">GATE 4</div><div class="gs-t">Human publishes</div><div class="gs-d">Ma Thet Thet's hand fires every post and DM. Live URL receipt or it did not happen.</div></div>
+        <div class="gate-step"><div class="gs-n">GATE 5</div><div class="gs-t">CTO → Codex</div><div class="gs-d">Rated interactive work is productionized by the CTO lane. The studio never touches prod.</div></div>
+      </div>
+      <div class="card" style="margin-top:20px">
+        <h3 style="margin-top:0">Open items flagged for rating</h3>
+        <ul class="anatomy-list" style="font-size:14px">
+          <li><span class="n">→</span><span><strong>Myanmar type rendering:</strong> MM block font stack and line-breaking on low-end Android needs device testing with CCO before first production asset.</span></li>
+          <li><span class="n">→</span><span><strong>Workplace footage consent workflow:</strong> TikTok cuts using employer premises need a consent artifact on file — format to be ruled on.</span></li>
+          <li><span class="n">→</span><span><strong>Pro-Referrer earnings display:</strong> exact treatment of verified figures (ranges vs. exact) is a KoKo ruling, not a studio decision.</span></li>
+          <li style="border-bottom:none"><span class="n">→</span><span><strong>Emoji render matrix:</strong> the curated set needs a documented pass on the target Android version range before first youth-facing post.</span></li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="f-mark">ReferTRM<span class="tm">TM</span> <span style="font-weight:400;color:var(--text-3)">· The Recruiter Myanmar</span></div>
+  <p style="margin-top:10px;max-width:72ch">Brand Visual System v1 · Internal design-review demo · EN master with MM slots for CCO · Sample data only — no real employer, client, salary, or earnings information appears on this page · Demo host only; nothing here is published or production · Rating required before any onward routing.</p>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement,btn=document.getElementById('themeToggle');
+  var saved=null; try{saved=localStorage.getItem('rtm-theme')}catch(e){}
+  if(saved){root.setAttribute('data-theme',saved)}
+  btn.addEventListener('click',function(){
+    var next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('rtm-theme',next)}catch(e){}
+  });
+})();
+document.querySelectorAll('.swatch').forEach(function(sw){
+  sw.addEventListener('click',function(){
+    var hex=sw.getAttribute('data-hex');
+    function done(){var el=sw.querySelector('.sw-hex'),t=el.textContent;el.textContent='copied';setTimeout(function(){el.textContent=t},900)}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(hex).then(done).catch(done)}else{done()}
+  });
+});
+(function(){
+  var links=document.querySelectorAll('.sidenav a');
+  var secs=[].map.call(links,function(a){return document.querySelector(a.getAttribute('href'))});
+  function onScroll(){
+    var y=window.scrollY+120,idx=0;
+    secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i});
+    links.forEach(function(a,i){a.classList.toggle('active',i===idx)});
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>
