@@ -28,18 +28,31 @@ function setBand(v){ try{ localStorage.setItem('ydc-canvas-band', v); }catch(e){
 function bandKey(band){ return band==='basic' ? 'basic' : band==='middle' ? 'middle' : 'high'; }
 
 const REGISTER = {
-  basic:  { greet:()=>`Hello, ${LEARNER.firstName}!`, bubble:'Ready to play and learn tonight?' },
-  middle: { greet:()=>`Good evening, ${LEARNER.firstName}`, bubble:'Your trail is waiting. One more step tonight?' },
-  high:   { greet:()=>`Good evening, ${LEARNER.firstName}`, bubble:'Your trail is waiting. One more step tonight?' },
-  out_of_school:{ greet:()=>`Good evening, ${LEARNER.firstName}`, bubble:'Your trail is waiting. One more step tonight?' },
+  basic:  { bubble:'Ready to play and learn?' },
+  middle: { bubble:'Your trail is waiting. One more step?' },
+  high:   { bubble:'Your trail is waiting. One more step?' },
+  out_of_school:{ bubble:'Your trail is waiting. One more step?' },
 };
 function registerFor(band){ return REGISTER[band] || REGISTER.high; }
+
+/* time-aware greeting — the trail knows what the sky looks like */
+function dayPart(){ const h = new Date().getHours(); return h < 5 ? 'night' : h < 11 ? 'morning' : h < 17 ? 'afternoon' : h < 22 ? 'evening' : 'night'; }
+const GREET = { morning:'Good morning', afternoon:'Good afternoon', evening:'Good evening', night:'Still up' };
+const SUBLINE = {
+  morning:   'A fresh page on your trail.',
+  afternoon: 'Your trail is right where you left it.',
+  evening:   'The whole trail is yours tonight.',
+  night:     'The stars are out. So is your trail.',
+};
+function greetFor(band){ return band === 'basic' ? `Hello, ${LEARNER.firstName}!` : `${GREET[dayPart()]}, ${LEARNER.firstName}`; }
+function subFor(band){ return band === 'basic' ? 'Come play on your trail!' : SUBLINE[dayPart()]; }
+function skyEm(){ const p = dayPart(); return (p === 'morning' || p === 'afternoon') ? '☀️' : '🌙'; }
 
 const TIERS = [
   { id:'foundation',   name:'Foundation',   n:1, status:'done',    em:'🌱', summary:'Core study skills and subject foundations.' },
   { id:'working',      name:'Working',      n:2, status:'current', em:'🎒', summary:'Applied skills: reading, writing, lab method, presentation.' },
   { id:'professional', name:'Professional', n:3, status:'locked',  em:'🧭', summary:'Independent project work and specialist subject tracks.' },
-  { id:'advanced',     name:'Advanced',     n:4, status:'locked',  em:'🏔️', summary:'Mastery portfolio and community leadership.' },
+  { id:'advanced',     name:'Advanced',     n:4, status:'locked',  em:'🏆', summary:'Mastery portfolio and community leadership.' },
 ];
 
 /* five majors — canon names, reasoning captions; canvas adds color + emoji */
@@ -47,7 +60,7 @@ const MAJORS = {
   english:   { name:'English',   cap:'Live communication',  em:'💬', c:'var(--c-english)',   c1:'#FF7A85', c2:'#FF9E64' },
   math:      { name:'Math',      cap:'Formal reasoning',    em:'🧮', c:'var(--c-math)',      c1:'#FFC24B', c2:'#FF8E53' },
   physics:   { name:'Physics',   cap:'Causal reasoning',    em:'⚡', c:'var(--c-physics)',   c1:'#54C8FF', c2:'#7C6CFF' },
-  chemistry: { name:'Chemistry', cap:'Process reasoning',   em:'⚗️', c:'var(--c-chemistry)', c1:'#B28CFF', c2:'#FF6E9E' },
+  chemistry: { name:'Chemistry', cap:'Process reasoning',   em:'🧪', c:'var(--c-chemistry)', c1:'#B28CFF', c2:'#FF6E9E' },
   biology:   { name:'Biology',   cap:'Systems reasoning',   em:'🌿', c:'var(--c-biology)',   c1:'#4ADE80', c2:'#2DD4BF' },
 };
 const MAJOR_ORDER = ['english','math','physics','chemistry','biology'];
@@ -175,7 +188,7 @@ const LESSONS = {
 const TYPE_META = {
   sim:        { em:'🎮', label:'Sim' },
   video:      { em:'🎬', label:'Video' },
-  experiment: { em:'🧪', label:'Experiment' },
+  experiment: { em:'🔬', label:'Experiment' },
   reading:    { em:'📖', label:'Reading' },
   scenario:   { em:'💬', label:'Scenario' },
   speaking:   { em:'🎤', label:'Speaking' },
@@ -215,7 +228,7 @@ const CIRCLE_ACTS = [
   ['💛','left a kind review on a friend’s draft'],
   ['🧪','tried the kitchen-sink reaction'],
   ['🏅','earned a module certificate'],
-  ['🎮','got stuck on the sim — then solved it'],
+  ['🎮','solved the sim’s hardest level'],
   ['📖','read two lessons before dinner'],
 ];
 function circleFor(band){
@@ -280,15 +293,16 @@ function assignState(tierId, modId, band){
   return 'notsub';
 }
 
+/* struggle moments: no emoji — warm words carry it (dignity fence) */
 const ATTENTIONS = {
   basic: [
-    { href:'#/module/b-w-1', em:'💬', title:'Your recording came back', sub:'Your mentor left a note — one more try. You can do it.' },
+    { href:'#/module/b-w-1', title:'Your recording came back', sub:'Your mentor left a note — one more try. You can do it.' },
   ],
   middle: [
-    { href:'#/module/m-w-3', em:'🧪', title:'Assignment returned', sub:'Lab Basics & Safety — one more pass with your mentor’s note.' },
+    { href:'#/module/m-w-3', title:'Assignment returned', sub:'Lab Basics & Safety — one more pass with your mentor’s note.' },
   ],
   high: [
-    { href:'#/module/w-3', em:'🧪', title:'Assignment returned', sub:'Lab Methods & Safety — one more pass with your mentor’s note.' },
+    { href:'#/module/w-3', title:'Assignment returned', sub:'Lab Methods & Safety — one more pass with your mentor’s note.' },
   ],
 };
 function attentionFor(band){ return ATTENTIONS[bandKey(band)]; }
@@ -345,7 +359,7 @@ const CAREER = {
       copy:'Try everything. No choosing yet — curiosity is the work.', gates:[], kind:'families' },
     { band:'16–17', em:'🎯', name:'Focus',
       copy:'Two families go deeper. Real projects begin.', gates:['English L1'], kind:'focus' },
-    { band:'18–20', em:'🛠️', name:'Specialize',
+    { band:'18–20', em:'🔧', name:'Specialize',
       copy:'Skills sharpen into evidence others can trust.', gates:['Portfolio','Mentorship','English L2'], kind:'specialize' },
     { band:'20+', em:'🚀', name:'Transition',
       copy:'Move to the adult platform — referrals, real roles, the full network.', gates:[], kind:'transition' },
@@ -376,7 +390,10 @@ function shell(content, routeName){
   const active = LESSONS ? progressFor(getBand()).working.active : null;
   return `
   <div class="stars" aria-hidden="true">${starField()}</div>
+  <div class="shoot" aria-hidden="true"></div>
   <div class="firefly" aria-hidden="true"></div>
+  <div class="firefly f2" aria-hidden="true"></div>
+  <div class="firefly f3" aria-hidden="true"></div>
   <header class="topbar">
     <div class="topbar-in">
       <a class="brand" href="#/"><span class="bug"></span><span class="full">YDC&nbsp;</span><span style="color:var(--dim);font-weight:700;font-size:13px">night trail</span></a>
@@ -393,7 +410,7 @@ function shell(content, routeName){
   ${content}
   <nav class="tabbar"><div class="tabbar-in">
     <a href="#/" class="${routeName==='home'?'on':''}"><span class="em">🏠</span>Home</a>
-    <a href="#/map" class="${routeName==='map'?'on':''}"><span class="em">🗺️</span>Trail</a>
+    <a href="#/map" class="${routeName==='map'?'on':''}"><span class="em">📍</span>Trail</a>
     <a href="#/module/${active}" class="${routeName==='quest'?'on':''}"><span class="em">🎯</span>Quest</a>
     <a href="#/horizon" class="${routeName==='horizon'?'on':''}"><span class="em">🌅</span>Horizon</a>
   </div></nav>`;
@@ -403,6 +420,9 @@ function starField(){
   let s = '';
   for(let i=0; i<46; i++){
     s += `<i style="left:${(r()*100).toFixed(1)}%;top:${(r()*100).toFixed(1)}%;--tw:${(2+r()*3.5).toFixed(1)}s;animation-delay:${(r()*3).toFixed(1)}s"></i>`;
+  }
+  for(let i=0; i<10; i++){
+    s += `<i class="b" style="left:${(r()*100).toFixed(1)}%;top:${(r()*100).toFixed(1)}%;--tw:${(5+r()*4).toFixed(1)}s;animation-delay:${(r()*5).toFixed(1)}s"></i>`;
   }
   return s;
 }
@@ -431,6 +451,7 @@ function trailHtml(items, opts){
   <div class="trail" style="height:${H}px">
     <svg class="path" viewBox="0 0 100 ${H}" preserveAspectRatio="none">
       <path d="M ${first.x*100} ${first.y} ${pathD}" vector-effect="non-scaling-stroke"/>
+      <path class="pulse" pathLength="100" d="M ${first.x*100} ${first.y} ${pathD}" vector-effect="non-scaling-stroke"/>
     </svg>
     ${pts.map(p=>`
       <a class="tnode ${p.it.state}" href="${p.it.href}" style="left:${(p.x*100).toFixed(1)}%;top:${p.y}px;--nc:${p.it.color}">
@@ -473,8 +494,8 @@ function viewHome(){
   const content = `
   <main class="page">
     <section class="hero rv">
-      <h1>${reg.greet()} <span class="em">🌙</span></h1>
-      <p class="sub">The whole trail is yours tonight.</p>
+      <h1>${greetFor(band)}</h1>
+      <p class="sub">${skyEm()} ${subFor(band)}</p>
       <div class="bubble"><span class="who"><span class="bug"></span>MAYA · your AI buddy</span>
         ${reg.bubble} I'm here if you get stuck.</div>
       <p class="posline"><b>AI is the tutor.</b> YDC is the proof.</p>
@@ -486,6 +507,7 @@ function viewHome(){
         <h2>${mj.em} ${mod.title}</h2>
         <div class="qs">${tier.name} tier · Module ${modIdx+1} · ${doneCount} of ${lessons.length} lessons done</div>
         <div class="qbar"><i style="width:${Math.round(doneCount/lessons.length*100)}%"></i></div>
+        <div class="qdots">${lessons.map(l=>`<span class="qd ${l.state}"></span>`).join('')}</div>
         <div class="qrow">
           <span class="qnext">Next: ${TYPE_META[cur.type].em} ${cur.title} · ${cur.dur} min</span>
           <a class="qbtn" href="#/module/${mod.id}">Continue ▶</a>
@@ -496,7 +518,6 @@ function viewHome(){
     ${attn.map(a=>`
     <section class="rv" style="margin-top:14px">
       <a class="statusbanner warn press" href="${a.href}" style="display:flex;text-decoration:none">
-        <span style="font-size:22px">${a.em}</span>
         <span><span class="t">${a.title}</span><br><span style="color:var(--mut)">${a.sub}</span></span>
       </a>
     </section>`).join('')}
@@ -517,7 +538,7 @@ function viewHome(){
       </div>
     </section>
 
-    <div class="sechead rv"><h3>Your circle tonight</h3><span class="more">4 friends learning</span></div>
+    <div class="sechead rv"><h3>Your circle</h3><span class="more">4 friends learning</span></div>
     <section class="circle-strip rv">
       ${circle.map(c=>`
         <div class="mate">
@@ -588,7 +609,7 @@ function viewMap(){
   const content = `
   <main class="page">
     <section class="hero rv">
-      <h1>The trail map <span class="em">🗺️</span></h1>
+      <h1>The trail map <span class="em">📍</span></h1>
       <p class="sub">Four zones. Five colors. Every step is real.</p>
     </section>
     ${zones}
@@ -649,7 +670,7 @@ function viewModule(modId){
         Stuck anywhere in ${mod.title}? I explain like a friend, not a textbook.</div>
       <div class="opts">
         <span>💡 Explain this lesson simply</span>
-        <span>🗣️ Explain in my language</span>
+        <span>🌐 Explain in my language</span>
         <span>🎯 Quiz me before the quest</span>
       </div>
     </section>
@@ -693,14 +714,14 @@ function assignCard(tierId, m, band){
   const task = flavor === 'two_ai_disagreement' ? DISAGREE_TASK : taskFor(band, m);
   const peers = peersFor(m.id);
   const formats = flavor === 'two_ai_disagreement' ? ['✍️ Written','📸 Photo']
-    : bandKey(band)==='basic' ? ['🖍️ Drawing','📸 Photo']
-    : ['🎥 Video','📸 Photo','✍️ Written','🧪 Experiment'];
+    : bandKey(band)==='basic' ? ['✏️ Drawing','📸 Photo']
+    : ['🎥 Video','📸 Photo','✍️ Written','🔬 Experiment'];
 
   const disagree = flavor === 'two_ai_disagreement' ? `
     <div class="disagree">
       <div class="dcol"><div class="h">🤖 AI A claims</div><div class="q">${DISAGREE_GHOST.a}</div></div>
       <div class="dcol"><div class="h">🤖 AI B claims</div><div class="q">${DISAGREE_GHOST.b}</div></div>
-      <div class="dcol verdict"><div class="h">🕵️ Your verification</div><div class="q">${DISAGREE_GHOST.resolve}</div></div>
+      <div class="dcol verdict"><div class="h">🔍 Your verification</div><div class="q">${DISAGREE_GHOST.resolve}</div></div>
     </div>` : '';
 
   const rubric = (earned)=>`
@@ -733,7 +754,7 @@ function assignCard(tierId, m, band){
       <p style="margin-top:12px;font-size:13px;color:var(--dim)">Keep learning while they finish — no waiting around.</p>`;
   } else if(st === 'revision'){
     statusHtml = `
-      <div class="statusbanner warn"><span style="font-size:20px">🔁</span>
+      <div class="statusbanner warn">
         <span><span class="t">One more pass — you've got this</span><br>
         <b>${LEARNER.mentor}</b> (mentor): ${REVISION_QUOTE[bandKey(band)]}</span></div>
       <p class="task" style="margin-top:14px">${task}</p>
@@ -749,7 +770,7 @@ function assignCard(tierId, m, band){
   const stateChip = {
     notsub:   '<span class="chip">Not submitted</span>',
     awaiting: '<span class="chip" style="color:var(--c-teal);border-color:color-mix(in srgb, var(--c-teal) 45%, transparent)">👥 Peer review · 1 of 2</span>',
-    revision: '<span class="chip" style="color:var(--c-math);border-color:color-mix(in srgb, var(--c-math) 45%, transparent)">🔁 Revision requested</span>',
+    revision: '<span class="chip" style="color:var(--c-math);border-color:color-mix(in srgb, var(--c-math) 45%, transparent)">Revision requested</span>',
     scored:   '<span class="chip" style="color:var(--c-gold);border-color:color-mix(in srgb, var(--c-gold) 45%, transparent)">🏅 Scored</span>',
   }[st];
 
@@ -877,7 +898,7 @@ function viewPromotion(){
       <p class="quiet">Your Foundation work is complete and verified — every module reviewed, nothing skipped. Promotions here are earned, and this one is yours.</p>
       <p class="quiet" style="margin-top:10px;font-size:13px;color:var(--dim)">Verified by ${LEARNER.mentor}, your mentor · every tier gate includes the English test</p>
       <div class="ctas">
-        <a class="btn warm" href="#/map">Keep climbing 🗺️</a>
+        <a class="btn warm" href="#/map">Keep climbing 📍</a>
         <a class="btn ghost" href="#/">Back home</a>
       </div>
     </div>
@@ -887,6 +908,10 @@ function viewPromotion(){
 
 /* ---------- router + reveal ---------- */
 function observeReveals(){
+  if(!('IntersectionObserver' in window)){
+    document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'));
+    return;
+  }
   const io = new IntersectionObserver(es=>{
     es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold:.08 });
