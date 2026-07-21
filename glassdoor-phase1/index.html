@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DESIGN DEMO — Company Profile /company/[slug] — Glassdoor Myanmar Phase 1 Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Padauk:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   GLASSDOOR-MYANMAR PHASE 1 — DESIGN REFERENCE PROTOTYPE
+   Host surface: /company/[slug]
+   STATUS: REFERENCE DESIGN ONLY — NO PRODUCTION DATA
+   Production tokens: Navy #001F3F · Gold #D4AF37 · Teal #0D9488
+   Dark #001229 · Sora · DM Sans · Padauk · JetBrains Mono
+   ============================================================ */
+:root{
+  --navy:#001F3F;
+  --navy-ink:#0A1B2E;          /* derived — deepest readable ink on light */
+  --gold:#D4AF37;             /* accent/border only — never body text */
+  --teal:#0D9488;
+  --teal-deep:#0A6E66;        /* derived — AA-safe teal for text surfaces */
+  --teal-tint:#E6F5F3;        /* derived */
+  --dark:#001229;
+  --paper:#FFFFFF;
+  --wash:#F5F7FA;             /* derived neutral — pending CTO confirmation */
+  --line:#D8DEE6;             /* derived neutral */
+  --slate:#3D4A5C;            /* derived — 9.0:1 on white */
+  --slate-soft:#5B6879;       /* derived — 5.67:1 on white */
+  --danger:#B42318;
+  --danger-tint:#FDF0EE;
+  --amber-deep:#8A5A00;       /* derived — AA-safe caution label */
+  --amber-tint:#FBF3DF;
+  --radius:10px;
+  --mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  color:var(--navy-ink);
+  background:var(--wash);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.mm{font-family:'DM Sans','Padauk',sans-serif;line-height:1.8}
+h1,h2,h3,h4{font-family:'Sora',sans-serif;color:var(--navy);line-height:1.25}
+a{color:var(--teal-deep);text-decoration:underline;text-underline-offset:3px}
+a:hover{color:var(--navy)}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px;border-radius:4px}
+button{font-family:inherit;cursor:pointer}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+@media(min-width:768px){.wrap{padding:0 32px}}
+
+/* ---------- DEMO CONTROL BAR (review chrome only, NOT production UI) ---------- */
+.demo-bar{
+  background:var(--dark);color:#E8EEF6;
+  border-bottom:3px solid var(--gold);
+  position:sticky;top:0;z-index:50;
+}
+.demo-bar .wrap{padding-top:10px;padding-bottom:10px}
+.demo-flag{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+  color:#FFD766;text-transform:uppercase;margin-bottom:8px;
+}
+.demo-flag .dot{width:8px;height:8px;background:var(--gold);border-radius:50%}
+.demo-controls{display:flex;flex-wrap:wrap;gap:10px 18px}
+.demo-group{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.demo-group>span{font-size:11px;font-family:var(--mono);color:#9FB3CC;letter-spacing:.05em}
+.demo-btn{
+  background:transparent;color:#E8EEF6;border:1px solid #3A5578;
+  border-radius:6px;padding:6px 10px;font-size:12px;min-height:44px;
+}
+.demo-btn[aria-pressed="true"]{background:var(--teal-deep);border-color:var(--teal);color:#fff;font-weight:700}
+.demo-btn:hover{border-color:var(--gold)}
+
+/* ---------- HOST BAR ---------- */
+.host-bar{background:var(--navy);color:#fff}
+.host-bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}
+.brand{font-family:'Sora',sans-serif;font-weight:700;font-size:17px;color:#fff;display:flex;align-items:center;gap:8px}
+.brand-mark{width:26px;height:26px;background:var(--gold);color:var(--navy);border-radius:6px;display:grid;place-items:center;font-size:13px;font-weight:700}
+.host-bar nav{display:flex;gap:4px;flex-wrap:wrap}
+.host-bar nav a{color:#DCE6F2;text-decoration:none;font-size:14px;padding:8px 10px;min-height:44px;display:inline-flex;align-items:center;border-radius:6px}
+.host-bar nav a:hover{background:rgba(255,255,255,.08);color:#fff}
+
+/* ---------- COMPANY IDENTITY HEADER ---------- */
+.co-header{background:var(--paper);border-bottom:1px solid var(--line)}
+.co-header .wrap{padding-top:24px;padding-bottom:0}
+.co-top{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.co-logo{
+  width:72px;height:72px;border-radius:12px;background:var(--navy);
+  color:var(--gold);display:grid;place-items:center;
+  font-family:'Sora',sans-serif;font-weight:700;font-size:26px;flex-shrink:0;
+  border:1px solid var(--line);
+}
+.co-id{flex:1;min-width:220px}
+.co-id h1{font-size:clamp(22px,4.5vw,32px)}
+.co-meta{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:8px;font-size:14px;color:var(--slate)}
+.co-meta span{display:inline-flex;align-items:center;gap:6px}
+.co-meta svg{color:var(--slate-soft)}
+/* Commercial relationship label — deliberately NOT a badge of quality */
+.commercial-tag{
+  display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;
+  border:1.5px solid var(--gold);border-radius:6px;
+  padding:6px 12px;margin-top:12px;background:#FFFDF6;
+  font-size:13px;color:var(--navy);font-weight:500;
+}
+.commercial-tag .code{font-family:var(--mono);font-size:10px;color:var(--slate-soft);letter-spacing:.04em}
+.commercial-note{font-size:12px;color:var(--slate-soft);margin-top:6px;max-width:52ch}
+.co-open-jobs{margin-top:14px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;padding:10px 18px;border-radius:8px;font-size:15px;font-weight:700;
+  border:2px solid transparent;text-decoration:none;
+}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-primary:hover{background:#0A3055;color:#fff}
+.btn-ghost{background:#fff;color:var(--navy);border-color:var(--navy)}
+.btn-ghost:hover{background:var(--navy);color:#fff}
+.btn-teal{background:var(--teal-deep);color:#fff}
+.btn-teal:hover{background:#085A54;color:#fff}
+
+/* ---------- SECTION NAV ---------- */
+.section-nav{background:var(--paper);border-bottom:1px solid var(--line)}
+.section-nav .nav-row{display:flex;gap:2px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.section-nav a{
+  text-decoration:none;color:var(--slate);font-weight:500;font-size:15px;
+  padding:14px 16px;min-height:44px;border-bottom:3px solid transparent;white-space:nowrap;
+}
+.section-nav a[aria-current="true"]{color:var(--navy);font-weight:700;border-bottom-color:var(--teal)}
+.section-nav a:hover{color:var(--navy)}
+.section-nav .count{font-family:var(--mono);font-size:11px;color:var(--slate-soft);margin-left:4px}
+
+/* ---------- GENERIC SECTIONS ---------- */
+section.block{padding:32px 0 8px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.sec-head h2{font-size:clamp(19px,3vw,24px)}
+.card{
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px;margin-bottom:16px;
+}
+@media(min-width:768px){.card{padding:24px}}
+.facts{display:grid;gap:10px;grid-template-columns:1fr}
+@media(min-width:500px){.facts{grid-template-columns:1fr 1fr}}
+.fact{border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:#FBFCFE}
+.fact dt{font-size:12px;font-family:var(--mono);color:var(--slate-soft);letter-spacing:.05em;text-transform:uppercase}
+.fact dd{font-size:15px;font-weight:500;color:var(--navy-ink);margin-top:2px}
+.muted{color:var(--slate)}
+.small{font-size:13px}
+.mono-note{font-family:var(--mono);font-size:11px;color:var(--slate-soft);letter-spacing:.03em}
+
+/* ---------- BADGES (provenance system) ---------- */
+.badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12.5px;font-weight:700;line-height:1.2;
+  padding:7px 11px;border-radius:6px;border:1.5px solid transparent;
+}
+.badge svg{width:14px;height:14px;flex-shrink:0}
+.badge-verified{background:var(--teal-deep);color:#fff;border-color:var(--teal-deep)}
+.badge-self{background:#fff;color:var(--slate);border-color:#5B6879;border-style:dashed}
+.badge-bench{background:#fff;color:var(--navy);border-color:var(--navy)}
+.badge-commercial{background:#FFFDF6;color:var(--navy);border-color:var(--gold);border-radius:4px;font-weight:500}
+.badge .tag-code{font-family:var(--mono);font-weight:400;font-size:10px;color:inherit}
+
+/* ---------- HONEST EMPTY STATES ---------- */
+.empty{
+  border:1.5px dashed var(--line);border-radius:var(--radius);
+  background:#FBFCFE;padding:28px 20px;text-align:left;
+}
+.empty h3{font-size:17px;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.empty h3 svg{color:var(--teal-deep)}
+.empty p{color:var(--slate);max-width:60ch}
+.empty .qualify{margin-top:14px;background:var(--teal-tint);border-left:4px solid var(--teal-deep);padding:12px 14px;border-radius:0 8px 8px 0}
+.empty .qualify strong{color:var(--navy)}
+.empty ul{margin:10px 0 0 20px;color:var(--slate)}
+.mm-slot{
+  margin-top:16px;border:1.5px dashed #8A97A8;border-radius:8px;
+  padding:14px;background:#fff;
+}
+.mm-slot .slot-tag{font-family:var(--mono);font-size:11px;color:var(--slate-soft);letter-spacing:.05em;text-transform:uppercase}
+.mm-slot .slot-body{font-size:15px;color:#8A97A8;margin-top:4px}
+
+/* ---------- REVIEW SUMMARY / DISTRIBUTION ---------- */
+.summary-row{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}
+.score-block{min-width:120px}
+.score-num{font-family:'Sora',sans-serif;font-size:44px;font-weight:700;color:var(--navy);line-height:1}
+.stars{display:flex;gap:3px;margin:8px 0 4px}
+.stars svg{width:20px;height:20px}
+.star-full{color:var(--gold)}
+.star-empty{color:#C6CFDB}
+.score-sub{font-size:13px;color:var(--slate)}
+.dist{flex:1;min-width:220px}
+.dist-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:13px}
+.dist-row .lbl{width:14px;font-family:var(--mono);color:var(--slate)}
+.dist-bar{flex:1;height:12px;background:#EDF1F6;border-radius:6px;overflow:hidden}
+.dist-bar i{display:block;height:100%;background:var(--teal);border-radius:6px}
+.dist-row .n{width:36px;text-align:right;font-family:var(--mono);color:var(--slate-soft)}
+
+/* ---------- REVIEW CARD ---------- */
+.review{padding:4px 0}
+.review-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.review-head .who{font-size:13px;color:var(--slate)}
+.review-head .who strong{color:var(--navy-ink);font-size:14px;display:block}
+.review-stars{display:flex;gap:2px;margin-top:4px}
+.review-stars svg{width:16px;height:16px}
+.review h4{font-size:16px;margin:10px 0 6px}
+.review .body{color:var(--navy-ink);font-size:15px}
+.pca{margin-top:12px;display:grid;gap:10px}
+.pca .row{display:flex;gap:10px;font-size:14px}
+.pca .row svg{width:16px;height:16px;margin-top:3px}
+.pca .lbl{font-weight:700;color:var(--navy)}
+.review-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap}
+.report-link{background:none;border:none;color:var(--slate-soft);font-size:13px;text-decoration:underline;text-underline-offset:3px;min-height:44px;padding:6px 0}
+.report-link:hover{color:var(--danger)}
+
+/* ---------- REVIEW PROMPT STATES ---------- */
+.prompt{border-radius:var(--radius);padding:20px;border:1.5px solid var(--line);background:var(--paper)}
+.prompt h3{font-size:16px;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.prompt.locked{background:#FBFCFE;border-style:dashed}
+.prompt.locked h3 svg{color:var(--slate-soft)}
+.prompt.eligible{border-color:var(--teal-deep);background:#fff;box-shadow:0 0 0 3px var(--teal-tint)}
+.prompt.eligible h3 svg{color:var(--teal-deep)}
+.prompt.done{background:var(--teal-tint);border-color:var(--teal-deep)}
+.prompt.done h3 svg{color:var(--teal-deep)}
+.prompt.pending{background:var(--amber-tint);border-color:#D9A93B}
+.prompt.pending h3 svg{color:var(--amber-deep)}
+.prompt.error{background:var(--danger-tint);border-color:var(--danger)}
+.prompt.error h3 svg{color:var(--danger)}
+.prompt textarea{
+  width:100%;min-height:110px;border:1.5px solid var(--line);border-radius:8px;
+  padding:12px;font-family:inherit;font-size:15px;margin-top:12px;resize:vertical;color:var(--navy-ink);
+}
+.prompt textarea:focus-visible{outline:3px solid var(--teal);outline-offset:0;border-color:var(--teal-deep)}
+.eligibility-line{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--slate);margin-top:10px}
+.eligibility-line svg{color:var(--teal-deep);margin-top:3px}
+.field-note{font-size:12.5px;color:var(--slate-soft);margin-top:6px}
+
+/* ---------- SALARY CARDS ---------- */
+.salary-card{border:1.5px solid var(--line);border-radius:var(--radius);padding:20px;background:var(--paper);margin-bottom:16px}
+.salary-card.bench{border-style:dashed;border-color:var(--navy)}
+.salary-card .src-line{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.salary-card .role{font-family:'Sora',sans-serif;font-weight:600;font-size:16px;color:var(--navy)}
+.salary-figure{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:8px 0 4px}
+.salary-figure .amt{font-family:'Sora',sans-serif;font-size:clamp(22px,5vw,30px);font-weight:700;color:var(--navy)}
+.salary-figure .per{font-size:14px;color:var(--slate)}
+.salary-meta{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13px;color:var(--slate);margin-top:8px}
+.salary-meta b{color:var(--navy-ink);font-weight:700}
+.confidence{margin-top:14px;background:#F0F4F9;border-radius:8px;padding:12px 14px;font-size:13px;color:var(--slate)}
+.confidence strong{color:var(--navy)}
+.range-line{display:flex;align-items:center;gap:10px;margin-top:12px}
+.range-track{flex:1;height:8px;background:#EDF1F6;border-radius:4px;position:relative;min-width:120px}
+.range-track .fill{position:absolute;top:0;bottom:0;left:0;width:100%;background:var(--teal);opacity:.55;border-radius:4px}
+.range-track .tick{position:absolute;top:-4px;left:50%;width:3px;height:16px;background:var(--navy);border-radius:2px}
+.range-lbl{font-family:var(--mono);font-size:11px;color:var(--slate-soft);white-space:nowrap}
+.salary-divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:var(--slate-soft);font-size:12px;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.salary-divider::before,.salary-divider::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* ---------- SKELETON ---------- */
+.skel{border-radius:6px;background:linear-gradient(90deg,#E7ECF2 25%,#F3F6FA 50%,#E7ECF2 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
+@keyframes shimmer{to{background-position:-200% 0}}
+@media(prefers-reduced-motion:reduce){.skel{animation:none}}
+.skel-note{font-size:12.5px;color:var(--slate-soft);display:flex;align-items:center;gap:8px;margin-bottom:14px}
+
+/* ---------- BADGE COMPARISON ---------- */
+.badge-compare{display:grid;gap:12px;grid-template-columns:1fr}
+@media(min-width:640px){.badge-compare{grid-template-columns:1fr 1fr}}
+@media(min-width:1024px){.badge-compare{grid-template-columns:repeat(4,1fr)}}
+.bc-cell{border:1px solid var(--line);border-radius:8px;padding:14px;background:#fff}
+.bc-cell .name{font-size:13px;font-weight:700;color:var(--navy);margin:10px 0 4px}
+.bc-cell .desc{font-size:12.5px;color:var(--slate)}
+.bc-cell .mono-id{font-family:var(--mono);font-size:10px;color:var(--slate-soft);margin-top:8px;display:block}
+.no-color-strip{margin-top:14px;filter:grayscale(1);border:1px dashed var(--line);border-radius:8px;padding:14px;background:#fff}
+.strip-lbl{font-family:var(--mono);font-size:11px;color:var(--slate-soft);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+
+/* ---------- SAMPLE BANNER ---------- */
+.sample-banner{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:var(--amber-tint);border:1.5px solid #D9A93B;border-radius:8px;
+  padding:10px 14px;margin-bottom:16px;
+  font-family:var(--mono);font-size:12px;color:var(--amber-deep);font-weight:600;letter-spacing:.03em;
+}
+.sample-banner svg{color:var(--amber-deep)}
+
+/* ---------- COMPONENT SHEET ---------- */
+.comp-grid{display:grid;gap:12px;grid-template-columns:1fr}
+@media(min-width:640px){.comp-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1024px){.comp-grid{grid-template-columns:repeat(3,1fr)}}
+.comp{border:1px solid var(--line);border-radius:8px;background:#fff;padding:14px}
+.comp h4{font-size:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.comp h4 .cid{font-family:var(--mono);font-size:10px;color:var(--slate-soft)}
+.comp ul{margin:8px 0 0 18px;font-size:12.5px;color:var(--slate)}
+
+/* ---------- FOOTER ---------- */
+footer.prov{background:var(--dark);color:#B9C7DA;margin-top:48px}
+footer.prov .wrap{padding-top:24px;padding-bottom:28px}
+footer.prov .row{display:flex;flex-wrap:wrap;gap:6px 20px;font-family:var(--mono);font-size:11px;letter-spacing:.04em}
+footer.prov .row span{display:inline-flex;align-items:center;gap:6px}
+footer.prov .k{color:#FFD766}
+footer.prov p{font-size:12px;margin-top:12px;color:#8FA3BD;max-width:70ch}
+
+/* ---------- JOBS ---------- */
+.job-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;border-top:1px solid var(--line);flex-wrap:wrap}
+.job-row:first-of-type{border-top:none}
+.job-row .jt{font-weight:700;color:var(--navy);font-size:15px}
+.job-row .jm{font-size:13px;color:var(--slate)}
+
+body{overflow-x:hidden}
+.card,.empty,.prompt,.salary-card{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+
+<!-- DEMO CONTROL BAR — REVIEW CHROME ONLY. NOT PART OF PRODUCTION UI. -->
+<div class="demo-bar" role="region" aria-label="Design demo controls — not production UI">
+  <div class="wrap">
+    <div class="demo-flag"><span class="dot"></span> DESIGN DEMO — NO PRODUCTION DATA · REFERENCE ONLY · /company/[slug] PHASE 1 · S322</div>
+    <div class="demo-controls">
+      <div class="demo-group" role="group" aria-label="Company evidence state">
+        <span>EVIDENCE</span>
+        <button class="demo-btn" data-k="data" data-v="empty">Launch-empty (real)</button>
+        <button class="demo-btn" data-k="data" data-v="populated">Populated (sample)</button>
+        <button class="demo-btn" data-k="data" data-v="loading">Loading skeleton</button>
+      </div>
+      <div class="demo-group" role="group" aria-label="Review prompt state">
+        <span>PROMPT</span>
+        <button class="demo-btn" data-k="prompt" data-v="locked">Not eligible</button>
+        <button class="demo-btn" data-k="prompt" data-v="eligible">Eligible</button>
+        <button class="demo-btn" data-k="prompt" data-v="submitted">Already submitted</button>
+        <button class="demo-btn" data-k="prompt" data-v="pending">Pending moderation</button>
+        <button class="demo-btn" data-k="prompt" data-v="error">Error / retry</button>
+      </div>
+      <div class="demo-group" role="group" aria-label="Salary evidence state">
+        <span>SALARY</span>
+        <button class="demo-btn" data-k="salary" data-v="none">No evidence</button>
+        <button class="demo-btn" data-k="salary" data-v="benchmark">Benchmark only</button>
+        <button class="demo-btn" data-k="salary" data-v="verified">Verified only</button>
+        <button class="demo-btn" data-k="salary" data-v="mixed">Mixed sources</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header class="host-bar">
+  <div class="wrap">
+    <div class="brand"><span class="brand-mark">R</span> ReferTRM</div>
+    <nav aria-label="Primary">
+      <a href="#">Jobs</a><a href="#" aria-current="page">Companies</a><a href="#">Academy</a><a href="#">Sign in</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ==================== COMPANY IDENTITY HEADER ==================== -->
+<div class="co-header">
+  <div class="wrap">
+    <div class="co-top">
+      <div class="co-logo" aria-hidden="true">TC</div>
+      <div class="co-id">
+        <h1 id="co-name">Thitsa Commerce Group</h1>
+        <div class="co-meta">
+          <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> E-commerce &amp; Retail</span>
+          <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Yangon, Myanmar</span>
+          <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg> 51–200 employees</span>
+        </div>
+
+        <!-- COMMERCIAL RELATIONSHIP — separated from trust/evidence by design -->
+        <div>
+          <span class="commercial-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8A6D1D" stroke-width="2"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M3 12h18"/></svg>
+            Premium Client — commercial relationship
+            <span class="code">LBL-COMMERCIAL</span>
+          </span>
+          <p class="commercial-note">This label describes a paid partnership with ReferTRM. It is <strong>not</strong> a trust, verification, or quality signal and never affects ratings, review visibility, search order, or salary presentation.</p>
+        </div>
+
+        <div class="co-open-jobs">
+          <a class="btn btn-primary" href="#jobs">View 3 open positions</a>
+        </div>
+      </div>
+    </div>
+
+    <nav class="section-nav" aria-label="Company profile sections" style="margin-top:20px">
+      <div class="nav-row">
+        <a href="#overview" aria-current="true">Overview</a>
+        <a href="#reviews">Reviews <span class="count" id="nav-review-count">0</span></a>
+        <a href="#salaries">Salaries</a>
+        <a href="#jobs">Jobs <span class="count">3</span></a>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- ==================== OVERVIEW ==================== -->
+  <section class="block" id="overview" aria-labelledby="ov-h">
+    <div class="sec-head"><h2 id="ov-h">Overview</h2></div>
+    <div class="card">
+      <div class="sample-banner" data-only="populated" style="display:none">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+        SAMPLE LAYOUT DATA — NOT PRODUCTION · company facts shown for layout reference only
+      </div>
+      <div class="facts">
+        <div class="fact"><dt>Industry</dt><dd>E-commerce &amp; Retail</dd></div>
+        <div class="fact"><dt>Headquarters</dt><dd>Yangon, Myanmar</dd></div>
+        <div class="fact"><dt>Company size</dt><dd>51–200 employees</dd></div>
+        <div class="fact"><dt>Profile source</dt><dd>ReferTRM company registry <span class="mono-note">SRC-REGISTRY</span></dd></div>
+      </div>
+      <p class="small muted" style="margin-top:14px">Factual company data comes from the company registry and the employer's own profile. It is shown separately from worker evidence (reviews, salaries) below — facts and evidence never merge.</p>
+    </div>
+  </section>
+
+  <!-- ==================== REVIEW PROMPT ==================== -->
+  <section class="block" id="write-review" aria-labelledby="rp-h">
+    <div class="sec-head"><h2 id="rp-h">Your review</h2><span class="mono-note">STATE: <span id="prompt-state-lbl">locked</span> · reference only</span></div>
+
+    <div class="prompt locked" data-prompt="locked">
+      <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> You are not eligible to review this company yet</h3>
+      <p class="muted small">Reviews are limited to people with a real, timestamped contact or application through ReferTRM, opened after a 30-day reflection period. This keeps every review connected to a genuine interaction.</p>
+      <div class="eligibility-line"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg> Eligibility is checked against your contact history — nothing you can type here changes it.</div>
+      <div class="mm-slot"><span class="slot-tag">MM SLOT — CCO TO AUTHOR</span><p class="slot-body mm">[MM SLOT — CCO TO AUTHOR]</p></div>
+    </div>
+
+    <div class="prompt eligible" data-prompt="eligible" hidden>
+      <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> You can now review this company</h3>
+      <p class="muted small">Your application on <strong>12 Jun 2026</strong> (sample) passed the 30-day reflection period. Your review will carry the <em>Contacted via ReferTRM</em> badge. One review per applicant — enforced at database level (Codex dependency D-01).</p>
+      <label for="rv-text" class="small" style="font-weight:700;color:var(--navy);display:block;margin-top:12px">Your experience</label>
+      <textarea id="rv-text" placeholder="What should a jobseeker know about working here?"></textarea>
+      <p class="field-note">Pros, cons, and advice fields appear in the full submission flow. Your identity is never shown; only role family and employment time context are published.</p>
+      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn btn-teal" type="button">Submit for moderation</button>
+        <button class="btn btn-ghost" type="button">Save draft</button>
+      </div>
+      <div class="mm-slot"><span class="slot-tag">MM SLOT — CCO TO AUTHOR</span><p class="slot-body mm">[MM SLOT — CCO TO AUTHOR]</p></div>
+    </div>
+
+    <div class="prompt done" data-prompt="submitted" hidden>
+      <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> You have already submitted a review for this company</h3>
+      <p class="muted small">Each applicant can publish one review per company. Your existing review is shown below. Duplicate submissions are blocked at database level (Codex dependency D-01).</p>
+      <div style="margin-top:12px"><button class="btn btn-ghost" type="button">View my review</button></div>
+    </div>
+
+    <div class="prompt pending" data-prompt="pending" hidden>
+      <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> Submission received — pending moderation</h3>
+      <p class="muted small">Your review is in the moderation queue. It is not public yet. Moderation policy and SLA are owned by Codex/CTO (dependency D-02) — this design only defines the waiting state.</p>
+    </div>
+
+    <div class="prompt error" data-prompt="error" hidden>
+      <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg> Something went wrong — your text is safe</h3>
+      <p class="muted small">The submission could not be sent. Everything you entered is preserved below. Check your connection and try again; on 3G this may take a moment.</p>
+      <textarea aria-label="Your preserved review text">The interview process was clear and the team responded quickly…</textarea>
+      <div style="margin-top:12px"><button class="btn btn-teal" type="button">Retry submission</button></div>
+    </div>
+  </section>
+
+  <!-- ==================== REVIEWS ==================== -->
+  <section class="block" id="reviews" aria-labelledby="rv-h">
+    <div class="sec-head"><h2 id="rv-h">Reviews</h2><span class="mono-note">PROVENANCE: CONTACTED-VIA-REFERTRM (P1) · SELF-REPORTED (P2, DEMO ONLY)</span></div>
+
+    <div data-reviews="empty">
+      <div class="empty">
+        <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></svg> No verified reviews yet</h3>
+        <p>There is no worker review evidence for this company yet. That is simply the current truth — not a hidden score. We do not show a greyed-out rating or an estimated score when no evidence exists.</p>
+        <div class="qualify">
+          <strong>What will qualify as evidence:</strong>
+          <ul>
+            <li>A review from an applicant with a real, timestamped contact or application via ReferTRM, opened after a 30-day reflection period — shown with the <em>Contacted via ReferTRM</em> badge.</li>
+            <li>Every review passes moderation before publication.</li>
+            <li>Unverified or self-reported content, when introduced later, will carry its own clearly different label.</li>
+          </ul>
+        </div>
+        <p class="small" style="margin-top:14px"><a href="#write-review">Check whether you are eligible to review</a> · <a href="#salaries">See salary evidence status</a></p>
+        <div class="mm-slot"><span class="slot-tag">MM SLOT — CCO TO AUTHOR</span><p class="slot-body mm">[MM SLOT — CCO TO AUTHOR]</p></div>
+      </div>
+    </div>
+
+    <div data-reviews="loading" hidden>
+      <div class="card">
+        <p class="skel-note"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-9-9"/></svg> Loading review evidence…</p>
+        <div class="skel" style="height:18px;width:45%;margin-bottom:12px"></div>
+        <div class="skel" style="height:12px;width:90%;margin-bottom:8px"></div>
+        <div class="skel" style="height:12px;width:75%;margin-bottom:8px"></div>
+        <div class="skel" style="height:12px;width:60%"></div>
+        <p class="mono-note" style="margin-top:12px">Skeleton bars are abstract — they never mimic star rows or rating shapes.</p>
+      </div>
+    </div>
+
+    <div data-reviews="populated" hidden>
+      <div class="sample-banner">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+        SAMPLE LAYOUT DATA — NOT PRODUCTION · all reviews, counts and ratings below are fabricated placeholders to demonstrate layout
+      </div>
+      <div class="card">
+        <div class="summary-row">
+          <div class="score-block">
+            <div class="score-num">4.2</div>
+            <div class="stars" role="img" aria-label="4.2 out of 5 stars (sample data)">
+              <svg class="star-full" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+              <svg class="star-full" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+              <svg class="star-full" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+              <svg class="star-full" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+              <svg class="star-empty" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            </div>
+            <div class="score-sub">12 verified reviews <span class="mono-note">SAMPLE</span></div>
+          </div>
+          <div class="dist" aria-label="Rating distribution (sample data)">
+            <div class="dist-row"><span class="lbl">5</span><div class="dist-bar"><i style="width:58%"></i></div><span class="n">7</span></div>
+            <div class="dist-row"><span class="lbl">4</span><div class="dist-bar"><i style="width:25%"></i></div><span class="n">3</span></div>
+            <div class="dist-row"><span class="lbl">3</span><div class="dist-bar"><i style="width:8%"></i></div><span class="n">1</span></div>
+            <div class="dist-row"><span class="lbl">2</span><div class="dist-bar"><i style="width:8%"></i></div><span class="n">1</span></div>
+            <div class="dist-row"><span class="lbl">1</span><div class="dist-bar"><i style="width:0%"></i></div><span class="n">0</span></div>
+          </div>
+        </div>
+        <p class="small muted" style="margin-top:14px">Counts and bars always carry text labels — meaning never depends on color alone.</p>
+      </div>
+
+      <div class="card">
+        <article class="review">
+          <div class="review-head">
+            <div>
+              <div class="who"><strong>Sales role · Yangon</strong> Current employee · less than 1 year</div>
+              <div class="review-stars" role="img" aria-label="5 out of 5 (sample)">
+                <svg class="star-full" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg class="star-full" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg class="star-full" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg class="star-full" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg class="star-full" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+              </div>
+            </div>
+            <span class="badge badge-verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg> Contacted via ReferTRM <span class="tag-code">P1-VERIFIED</span></span>
+          </div>
+          <h4>Structured onboarding, real support <span class="mono-note">SAMPLE</span></h4>
+          <p class="body">The team trained me on actual outreach within the first two weeks. Managers answered questions directly and targets were explained in writing.</p>
+          <div class="pca">
+            <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="#0A6E66" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><div><span class="lbl">Pros</span> — Clear targets, weekly feedback, paid on time.</div></div>
+            <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="2.4"><path d="M18 6 6 18M6 6l12 12"/></svg><div><span class="lbl">Cons</span> — Office hours run late during campaign weeks.</div></div>
+            <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="#3D4A5C" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4m0-4h.01"/></svg><div><span class="lbl">Advice</span> — Ask about commission structure in writing.</div></div>
+          </div>
+          <div class="review-foot">
+            <span class="mono-note">SUBMITTED 2026-06-12 · MODERATED · ID NEVER SHOWN</span>
+            <button class="report-link" type="button">Report this review</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="card">
+        <article class="review">
+          <div class="review-head">
+            <div>
+              <div class="who"><strong>Operations role · Mandalay</strong> Former employee · 1–2 years</div>
+              <div class="review-stars" role="img" aria-label="3 out of 5 (sample)">
+                <svg class="star-full" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg class="star-full" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg class="star-full" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg class="star-empty" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg class="star-empty" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+              </div>
+            </div>
+            <span class="badge badge-self"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg> Self-reported <span class="tag-code">P2-UNVERIFIED</span></span>
+          </div>
+          <h4>Mixed experience, depends on team <span class="mono-note">SAMPLE</span></h4>
+          <p class="body">Some teams were well organised; mine changed managers three times in a year. This review was submitted directly and has no verified contact link.</p>
+          <div class="pca">
+            <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="#0A6E66" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><div><span class="lbl">Pros</span> — Flexible leave approval.</div></div>
+            <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="2.4"><path d="M18 6 6 18M6 6l12 12"/></svg><div><span class="lbl">Cons</span> — Unclear promotion path.</div></div>
+          </div>
+          <div class="review-foot">
+            <span class="mono-note">PHASE 2 PROVENANCE — SHOWN FOR BADGE-SEPARATION DEMO ONLY</span>
+            <button class="report-link" type="button">Report this review</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SALARIES ==================== -->
+  <section class="block" id="salaries" aria-labelledby="sa-h">
+    <div class="sec-head"><h2 id="sa-h">Salaries</h2><span class="mono-note">SOURCES NEVER COMBINE INTO ONE NUMBER</span></div>
+
+    <div data-salary="none">
+      <div class="empty">
+        <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg> No salary evidence for this company yet</h3>
+        <p>Neither company-specific submissions nor a matching market benchmark are available for this employer right now. We will not estimate or invent a figure.</p>
+        <div class="qualify"><strong>What can appear here:</strong>
+          <ul>
+            <li><em>Company-specific insight</em> — submitted by a verified-contact worker, always labelled with sample size and date.</li>
+            <li><em>Market benchmark</em> — a market-wide reference range from ReferTRM's benchmark dataset (85 records at Phase 1 baseline), always labelled as market-wide, never as an employer offer.</li>
+          </ul>
+        </div>
+        <div class="mm-slot"><span class="slot-tag">MM SLOT — CCO TO AUTHOR</span><p class="slot-body mm">[MM SLOT — CCO TO AUTHOR]</p></div>
+      </div>
+    </div>
+
+    <div data-salary="benchmark" hidden>
+      <div class="empty" style="margin-bottom:16px">
+        <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg> No company-specific salary evidence yet</h3>
+        <p>No worker at this company has submitted verified salary insight. Below is a <strong>market-wide benchmark</strong> for orientation — it is not a salary promised by this employer.</p>
+      </div>
+      <div class="salary-card bench">
+        <div class="src-line">
+          <span class="badge badge-bench"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 3 5-6"/></svg> Market benchmark <span class="tag-code">SRC-BENCHMARK</span></span>
+        </div>
+        <div class="role">Sales Development Representative — market-wide</div>
+        <div class="salary-figure"><span class="amt">350,000 – 550,000 MMK</span><span class="per">per month · median 450,000</span></div>
+        <div class="range-line">
+          <span class="range-lbl">350K</span>
+          <div class="range-track"><span class="fill"></span><span class="tick"></span></div>
+          <span class="range-lbl">550K</span>
+        </div>
+        <div class="salary-meta">
+          <span>Source: <b>ReferTRM benchmark dataset</b></span>
+          <span>Sample size: <b>n = 85 records</b> (market-wide)</span>
+          <span>Currency: <b>MMK / month</b></span>
+          <span>Context: <b>Yangon · entry level</b></span>
+          <span>Last updated: <b>Jul 2026</b></span>
+        </div>
+        <div class="confidence"><strong>How to read this:</strong> this range reflects the broader Myanmar market for the role family, not this employer's payroll. Coverage is thin (85 market records), so treat it as orientation, not negotiation ground truth. <span class="mono-note">SAMPLE FIGURES</span></div>
+      </div>
+    </div>
+
+    <div data-salary="verified" hidden>
+      <div class="sample-banner"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg> SAMPLE LAYOUT DATA — NOT PRODUCTION</div>
+      <div class="salary-card">
+        <div class="src-line">
+          <span class="badge badge-verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg> Company-specific insight <span class="tag-code">SRC-WORKER-VERIFIED</span></span>
+        </div>
+        <div class="role">Sales Development Representative — this company</div>
+        <div class="salary-figure"><span class="amt">420,000 MMK</span><span class="per">per month · median</span></div>
+        <div class="salary-meta">
+          <span>Source: <b>worker submissions, contacted via ReferTRM</b></span>
+          <span>Sample size: <b>n = 4</b></span>
+          <span>Currency: <b>MMK / month</b></span>
+          <span>Context: <b>Yangon · 0–2 yrs experience</b></span>
+          <span>Last updated: <b>Jul 2026</b></span>
+        </div>
+        <div class="confidence"><strong>How to read this:</strong> based on 4 verified-contact submissions. Small samples vary widely — this describes reported pay, not a current offer. <span class="mono-note">SAMPLE FIGURES</span></div>
+      </div>
+    </div>
+
+    <div data-salary="mixed" hidden>
+      <div class="sample-banner"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg> SAMPLE LAYOUT DATA — NOT PRODUCTION</div>
+      <div class="salary-card">
+        <div class="src-line">
+          <span class="badge badge-verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg> Company-specific insight <span class="tag-code">SRC-WORKER-VERIFIED</span></span>
+        </div>
+        <div class="role">Sales Development Representative — this company</div>
+        <div class="salary-figure"><span class="amt">420,000 MMK</span><span class="per">per month · median</span></div>
+        <div class="salary-meta">
+          <span>Sample size: <b>n = 4</b></span><span>Currency: <b>MMK / month</b></span><span>Context: <b>Yangon · 0–2 yrs</b></span><span>Last updated: <b>Jul 2026</b></span>
+        </div>
+        <div class="confidence"><strong>Company-specific:</strong> 4 verified-contact submissions. Reported pay, not an offer. <span class="mono-note">SAMPLE FIGURES</span></div>
+      </div>
+
+      <div class="salary-divider">Separate source — never averaged</div>
+
+      <div class="salary-card bench">
+        <div class="src-line">
+          <span class="badge badge-bench"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 3 5-6"/></svg> Market benchmark <span class="tag-code">SRC-BENCHMARK</span></span>
+        </div>
+        <div class="role">Sales Development Representative — market-wide</div>
+        <div class="salary-figure"><span class="amt">350,000 – 550,000 MMK</span><span class="per">per month · median 450,000</span></div>
+        <div class="salary-meta">
+          <span>Sample size: <b>n = 85 records</b> (market-wide)</span><span>Currency: <b>MMK / month</b></span><span>Last updated: <b>Jul 2026</b></span>
+        </div>
+        <div class="confidence"><strong>Market-wide reference:</strong> orientation only — not this employer's payroll. The two figures on this page come from different sources and are never merged. <span class="mono-note">SAMPLE FIGURES</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== JOBS ==================== -->
+  <section class="block" id="jobs" aria-labelledby="jb-h">
+    <div class="sec-head"><h2 id="jb-h">Open positions</h2></div>
+    <div class="card">
+      <div class="job-row">
+        <div><div class="jt">Sales Development Representative</div><div class="jm">Yangon · Full-time · Entry level</div></div>
+        <a class="btn btn-primary" href="#">Apply via ReferTRM</a>
+      </div>
+      <div class="job-row">
+        <div><div class="jt">Customer Support Associate</div><div class="jm">Yangon · Full-time</div></div>
+        <a class="btn btn-primary" href="#">Apply via ReferTRM</a>
+      </div>
+      <div class="job-row">
+        <div><div class="jt">Operations Coordinator</div><div class="jm">Mandalay · Full-time</div></div>
+        <a class="btn btn-primary" href="#">Apply via ReferTRM</a>
+      </div>
+      <p class="small muted" style="margin-top:12px">Applying through ReferTRM creates the timestamped contact that may later make you eligible to submit a verified review.</p>
+    </div>
+  </section>
+
+  <!-- ==================== BADGE COMPARISON ==================== -->
+  <section class="block" id="badges" aria-labelledby="bd-h">
+    <div class="sec-head"><h2 id="bd-h">Badge separation proof</h2><span class="mono-note">FOUR LABELS · FOUR SHAPES · FOUR MEANINGS — NEVER CONFUSABLE</span></div>
+    <div class="badge-compare">
+      <div class="bc-cell">
+        <span class="badge badge-commercial"><svg viewBox="0 0 24 24" fill="none" stroke="#8A6D1D" stroke-width="2" width="14" height="14"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M3 12h18"/></svg> Premium Client <span class="tag-code">LBL-COMMERCIAL</span></span>
+        <p class="name">Commercial relationship</p>
+        <p class="desc">Paid partnership. Gold outline, squared tag shape, card icon. Never solid, never near ratings. Explicitly disclaimed in place.</p>
+        <span class="mono-id">SHAPE: squared tag · CUE: gold outline only</span>
+      </div>
+      <div class="bc-cell">
+        <span class="badge badge-verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg> Contacted via ReferTRM <span class="tag-code">P1-VERIFIED</span></span>
+        <p class="name">Verified contact (Phase 1)</p>
+        <p class="desc">Tied to a real timestamped contact/apply action. Solid deep-teal fill, shield-check icon — the only solid badge in the system.</p>
+        <span class="mono-id">SHAPE: solid pill · CUE: shield + fill</span>
+      </div>
+      <div class="bc-cell">
+        <span class="badge badge-self"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg> Self-reported <span class="tag-code">P2-UNVERIFIED</span></span>
+        <p class="name">Self-reported (Phase 2 demo)</p>
+        <p class="desc">Direct submission, no verified link. Dashed slate outline, pencil icon. Dashed border is the unique cue — never filled, never teal.</p>
+        <span class="mono-id">SHAPE: dashed outline · CUE: pencil + dash</span>
+      </div>
+      <div class="bc-cell">
+        <span class="badge badge-bench"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 3 5-6"/></svg> Market benchmark <span class="tag-code">SRC-BENCHMARK</span></span>
+        <p class="name">Market benchmark</p>
+        <p class="desc">Market-wide salary reference. Navy outline, chart icon, always paired with "market-wide" wording and a never-an-offer disclaimer.</p>
+        <span class="mono-id">SHAPE: solid navy outline · CUE: chart icon</span>
+      </div>
+    </div>
+    <div class="no-color-strip">
+      <p class="strip-lbl">Grayscale survival check — labels remain distinct without color</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <span class="badge badge-commercial">Premium Client <span class="tag-code">LBL-COMMERCIAL</span></span>
+        <span class="badge badge-verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="14" height="14"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg> Contacted via ReferTRM</span>
+        <span class="badge badge-self"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg> Self-reported</span>
+        <span class="badge badge-bench"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 3 5-6"/></svg> Market benchmark</span>
+      </div>
+      <p class="small muted" style="margin-top:10px">Distinction survives grayscale: solid fill vs dashed outline vs solid outline vs squared tag, plus unique icons and mono provenance codes.</p>
+    </div>
+  </section>
+
+  <!-- ==================== COMPONENT SHEET ==================== -->
+  <section class="block" id="components" aria-labelledby="cp-h">
+    <div class="sec-head"><h2 id="cp-h">Component inventory</h2><span class="mono-note">SUMMARY — FULL SHEET IN HANDOFF DOCS</span></div>
+    <div class="comp-grid">
+      <div class="comp"><h4>CompanyIdentityHeader <span class="cid">C-01</span></h4><ul><li>Logo, name, industry, location, size</li><li>Facts zone only — no evidence here</li><li>Fields: name, industry, city, sizeBand, logoUrl?</li></ul></div>
+      <div class="comp"><h4>SectionNav <span class="cid">C-02</span></h4><ul><li>Overview / Reviews / Salaries / Jobs</li><li>Sticky, scrollable row at 360px, 44px targets</li><li>Counts shown only when real</li></ul></div>
+      <div class="comp"><h4>CommercialLabel <span class="cid">C-03</span></h4><ul><li>Gold outline squared tag + disclaimer line</li><li>Never adjacent to rating or trust copy</li><li>Field: commercialTier (none|premium)</li></ul></div>
+      <div class="comp"><h4>ProvenanceBadge <span class="cid">C-04</span></h4><ul><li>Variants: verified / self-reported / benchmark / commercial</li><li>Shape + icon + mono code, grayscale-safe</li><li>Field: provenance (enum)</li></ul></div>
+      <div class="comp"><h4>HonestEmptyState <span class="cid">C-05</span></h4><ul><li>Variants: reviews-empty, salary-empty</li><li>No fake stars, no "be first" pressure</li><li>Always explains what qualifies</li></ul></div>
+      <div class="comp"><h4>RatingSummary + Distribution <span class="cid">C-06</span></h4><ul><li>Rendered only when reviewCount &gt; 0</li><li>Text labels on every bar (color-independent)</li><li>Fields: avg, count, dist[1..5]</li></ul></div>
+      <div class="comp"><h4>ReviewCard <span class="cid">C-07</span></h4><ul><li>Badge, role-family + time context, pros/cons/advice</li><li>Identity never shown; report affordance</li><li>Fields: rating, title, body, pros, cons, advice, status, submittedAt, provenance</li></ul></div>
+      <div class="comp"><h4>SalaryEvidenceCard <span class="cid">C-08</span></h4><ul><li>Variants: worker-verified / benchmark / none</li><li>Source, n, currency, period, context, updatedAt, confidence note</li><li>Sources never merged into one figure</li></ul></div>
+      <div class="comp"><h4>ReviewPrompt <span class="cid">C-09</span></h4><ul><li>States: locked / eligible / submitted / pending / error</li><li>Error preserves entered text</li><li>Eligibility computed server-side (Codex)</li></ul></div>
+      <div class="comp"><h4>SkeletonLoader <span class="cid">C-10</span></h4><ul><li>Abstract bars; never star/figure shapes</li><li>Reduced-motion safe</li></ul></div>
+      <div class="comp"><h4>ReportAffordance <span class="cid">C-11</span></h4><ul><li>Per-review "Report" — moderation endpoint (Codex D-02)</li></ul></div>
+      <div class="comp"><h4>CCOMyanmarSlot <span class="cid">C-12</span></h4><ul><li>Dashed container, Padauk, line-height ≥ 1.8</li><li>Kimi authors zero Myanmar text</li></ul></div>
+    </div>
+  </section>
+</main>
+
+<footer class="prov">
+  <div class="wrap">
+    <div class="row">
+      <span><span class="k">HOST</span> /company/[slug]</span>
+      <span><span class="k">CLASS</span> REFERENCE DESIGN — NOT PRODUCTION CODE</span>
+      <span><span class="k">DATA</span> 297 companies · 0 reviews · 0 salary insights · 85 benchmarks (baseline)</span>
+      <span><span class="k">MM</span> ALL MYANMAR COPY = CCO SLOT</span>
+    </div>
+    <p>Design reference for GLASSDOOR-MYANMAR-KIMI-DESIGN-PHASE1-S322. No production code, database, API, or Myanmar copy was created. Sample figures are conspicuously marked and exist only to demonstrate populated layouts. Codex implements later from the sealed specification after CEO review.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var state={data:'empty',prompt:'locked',salary:'none'};
+  var q=new URLSearchParams(location.search);
+  ['data','prompt','salary'].forEach(function(k){ if(q.get(k)) state[k]=q.get(k); });
+
+  function apply(){
+    document.querySelectorAll('.demo-btn').forEach(function(b){
+      b.setAttribute('aria-pressed', String(state[b.dataset.k]===b.dataset.v));
+    });
+    document.querySelectorAll('[data-reviews]').forEach(function(el){
+      el.hidden = el.dataset.reviews !== state.data;
+    });
+    document.querySelectorAll('[data-only]').forEach(function(el){
+      el.style.display = (state.data==='populated'||state.data==='loading') ? 'flex':'none';
+    });
+    document.querySelectorAll('[data-prompt]').forEach(function(el){
+      el.hidden = el.dataset.prompt !== state.prompt;
+    });
+    document.getElementById('prompt-state-lbl').textContent = state.prompt;
+    document.querySelectorAll('[data-salary]').forEach(function(el){
+      el.hidden = el.dataset.salary !== state.salary;
+    });
+    document.getElementById('nav-review-count').textContent = state.data==='populated' ? '12' : '0';
+  }
+  document.querySelectorAll('.demo-btn').forEach(function(b){
+    b.addEventListener('click',function(){ state[b.dataset.k]=b.dataset.v; apply(); });
+  });
+  apply();
+})();
+</script>
+</body>
+</html>
