@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Makro — Real Presentation · ReferTRM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F5F0; --panel:#FFFFFF; --line:rgba(0,31,63,.10); --line2:rgba(0,31,63,.06);
+  --navy:#001F3F; --ink:#0B1D38; --mut:#3E5069; --dim:#75849A;
+  --gold:#D4AF37; --goldT:#96760E; --gold-dim:rgba(212,175,55,.14);
+  --teal:#0F766E; --teal-dim:rgba(15,118,110,.10);
+  --mono:'JetBrains Mono',monospace; --disp:'Bricolage Grotesque',sans-serif; --body:'Inter',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased}
+.deck{max-width:1180px;margin:0 auto;padding:48px 24px 80px;display:flex;flex-direction:column;gap:44px}
+.frame{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 14px 40px rgba(0,31,63,.08)}
+.frameIn{padding:clamp(28px,4.5vw,56px)}
+.fMeta{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:26px}
+.fMeta b{color:var(--goldT);font-weight:600}
+.fTitle{font-family:var(--disp);font-size:clamp(28px,4vw,46px);font-weight:800;letter-spacing:-.025em;line-height:1.04;color:var(--navy)}
+.fTitle em{font-style:normal;color:var(--goldT)}
+.fSub{font-size:15px;color:var(--mut);line-height:1.75;max-width:660px;margin-top:14px}
+.fFoot{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:14px clamp(28px,4.5vw,56px);border-top:1px solid var(--line2);font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border-radius:6px;font-weight:700}
+.bVer{color:var(--teal);background:var(--teal-dim);border:1px solid rgba(15,118,110,.3)}
+.bMiss{color:var(--goldT);background:var(--gold-dim);border:1px dashed rgba(150,118,14,.55)}
+.badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.miss{margin-top:30px;border:1.5px dashed rgba(150,118,14,.55);border-radius:14px;background:linear-gradient(160deg,rgba(212,175,55,.06),transparent 60%);padding:clamp(24px,3.5vw,40px)}
+.missK{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--goldT);text-transform:uppercase;font-weight:700;margin-bottom:16px}
+.missK::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(150,118,14,.4),transparent)}
+.missT{font-family:var(--disp);font-size:clamp(19px,2.4vw,26px);font-weight:700;color:var(--navy);letter-spacing:-.01em}
+.missD{font-size:13.5px;color:var(--mut);line-height:1.8;margin-top:10px;max-width:640px}
+.spec{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-top:22px}
+.specI{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:var(--panel)}
+.specK{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.specV{font-size:12.5px;font-weight:600;color:var(--ink);margin-top:5px;line-height:1.55}
+.he{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+.heI{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:8px;padding:9px 14px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--mut);background:var(--panel)}
+.heI i{width:8px;height:8px;border-radius:50%;background:var(--gold);flex:none}
+.heI.t i{background:var(--teal)}
+.num{font-family:var(--mono)}
+ul.pts{margin:18px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;max-width:680px}
+ul.pts li{display:flex;gap:12px;font-size:14px;color:var(--mut);line-height:1.7}
+ul.pts li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--gold);margin-top:9px}
+ul.pts b{color:var(--ink);font-weight:600}
+.big{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-top:30px}
+.bigI{border:1px solid var(--line);border-radius:14px;padding:22px;background:linear-gradient(180deg,#FFFFFF,#FCFBF6)}
+.bigN{font-family:var(--disp);font-size:clamp(38px,4.6vw,58px);font-weight:800;letter-spacing:-.03em;color:var(--navy);line-height:1}
+.bigN em{font-style:normal;color:var(--goldT)}
+.bigK{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-top:10px}
+.bar{margin-top:26px;max-width:680px}
+.barT{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:8px}
+.barTk{height:14px;border-radius:7px;background:rgba(0,31,63,.07);overflow:hidden;display:flex}
+.barA{height:100%;background:var(--teal)}
+.barB{height:100%;background:var(--gold)}
+.barL{display:flex;gap:18px;flex-wrap:wrap;margin-top:9px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.barL i{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:-1px}
+.flag{margin-top:18px;border-left:3px solid var(--gold);padding:10px 16px;font-size:12.5px;color:var(--mut);background:var(--gold-dim);border-radius:0 10px 10px 0;line-height:1.65;max-width:680px}
+.flag b{color:var(--ink)}
+.prov{margin-top:28px;border:1px solid var(--line);border-radius:12px;overflow:hidden;max-width:760px}
+.provH{padding:10px 16px;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--goldT);background:var(--gold-dim);font-weight:700}
+.prov ul{list-style:none;margin:0;padding:0}
+.prov li{display:flex;justify-content:space-between;gap:14px;padding:10px 16px;border-top:1px solid var(--line2);font-size:12.5px;color:var(--mut);flex-wrap:wrap;line-height:1.55}
+.prov li:first-child{border-top:0}
+.prov li b{color:var(--ink);font-weight:600}
+.prov li span{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--teal);text-transform:uppercase;white-space:nowrap}
+.links{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.klink{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:9px;padding:10px 16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--goldT);text-decoration:none;font-weight:700;background:var(--panel)}
+.klink:hover{border-color:var(--gold)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:26px}
+.card{border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--panel)}
+.cardK{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.cardT{font-family:var(--disp);font-size:19px;font-weight:700;color:var(--navy);margin-top:6px;letter-spacing:-.01em}
+.cardD{font-size:13px;color:var(--mut);line-height:1.7;margin-top:8px}
+.law{border:1.5px solid var(--navy);border-radius:14px;padding:clamp(20px,3vw,30px);margin-top:30px;background:linear-gradient(150deg,rgba(0,31,63,.04),transparent 55%)}
+.lawK{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--navy);font-weight:700;margin-bottom:10px}
+.lawT{font-size:14.5px;color:var(--ink);line-height:1.8;max-width:700px}
+.lawT b{color:var(--navy)}
+@media print{.frame{box-shadow:none;page-break-after:always;border-radius:0}.deck{padding:0;gap:0}}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- COVER -->
+<section class="frame">
+  <div class="frameIn">
+    <div class="fMeta"><span>ReferTRM · MAKRO REAL PRESENTATION · S322</span><span><b>HRBP REVIEW</b></span></div>
+    <h1 class="fTitle">Makro, on the<br><em>real record</em></h1>
+    <p class="fSub">The client walkthrough, rebuilt on one law: every person, number and date on these frames traces to a verified production figure or a real capture. Whatever is not yet in hand is flagged as a capture-pending slot — never filled from imagination. Demo-first on the isolated host; rated before the client sees it.</p>
+    <div class="law">
+      <div class="lawK">The one fence above all</div>
+      <p class="lawT"><b>No synthetic data, ever.</b> No invented people, no invented tenure, no placeholder that could read as real. Real figures are marked <b>verified</b>; missing captures are marked <b>capture-pending</b> and held open as dashed slots with a drop-in spec.</p>
+    </div>
+    <div class="he" style="margin-top:26px">
+      <span class="heI t"><i></i>6 ARC FRAMES</span>
+      <span class="heI t"><i></i>0 SYNTHETIC DATA POINTS</span>
+      <span class="heI"><i></i>6 CAPTURE-PENDING SLOTS</span>
+    </div>
+    <div class="links">
+      <a class="klink" href="prototypes.html">Track B — Portal prototypes &rarr;</a>
+      <a class="klink" href="masked.html">Track C — Masked demo view &rarr;</a>
+    </div>
+  </div>
+  <div class="fFoot"><span>REAL-ONLY REBUILD · THE MOCK IS DEAD</span><span>EN ONLY · MM ROUTES THROUGH CCO</span></div>
+</section>
+
+<!-- FRAME 01 — S3 TAXONOMY (HERO) -->
+<section class="frame">
+  <div class="frameIn">
+    <div class="fMeta"><span>FRAME 01 / 06 · S3 TAXONOMY — HERO</span><span><span class="badge bVer">Verified figures</span>&nbsp;<span class="badge bMiss">Capture pending</span></span></div>
+    <h2 class="fTitle">Your JDs, becoming<br><em>16 departments</em></h2>
+    <p class="fSub">The hero truth: this is not a generic template. The performance system is built from Makro's own job descriptions into 16 real departments across 2 stores — your structure, not ours. Every other view in the system inherits it.</p>
+    <div class="big">
+      <div class="bigI"><div class="bigN">16</div><div class="bigK">Real departments · built from Makro JDs</div></div>
+      <div class="bigI"><div class="bigN">2</div><div class="bigK">Stores · Store 1 &amp; Store 2</div></div>
+      <div class="bigI"><div class="bigN"><em>&nearr;</em></div><div class="bigK">More stores opening soon — structure scales</div></div>
+    </div>
+    <div class="miss">
+      <div class="missK">Capture-pending — flagged, never filled</div>
+      <div class="missT">S3 · Taxonomy view — <span class="num">S3_TAXONOMY_MAKRO.png</span></div>
+      <p class="missD">Cited in the S322 dispatch as an existing real capture on production. It is not yet in hand — this slot is held open for it. The taxonomy frame carries structure only: no staff identity, no PII. When the capture lands, it drops in here unchanged.</p>
+      <div class="spec">
+        <div class="specI"><div class="specK">NEEDED FROM</div><div class="specV">Codex — <span class="num">S3_TAXONOMY_MAKRO.png</span> (prod capture)</div></div>
+        <div class="specI"><div class="specK">CONTENT EXPECTED</div><div class="specV">The 16-department taxonomy, full frame, 1440w</div></div>
+        <div class="specI"><div class="specK">PII LOAD</div><div class="specV">None — taxonomy is structure, not identity</div></div>
+        <div class="specI"><div class="specK">ROLE IN ARC</div><div class="specV">Opening proof — the system knows your organisation</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="fFoot"><span>S3 · TAXONOMY · HERO</span><span>FIGURES VERIFIED ON PROD · 19–20 JUL 2026</span></div>
+</section>
+
+<!-- FRAME 02 — ROSTER 177 -->
+<section class="frame">
+  <div class="frameIn">
+    <div class="fMeta"><span>FRAME 02 / 06 · ROSTER</span><span><span class="badge bVer">Verified figures</span>&nbsp;<span class="badge bMiss">Capture pending</span></span></div>
+    <h2 class="fTitle"><span class="num">177</span> on record —<br><em>all of them</em></h2>
+    <p class="fSub">134 active + 43 former. Exit is data, not deletion: former staff stay on the record, because turnover history is real HR value. The roster filters by store and by status — built for two stores today, ready for more.</p>
+    <div class="big">
+      <div class="bigI"><div class="bigN">177</div><div class="bigK">Employees on record</div></div>
+      <div class="bigI"><div class="bigN"><em>134</em></div><div class="bigK">Active</div></div>
+      <div class="bigI"><div class="bigN">43</div><div class="bigK">Former — kept on the record</div></div>
+    </div>
+    <div class="bar">
+      <div class="barT"><span>Record composition</span><span class="num">134 + 43 = 177</span></div>
+      <div class="barTk"><div class="barA" style="width:75.7%"></div><div class="barB" style="width:24.3%"></div></div>
+      <div class="barL"><span><i style="background:var(--teal)"></i>ACTIVE — 134</span><span><i style="background:var(--gold)"></i>FORMER — 43</span></div>
+    </div>
+    <div class="he" style="margin-top:24px">
+      <span class="heI t"><i></i>STORE FILTER — ALL / STORE 1 / STORE 2</span>
+      <span class="heI t"><i></i>STATUS FILTER — ACTIVE / FORMER</span>
+      <span class="heI t"><i></i>PER-STORE ADMIN</span>
+    </div>
+    <div class="miss">
+      <div class="missK">Capture-pending — flagged, never filled</div>
+      <div class="missT">Store-filtered roster view</div>
+      <p class="missD">The real roster surface — rows, filters, statuses — is captured by Codex once the real roster and filters land on production. No stand-in rows are shown on this frame. The aggregate figures above are the verified truth; the person-level view waits for its real capture.</p>
+      <div class="spec">
+        <div class="specI"><div class="specK">NEEDED FROM</div><div class="specV">Codex — prod capture once roster + filters land</div></div>
+        <div class="specI"><div class="specK">CONTENT EXPECTED</div><div class="specV">Roster at 177 scale, store filter open</div></div>
+        <div class="specI"><div class="specK">PII LOAD</div><div class="specV">Person-level — masked per Track C on any forwardable frame</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="fFoot"><span>ROSTER · 177 = 134 ACTIVE + 43 FORMER</span><span>AGGREGATE LAYER · PII-SAFE</span></div>
+</section>
+
+<!-- FRAME 03 — REAL TENURE -->
+<section class="frame">
+  <div class="frameIn">
+    <div class="fMeta"><span>FRAME 03 / 06 · TENURE</span><span><span class="badge bVer">Verified figures</span>&nbsp;<span class="badge bMiss">Capture pending</span></span></div>
+    <h2 class="fTitle">Young, and<br><em>growing fast</em></h2>
+    <p class="fSub">The honest tenure story — no fabricated seniority. Of the active workforce, roughly 99 of about 135 joined within the last six months, and one person has passed two years of service. A young, fast-growing workforce — tracked as it truly is.</p>
+    <div class="bar">
+      <div class="barT"><span>Joined within the last 6 months</span><span class="num">&asymp;99 of ~135 active</span></div>
+      <div class="barTk"><div class="barA" style="width:73.3%"></div></div>
+      <div class="barL"><span><i style="background:var(--teal)"></i>&asymp;99 — JOINED &lt; 6 MONTHS AGO</span><span>REMAINDER — LONGER SERVICE</span></div>
+    </div>
+    <div class="big" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+      <div class="bigI"><div class="bigN">&asymp;99<span style="font-size:.4em;color:var(--dim)"> / ~135</span></div><div class="bigK">Active staff joined in the last 6 months</div></div>
+      <div class="bigI"><div class="bigN">1</div><div class="bigK">Person past 2 years of service</div></div>
+    </div>
+    <div class="flag"><b>Reconciliation flag.</b> Active headcount verified at <b>134</b> in the same session; the tenure snapshot read <b>~135</b> — a one-person timing delta. Flagged for Codex to reconcile at capture time; both figures shown as verified, neither adjusted.</div>
+    <div class="miss">
+      <div class="missK">Capture-pending — flagged, never filled</div>
+      <div class="missT">Tenure distribution view</div>
+      <p class="missD">The full service-time distribution — every real tenure band, person-level — is held for Codex's production capture. Only the two verified figures above appear on this frame; no distribution is sketched, estimated, or implied beyond them.</p>
+      <div class="spec">
+        <div class="specI"><div class="specK">NEEDED FROM</div><div class="specV">Codex — prod tenure view capture</div></div>
+        <div class="specI"><div class="specK">CONTENT EXPECTED</div><div class="specV">Real tenure bands across the active roster</div></div>
+        <div class="specI"><div class="specK">PII LOAD</div><div class="specV">Aggregate bands — masked per Track C if person-level</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="fFoot"><span>TENURE · REAL SERVICE TIME ONLY</span><span>HONEST STORY · NO INFLATED SENIORITY</span></div>
+</section>
+
+<!-- FRAME 04 — CYCLE -->
+<section class="frame">
+  <div class="frameIn">
+    <div class="fMeta"><span>FRAME 04 / 06 · PERFORMANCE CYCLE</span><span><span class="badge bVer">Verified state</span>&nbsp;<span class="badge bMiss">Capture pending</span></span></div>
+    <h2 class="fTitle">One cycle, honestly<br><em>interim</em></h2>
+    <p class="fSub">The working mechanic today is the <b>Golden Lotus</b> cycle — interim by design, and labeled as such everywhere it appears. When Makro's own cycle is seeded, it becomes the system of record. Until then, nothing about the interim cycle is dressed up as final.</p>
+    <div class="he" style="margin-top:24px">
+      <span class="heI"><i></i>GOLDEN LOTUS — INTERIM CYCLE</span>
+      <span class="heI t"><i></i>Labeled interim, everywhere</span>
+      <span class="heI"><i></i>Makro's own cycle — to be seeded</span>
+    </div>
+    <div class="miss">
+      <div class="missK">Capture-pending — flagged, never filled</div>
+      <div class="missT">Live cycle view</div>
+      <p class="missD">The interim cycle as it actually appears in the portal — label, assignments, progress — is held for Codex's production capture. This frame states only what is verified: the cycle exists, it is interim, and it says so on its face.</p>
+      <div class="spec">
+        <div class="specI"><div class="specK">NEEDED FROM</div><div class="specV">Codex — prod cycle view capture</div></div>
+        <div class="specI"><div class="specK">CONTENT EXPECTED</div><div class="specV">Golden Lotus interim cycle, label visible</div></div>
+        <div class="specI"><div class="specK">ROLE IN ARC</div><div class="specV">The mechanic — honest about its interim status</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="fFoot"><span>CYCLE · GOLDEN LOTUS INTERIM</span><span>LABELED, NEVER DRESSED UP</span></div>
+</section>
+
+<!-- FRAME 05 — REPORTS S8 -->
+<section class="frame">
+  <div class="frameIn">
+    <div class="fMeta"><span>FRAME 05 / 06 · REPORTS</span><span><span class="badge bVer">Verified state</span>&nbsp;<span class="badge bMiss">Capture pending</span></span></div>
+    <h2 class="fTitle">Reports that<br><em>compound</em></h2>
+    <p class="fSub">What an HRBP opens today — and what the same surface becomes as cycles close. The deep report is honest-empty until cycle 2: the system says so on its face rather than performing data it does not have.</p>
+    <div class="two">
+      <div class="card">
+        <div class="cardK">S8 · TODAY</div>
+        <div class="cardT">Today's view — live on prod</div>
+        <p class="cardD">The reports surface exists and serves today's picture. Its real capture (<span class="num">S8</span>) is cited in the dispatch as existing and is held in the pending slot below.</p>
+      </div>
+      <div class="card">
+        <div class="cardK">S8 · MILESTONE</div>
+        <div class="cardT">Deep report — from cycle 2</div>
+        <p class="cardD">The compounding milestone is honest-empty by design: it unlocks when a second cycle closes, and the surface says exactly that.</p>
+        <div class="he" style="margin-top:14px"><span class="heI"><i></i>Deep report — available from cycle 2</span></div>
+      </div>
+    </div>
+    <div class="miss">
+      <div class="missK">Capture-pending — flagged, never filled</div>
+      <div class="missT">S8 · Reports surface</div>
+      <p class="missD">Cited in the S322 dispatch as an existing real capture. Not yet in hand — this slot is held open for it, with the honest-empty milestone state shown alongside, exactly as production presents it.</p>
+      <div class="spec">
+        <div class="specI"><div class="specK">NEEDED FROM</div><div class="specV">Codex — S8 reports capture (prod)</div></div>
+        <div class="specI"><div class="specK">CONTENT EXPECTED</div><div class="specV">Today's reports view + honest-empty milestone</div></div>
+        <div class="specI"><div class="specK">PII LOAD</div><div class="specV">Aggregate reporting — masked per Track C if person-level</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="fFoot"><span>S8 · REPORTS</span><span>HONEST-EMPTY FROM CYCLE 2</span></div>
+</section>
+
+<!-- FRAME 06 — TRUST CLOSE -->
+<section class="frame">
+  <div class="frameIn">
+    <div class="fMeta"><span>FRAME 06 / 06 · TRUST CLOSE</span><span><span class="badge bVer">Verified capabilities</span>&nbsp;<span class="badge bMiss">Capture pending</span></span></div>
+    <h2 class="fTitle">Your data. Your edits.<br><em>Every one logged.</em></h2>
+    <p class="fSub">Admins can correct the record — names, editable fields, per-store administration — and every change lands in a client-visible Change Log. An auditable trail, not a black box. That is the close: a system Makro can check, not one it must take on faith.</p>
+    <ul class="pts">
+      <li><b>Audited editable fields</b> — client-visible Change Log on every admin edit.</li>
+      <li><b>Self-service name edit</b> — staff correct their own record, on the record.</li>
+      <li><b>Per-store admin</b> — each store runs its own people, under one register.</li>
+      <li><b>Store + Active/Former filters</b> — the whole 177, sliced the way HR thinks.</li>
+    </ul>
+    <div class="miss">
+      <div class="missK">Capture-pending — flagged, never filled</div>
+      <div class="missT">Change Log view</div>
+      <p class="missD">The audit surface — field, old value, new value, actor, timestamp — is held for Codex's production capture. Shown to the client as it truly renders, once landed.</p>
+      <div class="spec">
+        <div class="specI"><div class="specK">NEEDED FROM</div><div class="specV">Codex — Change Log capture (prod)</div></div>
+        <div class="specI"><div class="specK">CONTENT EXPECTED</div><div class="specV">Audit entries with actor + timestamp</div></div>
+        <div class="specI"><div class="specK">ROLE IN ARC</div><div class="specV">The trust close — checkable, not taken on faith</div></div>
+      </div>
+    </div>
+    <div class="prov">
+      <div class="provH">Verified facts register — everything this deck claims</div>
+      <ul>
+        <li><b>177 employees on record = 134 active + 43 former</b><span>verified on prod · 19–20 Jul 2026</span></li>
+        <li><b>2 stores — Store 1 &amp; Store 2, more opening soon</b><span>verified on prod · 19–20 Jul 2026</span></li>
+        <li><b>16 real departments, built from Makro's own JDs</b><span>verified on prod · 19–20 Jul 2026</span></li>
+        <li><b>&asymp;99 of ~135 active joined within 6 months · 1 person past 2 years</b><span>verified on prod · 19–20 Jul 2026</span></li>
+        <li><b>Golden Lotus interim cycle — labeled interim</b><span>verified on prod · 19–20 Jul 2026</span></li>
+        <li><b>Reports S8 — today's view + deep report honest-empty from cycle 2</b><span>verified on prod · 19–20 Jul 2026</span></li>
+        <li><b>Audited editable fields + client-visible Change Log · self-service name edit · per-store admin · store + status filters</b><span>verified on prod · 19–20 Jul 2026</span></li>
+      </ul>
+    </div>
+    <div class="he" style="margin-top:26px">
+      <span class="heI"><i></i>Next: Codex captures — S3 · Roster · Tenure · Cycle · S8 · Change Log</span>
+      <span class="heI t"><i></i>Then: rated before the client sees it</span>
+    </div>
+    <div class="links">
+      <a class="klink" href="prototypes.html">Track B — Portal prototypes &rarr;</a>
+      <a class="klink" href="masked.html">Track C — Masked demo view &rarr;</a>
+    </div>
+  </div>
+  <div class="fFoot"><span>GATE: REAL-ONLY · NO SYNTHETIC DATA · CAPTURE-PENDING = FLAGGED, NEVER FILLED · MASKED IDENTITY ON FORWARDABLE FRAMES · ZERO EMOJI · CCO OWNS MM · DEMO-FIRST</span><span>S322</span></div>
+</section>
+
+</div>
+</body>
+</html>
