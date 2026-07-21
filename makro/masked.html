@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track C — Masked Demo View · Makro Real · ReferTRM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F5F0; --panel:#FFFFFF; --panel2:#FBFAF6; --line:rgba(0,31,63,.10); --line2:rgba(0,31,63,.06);
+  --navy:#001F3F; --ink:#0B1D38; --mut:#3E5069; --dim:#75849A;
+  --gold:#D4AF37; --goldT:#96760E; --gold-dim:rgba(212,175,55,.14);
+  --teal:#0F766E; --teal-dim:rgba(15,118,110,.10);
+  --ok:#15803D; --ok-dim:rgba(21,128,61,.10);
+  --warn:#B45309; --warn-dim:rgba(180,83,9,.10);
+  --bad:#B91C1C; --bad-dim:rgba(185,28,28,.10);
+  --mono:'JetBrains Mono',monospace; --disp:'Bricolage Grotesque',sans-serif; --body:'Inter',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:14px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+.top{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:14px;height:58px;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(14px);margin:0 -20px 34px;padding:0 20px}
+.brand{font-family:var(--disp);font-size:16px;font-weight:800;letter-spacing:-.02em}
+.brand b{color:var(--goldT)}
+.topCrumb{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase}
+.topSp{flex:1}
+.klink{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--goldT);text-decoration:none;font-weight:700;background:var(--panel)}
+.klink:hover{border-color:var(--gold)}
+.hTitle{font-family:var(--disp);font-size:clamp(28px,4vw,42px);font-weight:800;letter-spacing:-.025em;line-height:1.05;color:var(--navy)}
+.hTitle em{font-style:normal;color:var(--goldT)}
+.hSub{font-size:15px;color:var(--mut);line-height:1.75;max-width:700px;margin-top:14px}
+.law{border:1.5px solid var(--navy);border-radius:14px;padding:clamp(18px,3vw,26px);background:linear-gradient(150deg,var(--gold-dim),transparent 55%);margin:28px 0 34px}
+.lawK{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--goldT);font-weight:700;margin-bottom:8px}
+.lawT{font-size:14px;color:var(--ink);line-height:1.75;max-width:720px}
+.lawT b{color:var(--navy)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:34px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;box-shadow:0 10px 30px rgba(0,31,63,.07)}
+.cardK{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.cardT{font-family:var(--disp);font-size:20px;font-weight:800;color:var(--navy);margin-top:6px;letter-spacing:-.01em}
+.cardD{font-size:13px;color:var(--mut);line-height:1.75;margin-top:10px}
+.cardD b{color:var(--ink)}
+.sect{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--goldT);font-weight:700;margin:34px 0 14px;display:flex;align-items:center;gap:12px}
+.sect::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(150,118,14,.4),transparent)}
+.tblWrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--panel);box-shadow:0 10px 30px rgba(0,31,63,.07)}
+table.rules{width:100%;min-width:680px;border-collapse:collapse;font-size:13px}
+.rules th{text-align:left;font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);padding:12px 16px;border-bottom:1px solid var(--line);background:var(--panel2)}
+.rules td{padding:13px 16px;border-bottom:1px solid var(--line2);vertical-align:top;line-height:1.6;color:var(--mut)}
+.rules tr:last-child td{border-bottom:0}
+.rules td.f{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--ink);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.rules td .mk{color:var(--teal);font-weight:600}
+.rules td .ms{color:var(--goldT);font-weight:600}
+.demo{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:0 14px 40px rgba(0,31,63,.08);overflow:hidden}
+.demoH{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 22px;border-bottom:1px solid var(--line2);background:var(--panel2);font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.demoH b{color:var(--goldT);font-weight:700}
+.demoB{padding:clamp(20px,3vw,30px)}
+.person{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.avatar{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--navy),#123E6B);display:grid;place-items:center;color:#fff;font-family:var(--disp);font-weight:800;font-size:22px;flex:none}
+.pId{flex:1;min-width:220px}
+.pName{font-family:var(--disp);font-size:22px;font-weight:800;color:var(--navy);letter-spacing:.02em}
+.pRole{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-top:5px}
+.pChips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.cp{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--dim);border:1px dashed var(--line);border-radius:6px;padding:4px 9px;text-transform:uppercase}
+.band{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:6px;font-weight:700;color:var(--teal);background:var(--teal-dim);border:1px solid rgba(15,118,110,.3)}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:20px}
+.fgI{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--panel2)}
+.fgK{font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.fgV{font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--mut);margin-top:5px;line-height:1.5}
+.note{margin-top:16px;border-left:3px solid var(--gold);padding:10px 16px;font-size:12.5px;color:var(--mut);background:var(--gold-dim);border-radius:0 10px 10px 0;line-height:1.65;max-width:720px}
+.note b{color:var(--ink)}
+.foot{margin-top:40px;border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <span class="brand">Refer<b>TRM</b></span>
+    <span class="topCrumb">TRACK C · MASKED DEMO VIEW</span>
+    <span class="topSp"></span>
+    <a class="klink" href="index.html">&larr; Deck</a>
+    <a class="klink" href="prototypes.html">Prototypes</a>
+  </div>
+
+  <h1 class="hTitle">One real demo,<br><em>identities sealed</em></h1>
+  <p class="hSub">The single-demo strategy: real Makro becomes the one demo shown to every prospect — with identities masked. Real structure, real tenure bands, real cycle; no name, no phone, no NRC. For Makro's own HRBP walkthrough the same views run unmasked: their data, their people. The mask is only the third-party layer.</p>
+
+  <div class="law">
+    <div class="lawK">What this page is — and is not</div>
+    <p class="lawT">This is the <b>masking spec rendered on placeholders</b> (<span style="font-family:var(--mono)">··</span>, <span style="font-family:var(--mono)">——</span>, <span style="font-family:var(--mono)">•</span>). It is <b>not a person record</b> and contains no identity — real or invented. It defines how the real portal looks to a prospect, so the same live system is safe to show a competitor.</p>
+  </div>
+
+  <div class="two">
+    <div class="card">
+      <div class="cardK">MODE 1 · FOR MAKRO</div>
+      <div class="cardT">Unmasked — their own data</div>
+      <p class="cardD">Full names, full records, the client-visible Change Log. Shown only in the HRBP's own walkthrough of their own tenant — <b>never on a forwardable frame</b>.</p>
+    </div>
+    <div class="card">
+      <div class="cardK">MODE 2 · FOR PROSPECTS</div>
+      <div class="cardT">Masked — the same system, sealed</div>
+      <p class="cardD">Initials-only identity, role labels, hidden phone and NRC. <b>Real</b> structure, tenure bands and cycle underneath — the proof stays powerful because it stays true.</p>
+    </div>
+  </div>
+
+  <div class="sect">Masking rules — field by field</div>
+  <div class="tblWrap">
+    <table class="rules">
+      <thead><tr><th>Field</th><th>Makro view (unmasked)</th><th>Prospect view (masked)</th></tr></thead>
+      <tbody>
+        <tr><td class="f">Name</td><td>Full name, on the record</td><td><span class="ms">Initials-only avatar + role label</span> — no name rendered</td></tr>
+        <tr><td class="f">Phone</td><td>Full number</td><td><span class="ms">09-••• ••• •••</span> — hidden</td></tr>
+        <tr><td class="f">NRC</td><td>On record</td><td><span class="ms">Never rendered</span> — not in markup, not in exports</td></tr>
+        <tr><td class="f">Tenure</td><td>Exact service time</td><td><span class="mk">Real band</span> — &lt; 6 m · 6 m–2 y · 2 y +, bucketed from true dates</td></tr>
+        <tr><td class="f">Scores &amp; cycle</td><td>Real, person-level</td><td><span class="mk">Real</span> — no identity attached</td></tr>
+        <tr><td class="f">Structure</td><td>16 departments · 2 stores</td><td><span class="mk">Real, unchanged</span> — structure carries no identity</td></tr>
+        <tr><td class="f">Change Log</td><td>Full audit trail</td><td><span class="mk">Real entries</span> — actor names reduced to role labels</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sect">The template — masking spec rendered</div>
+  <div class="demo">
+    <div class="demoH"><span>PERSON CARD · PROSPECT VIEW</span><span><b>SPEC — NOT A PERSON RECORD</b></span></div>
+    <div class="demoB">
+      <div class="person">
+        <div class="avatar">··</div>
+        <div class="pId">
+          <div class="pName">Role label — Department · Store</div>
+          <div class="pRole">Identity sealed · initials only</div>
+          <div class="pChips">
+            <span class="band">Tenure — &lt; 6 m · real band</span>
+            <span class="cp">Phone — 09-••• ••• •••</span>
+            <span class="cp">NRC — never rendered</span>
+          </div>
+        </div>
+      </div>
+      <div class="fgrid">
+        <div class="fgI"><div class="fgK">Department</div><div class="fgV">Real — from the 16</div></div>
+        <div class="fgI"><div class="fgK">Store</div><div class="fgV">Real — Store 1 / 2</div></div>
+        <div class="fgI"><div class="fgK">Status</div><div class="fgV">Real — Active / Former</div></div>
+        <div class="fgI"><div class="fgK">Cycle</div><div class="fgV">Real — Golden Lotus interim</div></div>
+        <div class="fgI"><div class="fgK">Score</div><div class="fgV">Real — no identity attached</div></div>
+        <div class="fgI"><div class="fgK">Tenure band</div><div class="fgV">Real — bucketed, never inflated</div></div>
+      </div>
+      <div class="note"><b>Why the bands are safe:</b> they bucket real service time — verified this session at &asymp;99 of ~135 active under six months, one person past two years. Bands compress the truth; they never inflate it. A prospect sees a young, fast-growing workforce exactly as Makro's HRBP does — minus the identities.</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>GATE: REAL-ONLY · MASKED IDENTITY ON FORWARDABLE FRAMES · UNMASKED ONLY IN MAKRO'S OWN WALKTHROUGH · ZERO EMOJI · CCO OWNS MM · DEMO-FIRST</span>
+    <span>TRACK C · S322</span>
+  </div>
+</div>
+</body>
+</html>
