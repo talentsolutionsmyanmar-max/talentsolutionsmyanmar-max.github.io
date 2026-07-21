@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track B — Portal Prototypes · Makro Real · ReferTRM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F5F0; --bg2:#EFEBE1; --panel:#FFFFFF; --panel2:#FBFAF6; --line:rgba(0,31,63,.10); --line2:rgba(0,31,63,.06);
+  --navy:#001F3F; --ink:#0B1D38; --txt:#0B1D38; --mut:#3E5069; --dim:#75849A;
+  --gold:#D4AF37; --goldT:#96760E; --gold-dim:rgba(212,175,55,.14);
+  --teal:#0F766E; --teal-dim:rgba(15,118,110,.10);
+  --ok:#15803D; --ok-dim:rgba(21,128,61,.10);
+  --warn:#B45309; --warn-dim:rgba(180,83,9,.10);
+  --bad:#B91C1C; --bad-dim:rgba(185,28,28,.10);
+  --mono:'JetBrains Mono',monospace; --disp:'Bricolage Grotesque',sans-serif; --body:'Inter',sans-serif;
+  --shadow:0 1px 3px rgba(0,31,63,.07); --shadow2:0 10px 30px rgba(0,31,63,.09);
+}
+[data-theme="dark"]{
+  --bg:#050B16; --bg2:#071120; --panel:#0A1526; --panel2:#0C1830; --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.05);
+  --navy:#E8EEF6; --ink:#E8EEF6; --txt:#E8EEF6; --mut:#8DA0B8; --dim:#54677F;
+  --goldT:#E3C35B; --gold-dim:rgba(212,175,55,.16);
+  --teal:#2DD4BF; --teal-dim:rgba(45,212,191,.10);
+  --ok:#34D399; --ok-dim:rgba(52,211,153,.12);
+  --warn:#FBBF24; --warn-dim:rgba(251,191,36,.12);
+  --bad:#F87171; --bad-dim:rgba(248,113,113,.12);
+  --shadow:0 1px 3px rgba(0,0,0,.4); --shadow2:0 12px 32px rgba(0,0,0,.5);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--txt);font-family:var(--body);font-size:14px;-webkit-font-smoothing:antialiased;transition:background .25s,color .25s}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+.top{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:14px;padding:0 20px;height:58px;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(14px);margin:0 -20px 34px;padding:0 20px}
+.brand{font-family:var(--disp);font-size:16px;font-weight:800;letter-spacing:-.02em}
+.brand b{color:var(--goldT)}
+.topCrumb{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase}
+.topSp{flex:1}
+.tBtn{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:8px 14px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--mut);cursor:pointer;text-transform:uppercase}
+.tBtn:hover{border-color:var(--gold);color:var(--goldT)}
+.klink{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--goldT);text-decoration:none;font-weight:700;background:var(--panel)}
+.klink:hover{border-color:var(--gold)}
+.law{border:1.5px solid var(--navy);border-radius:14px;padding:clamp(18px,3vw,26px);background:linear-gradient(150deg,var(--gold-dim),transparent 55%);margin-bottom:34px}
+.lawK{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--goldT);font-weight:700;margin-bottom:8px}
+.lawT{font-size:14px;color:var(--ink);line-height:1.75;max-width:720px}
+.lawT b{color:var(--navy)}
+.view{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow2);margin-bottom:34px}
+.vHead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:16px clamp(18px,3vw,28px);border-bottom:1px solid var(--line2);background:var(--panel2)}
+.vTitle{font-family:var(--disp);font-size:19px;font-weight:800;color:var(--navy);letter-spacing:-.01em}
+.vTag{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--goldT);border:1px dashed rgba(150,118,14,.55);background:var(--gold-dim);padding:5px 10px;border-radius:6px;font-weight:700}
+.vBody{padding:clamp(18px,3vw,28px)}
+.vNote{font-size:12.5px;color:var(--mut);line-height:1.7;max-width:640px;margin-bottom:18px}
+.fbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.fchip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:8px;padding:8px 13px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);background:var(--panel)}
+.fchip.on{background:var(--gold-dim);color:var(--goldT);border-color:rgba(150,118,14,.5);font-weight:700}
+.fchip b{color:var(--teal);font-weight:700}
+.fsep{width:1px;align-self:stretch;background:var(--line);margin:2px 4px}
+.tblWrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table.tbl{width:100%;min-width:760px;border-collapse:collapse;font-size:13px}
+.tbl th{text-align:left;font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel2)}
+.slot{border-top:1px dashed var(--line);margin:0}
+.slotIn{border:1.5px dashed rgba(150,118,14,.55);border-radius:12px;margin:16px;background:linear-gradient(160deg,var(--gold-dim),transparent 60%);padding:clamp(20px,3vw,32px)}
+.slotK{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--goldT);text-transform:uppercase;font-weight:700;margin-bottom:10px}
+.slotK::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(150,118,14,.4),transparent)}
+.slotT{font-family:var(--disp);font-size:17px;font-weight:700;color:var(--navy)}
+.slotD{font-size:12.5px;color:var(--mut);line-height:1.7;margin-top:6px;max-width:600px}
+.specRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.spI{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--mut);background:var(--panel);text-transform:uppercase}
+.spI i{width:8px;height:8px;border-radius:50%;flex:none}
+.pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:6px;font-weight:700}
+.pA{color:var(--teal);background:var(--teal-dim);border:1px solid rgba(15,118,110,.3)}
+.pF{color:var(--mut);background:var(--panel2);border:1px solid var(--line)}
+.pOk{color:var(--ok);background:var(--ok-dim)}
+.pW{color:var(--warn);background:var(--warn-dim)}
+.pB{color:var(--bad);background:var(--bad-dim)}
+.person{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.avatar{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--navy),#123E6B);display:grid;place-items:center;color:#fff;font-family:var(--disp);font-weight:800;font-size:18px;flex:none}
+[data-theme="dark"] .avatar{background:linear-gradient(135deg,#1E3A5F,#2B5B8F)}
+.pId{flex:1;min-width:220px}
+.pName{font-family:var(--disp);font-size:22px;font-weight:800;color:var(--navy);letter-spacing:-.01em}
+.pRole{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-top:5px}
+.pChips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.cp{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--dim);border:1px dashed var(--line);border-radius:6px;padding:4px 9px;text-transform:uppercase}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:18px}
+.fgI{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--panel2)}
+.fgK{font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.fgV{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--mut);margin-top:5px}
+.tl{margin-top:20px;border-left:2px solid var(--line);padding-left:0;display:flex;flex-direction:column;gap:12px}
+.tlN{position:relative;padding:12px 16px 12px 22px;border:1px dashed var(--line);border-radius:10px;background:var(--panel)}
+.tlN::before{content:"";position:absolute;left:-6px;top:18px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--gold)}
+.tlK{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--goldT);font-weight:700}
+.tlD{font-size:12px;color:var(--mut);margin-top:4px;line-height:1.6}
+.logE{border:1px dashed var(--line);border-radius:12px;padding:16px 18px;background:var(--panel);margin-bottom:12px}
+.logR{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.logK{font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.logV{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--mut);margin-top:4px}
+.foot{margin-top:40px;border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+@media(max-width:640px){.person{flex-direction:column}.wrap{padding:0 14px 60px}.top{margin:0 -14px 26px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <span class="brand">Refer<b>TRM</b></span>
+    <span class="topCrumb">TRACK B · PORTAL PROTOTYPES</span>
+    <span class="topSp"></span>
+    <a class="klink" href="index.html">&larr; Deck</a>
+    <button class="tBtn" id="themeBtn" type="button">Dark</button>
+  </div>
+
+  <div class="law">
+    <div class="lawK">Track B — design only, Codex productionizes</div>
+    <p class="lawT">These are <b>presentation prototypes of the real portal views</b> — roster, person detail, Change Log — in the sealed language, mobile-light for 3G Android. Every data region is a <b>capture-pending dashed slot</b>: zero synthetic rows, zero example people, zero invented values. Filters, columns, pills and panels are structure; the real rows arrive with Codex's production captures.</p>
+  </div>
+
+  <!-- VIEW 01 — ROSTER -->
+  <section class="view">
+    <div class="vHead"><span class="vTitle">01 · Workforce roster</span><span class="vTag">Design prototype · data capture-pending</span></div>
+    <div class="vBody">
+      <p class="vNote">The register at real scale — <b>177 on record (134 active + 43 former)</b>, store-filterable. Filter chips show the real structure; the row body waits for the real capture.</p>
+      <div class="fbar">
+        <span class="fchip on">All stores</span><span class="fchip">Store 1</span><span class="fchip">Store 2</span>
+        <span class="fsep"></span>
+        <span class="fchip on">Active <b>134</b></span><span class="fchip">Former <b>43</b></span>
+        <span class="fsep"></span>
+        <span class="fchip">On record <b>177</b></span>
+      </div>
+      <div class="tblWrap">
+        <table class="tbl">
+          <thead><tr><th>Employee</th><th>Department</th><th>Store</th><th>Status</th><th>Tenure</th><th>Score</th></tr></thead>
+        </table>
+        <div class="slot">
+          <div class="slotIn">
+            <div class="slotK">Capture-pending — flagged, never filled</div>
+            <div class="slotT">177 real rows</div>
+            <p class="slotD">Codex captures the store-filtered roster once the real roster and filters land on production. No stand-in rows are rendered here — the synthetic-data fence. Column order, pill styles and filter behaviour above are the design spec Codex productionizes.</p>
+            <div class="specRow">
+              <span class="spI"><i style="background:var(--teal)"></i>Status pill — Active (teal)</span>
+              <span class="spI"><i style="background:var(--dim)"></i>Status pill — Former (neutral)</span>
+              <span class="spI"><i style="background:var(--gold)"></i>Tenure — real service time only</span>
+              <span class="spI"><i style="background:var(--gold)"></i>Row tap — person detail (view 02)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="specRow" style="margin-top:14px">
+        <span class="pill pA">Active</span>
+        <span class="pill pF">Former</span>
+        <span class="spI" style="text-transform:none">Score tiers (spec, not data):&nbsp;<span class="pill pOk">&ge;70</span>&nbsp;<span class="pill pW">50–69</span>&nbsp;<span class="pill pB">&lt;50</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIEW 02 — PERSON DETAIL -->
+  <section class="view">
+    <div class="vHead"><span class="vTitle">02 · Person detail</span><span class="vTag">Design prototype · data capture-pending</span></div>
+    <div class="vBody">
+      <p class="vNote">The person view, rendered on placeholders (<span style="font-family:var(--mono)">··</span>, <span style="font-family:var(--mono)">——</span>, <span style="font-family:var(--mono)">•</span>). This is an anatomy spec, not a person record — identity fields follow the Track C masking rules on any forwardable frame.</p>
+      <div class="person">
+        <div class="avatar">··</div>
+        <div class="pId">
+          <div class="pName">———— ————</div>
+          <div class="pRole">Department · Store — capture-pending</div>
+          <div class="pChips">
+            <span class="cp">Phone — 09-••• ••• •••</span>
+            <span class="cp">NRC — never rendered</span>
+            <span class="cp">All fields capture-pending</span>
+          </div>
+        </div>
+      </div>
+      <div class="fgrid">
+        <div class="fgI"><div class="fgK">Store</div><div class="fgV">——</div></div>
+        <div class="fgI"><div class="fgK">Department</div><div class="fgV">——</div></div>
+        <div class="fgI"><div class="fgK">Status</div><div class="fgV">——</div></div>
+        <div class="fgI"><div class="fgK">Tenure</div><div class="fgV">——</div></div>
+        <div class="fgI"><div class="fgK">Joined</div><div class="fgV">——</div></div>
+        <div class="fgI"><div class="fgK">Current score</div><div class="fgV">——</div></div>
+      </div>
+      <div class="tl" style="margin-top:22px">
+        <div class="tlN"><div class="tlK">Lifecycle event — capture-pending</div><div class="tlD">Event anatomy (design spec): type · date · detail. Real events render from the production record — none are sketched here.</div></div>
+        <div class="tlN"><div class="tlK">Lifecycle event — capture-pending</div><div class="tlD">Timeline runs newest-first; score events carry the 70/50 tier colour canon.</div></div>
+        <div class="tlN"><div class="tlK">Lifecycle event — capture-pending</div><div class="tlD">Joined event anchors real service time — the tenure figure above is computed from it, never typed in.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIEW 03 — CHANGE LOG -->
+  <section class="view">
+    <div class="vHead"><span class="vTitle">03 · Change Log panel</span><span class="vTag">Design prototype · data capture-pending</span></div>
+    <div class="vBody">
+      <p class="vNote">The trust surface: every admin edit to an audited field lands here — client-visible, an auditable record, not a black box. Entry anatomy below is the spec; real entries arrive with the production capture.</p>
+      <div class="logE">
+        <div class="logR">
+          <div><div class="logK">Field</div><div class="logV">——</div></div>
+          <div><div class="logK">Old &rarr; New</div><div class="logV">—— &rarr; ——</div></div>
+          <div><div class="logK">Actor</div><div class="logV">——</div></div>
+          <div><div class="logK">Timestamp</div><div class="logV">——</div></div>
+        </div>
+      </div>
+      <div class="logE">
+        <div class="logR">
+          <div><div class="logK">Field</div><div class="logV">——</div></div>
+          <div><div class="logK">Old &rarr; New</div><div class="logV">—— &rarr; ——</div></div>
+          <div><div class="logK">Actor</div><div class="logV">——</div></div>
+          <div><div class="logK">Timestamp</div><div class="logV">——</div></div>
+        </div>
+      </div>
+      <div class="specRow" style="margin-top:14px">
+        <span class="spI"><i style="background:var(--gold)"></i>Audited editable fields — spec</span>
+        <span class="spI"><i style="background:var(--gold)"></i>Self-service name edit — logged here</span>
+        <span class="spI"><i style="background:var(--gold)"></i>Client-visible — no hidden edits</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>GATE: DESIGN-ONLY · CODEX PRODUCTIONIZES · ZERO SYNTHETIC ROWS · CAPTURE-PENDING = FLAGGED · ZERO EMOJI · 3G-ANDROID LIGHT</span>
+    <span>TRACK B · S322</span>
+  </div>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('themeBtn');
+  function apply(t){document.documentElement.setAttribute('data-theme',t);b.textContent=(t==='dark'?'Light':'Dark');}
+  var t='light';try{t=localStorage.getItem('makro-theme')||'light'}catch(e){}
+  apply(t);
+  b.addEventListener('click',function(){t=(t==='dark'?'light':'dark');try{localStorage.setItem('makro-theme',t)}catch(e){}apply(t);});
+})();
+</script>
+</body>
+</html>
