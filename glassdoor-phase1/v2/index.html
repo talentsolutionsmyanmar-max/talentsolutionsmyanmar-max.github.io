@@ -2,305 +2,272 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#001229">
-  <meta name="description" content="Real jobs, honest workplace evidence, and privacy-first career decisions for Myanmar.">
-  <title>Makro Myanmar — Workplace Truth by ReferTRM</title>
+  <meta name="description" content="A free Myanmar job board built around real employers, honest salaries, safety, and earned workplace evidence.">
+  <title>ReferTRM Trust — Real Jobs. No Fees.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;family=Padauk:wght@400;700&amp;family=Sora:wght@500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@600&amp;family=Padauk:wght@400;700&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet">
   <style>
+    /* PRIMITIVES */
     :root{
-      --night:#001229;--navy:#001f3f;--navy-2:#06335a;--gold:#d4af37;--gold-soft:#f2d77b;
-      --teal:#0d9488;--teal-light:#60d5c9;--paper:#f6f3ea;--white:#fff;--ink:#07182a;
-      --muted:#9fb0c3;--line:rgba(255,255,255,.13);--line-dark:rgba(0,31,63,.14);
-      --danger:#ef6a67;--radius-s:12px;--radius-m:20px;--radius-l:32px;--radius-xl:48px;
-      --shadow:0 30px 80px rgba(0,10,28,.24);--max:1240px;
-      --ease:cubic-bezier(.22,1,.36,1);
+      --p-navy-950:#001229;--p-navy-900:#001f3f;--p-navy-800:#06335a;
+      --p-gold-500:#d4af37;--p-gold-300:#f2d77b;--p-teal-600:#0d9488;--p-teal-300:#60d5c9;
+      --p-white:#fff;--p-paper:#f7f5ef;--p-ink:#07182a;--p-slate-100:#dce6ed;--p-slate-300:#9aabbc;--p-slate-500:#607386;
+      --p-red-400:#ef6a67;
+      --s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:20px;--s-6:24px;--s-8:32px;--s-10:40px;--s-12:48px;
+      --r-s:12px;--r-m:18px;--r-l:26px;--r-xl:36px;--r-pill:999px;
+      --shadow-1:0 16px 42px rgb(0 10 28 / .18);--shadow-2:0 28px 80px rgb(0 10 28 / .28);
+      --t-fast:160ms;--t-normal:260ms;--ease:cubic-bezier(.22,1,.36,1);
+
+      /* SEMANTIC */
+      --canvas:var(--p-navy-950);--surface:var(--p-navy-900);--surface-raised:var(--p-navy-800);
+      --text:var(--p-white);--text-subtle:var(--p-slate-300);--text-dark:var(--p-ink);
+      --accent:var(--p-gold-500);--accent-soft:var(--p-gold-300);--safe:var(--p-teal-600);--safe-soft:var(--p-teal-300);
+      --border:rgb(255 255 255 / .13);--border-dark:rgb(0 31 63 / .15);
+
+      /* COMPONENT */
+      --appbar-height:64px;--tabbar-height:76px;--button-height:48px;
+      --card-bg:var(--surface);--card-radius:var(--r-l);--card-border:var(--border);
+      --nav-bg:var(--p-white);--nav-fg:var(--p-navy-900);--nav-active-bg:var(--p-gold-500);
     }
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth;background:var(--night)}
-    body{margin:0;color:var(--white);background:var(--night);font-family:"DM Sans",sans-serif;line-height:1.5;overflow-x:hidden}
-    button,a{font:inherit}a{color:inherit;text-decoration:none}button{color:inherit}
+    html,body{height:100%;overflow:hidden;background:var(--canvas)}
+    body{margin:0;color:var(--text);font-family:"DM Sans","Padauk",sans-serif;line-height:1.5}
+    button,a{font:inherit;color:inherit}button{cursor:pointer}a{text-decoration:none}
+    button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
     img{display:block;max-width:100%}
-    button,[role="tab"],a{touch-action:manipulation}
-    button{cursor:pointer}
-    :focus-visible{outline:3px solid var(--gold-soft);outline-offset:4px}
-    .skip{position:fixed;left:16px;top:12px;z-index:1000;transform:translateY(-150%);background:var(--gold);color:var(--night);padding:10px 16px;border-radius:10px;font-weight:700}
-    .skip:focus{transform:none}
-    .wrap{width:min(calc(100% - 40px),var(--max));margin-inline:auto}
+    :focus-visible{outline:3px solid var(--accent-soft);outline-offset:3px}
+    .skip{position:fixed;z-index:1000;left:12px;top:8px;transform:translateY(-140%);padding:10px 14px;border-radius:10px;background:var(--accent);color:var(--text-dark);font-weight:700}.skip:focus{transform:none}
+    .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
     .mono{font-family:"JetBrains Mono",monospace;font-variant-numeric:tabular-nums}
-    .eyebrow{display:flex;align-items:center;gap:10px;font:600 11px/1 "JetBrains Mono",monospace;letter-spacing:.13em;text-transform:uppercase;color:var(--gold-soft)}
-    .eyebrow::before{content:"";width:22px;height:1px;background:currentColor}
-    .btn{min-height:48px;border:1px solid transparent;border-radius:999px;padding:0 20px;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:700;transition:transform .24s var(--ease),background .24s,color .24s,border-color .24s}
-    .btn:hover{transform:translateY(-2px)}.btn:active{transform:scale(.97)}
-    .btn-gold{background:var(--gold);color:var(--night);box-shadow:0 12px 34px rgba(212,175,55,.18)}
-    .btn-dark{background:var(--night);color:var(--white)}
-    .btn-ghost{border-color:var(--line);background:rgba(255,255,255,.045)}
-    .btn svg{width:17px;height:17px}
+    .mm{font-family:"Padauk","DM Sans",sans-serif;line-height:1.8;font-style:normal}
 
-    .topbar{position:absolute;inset:0 0 auto;z-index:20;border-bottom:1px solid var(--line)}
-    .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-    .brand{display:flex;align-items:center;gap:11px;font-family:"Sora",sans-serif;font-weight:700}
-    .brand-mark{position:relative;width:29px;height:29px;transform:rotate(45deg);border:1px solid var(--gold);display:grid;place-items:center}
-    .brand-mark::after{content:"";width:9px;height:9px;background:var(--gold)}
-    .brand span:last-child{transform:translateY(1px)}
-    .nav-links{display:flex;align-items:center;gap:27px;color:#d7e0e9;font-size:14px}
-    .nav-links a{position:relative;padding-block:8px}.nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:2px;height:1px;background:var(--gold);transition:right .24s}.nav-links a:hover::after{right:0}
-    .nav-cta{min-height:44px;padding-inline:17px}
+    .appbar{position:fixed;z-index:40;inset:0 0 auto;height:calc(var(--appbar-height) + env(safe-area-inset-top));padding-top:env(safe-area-inset-top);background:var(--canvas);border-bottom:1px solid var(--border)}
+    .appbar-inner{height:var(--appbar-height);padding:0 var(--s-4);display:flex;align-items:center;justify-content:space-between;gap:var(--s-3)}
+    .brand{min-height:44px;display:flex;align-items:center;gap:10px;font-family:"Sora",sans-serif;font-size:14px;font-weight:700;white-space:nowrap}
+    .brand-mark{position:relative;width:28px;height:28px;border:1px solid var(--accent);transform:rotate(45deg);display:grid;place-items:center;flex:0 0 auto}.brand-mark::after{content:"";width:8px;height:8px;background:var(--accent)}
+    .status-pill{min-height:36px;display:flex;align-items:center;gap:8px;padding:0 12px;border:1px solid var(--border);border-radius:var(--r-pill);color:var(--text-subtle);font-size:11px;white-space:nowrap}.status-dot{width:7px;height:7px;border-radius:50%;background:var(--safe-soft);box-shadow:0 0 0 5px rgb(96 213 201 / .1)}
 
-    .hero{position:relative;isolation:isolate;min-height:830px;overflow:hidden;background:
-      radial-gradient(circle at var(--mx,78%) var(--my,18%),rgba(13,148,136,.24),transparent 25%),
-      radial-gradient(circle at 68% 54%,rgba(212,175,55,.1),transparent 31%),
-      linear-gradient(132deg,var(--night) 0%,var(--navy) 52%,#001a36 100%)}
-    .hero::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.28;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:72px 72px;mask-image:linear-gradient(to right,transparent,black 48%,black)}
-    .hero::after{content:"";position:absolute;width:520px;height:520px;right:-260px;top:140px;border:1px solid rgba(212,175,55,.23);border-radius:50%;box-shadow:0 0 0 92px rgba(212,175,55,.018),0 0 0 184px rgba(212,175,55,.014);z-index:-1}
-    .hero-grid{padding-top:148px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(420px,.95fr);gap:70px;align-items:center}
-    .company-pill{width:max-content;max-width:100%;display:flex;align-items:center;gap:12px;padding:8px 15px 8px 8px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.045);color:#dae4ed;font-size:13px}
-    .company-pill img{width:34px;height:34px;border-radius:50%;object-fit:cover;background:white}
-    .company-pill strong{color:white}.verified-dot{width:7px;height:7px;border-radius:50%;background:var(--teal-light);box-shadow:0 0 0 5px rgba(96,213,201,.1)}
-    h1,h2,h3,p{margin-top:0}.hero h1{font:600 clamp(52px,6.5vw,92px)/.97 "Sora",sans-serif;letter-spacing:-.065em;margin:29px 0 25px;max-width:9.5ch}
-    .hero h1 em{font-style:normal;color:var(--gold-soft)}
-    .hero-copy{max-width:590px;color:#bcc9d6;font-size:clamp(17px,1.6vw,20px);line-height:1.65}
-    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:31px}
-    .source-note{display:flex;align-items:center;gap:10px;margin-top:25px;color:#8ea1b4;font-size:12px}
-    .source-note svg{width:15px;color:var(--teal-light)}
+    .screens{position:fixed;inset:calc(var(--appbar-height) + env(safe-area-inset-top)) 0 calc(var(--tabbar-height) + env(safe-area-inset-bottom));overflow:hidden}
+    .screen{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;padding:var(--s-4);opacity:0;visibility:hidden;transform:translateX(18px);transition:opacity var(--t-normal) var(--ease),transform var(--t-normal) var(--ease),visibility 0s linear var(--t-normal);scrollbar-width:none}.screen::-webkit-scrollbar{display:none}
+    .screen.is-active{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+    .screen-wrap{width:min(100%,1200px);min-height:100%;margin-inline:auto}
+    .screen-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s-4);margin-bottom:var(--s-5)}
+    .eyebrow{font:600 10px/1 "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-soft);margin-bottom:10px}.screen-title{font:600 clamp(28px,8vw,44px)/1.05 "Sora",sans-serif;letter-spacing:-.045em;margin:0}.screen-title[tabindex="-1"]:focus{outline:none}.screen-subtitle{margin:8px 0 0;color:var(--text-subtle);font-size:14px;max-width:56ch}
+    .icon-button{width:48px;height:48px;border:1px solid var(--border);border-radius:50%;background:var(--surface);display:grid;place-items:center;flex:0 0 auto;transition:background var(--t-fast),transform var(--t-fast)}.icon-button:active{transform:scale(.94)}.icon-button svg{width:19px;height:19px}
+    .button{min-height:var(--button-height);border:1px solid transparent;border-radius:var(--r-pill);padding:0 20px;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:700;transition:transform var(--t-fast),background var(--t-fast),border-color var(--t-fast)}.button:active{transform:scale(.97)}.button svg{width:17px;height:17px}.button-primary{background:var(--accent);color:var(--text-dark);box-shadow:0 12px 32px rgb(212 175 55 / .16)}.button-secondary{background:var(--surface);border-color:var(--border)}.button-safe{background:var(--safe);color:var(--p-white)}
 
-    .truth-orbit{position:relative;width:100%;aspect-ratio:1;max-width:540px;margin-inline:auto;display:grid;place-items:center}
-    .orbit-ring{position:absolute;border:1px solid rgba(255,255,255,.16);border-radius:50%}.orbit-ring.one{inset:5%}.orbit-ring.two{inset:19%;border-style:dashed;animation:spin 32s linear infinite}.orbit-ring.three{inset:34%;border-color:rgba(212,175,55,.32)}
-    .orbit-core{position:relative;z-index:2;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle at 40% 30%,#0b3e64,var(--night) 68%);border:1px solid rgba(242,215,123,.45);box-shadow:0 28px 80px rgba(0,0,0,.38),inset 0 0 40px rgba(13,148,136,.1);display:grid;place-content:center;text-align:center}
-    .orbit-core strong{font:600 54px/1 "Sora";letter-spacing:-.06em}.orbit-core span{color:#afbdca;font-size:11px;max-width:13ch;margin:8px auto 0}
-    .orbit-node{position:absolute;z-index:3;width:126px;padding:12px 13px;border:1px solid var(--line);border-radius:14px;background:#052443;box-shadow:0 16px 34px rgba(0,0,0,.24)}
-    .orbit-node b{display:block;font-size:13px}.orbit-node span{display:block;color:#91a5b8;font-size:11px;margin-top:4px}.orbit-node::before{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:var(--gold)}
-    .n1{left:0;top:16%}.n1::before{right:-4px;top:22px}.n2{right:0;top:23%}.n2::before{left:-4px;top:22px}.n3{left:5%;bottom:15%}.n3::before{right:-4px;top:22px}.n4{right:3%;bottom:11%}.n4::before{left:-4px;top:22px}
-    .orbit-status{position:absolute;bottom:0;left:50%;transform:translateX(-50%);white-space:nowrap;color:#9dafc0;font:500 10px "JetBrains Mono";letter-spacing:.09em;text-transform:uppercase}
-    @keyframes spin{to{transform:rotate(360deg)}}
+    /* HUB */
+    .hub{background:radial-gradient(circle at 92% 18%,rgb(13 148 136 / .18),transparent 30%),linear-gradient(145deg,var(--canvas),var(--surface))}
+    .hub::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:64px 64px;opacity:.16;mask-image:linear-gradient(to bottom,black,transparent 80%)}
+    .hub-layout{position:relative;display:grid;gap:var(--s-5);align-content:start}
+    .hub-copy{padding-top:var(--s-2)}
+    .hub-proof{width:max-content;max-width:100%;display:flex;align-items:center;gap:9px;padding:7px 11px 7px 7px;border:1px solid var(--border);border-radius:var(--r-pill);background:var(--surface);font-size:11px}.hub-proof img{width:31px;height:31px;border-radius:50%;object-fit:cover;background:var(--p-white)}.hub-proof strong{font-weight:700}.hub-proof span{color:var(--text-subtle)}
+    .hub h1{font:600 clamp(38px,10.3vw,68px)/.99 "Sora",sans-serif;letter-spacing:-.06em;margin:var(--s-4) 0 var(--s-3);max-width:11ch}.hub h1 em{font-style:normal;color:var(--accent-soft)}
+    .hub-lead{margin:0;color:var(--text-subtle);font-size:15px;line-height:1.6;max-width:610px}
+    .hub-facts{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;margin-top:var(--s-4);color:var(--text-subtle);font-size:11px}.hub-fact{display:flex;align-items:center;gap:6px}.hub-fact svg{width:14px;height:14px;color:var(--safe-soft)}
+    .launch-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:var(--s-5)}
+    .launch-card{min-height:82px;border:1px solid var(--border);border-radius:var(--r-m);background:var(--surface);padding:13px;text-align:left;display:flex;flex-direction:column;justify-content:space-between;transition:transform var(--t-fast),background var(--t-fast),border-color var(--t-fast)}.launch-card:active{transform:scale(.97);background:var(--surface-raised)}.launch-card:first-child{grid-column:1/-1;background:var(--accent);color:var(--text-dark);border-color:var(--accent)}.launch-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.launch-icon{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:rgb(255 255 255 / .1)}.launch-card:first-child .launch-icon{background:rgb(0 18 41 / .1)}.launch-icon svg{width:16px;height:16px}.launch-card strong,.launch-card small{display:block}.launch-card strong{font:600 15px "Sora",sans-serif}.launch-card small{color:var(--text-subtle);font-size:10px;margin-top:3px}.launch-card:first-child small{color:var(--p-navy-900)}
+    .company-focus{position:relative;border:1px solid var(--border);border-radius:var(--r-xl);background:linear-gradient(145deg,var(--surface-raised),var(--surface));padding:var(--s-5);overflow:hidden;box-shadow:var(--shadow-1)}
+    .company-focus::after{content:"";position:absolute;width:220px;height:220px;right:-100px;top:-105px;border:1px solid rgb(242 215 123 / .28);border-radius:50%;box-shadow:0 0 0 42px rgb(212 175 55 / .025),0 0 0 84px rgb(212 175 55 / .018)}
+    .focus-head{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:var(--s-3)}.focus-company{display:flex;align-items:center;gap:11px;min-width:0}.focus-company img{width:48px;height:48px;border-radius:15px;object-fit:cover;background:var(--p-white)}.focus-company strong{font:600 15px "Sora";display:block}.focus-company span{display:block;color:var(--text-subtle);font-size:11px;margin-top:3px}.focus-number{text-align:right}.focus-number strong{font:600 28px/1 "Sora";display:block;color:var(--accent-soft)}.focus-number span{color:var(--text-subtle);font-size:9px;text-transform:uppercase;letter-spacing:.08em}
+    .trust-row{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:var(--s-4)}.trust-chip{min-height:61px;border:1px solid var(--border);border-radius:var(--r-s);padding:9px;background:var(--canvas)}.trust-chip svg{width:15px;height:15px;color:var(--safe-soft)}.trust-chip strong{display:block;font-size:10px;margin-top:5px}.trust-chip span{display:block;color:var(--text-subtle);font-size:8px;margin-top:2px}
+    .empty-line{position:relative;z-index:1;margin-top:10px;padding:11px 12px;border-radius:var(--r-s);background:var(--p-paper);color:var(--text-dark);display:flex;align-items:center;justify-content:space-between;gap:10px}.empty-line strong,.empty-line span{display:block}.empty-line strong{font:600 11px "Sora"}.empty-line span{font-size:9px;color:var(--p-slate-500);margin-top:3px}.empty-zero{font:600 23px "JetBrains Mono";color:var(--safe)}
 
-    .signal-bar{position:relative;z-index:4;margin-top:-66px}.signal-shell{display:grid;grid-template-columns:1.35fr repeat(3,1fr);border:1px solid rgba(255,255,255,.14);border-radius:22px;background:#fff;color:var(--ink);box-shadow:var(--shadow);overflow:hidden}
-    .signal{padding:25px 27px;border-left:1px solid var(--line-dark)}.signal:first-child{border-left:0;background:var(--paper)}
-    .signal small{display:block;color:#6b7885;font:600 10px "JetBrains Mono";letter-spacing:.1em;text-transform:uppercase;margin-bottom:9px}.signal strong{font:600 22px/1.25 "Sora"}.signal .big{font-size:31px;letter-spacing:-.05em}.signal p{margin:7px 0 0;color:#687583;font-size:12px}
+    /* JOBS */
+    .jobs-screen{background:var(--p-paper);color:var(--text-dark)}.jobs-screen .eyebrow{color:var(--safe)}.jobs-screen .screen-subtitle{color:var(--p-slate-500)}.jobs-screen .icon-button{background:var(--p-white);border-color:var(--border-dark)}
+    .segment{display:flex;gap:6px;overflow-x:auto;padding:4px;border-radius:var(--r-pill);background:var(--p-white);border:1px solid var(--border-dark);scrollbar-width:none;margin-bottom:var(--s-4);width:max-content;max-width:100%}.segment::-webkit-scrollbar{display:none}.segment-button{min-height:44px;border:0;border-radius:var(--r-pill);background:transparent;padding:0 16px;color:var(--p-slate-500);font-weight:700;font-size:12px;white-space:nowrap}.segment-button[aria-selected="true"]{background:var(--p-navy-900);color:var(--p-white)}
+    .job-stage{overflow:hidden}.job-grid{display:grid;gap:var(--s-3)}.job-card{display:none;min-height:360px;border:1px solid var(--border-dark);border-radius:var(--r-l);background:var(--p-white);padding:var(--s-5);box-shadow:0 14px 38px rgb(0 31 63 / .08)}.job-card.is-visible{display:flex;flex-direction:column;animation:card-in var(--t-normal) var(--ease)}
+    @keyframes card-in{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+    .job-company{display:flex;align-items:center;justify-content:space-between;gap:12px}.job-company-id{display:flex;align-items:center;gap:10px}.job-company img{width:38px;height:38px;border-radius:11px;object-fit:cover}.job-company strong{font:600 12px "Sora";display:block}.job-company span{font-size:9px;color:var(--safe);font-weight:700}.job-level{padding:6px 9px;border-radius:var(--r-pill);background:var(--p-paper);font-size:9px;font-weight:700;color:var(--p-slate-500)}
+    .job-card h2{font:600 clamp(23px,7vw,31px)/1.14 "Sora";letter-spacing:-.04em;margin:var(--s-6) 0 9px;max-width:16ch}.job-location{color:var(--p-slate-500);font-size:12px}.job-salary{font:600 20px "JetBrains Mono";margin-top:var(--s-5)}.job-salary span{font:500 9px "DM Sans";color:var(--p-slate-500);display:block;margin-top:4px}
+    .job-safety{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:var(--s-4)}.job-signal{min-height:58px;border-top:2px solid var(--safe);background:var(--p-paper);padding:8px;border-radius:7px}.job-signal svg{width:13px;height:13px;color:var(--safe)}.job-signal strong{display:block;font-size:9px;margin-top:4px}.job-signal span{display:block;font-size:8px;color:var(--p-slate-500)}
+    .job-actions{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:auto;padding-top:var(--s-5)}.job-actions .button{padding-inline:15px}.truth-link{width:48px;padding:0;border-color:var(--border-dark);background:var(--p-white);color:var(--p-navy-900)}
+    .pager{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:var(--s-4)}.pager-button{width:48px;height:48px;border:1px solid var(--border-dark);border-radius:50%;background:var(--p-white);color:var(--p-navy-900);display:grid;place-items:center}.pager-button:disabled{opacity:.35;cursor:not-allowed}.pager-button svg{width:17px}.page-status{font:600 10px "JetBrains Mono";color:var(--p-slate-500)}.page-dots{display:flex;gap:6px}.page-dot{width:7px;height:7px;border-radius:50%;background:var(--p-slate-100)}.page-dot.is-active{background:var(--safe);transform:scale(1.25)}
 
-    .job-board{background:var(--paper);color:var(--ink);padding:130px 0 105px}
-    .section-head{display:grid;grid-template-columns:1fr minmax(280px,460px);gap:45px;align-items:end;margin-bottom:45px}
-    .section-head .eyebrow{color:var(--teal)}.section-head h2{font:600 clamp(38px,5vw,66px)/1.02 "Sora";letter-spacing:-.055em;margin:18px 0 0;max-width:12ch}.section-head p{color:#5c6b77;font-size:17px;line-height:1.7;margin-bottom:2px}
-    .jobs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-    .job-card{position:relative;min-height:330px;padding:24px;border:1px solid var(--line-dark);border-radius:var(--radius-m);background:#fff;display:flex;flex-direction:column;transition:transform .3s var(--ease),box-shadow .3s,border-color .3s;overflow:hidden}
-    .job-card::after{content:"";position:absolute;width:160px;height:160px;border-radius:50%;right:-100px;bottom:-100px;background:var(--teal);opacity:0;transition:transform .35s var(--ease),opacity .35s}
-    .job-card:hover{transform:translateY(-7px);box-shadow:0 24px 55px rgba(0,31,63,.13);border-color:rgba(13,148,136,.45)}.job-card:hover::after{opacity:.1;transform:scale(1.5)}
-    .job-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.job-tag{font:600 10px "JetBrains Mono";letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
-    .job-arrow{width:38px;height:38px;border:1px solid var(--line-dark);border-radius:50%;display:grid;place-items:center;transition:background .2s,color .2s}.job-card:hover .job-arrow{background:var(--night);color:white}.job-arrow svg{width:16px}
-    .job-card h3{font:600 21px/1.25 "Sora";letter-spacing:-.025em;margin:30px 0 12px}.job-location{color:#6b7885;font-size:13px}
-    .job-bottom{margin-top:auto;border-top:1px solid var(--line-dark);padding-top:18px}.job-salary{font:600 17px "JetBrains Mono"}.job-meta{display:flex;justify-content:space-between;gap:12px;color:#71808c;font-size:11px;margin-top:7px}
-    .jobs-foot{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:26px;color:#62717d;font-size:14px}.jobs-foot strong{color:var(--ink)}
+    /* TRUTH */
+    .truth-screen{background:linear-gradient(145deg,var(--canvas),var(--surface))}.truth-company{display:flex;align-items:center;gap:12px}.truth-company img{width:48px;height:48px;border-radius:14px;object-fit:cover}.truth-company h2{font:600 17px "Sora";margin:0}.truth-company p{font-size:10px;color:var(--text-subtle);margin:3px 0 0}
+    .truth-hero{border:1px solid rgb(242 215 123 / .32);border-radius:var(--r-l);background:radial-gradient(circle at 90% 20%,rgb(13 148 136 / .16),transparent 33%),var(--surface);padding:var(--s-5);display:grid;grid-template-columns:1fr auto;gap:var(--s-4);align-items:center}.truth-hero h3{font:600 clamp(22px,6vw,31px)/1.15 "Sora";letter-spacing:-.035em;margin:0}.truth-hero p{color:var(--text-subtle);font-size:12px;margin:8px 0 0;max-width:48ch}.truth-orb{width:86px;height:86px;border-radius:50%;border:1px solid var(--accent-soft);box-shadow:inset 0 0 0 9px rgb(212 175 55 / .04),0 0 0 10px rgb(212 175 55 / .025);display:grid;place-content:center;text-align:center}.truth-orb strong{font:600 31px/1 "Sora"}.truth-orb span{font-size:7px;color:var(--text-subtle);max-width:9ch;margin-top:4px}
+    .truth-note{display:flex;gap:8px;align-items:flex-start;margin:10px 2px 0;color:var(--text-subtle);font-size:9px}.truth-note svg{width:14px;height:14px;color:var(--accent-soft);flex:0 0 auto}
+    .truth-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:var(--s-4)}.truth-signal{min-height:76px;border:1px solid var(--border);border-radius:var(--r-s);background:var(--surface);padding:11px;text-align:left}.truth-signal svg{width:15px;height:15px}.truth-signal.is-confirmed svg{color:var(--safe-soft)}.truth-signal.is-awaiting svg{color:var(--accent-soft)}.truth-signal strong{font-size:10px}.truth-signal span{display:block;color:var(--text-subtle);font-size:8px;margin-top:7px}.truth-signal .truth-signal-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:0}.signal-state{font:600 7px "JetBrains Mono"!important;letter-spacing:.07em;text-transform:uppercase;margin:0!important}.is-confirmed .signal-state{color:var(--safe-soft)}.is-awaiting .signal-state{color:var(--accent-soft)}.truth-signal[aria-pressed="true"]{border-color:var(--accent-soft);background:var(--surface-raised)}
+    .truth-explain{min-height:36px;margin-top:8px;padding:9px 11px;border-radius:var(--r-s);background:var(--canvas);border:1px solid var(--border);color:var(--text-subtle);font-size:9px}
+    .truth-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:var(--s-4)}
 
-    .loop{position:relative;padding:120px 0;background:#fff;color:var(--ink);overflow:hidden}
-    .loop::before{content:"TRUST LOOP";position:absolute;left:-8px;top:24px;color:rgba(0,31,63,.035);font:700 clamp(90px,15vw,230px)/1 "Sora";letter-spacing:-.08em;white-space:nowrap}
-    .loop .section-head{position:relative}.loop-steps{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line-dark);border-radius:var(--radius-l);overflow:hidden}
-    .loop-step{position:relative;padding:34px 27px 37px;min-height:290px;border-left:1px solid var(--line-dark);background:rgba(255,255,255,.88)}.loop-step:first-child{border-left:0}.loop-step:nth-child(3){background:var(--night);color:#fff}.loop-step:nth-child(3) p{color:#aebdca}
-    .step-no{display:flex;justify-content:space-between;align-items:center;font:600 11px "JetBrains Mono";color:var(--teal)}.step-no svg{width:18px}.loop-step h3{font:600 21px/1.25 "Sora";margin:48px 0 12px}.loop-step p{color:#667582;font-size:14px;line-height:1.65}.loop-step .micro{position:absolute;bottom:28px;color:#8b98a3;font:500 10px "JetBrains Mono";letter-spacing:.05em;text-transform:uppercase}
+    /* SAFETY */
+    .safety-screen{background:var(--p-paper);color:var(--text-dark)}.safety-screen .eyebrow{color:var(--safe)}.safety-screen .screen-subtitle{color:var(--p-slate-500)}.safety-screen .icon-button{background:var(--p-white);border-color:var(--border-dark)}
+    .safety-screen .segment{margin-bottom:var(--s-5)}
+    .safety-panel{display:none}.safety-panel.is-active{display:block;animation:card-in var(--t-normal) var(--ease)}
+    .safety-lead{border-radius:var(--r-l);background:var(--p-navy-900);color:var(--p-white);padding:var(--s-5);box-shadow:var(--shadow-1)}.safety-lead .shield-icon{width:48px;height:48px;border:1px solid var(--safe-soft);border-radius:50%;display:grid;place-items:center}.shield-icon svg{width:23px}.safety-lead h2{font:600 24px/1.15 "Sora";letter-spacing:-.035em;margin:var(--s-4) 0 8px}.safety-lead p{font-size:12px;color:var(--p-slate-300);margin:0}
+    .checklist{display:grid;gap:8px;margin-top:var(--s-3)}.safety-check{min-height:70px;border:1px solid var(--border-dark);border-radius:var(--r-m);background:var(--p-white);padding:12px;display:grid;grid-template-columns:34px 1fr;gap:11px;align-items:center}.check-no{width:34px;height:34px;border-radius:50%;background:var(--p-paper);display:grid;place-items:center;color:var(--safe);font:600 11px "JetBrains Mono"}.safety-check strong{display:block;font-size:12px}.safety-check span{display:block;color:var(--p-slate-500);font-size:9px;margin-top:3px}
+    .report-row{margin-top:var(--s-3);display:flex;justify-content:space-between;gap:10px;align-items:center;padding:8px 13px;border-radius:var(--r-s);background:rgb(239 106 103 / .1);border:1px solid rgb(239 106 103 / .28);color:var(--p-ink);font-size:10px}.report-row a{min-height:44px;display:inline-flex;align-items:center;font-weight:700;color:var(--p-red-400)}
+    .loop-grid{display:grid;gap:8px}.loop-step{min-height:84px;border:1px solid var(--border-dark);border-radius:var(--r-m);background:var(--p-white);padding:13px;display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:center}.loop-step:nth-child(3){background:var(--p-navy-900);color:var(--p-white)}.loop-no{font:600 17px "JetBrains Mono";color:var(--safe)}.loop-step h3{font:600 13px "Sora";margin:0}.loop-step p{font-size:9px;color:var(--p-slate-500);margin:4px 0 0}.loop-step:nth-child(3) p{color:var(--p-slate-300)}.vler-gate{margin-top:10px;padding:12px;border:1px dashed var(--border-dark);border-radius:var(--r-s);font-size:9px;color:var(--p-slate-500)}.vler-gate strong{color:var(--p-navy-900)}
 
-    .evidence{background:var(--night);padding:120px 0;position:relative;overflow:hidden}
-    .evidence::after{content:"";position:absolute;inset:auto -180px -280px auto;width:650px;height:650px;border-radius:50%;background:radial-gradient(circle,rgba(13,148,136,.17),transparent 66%)}
-    .evidence-head{display:flex;justify-content:space-between;gap:35px;align-items:end;margin-bottom:34px}.evidence h2{font:600 clamp(40px,5vw,66px)/1.02 "Sora";letter-spacing:-.055em;margin:17px 0 0}.evidence-head p{max-width:440px;color:#9fb0c0;font-size:16px}
-    .tabs{display:flex;gap:7px;overflow-x:auto;padding:5px;margin:0 0 24px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:999px;width:max-content;max-width:100%;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}
-    .tab{min-height:44px;border:0;border-radius:999px;background:transparent;padding:0 17px;color:#9fb0c0;white-space:nowrap;font-weight:600}.tab[aria-selected="true"]{background:#fff;color:var(--night)}
-    .truth-panel{position:relative;z-index:1;display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
-    .empty-truth{min-height:430px;border:1px solid var(--line);border-radius:var(--radius-l);background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.025));padding:43px;display:flex;flex-direction:column}
-    .empty-symbol{width:72px;height:72px;border:1px solid rgba(242,215,123,.5);border-radius:50%;display:grid;place-items:center;color:var(--gold-soft);box-shadow:inset 0 0 0 10px rgba(212,175,55,.045)}.empty-symbol svg{width:29px}
-    .empty-truth h3{font:600 30px/1.18 "Sora";letter-spacing:-.035em;margin:39px 0 15px;max-width:15ch}.empty-truth p{max-width:590px;color:#aebdca;line-height:1.75}
-    .empty-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:auto;padding-top:25px}
-    .truth-aside{display:grid;gap:16px}.principle{border-radius:var(--radius-m);padding:28px;border:1px solid var(--line);background:#06203d;min-height:130px}.principle.gold{background:var(--gold);color:var(--night);border-color:var(--gold)}
-    .principle .label{font:600 10px "JetBrains Mono";letter-spacing:.1em;text-transform:uppercase;color:var(--gold-soft)}.principle.gold .label{color:#4f4217}.principle h3{font:600 19px/1.35 "Sora";margin:21px 0 0}.principle p{color:#9fb0c0;font-size:13px;margin:10px 0 0}.principle.gold p{color:#524617}
-    [hidden]{display:none!important}
+    /* BOTTOM / SIDE NAV */
+    .tabbar{position:fixed;z-index:50;inset:auto 0 0;height:calc(var(--tabbar-height) + env(safe-area-inset-bottom));padding:6px 8px calc(6px + env(safe-area-inset-bottom));background:var(--nav-bg);border-top:1px solid var(--border-dark);box-shadow:0 -14px 34px rgb(0 10 28 / .12)}
+    .tabbar-inner{height:64px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;max-width:560px;margin:auto}
+    .nav-tab{min-width:0;border:0;border-radius:16px;background:transparent;color:var(--nav-fg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:9px;font-weight:700;transition:background var(--t-fast),transform var(--t-fast)}.nav-tab:active{transform:scale(.94)}.nav-tab svg{width:20px;height:20px;stroke-width:1.8}.nav-tab[aria-selected="true"]{background:var(--nav-active-bg)}
+    .screen-announcer{position:fixed}
 
-    .privacy{background:var(--teal);color:#fff;padding:100px 0;position:relative;overflow:hidden}
-    .privacy::before{content:"";position:absolute;inset:-30% auto auto 58%;width:540px;height:540px;border:1px solid rgba(255,255,255,.25);transform:rotate(45deg);box-shadow:0 0 0 80px rgba(255,255,255,.025),0 0 0 160px rgba(255,255,255,.02)}
-    .privacy-grid{position:relative;display:grid;grid-template-columns:.9fr 1.1fr;gap:90px;align-items:center}.shield{width:210px;aspect-ratio:1;margin:auto;position:relative;display:grid;place-items:center}.shield::before,.shield::after{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.4);transform:rotate(45deg);border-radius:28px}.shield::after{inset:31px;border-color:rgba(255,255,255,.22)}.shield svg{width:65px;position:relative;z-index:1}
-    .privacy h2{font:600 clamp(42px,5vw,70px)/1 "Sora";letter-spacing:-.06em;margin:18px 0 24px;max-width:10ch}.privacy-copy{font-size:18px;line-height:1.7;max-width:620px;color:#e5fffc}.privacy-rules{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:30px}.privacy-rule{border-top:1px solid rgba(255,255,255,.35);padding-top:15px;font-size:13px}.privacy-rule strong{display:block;font-family:"Sora";margin-bottom:5px}
-
-    footer{background:#000d1e;padding:60px 0 38px;color:#91a4b6}.footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;padding-bottom:45px;border-bottom:1px solid var(--line)}.footer-statement{font:500 clamp(25px,3vw,40px)/1.2 "Sora";letter-spacing:-.04em;color:white;max-width:18ch}.footer-links{display:flex;gap:35px;font-size:13px}.footer-bottom{display:flex;justify-content:space-between;gap:25px;padding-top:25px;font-size:11px}.footer-bottom strong{color:#d6e0e9}
-    .demo-trigger{position:fixed;right:18px;bottom:18px;z-index:50;width:48px;height:48px;border:1px solid var(--line);border-radius:50%;background:var(--night);box-shadow:0 12px 35px rgba(0,0,0,.3);display:grid;place-items:center}.demo-trigger svg{width:18px}.demo-trigger:hover{background:var(--gold);color:var(--night)}
-    .demo-menu{position:fixed;right:18px;bottom:76px;z-index:49;width:min(310px,calc(100vw - 36px));padding:18px;background:#fff;color:var(--ink);border:1px solid var(--line-dark);border-radius:18px;box-shadow:var(--shadow)}.demo-menu h3{font:600 15px "Sora";margin:0 0 7px}.demo-menu p{font-size:12px;color:#697884;margin-bottom:15px}.demo-option{width:100%;min-height:44px;text-align:left;padding:10px 12px;border:1px solid var(--line-dark);border-radius:10px;background:#fff;margin-top:7px;font-weight:600;color:var(--ink)}.demo-option:hover{background:var(--paper)}
-
-    dialog{width:min(620px,calc(100% - 28px));border:0;border-radius:28px;padding:0;background:#fff;color:var(--ink);box-shadow:0 40px 120px rgba(0,0,0,.45)}dialog::backdrop{background:rgba(0,10,28,.82)}
-    .modal-head{padding:25px 27px;border-bottom:1px solid var(--line-dark);display:flex;justify-content:space-between;gap:20px;align-items:center}.modal-head h2{font:600 20px "Sora";margin:0}.icon-btn{width:44px;height:44px;border:1px solid var(--line-dark);border-radius:50%;background:#fff;display:grid;place-items:center}.icon-btn svg{width:18px}
-    .modal-body{padding:31px 27px 28px}.step-kicker{color:var(--teal);font:600 10px "JetBrains Mono";letter-spacing:.1em;text-transform:uppercase}.modal-body h3{font:600 27px/1.2 "Sora";letter-spacing:-.03em;margin-bottom:12px}.modal-copy{color:#667582;margin-bottom:24px}.choice{width:100%;min-height:76px;padding:16px 18px;text-align:left;border:1px solid var(--line-dark);border-radius:14px;background:#fff;margin-top:10px;display:flex;justify-content:space-between;align-items:center;gap:20px}.choice strong{display:block}.choice span{display:block;color:#70808d;font-size:12px;margin-top:4px}.choice:hover{border-color:var(--teal);background:#f4fbfa}.choice svg{width:18px;flex:0 0 auto}
-    .notice{border-radius:14px;background:var(--paper);padding:17px;margin-top:22px;font-size:13px;color:#52616e}.notice strong{color:var(--ink)}
-    .modal-actions{display:flex;justify-content:space-between;gap:12px;margin-top:26px}.modal-actions .btn{border-color:var(--line-dark)}
-
-    @media(max-width:1050px){
-      .hero-grid{grid-template-columns:1fr 430px;gap:30px}.hero h1{font-size:62px}.jobs-grid{grid-template-columns:repeat(2,1fr)}.loop-steps{grid-template-columns:repeat(2,1fr)}.loop-step:nth-child(3){border-left:0;border-top:1px solid var(--line-dark)}.loop-step:nth-child(4){border-top:1px solid var(--line-dark)}
+    @media(min-width:700px){
+      .screen{padding:var(--s-6)}.hub-layout{grid-template-columns:1.05fr .95fr;align-items:center;min-height:100%;gap:var(--s-10)}.company-focus{padding:var(--s-8)}.launch-grid{max-width:610px}.job-grid{grid-template-columns:repeat(2,1fr)}.job-card{min-height:420px}.truth-grid{grid-template-columns:repeat(4,1fr)}.truth-signal{min-height:92px}.safety-content{display:grid;grid-template-columns:.9fr 1.1fr;gap:var(--s-4)}.safety-lead{min-height:100%;display:flex;flex-direction:column;justify-content:center}.loop-grid{grid-template-columns:repeat(2,1fr)}
     }
-    @media(max-width:820px){
-      .nav-links a:not(.nav-cta){display:none}.hero{min-height:auto;padding-bottom:125px}.hero-grid{grid-template-columns:1fr;padding-top:125px}.hero h1{font-size:clamp(49px,14vw,72px)}.hero-copy{max-width:650px}.truth-orbit{width:min(100%,500px);margin-top:28px}.signal-bar{margin-top:-58px}.signal-shell{grid-template-columns:repeat(2,1fr)}.signal:nth-child(3){border-left:0;border-top:1px solid var(--line-dark)}.signal:nth-child(4){border-top:1px solid var(--line-dark)}
-      .section-head{grid-template-columns:1fr}.job-board,.loop,.evidence{padding-block:95px}.truth-panel{grid-template-columns:1fr}.truth-aside{grid-template-columns:repeat(2,1fr)}.privacy-grid{grid-template-columns:1fr;gap:45px}.shield{width:160px}.privacy h2{max-width:13ch}.footer-top{display:grid}.footer-links{flex-wrap:wrap}.evidence-head{display:grid}
+    @media(min-width:700px) and (max-width:1023px) and (max-height:500px){
+      :root{--tabbar-height:0px}.appbar{left:80px}.screens{left:80px;bottom:0}.screen{padding:12px 18px}.tabbar{inset:var(--appbar-height) auto 0 0;width:80px;height:auto;padding:6px;border-top:0;border-right:1px solid var(--border-dark);box-shadow:none}.tabbar-inner{width:100%;height:100%;display:grid;grid-template-columns:1fr;align-content:center;gap:4px}.nav-tab{min-height:58px}.hub-layout{gap:18px}.hub h1{font-size:38px;margin:10px 0 8px}.hub-lead{font-size:13px;line-height:1.45}.hub-facts{margin-top:8px}.launch-grid{margin-top:9px;gap:7px}.launch-card{min-height:62px;padding:9px}.launch-card strong{font-size:12px}.launch-card small{font-size:8px}.company-focus{min-height:260px;padding:16px}.trust-chip{min-height:54px;padding:7px}.empty-line{padding:8px}.screen-heading{margin-bottom:10px}.screen-title{font-size:30px}.screen-subtitle{font-size:11px}.job-card{min-height:290px;padding:14px}.job-card h2{font-size:20px;margin-block:10px 6px}.job-salary{margin-top:10px}.job-safety{margin-top:8px}.job-actions{padding-top:9px}.pager{margin-top:8px}
     }
-    @media(max-width:580px){
-      .wrap{width:min(calc(100% - 28px),var(--max))}.nav{height:68px}.brand span:last-child{font-size:14px}.nav-cta{padding-inline:13px;font-size:12px}.hero-grid{padding-top:105px}.company-pill{font-size:11px}.hero h1{margin-top:24px;font-size:clamp(40px,13vw,48px);letter-spacing:-.055em}.hero-copy{font-size:16px}.hero-actions{display:grid}.hero-actions .btn{width:100%}.source-note{align-items:flex-start}.truth-orbit{width:350px;max-width:112%;margin-left:-6%}.orbit-core{width:132px;height:132px}.orbit-core strong{font-size:44px}.orbit-node{width:113px;padding:10px}.orbit-node b{font-size:11px}.orbit-node span{font-size:9px}.n1{left:2%}.n2{right:2%}.n3{left:4%}.n4{right:1%}.signal-shell{display:block}.signal{border-left:0;border-top:1px solid var(--line-dark);padding:20px}.signal:first-child{border-top:0}.section-head h2{font-size:40px}.jobs-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-14px;padding:0 14px 18px;scrollbar-width:none}.job-card{min-width:84vw;scroll-snap-align:center}.jobs-foot{align-items:flex-start;display:grid}.loop-steps{display:block}.loop-step{border-left:0;border-top:1px solid var(--line-dark);min-height:240px}.loop-step:first-child{border-top:0}.truth-aside{grid-template-columns:1fr}.empty-truth{padding:27px;min-height:480px}.empty-actions{display:grid}.privacy{padding-block:80px}.privacy-rules{grid-template-columns:1fr}.footer-links{display:grid;gap:15px}.footer-bottom{display:grid}.tabs{width:100%}.tab{padding-inline:14px}.demo-trigger{right:12px;bottom:12px}.demo-menu{right:12px;bottom:69px}.modal-actions{display:grid}.modal-actions .btn{width:100%}
+    @media(min-width:1024px){
+      :root{--appbar-height:72px;--tabbar-height:0px}
+      .appbar{left:92px}.appbar-inner{padding-inline:var(--s-8)}.screens{left:92px;bottom:0}.screen{padding:var(--s-8)}
+      .tabbar{inset:0 auto 0 0;width:92px;height:100%;padding:10px;border-top:0;border-right:1px solid var(--border-dark);display:flex;align-items:center}.tabbar-inner{width:100%;height:auto;display:grid;grid-template-columns:1fr;gap:10px}.nav-tab{min-height:70px}
+      .hub h1{font-size:clamp(55px,5vw,76px)}.company-focus{min-height:440px;display:flex;flex-direction:column;justify-content:center}.focus-company img{width:62px;height:62px}.trust-chip{min-height:80px;padding:13px}.trust-chip strong{font-size:12px}.empty-line{margin-top:14px;padding:16px}.empty-line strong{font-size:14px}.job-card{min-height:470px}.screen-heading{margin-bottom:var(--s-6)}
     }
-    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+    @media(max-width:359px){
+      .appbar-inner{padding-inline:12px}.brand{font-size:12px}.status-pill{padding-inline:9px;font-size:9px}.screen{padding:12px}.hub h1{font-size:36px}.hub-lead{font-size:14px}.launch-card{min-height:76px}.trust-chip{padding:7px}.trust-chip strong{font-size:9px}.truth-hero{padding:14px}.truth-orb{width:76px;height:76px}.truth-signal{padding:9px}.button{padding-inline:14px}
+    }
+    @media(max-height:680px) and (max-width:699px){
+      .hub h1{font-size:34px;margin-block:10px 8px}.hub-lead{font-size:13px}.hub-facts{margin-top:10px}.launch-grid{margin-top:12px}.launch-card{min-height:70px}.company-focus{margin-top:0}.truth-row{margin-top:8px}
+    }
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
   </style>
 </head>
 <body>
-  <a class="skip" href="#main">Skip to content</a>
-  <header class="topbar">
-    <div class="wrap nav">
-      <a class="brand" href="https://www.refertrm.com" aria-label="ReferTRM home"><span class="brand-mark" aria-hidden="true"></span><span>ReferTRM / Truth</span></a>
-      <nav class="nav-links" aria-label="Primary navigation">
-        <a href="#jobs">Open roles</a><a href="#truth">Workplace truth</a><a href="#privacy">Privacy</a>
-        <a class="btn btn-gold nav-cta" href="https://www.refertrm.com/jobs">Browse free jobs</a>
-      </nav>
+  <a class="skip" href="#screen-hub">Skip navigation</a>
+
+  <header class="appbar">
+    <div class="appbar-inner">
+      <a class="brand" href="https://www.refertrm.com" aria-label="ReferTRM home"><span class="brand-mark" aria-hidden="true"></span><span>ReferTRM / Trust</span></a>
+      <div class="status-pill" aria-label="Job board safety status"><span class="status-dot" aria-hidden="true"></span><span>Real jobs · no fees</span></div>
     </div>
   </header>
 
-  <main id="main">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="wrap hero-grid">
-        <div>
-          <div class="company-pill"><img src="https://www.refertrm.com/partner-logo-1.jpg" width="34" height="34" alt="Makro Myanmar logo"><span><strong>Makro Myanmar</strong> · Premium retail client</span><i class="verified-dot" aria-hidden="true"></i></div>
-          <h1 id="hero-title">Know the work <em>before the yes.</em></h1>
-          <p class="hero-copy">A Myanmar-first decision layer for real jobs. See what is publicly known, what workers have safely verified, and—just as importantly—what nobody can honestly claim yet.</p>
-          <div class="hero-actions">
-            <a class="btn btn-gold" href="#jobs">Explore 20 open roles <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a>
-            <a class="btn btn-ghost" href="#truth">Inspect workplace truth</a>
+  <main class="screens" id="main">
+    <section class="screen hub is-active" id="screen-hub" data-screen="hub" aria-labelledby="hub-title">
+      <div class="screen-wrap hub-layout">
+        <div class="hub-copy">
+          <div class="hub-proof"><img src="https://www.refertrm.com/partner-logo-1.jpg" width="31" height="31" alt="Makro Myanmar logo"><strong>Makro Myanmar</strong><span>· real employer, 20 roles</span></div>
+          <h1 id="hub-title">A job board you can trust with your <em>livelihood.</em></h1>
+          <p class="hub-lead">Every listing is real. You never pay a fee. Salaries are shown honestly. Workplace evidence appears only after it is earned.</p>
+          <div class="hub-facts">
+            <span class="hub-fact"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/><path d="m9 12 2 2 4-4"/></svg>253 active roles</span>
+            <span class="hub-fact"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M12 4v16"/></svg>54+ licensed clients</span>
+            <span class="hub-fact"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>0 invented reviews</span>
           </div>
-          <div class="source-note"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/><path d="m9 12 2 2 4-4"/></svg><span>Real production company and job data. No invented rating, review, or salary testimony.</span></div>
+          <div class="launch-grid" aria-label="Choose where to go">
+            <button class="launch-card js-nav" type="button" data-target="jobs"><span class="launch-top"><span class="launch-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 7h18v13H3z"/><path d="M3 12h18"/></svg></span><svg aria-hidden="true" width="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></span><span><strong>Find real jobs</strong><small>Salary shown · apply free</small></span></button>
+            <button class="launch-card js-nav" type="button" data-target="truth"><span class="launch-top"><span class="launch-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/></svg></span></span><span><strong>Employer truth</strong><small>Known · unknown · protected</small></span></button>
+            <button class="launch-card js-nav js-loop" type="button" data-target="safety"><span class="launch-top"><span class="launch-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h10M4 18h7"/></svg></span></span><span><strong>How it works</strong><small>See the trust loop</small></span></button>
+          </div>
         </div>
 
-        <div class="truth-orbit" aria-label="Workplace truth evidence map: zero verified contributors">
-          <div class="orbit-ring one"></div><div class="orbit-ring two"></div><div class="orbit-ring three"></div>
-          <div class="orbit-core"><strong class="mono">0</strong><span>verified workplace contributors</span></div>
-          <div class="orbit-node n1"><b>Hiring clarity</b><span>Awaiting evidence</span></div>
-          <div class="orbit-node n2"><b>Pay reality</b><span>Awaiting evidence</span></div>
-          <div class="orbit-node n3"><b>Hours & leave</b><span>Awaiting evidence</span></div>
-          <div class="orbit-node n4"><b>Manager practice</b><span>Awaiting evidence</span></div>
-          <div class="orbit-status">Truth map · launch state</div>
-        </div>
+        <aside class="company-focus" aria-label="Featured trusted employer">
+          <div class="focus-head"><div class="focus-company"><img src="https://www.refertrm.com/partner-logo-1.jpg" width="48" height="48" alt=""><div><strong>Makro Myanmar</strong><span>Retail &amp; Wholesale · Yangon</span></div></div><div class="focus-number"><strong class="mono">20</strong><span>open roles</span></div></div>
+          <div class="trust-row">
+            <div class="trust-chip"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/><path d="m9 12 2 2 4-4"/></svg><strong>Verified employer</strong><span>Production company</span></div>
+            <div class="trust-chip"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><strong>Never pay a fee</strong><span>Candidate promise</span></div>
+            <div class="trust-chip"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg><strong>Salary shown</strong><span>Real job bands</span></div>
+          </div>
+          <div class="empty-line"><div><strong>Workplace evidence is honest-empty.</strong><span>Nothing appears until it is earned.</span></div><div class="empty-zero">0</div></div>
+        </aside>
       </div>
     </section>
 
-    <section class="signal-bar" aria-label="Live platform signals">
-      <div class="wrap signal-shell">
-        <div class="signal"><small>Company in focus</small><strong>Makro Myanmar</strong><p>Retail & Wholesale · Yangon</p></div>
-        <div class="signal"><small>Open now</small><strong class="big mono">20</strong><p>Production job records</p></div>
-        <div class="signal"><small>ReferTRM network</small><strong class="big mono">54+</strong><p>Licensed employer clients</p></div>
-        <div class="signal"><small>Evidence integrity</small><strong class="big mono">0 ≠ rating</strong><p>Silence is never a score</p></div>
+    <section class="screen jobs-screen" id="screen-jobs" data-screen="jobs" aria-labelledby="jobs-title">
+      <div class="screen-wrap">
+        <div class="screen-heading"><div><div class="eyebrow">Free job board</div><h1 class="screen-title" id="jobs-title">Real work. Clear terms.</h1><p class="screen-subtitle">Swipe or tap through four real Makro Myanmar roles. Every card carries its safety proof.</p></div><button class="icon-button js-nav" type="button" data-target="hub" aria-label="Back to hub"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="segment" role="tablist" aria-label="Job categories"><button class="segment-button job-filter" role="tab" type="button" aria-selected="true" data-filter="all">Featured</button><button class="segment-button job-filter" role="tab" type="button" aria-selected="false" data-filter="senior">Senior</button><button class="segment-button job-filter" role="tab" type="button" aria-selected="false" data-filter="mid">Mid-level</button></div>
+        <div class="job-stage"><div class="job-grid" id="job-grid">
+          <article class="job-card" data-level="senior" data-index="0">
+            <div class="job-company"><div class="job-company-id"><img src="https://www.refertrm.com/partner-logo-1.jpg" width="38" height="38" alt=""><div><strong>Makro Myanmar</strong><span>Verified employer</span></div></div><span class="job-level">Senior · Full-time</span></div><h2>HR Operation Manager</h2><div class="job-location">Mingalar Taung Nyunt, Yangon</div><div class="job-salary">800K–1.5M MMK<span>Published monthly salary band</span></div><div class="job-safety"><div class="job-signal"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/></svg><strong>Real employer</strong><span>Verified</span></div><div class="job-signal"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><strong>No fees</strong><span>Ever</span></div><div class="job-signal"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/></svg><strong>Salary clear</strong><span>Band shown</span></div></div><div class="job-actions"><a class="button button-primary" href="https://www.refertrm.com/jobs/makro-hr-operation-manager">View &amp; apply free <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a><button class="button truth-link js-nav" type="button" data-target="truth" aria-label="Inspect Makro employer truth"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/></svg></button></div>
+          </article>
+          <article class="job-card" data-level="senior" data-index="1">
+            <div class="job-company"><div class="job-company-id"><img src="https://www.refertrm.com/partner-logo-1.jpg" width="38" height="38" alt=""><div><strong>Makro Myanmar</strong><span>Verified employer</span></div></div><span class="job-level">Urgent · Senior</span></div><h2>E-Commerce &amp; Customer Service Manager</h2><div class="job-location">Mingalar Taung Nyunt, Yangon</div><div class="job-salary">800K–1.5M MMK<span>Published monthly salary band</span></div><div class="job-safety"><div class="job-signal"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/></svg><strong>Real employer</strong><span>Verified</span></div><div class="job-signal"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><strong>No fees</strong><span>Ever</span></div><div class="job-signal"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/></svg><strong>Salary clear</strong><span>Band shown</span></div></div><div class="job-actions"><a class="button button-primary" href="https://www.refertrm.com/jobs/makro-ecommerce-cs-manager">View &amp; apply free <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a><button class="button truth-link js-nav" type="button" data-target="truth" aria-label="Inspect Makro employer truth"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/></svg></button></div>
+          </article>
+          <article class="job-card" data-level="mid" data-index="2">
+            <div class="job-company"><div class="job-company-id"><img src="https://www.refertrm.com/partner-logo-1.jpg" width="38" height="38" alt=""><div><strong>Makro Myanmar</strong><span>Verified employer</span></div></div><span class="job-level">Mid · Full-time</span></div><h2>Engineering Coordinator</h2><div class="job-location">Mingalar Taung Nyunt, Yangon</div><div class="job-salary">500K–900K MMK<span>Published monthly salary band</span></div><div class="job-safety"><div class="job-signal"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/></svg><strong>Real employer</strong><span>Verified</span></div><div class="job-signal"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><strong>No fees</strong><span>Ever</span></div><div class="job-signal"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/></svg><strong>Salary clear</strong><span>Band shown</span></div></div><div class="job-actions"><a class="button button-primary" href="https://www.refertrm.com/jobs/makro-engineering-coordinator">View &amp; apply free <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a><button class="button truth-link js-nav" type="button" data-target="truth" aria-label="Inspect Makro employer truth"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/></svg></button></div>
+          </article>
+          <article class="job-card" data-level="mid" data-index="3">
+            <div class="job-company"><div class="job-company-id"><img src="https://www.refertrm.com/partner-logo-1.jpg" width="38" height="38" alt=""><div><strong>Makro Myanmar</strong><span>Verified employer</span></div></div><span class="job-level">Mid · Full-time</span></div><h2>Treasury Executive</h2><div class="job-location">Mingalar Taung Nyunt, Yangon</div><div class="job-salary">400K–700K MMK<span>Published monthly salary band</span></div><div class="job-safety"><div class="job-signal"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/></svg><strong>Real employer</strong><span>Verified</span></div><div class="job-signal"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><strong>No fees</strong><span>Ever</span></div><div class="job-signal"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/></svg><strong>Salary clear</strong><span>Band shown</span></div></div><div class="job-actions"><a class="button button-primary" href="https://www.refertrm.com/jobs/makro-treasury-executive">View &amp; apply free <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a><button class="button truth-link js-nav" type="button" data-target="truth" aria-label="Inspect Makro employer truth"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/></svg></button></div>
+          </article>
+        </div></div>
+        <div class="pager" aria-label="Job pagination"><button class="pager-button" id="job-prev" type="button" aria-label="Previous jobs"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><div><div class="page-dots" id="page-dots" aria-hidden="true"></div><div class="page-status" id="page-status" aria-live="polite"></div></div><button class="pager-button" id="job-next" type="button" aria-label="Next jobs"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button></div>
       </div>
     </section>
 
-    <section class="job-board" id="jobs" aria-labelledby="jobs-title">
-      <div class="wrap">
-        <div class="section-head">
-          <div><div class="eyebrow">Free job marketplace</div><h2 id="jobs-title">Opportunity first. Confidence beside it.</h2></div>
-          <p>Job discovery and workplace truth belong in one journey. Every real role opens the company’s evidence layer before a candidate decides to apply.</p>
+    <section class="screen truth-screen" id="screen-truth" data-screen="truth" aria-labelledby="truth-title">
+      <div class="screen-wrap">
+        <div class="screen-heading"><div><div class="eyebrow">Employer truth</div><div class="truth-company"><img src="https://www.refertrm.com/partner-logo-1.jpg" width="48" height="48" alt="Makro Myanmar logo"><div><h1 class="screen-title" id="truth-title">Makro Myanmar</h1><p>Retail &amp; Wholesale · 20 open roles</p></div></div></div><button class="icon-button js-nav" type="button" data-target="hub" aria-label="Back to hub"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="truth-hero"><div><h3>Evidence only when it is earned.</h3><p>No worker review or salary submission is attached to Makro today. Nothing is guessed, borrowed, or manufactured.</p></div><div class="truth-orb" aria-label="0 verified contributors"><strong class="mono">0</strong><span>verified contributors</span></div></div>
+        <div class="truth-note"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18"/></svg><span>Contribution is not being solicited for this client. Client consent and VLER certification are required before eligibility can open.</span></div>
+        <div class="truth-grid" aria-label="Myanmar workplace truth signals">
+          <button class="truth-signal is-confirmed" type="button"><span class="truth-signal-top"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/><path d="m9 12 2 2 4-4"/></svg><span class="signal-state">Confirmed</span></span><strong>Verified employer</strong><span>Real production company</span></button>
+          <button class="truth-signal is-confirmed" type="button"><span class="truth-signal-top"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span class="signal-state">Protected</span></span><strong>You never pay</strong><span>ReferTRM candidate promise</span></button>
+          <button class="truth-signal is-confirmed" type="button"><span class="truth-signal-top"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg><span class="signal-state">Available</span></span><strong>Honest salary</strong><span>Role-specific bands shown</span></button>
+          <button class="truth-signal is-awaiting" type="button"><span class="truth-signal-top"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="signal-state">Awaiting</span></span><strong>Pay on time</strong><span>No verified pattern yet</span></button>
+          <button class="truth-signal is-awaiting" type="button"><span class="truth-signal-top"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16v10H4zM8 3v4M16 3v4"/></svg><span class="signal-state">Awaiting</span></span><strong>Real hours</strong><span>No verified pattern yet</span></button>
+          <button class="truth-signal is-awaiting" type="button"><span class="truth-signal-top"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 11v8M17 11v8M5 19h14M8 7a4 4 0 0 1 8 0v4H8z"/></svg><span class="signal-state">Awaiting</span></span><strong>Respect at work</strong><span>No verified pattern yet</span></button>
+          <button class="truth-signal is-awaiting" type="button"><span class="truth-signal-top"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18v-7a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v7M8 7V4M16 7V4"/></svg><span class="signal-state">Awaiting</span></span><strong>Family &amp; leave</strong><span>No verified pattern yet</span></button>
+          <button class="truth-signal is-confirmed js-nav" type="button" data-target="safety"><span class="truth-signal-top"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/></svg><span class="signal-state">Shielded</span></span><strong>Your privacy</strong><span>See protection model</span></button>
         </div>
-        <div class="jobs-grid">
-          <a class="job-card" href="https://www.refertrm.com/jobs/makro-hr-operation-manager" aria-label="View HR Operation Manager at Makro Myanmar">
-            <div class="job-top"><span class="job-tag">Senior · Full-time</span><span class="job-arrow"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 17 10-10M7 7h10v10"/></svg></span></div><h3>HR Operation Manager</h3><div class="job-location">Mingalar Taung Nyunt, Yangon</div><div class="job-bottom"><div class="job-salary">800K–1.5M MMK</div><div class="job-meta"><span>Salary shown</span><span>Apply free</span></div></div>
-          </a>
-          <a class="job-card" href="https://www.refertrm.com/jobs/makro-ecommerce-cs-manager" aria-label="View E-Commerce and Customer Service Manager at Makro Myanmar">
-            <div class="job-top"><span class="job-tag">Urgent · Senior</span><span class="job-arrow"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 17 10-10M7 7h10v10"/></svg></span></div><h3>E-Commerce &amp; Customer Service Manager</h3><div class="job-location">Mingalar Taung Nyunt, Yangon</div><div class="job-bottom"><div class="job-salary">800K–1.5M MMK</div><div class="job-meta"><span>Salary shown</span><span>Apply free</span></div></div>
-          </a>
-          <a class="job-card" href="https://www.refertrm.com/jobs/makro-engineering-coordinator" aria-label="View Engineering Coordinator at Makro Myanmar">
-            <div class="job-top"><span class="job-tag">Mid · Full-time</span><span class="job-arrow"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 17 10-10M7 7h10v10"/></svg></span></div><h3>Engineering Coordinator</h3><div class="job-location">Mingalar Taung Nyunt, Yangon</div><div class="job-bottom"><div class="job-salary">500K–900K MMK</div><div class="job-meta"><span>Salary shown</span><span>Apply free</span></div></div>
-          </a>
-          <a class="job-card" href="https://www.refertrm.com/jobs/makro-treasury-executive" aria-label="View Treasury Executive at Makro Myanmar">
-            <div class="job-top"><span class="job-tag">Mid · Full-time</span><span class="job-arrow"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 17 10-10M7 7h10v10"/></svg></span></div><h3>Treasury Executive</h3><div class="job-location">Mingalar Taung Nyunt, Yangon</div><div class="job-bottom"><div class="job-salary">400K–700K MMK</div><div class="job-meta"><span>Salary shown</span><span>Apply free</span></div></div>
-          </a>
-        </div>
-        <div class="jobs-foot"><span><strong>Real data:</strong> roles, locations, levels, and salary bands come from the production job catalogue.</span><a class="btn btn-dark" href="https://www.refertrm.com/jobs">View all free jobs <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a></div>
+        <div class="truth-explain" id="truth-explain" aria-live="polite">Tap a signal to inspect its evidence state.</div>
+        <div class="truth-actions"><button class="button button-primary js-nav" type="button" data-target="jobs">See open roles</button><button class="button button-secondary js-nav" type="button" data-target="safety">Safety rules</button></div>
       </div>
     </section>
 
-    <section class="loop" aria-labelledby="loop-title">
-      <div class="wrap">
-        <div class="section-head"><div><div class="eyebrow">One connected product</div><h2 id="loop-title">Jobs create intent. Truth earns confidence.</h2></div><p>The job board is not a traffic link beside the product. It is the start of a privacy-safe evidence flywheel.</p></div>
-        <div class="loop-steps">
-          <article class="loop-step"><div class="step-no"><span>01 / DISCOVER</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></div><h3>Find a real, free-to-apply role.</h3><p>Search by company, career family, location, and transparent salary where available.</p><span class="micro">No login wall to browse</span></article>
-          <article class="loop-step"><div class="step-no"><span>02 / INSPECT</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/></svg></div><h3>See what is known—and unknown.</h3><p>Hiring evidence, workplace evidence, and market benchmarks keep their own labels.</p><span class="micro">No false star score</span></article>
-          <article class="loop-step"><div class="step-no"><span>03 / APPLY</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></div><h3>Apply with context, still free.</h3><p>A verified platform interaction can later support eligibility without exposing a person publicly.</p><span class="micro">Provenance, not publicity</span></article>
-          <article class="loop-step"><div class="step-no"><span>04 / CONTRIBUTE</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M3 12h18"/></svg></div><h3>Return evidence safely.</h3><p>Structured patterns appear only after moderation and the required privacy threshold.</p><span class="micro">The loop compounds trust</span></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="evidence" id="truth" aria-labelledby="truth-title">
-      <div class="wrap">
-        <div class="evidence-head"><div><div class="eyebrow">Myanmar Workplace Truth Map</div><h2 id="truth-title">No theatre. Only evidence.</h2></div><p>Classic review sites turn one opinion into a public verdict. This system waits for safe, structured patterns.</p></div>
-        <div class="tabs" role="tablist" aria-label="Workplace truth categories">
-          <button class="tab" id="tab-workplace" role="tab" aria-selected="true" aria-controls="panel-workplace" data-tab="workplace">Workplace</button>
-          <button class="tab" id="tab-hiring" role="tab" aria-selected="false" aria-controls="panel-hiring" data-tab="hiring">Hiring</button>
-          <button class="tab" id="tab-pay" role="tab" aria-selected="false" aria-controls="panel-pay" data-tab="pay">Pay reality</button>
-          <button class="tab" id="tab-jobs" role="tab" aria-selected="false" aria-controls="panel-jobs" data-tab="jobs">Open roles</button>
-        </div>
-        <div class="truth-panel" id="panel-workplace" role="tabpanel" aria-labelledby="tab-workplace" data-panel="workplace">
-          <div class="empty-truth"><div class="empty-symbol"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4h16v12H7l-3 3V4Z"/><path d="M8 9h8M8 12h5"/></svg></div><h3>No verified workplace pattern yet.</h3><p>Makro Myanmar has no moderated workplace submissions in this launch dataset. We will not convert an empty record into a rating, guess, or endorsement.</p><div class="empty-actions"><button class="btn btn-gold js-share" type="button">Check if I can contribute</button><a class="btn btn-ghost" href="#privacy">See the privacy model</a></div></div>
-          <aside class="truth-aside"><div class="principle gold"><div class="label">The zero-state promise</div><h3>“Nothing yet” is useful truth.</h3><p>It protects candidates and companies from manufactured certainty.</p></div><div class="principle"><div class="label">Publishing rule</div><h3>Patterns, never identifiable stories.</h3><p>Low-volume signals stay private until aggregation is safe.</p></div></aside>
-        </div>
-        <div class="truth-panel" id="panel-hiring" role="tabpanel" aria-labelledby="tab-hiring" data-panel="hiring" hidden>
-          <div class="empty-truth"><div class="empty-symbol"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="3"/><path d="M5 20c.7-4 3-6 7-6s6.3 2 7 6"/></svg></div><h3>Hiring evidence stays separate.</h3><p>An interview experience can describe response time, clarity, and treatment. It cannot claim anything about daily work inside the company.</p><div class="empty-actions"><button class="btn btn-gold js-share" type="button">Share a verified hiring experience</button></div></div>
-          <aside class="truth-aside"><div class="principle gold"><div class="label">Eligibility source</div><h3>Applied through ReferTRM.</h3><p>A real interaction can establish provenance without displaying identity.</p></div><div class="principle"><div class="label">Moderation</div><h3>Incident first. Labels later.</h3><p>Structured facts are checked before any aggregate is shown.</p></div></aside>
-        </div>
-        <div class="truth-panel" id="panel-pay" role="tabpanel" aria-labelledby="tab-pay" data-panel="pay" hidden>
-          <div class="empty-truth"><div class="empty-symbol"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18m-4 4h.01"/></svg></div><h3>No verified company pay evidence yet.</h3><p>Open-job salary bands are shown with each role. They are not presented as worker-reported take-home pay, allowances, deductions, or guaranteed offers.</p><div class="empty-actions"><a class="btn btn-gold" href="#jobs">Compare open-role bands</a></div></div>
-          <aside class="truth-aside"><div class="principle gold"><div class="label">Source separation</div><h3>Job band ≠ payroll evidence.</h3><p>Every number keeps its origin, sample size, and caveat.</p></div><div class="principle"><div class="label">Future detail</div><h3>Base, commission, allowance, deduction.</h3><p>The complete pay reality matters more than one headline number.</p></div></aside>
-        </div>
-        <div class="truth-panel" id="panel-jobs" role="tabpanel" aria-labelledby="tab-jobs" data-panel="jobs" hidden>
-          <div class="empty-truth"><div class="empty-symbol"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 7h18v13H3z"/><path d="M3 12h18"/></svg></div><h3>20 real roles are open now.</h3><p>Workplace truth is embedded in the job decision—not built as an isolated review destination candidates must discover later.</p><div class="empty-actions"><a class="btn btn-gold" href="#jobs">Return to featured roles</a><a class="btn btn-ghost" href="https://www.refertrm.com/jobs">Open the full job board</a></div></div>
-          <aside class="truth-aside"><div class="principle gold"><div class="label">Candidate promise</div><h3>Browsing and applying stay free.</h3><p>ReferTRM earns from employers, never from job seekers.</p></div><div class="principle"><div class="label">Flywheel</div><h3>Every honest step improves the next decision.</h3><p>Discovery, application, and safe contribution form one system.</p></div></aside>
-        </div>
-      </div>
-    </section>
-
-    <section class="privacy" id="privacy" aria-labelledby="privacy-title">
-      <div class="wrap privacy-grid">
-        <div class="shield" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m12 3 7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/><path d="m9 12 2 2 4-4"/></svg></div>
-        <div><div class="eyebrow">Privacy Shield</div><h2 id="privacy-title">Truth without a target.</h2><p class="privacy-copy">Myanmar workplaces can be small, interconnected, and easy to identify from one detail. Before submission, the system warns when a role, date, branch, or incident could reveal someone.</p><div class="privacy-rules"><div class="privacy-rule"><strong>Re-identification warning</strong>Details are checked before a person can submit.</div><div class="privacy-rule"><strong>Quiet aggregation</strong>Small samples remain unpublished.</div><div class="privacy-rule"><strong>Draft recovery</strong>Long contributions survive weak connections.</div><div class="privacy-rule"><strong>Commercial separation</strong>Employer status never changes the truth rules.</div></div></div>
+    <section class="screen safety-screen" id="screen-safety" data-screen="safety" aria-labelledby="safety-title">
+      <div class="screen-wrap">
+        <div class="screen-heading"><div><div class="eyebrow">Safety &amp; dignity</div><h1 class="screen-title" id="safety-title">Before you apply.</h1><p class="screen-subtitle">Three checks protect your livelihood. Tap the trust loop to see how evidence grows.</p></div><button class="icon-button js-nav" type="button" data-target="hub" aria-label="Back to hub"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="segment" role="tablist" aria-label="Safety information"><button class="segment-button safety-tab" role="tab" type="button" aria-selected="true" data-safety="checks">Safety check</button><button class="segment-button safety-tab" role="tab" type="button" aria-selected="false" data-safety="loop">How trust grows</button></div>
+        <div class="safety-panel is-active" data-safety-panel="checks"><div class="safety-content"><div class="safety-lead"><div class="shield-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m12 3 7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/><path d="m9 12 2 2 4-4"/></svg></div><h2>A real job never starts with a candidate fee.</h2><p>ReferTRM earns from employers, never from job seekers. Payment requests are a fraud signal.</p></div><div><div class="checklist"><div class="safety-check"><span class="check-no">01</span><div><strong>Check the employer identity</strong><span>Use the verified company name and official channels on the listing.</span></div></div><div class="safety-check"><span class="check-no">02</span><div><strong>Pay nothing to apply</strong><span>No registration fee, interview fee, placement fee, or deposit.</span></div></div><div class="safety-check"><span class="check-no">03</span><div><strong>Get salary and terms in writing</strong><span>Confirm the band, hours, location, and conditions before accepting.</span></div></div></div><div class="report-row"><span>Someone asked you to pay?</span><a href="https://www.refertrm.com/safety">Report fraud safely</a></div></div></div></div>
+        <div class="safety-panel" data-safety-panel="loop"><div class="loop-grid"><div class="loop-step"><div class="loop-no">01</div><div><h3>See a real role</h3><p>Verified company, clear salary, and no-fee promise travel with the listing.</p></div></div><div class="loop-step"><div class="loop-no">02</div><div><h3>Inspect what is known</h3><p>Confirmed, awaiting, and protected signals remain visibly separate.</p></div></div><div class="loop-step"><div class="loop-no">03</div><div><h3>Apply free</h3><p>A real platform interaction can later establish provenance without publicity.</p></div></div><div class="loop-step"><div class="loop-no">04</div><div><h3>Earn evidence</h3><p>After consent, eligibility, moderation, and safe aggregation, the next seeker sees more truth.</p></div></div></div><div class="vler-gate"><strong>Architecture gate:</strong> apply → hire → workforce → contribution eligibility remains a design-only concept until the VLER certifies the lifecycle contracts.</div></div>
       </div>
     </section>
   </main>
 
-  <footer><div class="wrap"><div class="footer-top"><a class="brand" href="https://www.refertrm.com"><span class="brand-mark" aria-hidden="true"></span><span>ReferTRM / Truth</span></a><div class="footer-statement">A better career decision begins with what is real.</div><div class="footer-links"><a href="https://www.refertrm.com/jobs">Jobs</a><a href="https://www.refertrm.com/safety">Safety</a><a href="https://www.refertrm.com/privacy">Privacy</a></div></div><div class="footer-bottom"><span><strong>Research prototype.</strong> Real public company and job data; zero fabricated workplace claims.</span><span>Myanmar copy slots remain reserved for CCO review.</span></div></div></footer>
-
-  <button class="demo-trigger" id="demo-trigger" type="button" aria-label="Open prototype controls" aria-expanded="false" aria-controls="demo-menu"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M7 12h10M9 17h6"/></svg></button>
-  <div class="demo-menu" id="demo-menu" hidden><h3>Prototype controls</h3><p>Review deep-linked product states without changing the real-company evidence baseline.</p><button class="demo-option" type="button" data-jump="workplace">Workplace launch state</button><button class="demo-option" type="button" data-jump="hiring">Hiring evidence boundary</button><button class="demo-option" type="button" data-jump="pay">Salary source separation</button><button class="demo-option" type="button" data-jump="jobs">Free job-board connection</button></div>
-
-  <dialog id="share-dialog" aria-labelledby="share-title">
-    <div class="modal-head"><h2 id="share-title">Contribute safely</h2><button class="icon-btn" id="close-dialog" type="button" aria-label="Close dialog"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
-    <div class="modal-body"><p class="step-kicker">Step 1 of 3 · Relationship</p><h3>How do you know Makro Myanmar?</h3><p class="modal-copy">Hiring evidence and workplace evidence are collected separately so neither can speak for the other.</p>
-      <button class="choice" type="button" data-choice="hiring"><span><strong>I applied or interviewed</strong><span>Response time, process clarity, and candidate treatment.</span></span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
-      <button class="choice" type="button" data-choice="workplace"><span><strong>I work or worked here</strong><span>Pay, hours, leave, manager practice, and progression.</span></span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
-      <div class="notice" role="note"><strong>Before you continue:</strong> this prototype demonstrates the privacy-first eligibility flow. It does not write to production.</div>
-      <div class="modal-actions"><button class="btn" id="save-draft" type="button">Save draft locally</button><button class="btn btn-dark" id="continue-share" type="button" disabled>Continue</button></div>
-    </div>
-  </dialog>
+  <nav class="tabbar" aria-label="App navigation"><div class="tabbar-inner" role="tablist" aria-label="Main screens">
+    <button class="nav-tab js-nav" role="tab" type="button" aria-selected="true" aria-controls="screen-hub" data-target="hub"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m4 11 8-7 8 7v9H4z"/><path d="M9 20v-6h6v6"/></svg><span>Hub</span></button>
+    <button class="nav-tab js-nav" role="tab" type="button" aria-selected="false" aria-controls="screen-jobs" data-target="jobs"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 7h18v13H3z"/><path d="M3 12h18"/></svg><span>Jobs</span></button>
+    <button class="nav-tab js-nav" role="tab" type="button" aria-selected="false" aria-controls="screen-truth" data-target="truth"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/></svg><span>Truth</span></button>
+    <button class="nav-tab js-nav" role="tab" type="button" aria-selected="false" aria-controls="screen-safety" data-target="safety"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m12 3 7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/><path d="m9 12 2 2 4-4"/></svg><span>Safety</span></button>
+  </div></nav>
+  <div class="sr-only" id="screen-announcer" aria-live="polite"></div>
 
   <script>
-    const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
-    const hero=$('.hero');
-    hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();hero.style.setProperty('--mx',`${((e.clientX-r.left)/r.width)*100}%`);hero.style.setProperty('--my',`${((e.clientY-r.top)/r.height)*100}%`)});
-
-    function activateTab(name,scroll=false){
-      $$('.tab').forEach(t=>{const active=t.dataset.tab===name;t.setAttribute('aria-selected',String(active));t.tabIndex=active?0:-1});
-      $$('[data-panel]').forEach(p=>p.hidden=p.dataset.panel!==name);
-      const url=new URL(location.href);url.searchParams.set('view',name);history.replaceState({},'',url);
-      if(scroll) $('#truth').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+    const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+    const screenNames={hub:'Trust hub',jobs:'Free jobs',truth:'Employer truth',safety:'Safety and dignity'};
+    function showScreen(name,{focus=false,historyMode='replace'}={}){
+      if(!screenNames[name])name='hub';
+      $$('.screen').forEach(screen=>screen.classList.toggle('is-active',screen.dataset.screen===name));
+      $$('.nav-tab').forEach(tab=>tab.setAttribute('aria-selected',String(tab.dataset.target===name)));
+      const active=$(`[data-screen="${name}"]`);active.scrollTop=0;
+      const url=new URL(location.href);url.searchParams.set('screen',name);history[historyMode+'State']({},'',url);
+      $('#screen-announcer').textContent=`${screenNames[name]} screen`;
+      if(focus){const heading=active.querySelector('h1');heading?.setAttribute('tabindex','-1');heading?.focus({preventScroll:true})}
     }
-    $$('.tab').forEach((tab,i)=>{tab.addEventListener('click',()=>activateTab(tab.dataset.tab));tab.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight'].includes(e.key))return;e.preventDefault();const tabs=$$('.tab'),next=(i+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;tabs[next].focus();activateTab(tabs[next].dataset.tab)})});
-    const initial=new URLSearchParams(location.search).get('view');if(['workplace','hiring','pay','jobs'].includes(initial))activateTab(initial);
+    $$('.js-nav').forEach(button=>button.addEventListener('click',()=>{if(button.classList.contains('js-loop'))showSafetyPanel('loop');showScreen(button.dataset.target,{focus:true,historyMode:'push'})}));
+    addEventListener('popstate',()=>showScreen(new URLSearchParams(location.search).get('screen')||'hub'));
 
-    const demoBtn=$('#demo-trigger'),demoMenu=$('#demo-menu');
-    demoBtn.addEventListener('click',()=>{const open=demoMenu.hidden;demoMenu.hidden=!open;demoBtn.setAttribute('aria-expanded',String(open))});
-    $$('.demo-option').forEach(b=>b.addEventListener('click',()=>{activateTab(b.dataset.jump,true);demoMenu.hidden=true;demoBtn.setAttribute('aria-expanded','false')}));
-    document.addEventListener('click',e=>{if(!demoMenu.hidden&&!demoMenu.contains(e.target)&&e.target!==demoBtn){demoMenu.hidden=true;demoBtn.setAttribute('aria-expanded','false')}});
+    let jobFilter='all',jobPage=0,filteredJobs=[];
+    function perPage(){return matchMedia('(min-width:700px)').matches?2:1}
+    function renderJobs(reset=false){
+      if(reset)jobPage=0;
+      filteredJobs=$$('.job-card').filter(card=>jobFilter==='all'||card.dataset.level===jobFilter);
+      const pageSize=perPage(),pages=Math.max(1,Math.ceil(filteredJobs.length/pageSize));jobPage=Math.min(jobPage,pages-1);
+      $$('.job-card').forEach(card=>card.classList.remove('is-visible'));
+      filteredJobs.slice(jobPage*pageSize,jobPage*pageSize+pageSize).forEach(card=>card.classList.add('is-visible'));
+      $('#job-prev').disabled=jobPage===0;$('#job-next').disabled=jobPage>=pages-1;
+      $('#page-dots').innerHTML=Array.from({length:pages},(_,i)=>`<span class="page-dot ${i===jobPage?'is-active':''}"></span>`).join('');
+      $('#page-status').textContent=`${jobPage+1} / ${pages}`;
+    }
+    $('#job-prev').addEventListener('click',()=>{if(jobPage>0){jobPage--;renderJobs()}});$('#job-next').addEventListener('click',()=>{const pages=Math.ceil(filteredJobs.length/perPage());if(jobPage<pages-1){jobPage++;renderJobs()}});
+    $$('.job-filter').forEach(tab=>tab.addEventListener('click',()=>{jobFilter=tab.dataset.filter;$$('.job-filter').forEach(x=>x.setAttribute('aria-selected',String(x===tab)));renderJobs(true)}));
+    let resizeTimer;addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>renderJobs(),120)});
 
-    const dialog=$('#share-dialog'),continueBtn=$('#continue-share');let selected='';
-    $$('.js-share').forEach(b=>b.addEventListener('click',()=>dialog.showModal()));
-    $('#close-dialog').addEventListener('click',()=>dialog.close());
-    dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
-    $$('.choice').forEach(b=>b.addEventListener('click',()=>{selected=b.dataset.choice;$$('.choice').forEach(x=>{x.style.borderColor=x===b?'var(--teal)':'';x.setAttribute('aria-pressed',String(x===b))});continueBtn.disabled=false}));
-    $('#save-draft').addEventListener('click',e=>{localStorage.setItem('refertrm-truth-draft',JSON.stringify({company:'Makro Myanmar',relationship:selected,savedAt:new Date().toISOString()}));e.currentTarget.textContent='Draft saved on this device'});
-    continueBtn.addEventListener('click',()=>{if(!selected)return;$('.modal-body').innerHTML=`<p class="step-kicker">Prototype boundary</p><h3>Your relationship is noted.</h3><p class="modal-copy">Production continuation requires authenticated eligibility, moderation, privacy-threshold logic, and row-level security. Those safeguards are architecture-gated.</p><div class="notice"><strong>Nothing was submitted.</strong> This frontend intentionally stops before a production write.</div><div class="modal-actions"><button class="btn btn-dark" type="button" onclick="document.getElementById('share-dialog').close()">Done</button></div>`});
+    function showSafetyPanel(name){$$('.safety-tab').forEach(tab=>tab.setAttribute('aria-selected',String(tab.dataset.safety===name)));$$('[data-safety-panel]').forEach(panel=>panel.classList.toggle('is-active',panel.dataset.safetyPanel===name))}
+    $$('.safety-tab').forEach(tab=>tab.addEventListener('click',()=>showSafetyPanel(tab.dataset.safety)));
+    $$('.truth-signal:not(.js-nav)').forEach(signal=>signal.addEventListener('click',()=>{$$('.truth-signal:not(.js-nav)').forEach(x=>x.setAttribute('aria-pressed',String(x===signal)));const title=signal.querySelector('strong')?.textContent||'Signal';const detail=[...signal.children].find(x=>x.tagName==='SPAN'&&!x.classList.contains('truth-signal-top'))?.textContent||'';$('#truth-explain').textContent=`${title}: ${detail}.`;}));
+
+    const initial=new URLSearchParams(location.search).get('screen')||'hub';showScreen(initial);renderJobs();
   </script>
 </body>
 </html>
