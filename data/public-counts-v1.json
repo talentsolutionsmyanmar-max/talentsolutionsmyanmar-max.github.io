@@ -5,16 +5,22 @@
   "status": "verified",
   "counts": {
     "activeCoreJobs": 253,
-    "verifiedEmployers": 7,
-    "aggregatedBranchJobs": 0
+    "clientCompanies": 74,
+    "salaryVisibleJobs": 252,
+    "locationTaggedJobs": 253,
+    "levelTaggedJobs": 253,
+    "communityJobsCleared": 0
   },
   "definitions": {
-    "activeCoreJobs": "COUNT(public.\"Job\") WHERE lower(status) = 'active'; contracted ReferTRM core inventory, not Free Branch Board supply",
-    "verifiedEmployers": "COUNT(public.companies) WHERE verified = true",
-    "aggregatedBranchJobs": "Publishable Free Branch Board inventory; aggregated_jobs is not built, therefore honest-empty"
+    "activeCoreJobs": "COUNT(public.\"Job\") WHERE lower(status) = 'active'; active ReferTRM client-role inventory",
+    "clientCompanies": "COUNT(DISTINCT public.\"Job\".\"companyId\") for active jobs with a matching canonical public.\"Company\" record",
+    "salaryVisibleJobs": "Active jobs with salaryMin, salaryMax, or salaryDisplay present",
+    "locationTaggedJobs": "Active jobs with a recorded location",
+    "levelTaggedJobs": "Active jobs with a recorded job level",
+    "communityJobsCleared": "Independently submitted free listings cleared for public publication; currently honest-empty"
   },
   "governance": {
-    "authority": "S322 consolidated full-build brief, section 0",
+    "authority": "S322-JOBS-WORKPLACE-TRUTH-PUBLIC-IDENTITY; production read-only audit 2026-07-22",
     "internalCountsExcluded": [
       "employer_prospects"
     ],
