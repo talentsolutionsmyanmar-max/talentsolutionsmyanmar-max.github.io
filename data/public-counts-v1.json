@@ -1,0 +1,24 @@
+{
+  "contract": "refertrm-public-counts-v1",
+  "asOf": "2026-07-22",
+  "timezone": "Asia/Yangon",
+  "status": "verified",
+  "counts": {
+    "activeCoreJobs": 253,
+    "verifiedEmployers": 7,
+    "aggregatedBranchJobs": 0
+  },
+  "definitions": {
+    "activeCoreJobs": "COUNT(public.\"Job\") WHERE lower(status) = 'active'; contracted ReferTRM core inventory, not Free Branch Board supply",
+    "verifiedEmployers": "COUNT(public.companies) WHERE verified = true",
+    "aggregatedBranchJobs": "Publishable Free Branch Board inventory; aggregated_jobs is not built, therefore honest-empty"
+  },
+  "governance": {
+    "authority": "S322 consolidated full-build brief, section 0",
+    "internalCountsExcluded": [
+      "employer_prospects"
+    ],
+    "clientStatusMayInfluenceTransparency": false,
+    "nextReview": "CTO re-probe before any production integration"
+  }
+}
