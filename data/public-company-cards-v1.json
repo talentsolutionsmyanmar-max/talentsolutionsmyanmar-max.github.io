@@ -1,0 +1,69 @@
+{
+  "contract": "refertrm-public-company-cards-v1",
+  "asOf": "2026-07-22",
+  "timezone": "Asia/Yangon",
+  "source": "ReferTRM governed company and active-job audit",
+  "notes": "Public demo projection only. Counts are active roles with a public salary value at the audit time. No ratings or reviews are inferred.",
+  "companies": [
+    {
+      "name": "Makro Myanmar",
+      "slug": "makro",
+      "industry": "Retail & Wholesale",
+      "location": "Yangon",
+      "activeRoles": 20,
+      "salaryVisibleRoles": 20,
+      "publishedReviews": 0,
+      "logo": "https://www.refertrm.com/partner-logo-1.jpg"
+    },
+    {
+      "name": "Thadoe Mahar Co., Ltd",
+      "slug": "thadoe-mahar-co-ltd",
+      "industry": "Diversified Business",
+      "location": "Ottara Thiri, Nay Pyi Taw",
+      "activeRoles": 18,
+      "salaryVisibleRoles": 18,
+      "publishedReviews": 0,
+      "logo": null
+    },
+    {
+      "name": "Innopex Company",
+      "slug": "innopex-company",
+      "industry": "Business Services",
+      "location": "Mingalardon",
+      "activeRoles": 16,
+      "salaryVisibleRoles": 16,
+      "publishedReviews": 0,
+      "logo": null
+    },
+    {
+      "name": "EAC Myanmar",
+      "slug": "eac-myanmar",
+      "industry": "Consumer Goods",
+      "location": "Yangon, Myanmar",
+      "activeRoles": 11,
+      "salaryVisibleRoles": 11,
+      "publishedReviews": 0,
+      "logo": null
+    },
+    {
+      "name": "TOMO",
+      "slug": "tomo",
+      "industry": "Commerce & Services",
+      "location": "South Dagon",
+      "activeRoles": 10,
+      "salaryVisibleRoles": 10,
+      "publishedReviews": 0,
+      "logo": null
+    },
+    {
+      "name": "Myanmar Indobest",
+      "slug": "myanmar-indobest-comp_myanmar_indobest",
+      "industry": "General",
+      "location": "Yangon",
+      "activeRoles": 8,
+      "salaryVisibleRoles": 8,
+      "publishedReviews": 0,
+      "logo": null
+    }
+  ]
+}

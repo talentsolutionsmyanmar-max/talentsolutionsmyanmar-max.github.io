@@ -79,7 +79,7 @@
     @media(max-width:430px){.brand-name{font-size:13px}.employer-link span{display:none}.employer-link{width:44px;padding:0;justify-content:center}.hub-intro h1{font-size:45px}.intent-card h2{font-size:18px}.jobs-card h2{font-size:27px}.game-card .intent-copy{max-width:63%}.small-card .intent-copy{max-width:78%}.spot-art{right:-16px;width:100px;height:100px;opacity:.9}.live-proof-text{font-size:11px}.youth-ribbon{grid-template-columns:68px 1fr}.youth-art{width:68px;height:68px}.youth-ribbon .intent-arrow{display:none}}
     .soul-touching{transform:scale(.975)!important;transition:transform 420ms cubic-bezier(.22,1,.36,1)!important}.soul-touch-release{transform:none!important;transition:transform 420ms cubic-bezier(.22,1,.36,1)!important}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}[data-v4-mag]{transform:none!important}.intent-card::before,.route-card::before,.live-proof::after{display:none}.cur-dot,.cur-ring{display:none!important}}
-    html[data-lite="true"] .game-thumb{display:none}html[data-lite="true"] .game-card .intent-copy{max-width:100%}html[data-lite="true"] .lite-badge{display:flex}html[data-lite="true"] .scene-frame img{display:none}html[data-lite="true"] .scene-frame::before{content:"Scene art paused in data-lite mode";position:absolute;inset:0;display:grid;place-items:center;color:#9aabbc;font:500 9px "JetBrains Mono"}html[data-lite="true"] [data-v4-mag]{transform:none!important}html[data-lite="true"] .intent-card::before,html[data-lite="true"] .route-card::before,html[data-lite="true"] .live-proof::after{display:none!important}
+    html[data-lite="true"] .lite-badge{display:flex}html[data-lite="true"] .scene-frame img{display:none}html[data-lite="true"] .scene-frame::before{content:"Scene art paused in data-lite mode";position:absolute;inset:0;display:grid;place-items:center;color:#9aabbc;font:500 9px "JetBrains Mono"}
 
     /* 2026 professional door system: stable bounds, one cinematic surface. */
     .brand,.hub-intro h1,.intent-card h2,.live-proof-text,.youth-ribbon strong,.door-head h1,.route-card h2,.scene-title h1,.question,.science-card h3,.bridge-head h3{font-family:"Sora",sans-serif}
@@ -105,6 +105,7 @@
     .youth-ribbon:hover{border-color:rgb(15 118 110 / .58);box-shadow:0 14px 34px rgb(0 31 63 / .1)}.youth-ribbon:hover::before,.youth-ribbon.is-soul-active::before{opacity:1}.youth-ribbon>*{position:relative}
     .youth-ribbon .door-symbol{width:48px;height:48px;color:var(--teal);background:#e4f3ee}.youth-ribbon .door-symbol::after{border-color:#f4f9f6}
     .route-card{transform:none!important}.soul-touching,.soul-touch-release{transform:none!important}.soul-touching{border-color:var(--gold)!important;box-shadow:inset 0 0 0 2px rgb(212 175 55 / .18)!important}
+    .cur-dot,.cur-ring{position:fixed;z-index:1200;left:0;top:0;pointer-events:none;border-radius:50%;opacity:0;transform:translate3d(-50%,-50%,0)}.cur-dot{width:5px;height:5px;background:var(--gold)}.cur-ring{width:34px;height:34px;border:1px solid rgb(0 31 63 / .42);transition:width 240ms var(--ease),height 240ms var(--ease),border-color 240ms var(--ease),background 240ms var(--ease)}body.cursor-live .cur-dot,body.cursor-live .cur-ring{opacity:1}body.cursor-card .cur-ring{width:50px;height:50px;border-color:rgb(212 175 55 / .9);background:rgb(212 175 55 / .08)}
     @media(max-width:699px){.game-card{grid-column:1/-1;min-height:278px}.game-card .intent-copy{max-width:55%}.game-card .intent-copy h2{font-size:24px}.game-thumb{inset:0 0 0 44%}.game-thumb::after{background:linear-gradient(90deg,var(--paper) 0%,rgb(255 253 248 / .92) 35%,transparent 74%),linear-gradient(0deg,rgb(255 253 248 / .16),transparent)}}
     @media(min-width:1060px){.intent-grid{grid-template-areas:"work game" "learn game" "refer proof" "youth youth" "owner owner"}.jobs-card{grid-area:work}.game-card{grid-area:game}.learn-card{grid-area:learn}.refer-card{grid-area:refer}.live-proof{grid-area:proof}.youth-ribbon{grid-area:youth}.ownership{grid-area:owner}}
     @media(max-width:430px){.youth-ribbon{grid-template-columns:48px 1fr}.youth-ribbon .door-symbol{width:44px;height:44px}.small-card .intent-copy{max-width:74%}}
@@ -112,6 +113,7 @@
   </style>
 </head>
 <body>
+  <span class="cur-dot" aria-hidden="true"></span><span class="cur-ring" aria-hidden="true"></span>
   <a class="skip" href="#screen-home">Skip to choices</a>
   <header class="app-header">
     <div class="header-inner">
@@ -147,7 +149,7 @@
         <div class="door-head"><div><div class="fig">FIG 02 / Jobs &amp; workplace truth</div><h1 id="jobs-title">See the role. Know the workplace.</h1><p>Browse active client roles, explore the evidence behind a working decision, or bring a new opportunity forward for free.</p></div></div>
         <div class="door-stack">
           <article class="route-card dark" data-sheen><div><span class="route-note">BROWSE JOBS / 253 ACTIVE ROLES</span><h2>Find a role that fits.</h2><p>Explore opportunities from 74 client companies, see clear job terms, then sign in to view your fit and apply without a candidate fee.</p></div><div class="route-actions"><a class="button button-gold" href="https://www.refertrm.com/eq/jobs">Browse jobs<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a></div></article>
-          <article class="route-card" data-sheen><div><span class="route-note">EXPLORE COMPANIES / WORKPLACE TRUTH</span><h2>Look beyond the job title.</h2><p>Start with role, salary and company evidence. Reviews, employer responses and worker submissions will appear only when their eligibility and moderation paths are ready.</p></div><div class="route-actions"><a class="button button-navy" href="../glassdoor-phase1/v2/?screen=safety">Explore workplace truth<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a></div></article>
+          <article class="route-card" data-sheen><div><span class="route-note">EXPLORE COMPANIES / WORKPLACE TRUTH</span><h2>Look beyond the job title.</h2><p>Start with role, salary and company evidence. Reviews, employer responses and worker submissions will appear only when their eligibility and moderation paths are ready.</p></div><div class="route-actions"><a class="button button-navy" href="../glassdoor-phase1/v2/?screen=companies">Explore real companies<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a></div></article>
           <article class="route-card" data-sheen><div><span class="route-note">FOR EMPLOYERS / FREE PUBLICATION PATH</span><h2>Post a job — free.</h2><p>Bring a real opportunity forward. Identity, terms and publication checks protect jobseekers before an independently submitted listing becomes public.</p></div><div class="route-actions"><a class="button button-navy" href="../glassdoor-phase1/v2/?screen=employers">Start a free job post<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a></div></article>
         </div>
       </div>
@@ -226,14 +228,23 @@
       const motionQuery=new URLSearchParams(location.search);
       const lite=motionQuery.get('lite')==='1'||(motionQuery.get('full')!=='1'&&(slowNet||lowMem));
       const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
-      const reduced=reducedMotion.matches||lite;
+      const reduced=reducedMotion.matches;
       const fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
       const soulSurfaces=$$('[data-sheen]');
       if(lite)document.documentElement.dataset.lite='true';
 
       if(fine&&!reduced){
+        const dot=$('.cur-dot'),ring=$('.cur-ring');let mx=-80,my=-80,rx=-80,ry=-80;
+        addEventListener('pointermove',event=>{mx=event.clientX;my=event.clientY;dot.style.transform=`translate3d(${mx}px,${my}px,0) translate(-50%,-50%)`;document.body.classList.add('cursor-live')},{passive:true});
+        const follow=()=>{rx+=(mx-rx)*.14;ry+=(my-ry)*.14;ring.style.transform=`translate3d(${rx}px,${ry}px,0) translate(-50%,-50%)`;requestAnimationFrame(follow)};follow();
+        soulSurfaces.forEach(surface=>{surface.addEventListener('pointerenter',()=>document.body.classList.add('cursor-card'));surface.addEventListener('pointerleave',()=>document.body.classList.remove('cursor-card'))});
+      }
+
+      if(fine&&!reduced){
         soulSurfaces.forEach(element=>{
-          element.addEventListener('pointermove',event=>{const rect=element.getBoundingClientRect();element.style.setProperty('--mx',`${event.clientX-rect.left}px`);element.style.setProperty('--my',`${event.clientY-rect.top}px`)},{passive:true});
+          const control=element.querySelector('.intent-arrow');
+          element.addEventListener('pointermove',event=>{const rect=element.getBoundingClientRect(),x=event.clientX-rect.left,y=event.clientY-rect.top;element.style.setProperty('--mx',`${x}px`);element.style.setProperty('--my',`${y}px`);if(control){const dx=(x-rect.width/2)*.18,dy=(y-rect.height/2)*.28;control.style.transform=`translate3d(${Math.max(-7,Math.min(7,dx))}px,${Math.max(-7,Math.min(7,dy))}px,0)`}},{passive:true});
+          element.addEventListener('pointerleave',()=>{if(control)control.style.transform='translate3d(0,0,0)'},{passive:true});
         });
       }
 

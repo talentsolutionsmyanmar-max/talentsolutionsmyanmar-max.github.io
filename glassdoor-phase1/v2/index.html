@@ -95,6 +95,11 @@
     .share-object{margin-top:var(--sp-8);border:1px solid rgb(255 255 255 / .17);border-radius:var(--radius-l);padding:var(--sp-5);background:rgb(255 255 255 / .04)}.share-object-top{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-3)}.share-object-label{font:600 8px "JetBrains Mono";letter-spacing:.1em;color:var(--p-gold-200);text-transform:uppercase}.share-status{font-size:9px;color:var(--on-dark-subtle)}.share-object h3{font:600 22px/1.1 "Bricolage Grotesque";letter-spacing:-.035em;margin:30px 0 8px}.share-object p{font-size:10px;color:var(--on-dark-subtle);line-height:1.55;margin:0}.share-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:var(--sp-5)}
     .referral-flow{display:grid;gap:10px;margin:var(--sp-5) 0 var(--sp-10)}.flow-step{position:relative;min-height:128px;padding:var(--sp-5);border:1px solid var(--line);border-radius:var(--radius-l);background:var(--surface)}.flow-step .mono{font-size:9px;color:var(--verified)}.flow-step h3{font:600 17px "Bricolage Grotesque";margin:22px 0 6px}.flow-step p{font-size:10px;color:var(--ink-quiet);line-height:1.55;margin:0}.flow-gate{margin-top:var(--sp-4);padding:var(--sp-4);border-radius:var(--radius-m);background:var(--p-amber-100);color:var(--caution);font-size:10px;line-height:1.55}.flow-gate strong{font-weight:700}
 
+    /* COMPANIES — real client evidence, never decorative ratings */
+    .company-lead{padding-bottom:var(--sp-5);display:grid;gap:var(--sp-4)}.company-lead-note{padding:var(--sp-4);border-left:3px solid var(--verified);border-radius:var(--radius-m);background:#eef8f5;color:var(--ink-subtle);font-size:11px;line-height:1.6}.company-grid{display:grid;gap:12px;padding-bottom:var(--sp-10)}
+    .company-card{position:relative;isolation:isolate;min-height:260px;padding:var(--sp-5);border:1px solid var(--line);border-radius:var(--radius-l);background:var(--surface);overflow:hidden;display:flex;flex-direction:column;transition:border-color var(--normal) var(--ease),box-shadow var(--normal) var(--ease)}.company-card::before{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),rgb(212 175 55 / .17),transparent 64%);opacity:0;transition:opacity var(--normal) var(--ease)}.company-card:hover,.company-card:focus-within{border-color:rgb(212 175 55 / .7);box-shadow:0 22px 54px rgb(0 31 63 / .13)}.company-card:hover::before,.company-card:focus-within::before{opacity:1}.company-brand-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.company-mark{width:62px;height:62px;border:1px solid var(--line);border-radius:18px;background:var(--surface-strong);display:grid;place-items:center;overflow:hidden;color:var(--brand);font:700 17px "Bricolage Grotesque"}.company-mark img{width:100%;height:100%;object-fit:contain;padding:7px}.company-state{padding:6px 9px;border:1px solid rgb(15 118 110 / .24);border-radius:var(--radius-pill);color:var(--verified);font:600 8px "JetBrains Mono";letter-spacing:.07em;text-transform:uppercase}.company-card h2{font:600 24px/1.08 "Bricolage Grotesque";letter-spacing:-.035em;margin:26px 0 5px}.company-meta{font-size:10px;color:var(--ink-quiet);margin:0}.company-proof{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:18px 0}.company-proof div{padding:10px;border:1px solid var(--line-soft);border-radius:var(--radius-s);background:rgb(255 255 255 / .58)}.company-proof strong{display:block;font:600 18px "JetBrains Mono"}.company-proof span{display:block;margin-top:3px;font-size:8px;color:var(--ink-quiet)}.company-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto}.company-actions .button{min-height:44px;padding-inline:14px;font-size:10px}
+    .company-detail{display:grid;gap:var(--sp-4);padding-bottom:var(--sp-10)}.company-portrait{position:relative;min-height:420px;border-radius:var(--radius-xl);padding:clamp(26px,6vw,58px);background:var(--brand-deep);color:var(--on-dark);overflow:hidden}.company-portrait::after{content:"";position:absolute;width:430px;height:430px;border:1px solid rgb(212 175 55 / .28);border-radius:50%;right:-210px;bottom:-250px;box-shadow:0 0 0 64px rgb(212 175 55 / .03),0 0 0 128px rgb(212 175 55 / .018)}.company-portrait>*{position:relative;z-index:1}.company-portrait .company-mark{width:82px;height:82px;border-color:rgb(255 255 255 / .2);background:var(--surface)}.company-portrait h1{font:600 clamp(42px,9vw,82px)/.92 "Bricolage Grotesque";letter-spacing:-.06em;margin:34px 0 12px;max-width:10ch}.company-portrait p{max-width:58ch;color:var(--on-dark-subtle);font-size:13px}.company-evidence{display:grid;gap:10px}.evidence-panel{padding:var(--sp-5);border:1px solid var(--line);border-radius:var(--radius-l);background:var(--surface)}.evidence-panel .fig{margin-bottom:20px}.evidence-panel h2{font:600 23px/1.1 "Bricolage Grotesque";margin:0 0 7px}.evidence-panel p{margin:0;color:var(--ink-quiet);font-size:10px;line-height:1.6}.evidence-number{font:600 42px/1 "JetBrains Mono";color:var(--brand);margin-bottom:12px}.company-detail-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--sp-5)}
+
     /* SAFETY */
     .safety-grid{display:grid;gap:10px;margin-bottom:var(--sp-6)}.safety-card{min-height:180px;padding:var(--sp-5);border:1px solid var(--line);border-radius:var(--radius-l);background:var(--surface)}.safety-no{font:600 10px "JetBrains Mono";color:var(--verified)}.safety-card h2{font:600 20px/1.1 "Bricolage Grotesque";margin:34px 0 8px}.safety-card p{font-size:11px;line-height:1.6;color:var(--ink-quiet);margin:0}.dignity-wall{border-radius:var(--radius-xl);background:var(--brand-deep);color:var(--on-dark);padding:clamp(24px,5vw,48px);margin-bottom:var(--sp-10)}.dignity-wall h2{font:600 clamp(30px,6vw,52px)/1 "Bricolage Grotesque";letter-spacing:-.05em;margin:12px 0}.dignity-wall p{font-size:12px;line-height:1.65;color:var(--on-dark-subtle);max-width:62ch}.evidence-row{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:var(--sp-6)}.evidence{padding:var(--sp-4);border:1px solid rgb(255 255 255 / .16);border-radius:var(--radius-m)}.evidence strong{display:block;font:600 26px "JetBrains Mono";color:var(--p-gold-200)}.evidence span{display:block;font-size:9px;color:var(--on-dark-subtle);margin-top:6px}
 
@@ -111,7 +116,7 @@
       .screen{padding:var(--sp-8)}.topbar-inner{padding-inline:var(--sp-8)}
       .home-grid{grid-template-columns:minmax(0,1.65fr) minmax(300px,.75fr);align-items:stretch}.hero-island{min-height:690px}.editorial-note{padding:var(--sp-8) 0}.trust-grid{grid-template-columns:1fr}
       .weld-grid{grid-template-columns:repeat(3,1fr)}.empty-layout{grid-template-columns:1.15fr .85fr}.empty-hero{grid-row:span 2;min-height:610px}.inventory-proof{align-self:end}
-      .referral-flow,.safety-grid{grid-template-columns:repeat(3,1fr)}.employer-split{grid-template-columns:1fr 1fr}.contract-grid{grid-template-columns:repeat(4,1fr)}
+      .referral-flow,.safety-grid{grid-template-columns:repeat(3,1fr)}.company-grid{grid-template-columns:repeat(2,1fr)}.company-detail{grid-template-columns:1.15fr .85fr}.company-evidence{grid-template-columns:1fr 1fr}.employer-split{grid-template-columns:1fr 1fr}.contract-grid{grid-template-columns:repeat(4,1fr)}
       .dialog-backdrop{place-items:center}.dialog{padding:var(--sp-8)}
     }
     @media(min-width:1080px){.tabbar{position:relative;inset:auto;width:520px;transform:none;height:68px;padding:4px;margin:0 auto 24px;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow-soft)}.tabbar-inner{height:58px}.shell{padding-bottom:24px}.toast{bottom:24px}}
@@ -133,7 +138,7 @@
           <div class="hero-kicker">Myanmar jobs · workplace truth</div>
           <h1 id="home-title">Know the work before you <em>say yes.</em></h1>
           <p class="hero-copy">Browse real client opportunities, understand the terms, explore workplace evidence, or bring a new job forward for free. Every path stays inside one clear ReferTRM experience.</p>
-          <div class="hero-actions"><a class="button button-accent" href="https://www.refertrm.com/eq/jobs">Browse 253 jobs<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a><button class="button button-quiet js-nav" type="button" data-target="safety">Explore workplace truth</button></div>
+          <div class="hero-actions"><a class="button button-accent" href="https://www.refertrm.com/eq/jobs">Browse 253 jobs<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a><button class="button button-quiet js-nav" type="button" data-target="companies">Explore real companies</button></div>
           <div class="proof-tape" aria-label="Current governed public inventory"><div class="proof"><strong data-public-count="activeCoreJobs">—</strong><span>active client roles</span></div><div class="proof"><strong data-public-count="clientCompanies">—</strong><span>client companies hiring</span></div><div class="proof"><strong data-public-count="communityJobsCleared">—</strong><span>community listings cleared</span></div></div>
           <div class="count-asof" id="count-asof" role="status" aria-live="polite">Checking the governed public-count contract</div>
         </div></article>
@@ -147,7 +152,7 @@
 
       <section class="welds" aria-labelledby="welds-title"><div class="welds-head"><div><div class="fig">FIG 02 / How it connects</div><h2 id="welds-title">Discovery should lead somewhere useful.</h2></div><p class="welds-caption">Jobs, fit, referrals and employer verification connect without blurring their responsibilities.</p></div><div class="weld-grid">
         <article class="weld-card"><span class="weld-no">WELD 01</span><h3>See my fit</h3><p>Anonymous discovery hands into sign-in, CV Builder, Trinity, and the authenticated matcher. This demo calculates no profile.</p><a class="weld-route" href="https://www.refertrm.com/login?redirectTo=/eq/cv-builder">Enter the core fit path<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a></article>
-        <article class="weld-card"><span class="weld-no">WELD 02 / LEAD</span><h3>Share the job</h3><p>Every future listing is a share-object. The core attaches the signed-in member's real referral code; this public demo never invents one.</p><button class="weld-route js-nav" type="button" data-target="refer">Inspect the share contract<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></button></article>
+        <article class="weld-card"><span class="weld-no">WELD 02 / LEAD</span><h3>Know the company</h3><p>A real role connects to a real client identity, current hiring evidence and an honest review state before anyone is asked to trust it.</p><button class="weld-route js-nav" type="button" data-target="companies">Explore company evidence<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></button></article>
         <article class="weld-card"><span class="weld-no">WELD 03</span><h3>Claim the employer</h3><p>A claim starts verification and a prospect record. It never grants edit rights, contracted status, or access to candidate data.</p><button class="weld-route js-nav" type="button" data-target="employers">Open the claim stub<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></button></article>
       </div></section>
       <div class="separation-note"><strong>One public experience can still protect important boundaries.</strong><span>Client records, candidate PII and recruiter-workable requisitions never enter the community posting channel. Workplace reviews, salary submissions and employer responses appear only after their eligibility, moderation and appeal paths are ready.</span></div>
@@ -172,6 +177,17 @@
       <div class="flow-gate"><strong>Open ruling:</strong> referral and Recruiter Pathway payout policy remains KoKo-only. This demo does not state an income promise or calculate a reward.</div>
     </div></section>
 
+    <section class="screen" data-screen="companies" aria-labelledby="companies-title"><div class="wrap">
+      <header class="screen-head"><div><div class="fig">FIG 04 / Real client companies</div><h1 class="section-title" id="companies-title">See who is hiring—and what is known.</h1><p class="section-lead">Company pages connect real client identity, active roles, salary clarity and workplace evidence. An empty review state stays empty; we never turn missing evidence into a score.</p></div><button class="back js-nav" type="button" data-target="home"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>Hub</button></header>
+      <div class="company-lead"><div class="company-lead-note"><strong>Live hiring signal, governed public projection.</strong> These are real ReferTRM client companies with active roles at the audit date. Browse roles in ReferTRM core; share a company here without inventing a referral identity.</div><div class="count-asof" id="company-asof" role="status" aria-live="polite">Loading governed company evidence</div></div>
+      <div class="company-grid" id="company-grid" aria-live="polite"></div>
+    </div></section>
+
+    <section class="screen" data-screen="company" aria-labelledby="company-title"><div class="wrap">
+      <header class="screen-head"><button class="back js-nav" type="button" data-target="companies"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>All companies</button></header>
+      <div class="company-detail"><article class="company-portrait" id="company-portrait"></article><div class="company-evidence" id="company-evidence"></div></div>
+    </div></section>
+
     <section class="screen" data-screen="safety" aria-labelledby="safety-title"><div class="narrow">
       <header class="screen-head"><div><div class="fig">FIG 05 / Safety and dignity</div><h1 class="section-title" id="safety-title">Before you apply, protect the person who depends on that income.</h1><p class="section-lead">Trust signals are content. Unknowns remain visible questions instead of decorative badges.</p></div><button class="back js-nav" type="button" data-target="home"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>Hub</button></header>
       <div class="safety-grid"><article class="safety-card"><span class="safety-no">01 / IDENTITY</span><h2>Check the employer.</h2><p>Use the exact legal or trading name and an official public source. A claim is not verification.</p></article><article class="safety-card"><span class="safety-no">02 / PAYMENT</span><h2>Pay nothing to apply.</h2><p>No registration fee, interview fee, placement fee, uniform deposit, or processing payment.</p></article><article class="safety-card"><span class="safety-no">03 / TERMS</span><h2>Get the work in writing.</h2><p>Confirm salary, hours, location, reporting line, probation, and leave before accepting.</p></article></div>
@@ -189,28 +205,34 @@
   <nav class="tabbar" aria-label="Jobs and Workplace Truth navigation"><div class="tabbar-inner" role="tablist">
     <button class="nav-tab js-nav" role="tab" type="button" aria-selected="true" data-target="home"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m4 11 8-7 8 7v9H4zM9 20v-6h6v6"/></svg><span>Hub</span></button>
     <button class="nav-tab js-nav" role="tab" type="button" aria-selected="false" data-target="jobs"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 7h18v13H3zM3 12h18"/></svg><span>Jobs</span></button>
-    <button class="nav-tab js-nav" role="tab" type="button" aria-selected="false" data-target="refer"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.6-4.5M8.2 13.2l7.6 4.5"/></svg><span>Refer</span></button>
+    <button class="nav-tab js-nav" role="tab" type="button" aria-selected="false" data-target="companies"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 20V8h7v12M11 5h9v15M7 12h1m-1 4h1m7-7h1m-1 4h1m-1 4h1"/></svg><span>Companies</span></button>
     <button class="nav-tab js-nav" role="tab" type="button" aria-selected="false" data-target="safety"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m12 3 7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/><path d="m9 12 2 2 4-4"/></svg><span>Safety</span></button>
   </div></nav>
 
-  <div class="dialog-backdrop" id="share-dialog" role="presentation"><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="share-title"><div class="dialog-handle" aria-hidden="true"></div><h2 id="share-title">Share the honest search.</h2><p>There is no verified job object today, so this link carries no invented role and no referral code.</p><div class="share-url" id="share-url"></div><div class="dialog-actions"><button class="button button-primary" id="native-share" type="button">Share</button><button class="button button-quiet" id="copy-share" type="button">Copy link</button></div><p class="dialog-note">Sign in to ReferTRM when you need your real canonical referral identity.</p><button class="button button-quiet button-wide" id="close-share" type="button" style="margin-top:10px">Close</button></section></div>
+  <div class="dialog-backdrop" id="share-dialog" role="presentation"><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="share-title"><div class="dialog-handle" aria-hidden="true"></div><h2 id="share-title">Share the honest search.</h2><p id="share-copy">This public link carries no invented role, rating, or referral code.</p><div class="share-url" id="share-url"></div><div class="dialog-actions"><button class="button button-primary" id="native-share" type="button">Share</button><button class="button button-quiet" id="copy-share" type="button">Copy link</button></div><p class="dialog-note" id="share-note">Sign in to ReferTRM when you need your real canonical referral identity.</p><button class="button button-quiet button-wide" id="close-share" type="button" style="margin-top:10px">Close</button></section></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <div class="sr-only" id="announcer" aria-live="polite"></div>
 
   <noscript><div class="noscript"><h1>Jobs &amp; Workplace Truth</h1><p>Know the work before you say yes. Browse 253 active client roles from 74 client companies. Community listings remain at zero until they clear publication.</p><p><a href="https://www.refertrm.com/eq/jobs">Browse ReferTRM jobs</a> · <a href="https://www.refertrm.com/employers?source=board_claim">Post a job free</a></p></div></noscript>
 
   <script>
-    const screens={home:'Jobs and Workplace Truth',jobs:'Free job portal',refer:'Referral first',safety:'Workplace truth and safety',employers:'Post a job free'};
+    const screens={home:'Jobs and Workplace Truth',jobs:'Free job portal',companies:'Real client companies',company:'Company evidence',refer:'Referral first',safety:'Workplace truth and safety',employers:'Post a job free'};
     const select=(selector,root=document)=>root.querySelector(selector);
     const selectAll=(selector,root=document)=>[...root.querySelectorAll(selector)];
-    const shareLink=new URL(location.href);shareLink.search='';shareLink.searchParams.set('screen','jobs');shareLink.searchParams.set('utm_source','branch_share');
+    const escapeHTML=value=>String(value).replace(/[&<>'"]/g,character=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[character]));
+    const defaultShareLink=new URL(location.href);defaultShareLink.search='';defaultShareLink.searchParams.set('screen','jobs');defaultShareLink.searchParams.set('utm_source','public_share');
+    let shareState={url:defaultShareLink.href,title:'ReferTRM Jobs & Workplace Truth',text:'Know the work before you say yes.',kind:'search'};
+    let companyData=[];
     let lastFocus=null;
 
-    function showScreen(name,{historyMode='push',focus=true}={}){
+    function showScreen(name,{historyMode='push',focus=true,companySlug=null}={}){
+      if(name==='hub')name='companies';
       if(!screens[name])name='home';
       selectAll('[data-screen]').forEach(screen=>screen.classList.toggle('is-active',screen.dataset.screen===name));
-      selectAll('.nav-tab').forEach(tab=>tab.setAttribute('aria-selected',String(tab.dataset.target===name)));
+      const activeTab=name==='company'?'companies':name;
+      selectAll('.nav-tab').forEach(tab=>tab.setAttribute('aria-selected',String(tab.dataset.target===activeTab)));
       const url=new URL(location.href);url.searchParams.set('screen',name);
+      if(name==='company'&&companySlug)url.searchParams.set('company',companySlug);else url.searchParams.delete('company');
       if(historyMode)history[historyMode+'State']({},'',url);
       scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
       select('#announcer').textContent=screens[name];
@@ -218,7 +240,38 @@
     }
 
     selectAll('.js-nav').forEach(control=>control.addEventListener('click',()=>showScreen(control.dataset.target)));
-    addEventListener('popstate',()=>showScreen(new URLSearchParams(location.search).get('screen')||'home',{historyMode:null,focus:true}));
+    addEventListener('popstate',()=>openInitialRoute({historyMode:null,focus:true}));
+
+    const initials=name=>name.split(/\s+/).filter(Boolean).slice(0,2).map(part=>part[0]).join('').toUpperCase();
+    const markFor=company=>company.logo?`<span class="company-mark"><img src="${escapeHTML(company.logo)}" alt="${escapeHTML(company.name)} logo" width="62" height="62" data-company-logo data-initial="${escapeHTML(initials(company.name))}"></span>`:`<span class="company-mark" role="img" aria-label="${escapeHTML(company.name)} lettermark">${escapeHTML(initials(company.name))}</span>`;
+    function companyShareURL(company){const url=new URL(location.href);url.search='';url.searchParams.set('screen','company');url.searchParams.set('company',company.slug);url.searchParams.set('utm_source','company_share');return url.href}
+    function coreCompanyURL(company){return `https://www.refertrm.com/company/${encodeURIComponent(company.slug)}`}
+    function coreJobsURL(company){return `https://www.refertrm.com/eq/jobs?company=${encodeURIComponent(company.slug)}`}
+
+    function bindCompanyLogos(root=document){selectAll('[data-company-logo]',root).forEach(image=>image.addEventListener('error',()=>{const fallback=document.createElement('span');fallback.className='company-mark';fallback.setAttribute('role','img');fallback.setAttribute('aria-label',`${image.alt.replace(/ logo$/,'')} lettermark`);fallback.textContent=image.dataset.initial;image.closest('.company-mark').replaceWith(fallback)},{once:true}))}
+    function bindCompanySheen(root=document){if(!matchMedia('(hover:hover) and (pointer:fine)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;selectAll('.company-card',root).forEach(card=>card.addEventListener('pointermove',event=>{const rect=card.getBoundingClientRect();card.style.setProperty('--mx',`${event.clientX-rect.left}px`);card.style.setProperty('--my',`${event.clientY-rect.top}px`)},{passive:true}))}
+
+    function renderCompanies(contract){
+      companyData=contract.companies;
+      select('#company-asof').textContent=`Audited ${contract.asOf} · ${companyData.length} real client examples · no inferred ratings`;
+      select('#company-grid').innerHTML=companyData.map(company=>`<article class="company-card"><div class="company-brand-row">${markFor(company)}<span class="company-state">Real client · hiring</span></div><h2>${escapeHTML(company.name)}</h2><p class="company-meta">${escapeHTML(company.industry)} · ${escapeHTML(company.location)}</p><div class="company-proof"><div><strong>${company.activeRoles}</strong><span>active roles</span></div><div><strong>${company.salaryVisibleRoles}</strong><span>salary-visible</span></div></div><div class="company-actions"><button class="button button-primary js-company" type="button" data-company="${escapeHTML(company.slug)}">View company</button><a class="button button-quiet" href="${coreJobsURL(company)}">Browse roles</a><button class="button button-quiet js-share" type="button" data-company-share="${escapeHTML(company.slug)}">Share</button></div></article>`).join('');
+      bindCompanyLogos(select('#company-grid'));bindCompanySheen(select('#company-grid'));
+    }
+
+    function renderCompany(company){
+      document.title=`${company.name} — Jobs & Workplace Truth`;
+      select('#company-portrait').innerHTML=`${markFor(company)}<div class="fig" style="color:var(--p-gold-200);margin-top:28px">Real client company · current hiring evidence</div><h1 id="company-title">${escapeHTML(company.name)}</h1><p>${escapeHTML(company.industry)} · ${escapeHTML(company.location)}. This public surface connects the company identity to live opportunities without inventing workplace sentiment.</p><div class="company-detail-actions"><a class="button button-accent" href="${coreJobsURL(company)}">Browse ${company.activeRoles} roles</a><a class="button button-quiet" href="${coreCompanyURL(company)}" style="background:transparent;border-color:rgb(255 255 255 / .25);color:white">Open in ReferTRM</a><button class="button button-quiet js-share" type="button" data-company-share="${escapeHTML(company.slug)}" style="background:transparent;border-color:rgb(255 255 255 / .25);color:white">Share company</button></div>`;
+      select('#company-evidence').innerHTML=`<article class="evidence-panel"><div class="fig">Hiring now</div><div class="evidence-number">${company.activeRoles}</div><h2>Active opportunities</h2><p>Browse these roles in ReferTRM core, where job and application responsibilities remain governed.</p></article><article class="evidence-panel"><div class="fig">Salary clarity</div><div class="evidence-number">${company.salaryVisibleRoles}</div><h2>Roles show salary</h2><p>This is a current inventory count, not a market benchmark or worker-submitted salary claim.</p></article><article class="evidence-panel"><div class="fig">Workplace voice</div><div class="evidence-number">0</div><h2>No workplace reviews published yet.</h2><p>No stars, sentiment score, or “best workplace” badge is manufactured from an empty evidence state.</p></article><article class="evidence-panel"><div class="fig">Share safely</div><h2>Send one honest company link.</h2><p>The public link carries this company identity and evidence. ReferTRM core adds a real member referral identity only after sign-in.</p><div class="company-detail-actions"><button class="button button-primary js-share" type="button" data-company-share="${escapeHTML(company.slug)}">Share company</button></div></article>`;
+      bindCompanyLogos(select('#company-portrait'));
+    }
+
+    function openCompany(slug,{historyMode='push',focus=true}={}){const company=companyData.find(item=>item.slug===slug);if(!company){showScreen('companies',{historyMode,focus});return}renderCompany(company);showScreen('company',{historyMode,focus,companySlug:slug})}
+    function openInitialRoute({historyMode='replace',focus=false}={}){const params=new URLSearchParams(location.search),screen=params.get('screen')||'home';if(screen==='company')openCompany(params.get('company'),{historyMode,focus});else showScreen(screen,{historyMode,focus})}
+    document.addEventListener('click',event=>{const companyButton=event.target.closest('.js-company');if(companyButton)openCompany(companyButton.dataset.company)});
+
+    async function loadCompanies(){
+      try{const response=await fetch('../../data/public-company-cards-v1.json',{headers:{Accept:'application/json'}});if(!response.ok)throw new Error(`Company contract failed: ${response.status}`);const contract=await response.json();if(contract.contract!=='refertrm-public-company-cards-v1'||!Array.isArray(contract.companies)||!contract.companies.every(company=>company.name&&company.slug&&Number.isSafeInteger(company.activeRoles)&&Number.isSafeInteger(company.salaryVisibleRoles)&&company.publishedReviews===0))throw new Error('Invalid company contract');renderCompanies(contract)}catch(error){select('#company-asof').textContent='Company evidence unavailable · browse the governed ReferTRM job search';select('#company-grid').innerHTML='<article class="company-lead-note">We could not load the governed company projection. No fallback companies or ratings were invented. <a href="https://www.refertrm.com/eq/jobs"><strong>Browse ReferTRM jobs</strong></a>.</article>'}
+    }
 
     async function loadPublicCounts(){
       const started=performance.now(),status=select('#count-asof');
@@ -242,9 +295,14 @@
 
     const modalBackground=[select('#main'),select('.topbar'),select('.tabbar')];
     function setModalBackground(inert){modalBackground.forEach(node=>{if(node)node.inert=inert})}
-    function openShare(trigger){lastFocus=trigger;select('#share-url').textContent=shareLink.href;select('#share-dialog').classList.add('is-open');document.body.classList.add('modal-open');setModalBackground(true);select('#native-share').focus()}
+    function openShare(trigger){
+      lastFocus=trigger;const slug=trigger.dataset.companyShare,company=companyData.find(item=>item.slug===slug);
+      if(company){shareState={url:companyShareURL(company),title:`${company.name} — ReferTRM`,text:`See ${company.name}'s active roles and current workplace evidence.`,kind:'company'};select('#share-title').textContent=`Share ${company.name}.`;select('#share-copy').textContent='This link carries the real company identity, current hiring evidence, and no invented rating or referral code.';select('#share-note').textContent='Sign in to ReferTRM when you need your canonical member referral identity.'}
+      else{shareState={url:defaultShareLink.href,title:'ReferTRM Jobs & Workplace Truth',text:'Know the work before you say yes.',kind:'search'};select('#share-title').textContent='Share the honest search.';select('#share-copy').textContent='This public link carries no invented role, rating, or referral code.';select('#share-note').textContent='Sign in to ReferTRM when you need your real canonical referral identity.'}
+      select('#share-url').textContent=shareState.url;select('#share-dialog').classList.add('is-open');document.body.classList.add('modal-open');setModalBackground(true);select('#native-share').focus()
+    }
     function closeShare(){select('#share-dialog').classList.remove('is-open');document.body.classList.remove('modal-open');setModalBackground(false);lastFocus?.focus()}
-    selectAll('.js-share').forEach(button=>button.addEventListener('click',()=>openShare(button)));
+    document.addEventListener('click',event=>{const button=event.target.closest('.js-share');if(button)openShare(button)});
     select('#close-share').addEventListener('click',closeShare);
     select('#share-dialog').addEventListener('click',event=>{if(event.target===select('#share-dialog'))closeShare()});
     addEventListener('keydown',event=>{
@@ -260,13 +318,13 @@
     });
 
     function toast(message){const el=select('#toast');el.textContent=message;el.classList.add('is-visible');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove('is-visible'),2200)}
-    async function copyShare(){try{await navigator.clipboard.writeText(shareLink.href);toast('Job search link copied')}catch{toast('Copy unavailable — select the link manually')}}
+    async function copyShare(){try{await navigator.clipboard.writeText(shareState.url);toast(shareState.kind==='company'?'Company link copied':'Job search link copied')}catch{toast('Copy unavailable — select the link manually')}}
     select('#copy-share').addEventListener('click',copyShare);
-    select('#native-share').addEventListener('click',async()=>{if(navigator.share){try{await navigator.share({title:'ReferTRM Jobs & Workplace Truth',text:'Know the work before you say yes.',url:shareLink.href})}catch(error){if(error.name!=='AbortError')await copyShare()}}else await copyShare()});
+    select('#native-share').addEventListener('click',async()=>{if(navigator.share){try{await navigator.share({title:shareState.title,text:shareState.text,url:shareState.url})}catch(error){if(error.name!=='AbortError')await copyShare()}}else await copyShare()});
 
     select('#claim-form').addEventListener('submit',event=>{event.preventDefault();const name=select('#company-name');const site=select('#company-site');if(!name.value.trim()||!site.value.trim()){toast('Add the company name and official public page');(!name.value.trim()?name:site).focus();return}try{if(new URL(site.value).protocol!=='https:')throw new Error('HTTPS required')}catch{toast('Use a complete public URL beginning with https://');site.focus();return}select('#toast').classList.remove('is-visible');select('#claim-status').classList.add('is-visible');select('#claim-status').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'})});
 
-    const initial=new URLSearchParams(location.search).get('screen')||'home';showScreen(initial,{historyMode:'replace',focus:false});loadPublicCounts();
+    Promise.all([loadCompanies(),loadPublicCounts()]).finally(()=>openInitialRoute({historyMode:'replace',focus:false}));
   </script>
 </body>
 </html>
