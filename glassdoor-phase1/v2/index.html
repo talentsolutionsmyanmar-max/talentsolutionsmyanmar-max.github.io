@@ -40,14 +40,17 @@
   --mono:'JetBrains Mono',monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;color:var(--navy-ink);background:var(--wash);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-.mm{font-family:'DM Sans','Padauk',sans-serif;line-height:1.8}
+.mm{font-family:'DM Sans','Padauk',sans-serif;font-size:15px;line-height:2.1}
 h1,h2,h3,h4{font-family:'Sora',sans-serif;color:var(--navy);line-height:1.25}
 a{color:var(--teal-deep);text-decoration:underline;text-underline-offset:3px}
 a:hover{color:var(--navy)}
 :focus-visible{outline:3px solid var(--teal);outline-offset:2px;border-radius:4px}
 button{font-family:inherit;cursor:pointer}
+.skip-link{position:fixed;left:12px;top:12px;z-index:100;background:#fff;color:var(--navy);font-weight:700;padding:10px 14px;border:2px solid var(--teal);border-radius:8px;transform:translateY(-160%)}
+.skip-link:focus{transform:translateY(0)}
 .wrap{max-width:1120px;margin:0 auto;padding:0 16px}
 @media(min-width:768px){.wrap{padding:0 32px}}
 
@@ -63,7 +66,7 @@ button{font-family:inherit;cursor:pointer}
 .demo-btn[aria-pressed="true"]{background:var(--teal-deep);border-color:var(--teal);color:#fff;font-weight:700}
 .demo-btn:hover{border-color:var(--gold)}
 .demo-links{display:flex;gap:4px 14px;flex-wrap:wrap;margin-top:8px}
-.demo-links a{color:#9FB3CC;font-size:12px;font-family:var(--mono);text-decoration:none;padding:6px 0}
+.demo-links a{color:#9FB3CC;font-size:12px;font-family:var(--mono);text-decoration:none;padding:10px 0;min-height:44px;display:inline-flex;align-items:center}
 .demo-links a:hover{color:#FFD766}
 
 /* ---------- HOST BAR / HEADER (preserved v1) ---------- */
@@ -200,6 +203,7 @@ section.block{padding:32px 0 8px}
 @media(min-width:640px){.choice-grid{grid-template-columns:1fr 1fr}}
 .choice{border:1.5px solid var(--line);border-radius:10px;background:#fff;padding:16px;text-align:left;min-height:44px}
 .choice:hover{border-color:var(--teal-deep)}
+.choice[aria-pressed="true"]{border-color:var(--teal-deep);background:var(--teal-tint);box-shadow:inset 4px 0 0 var(--teal-deep)}
 .choice h4{font-size:15px;display:flex;align-items:center;gap:8px}
 .choice p{font-size:13px;color:var(--slate);margin-top:6px}
 .tap-opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
@@ -213,6 +217,8 @@ textarea.grow{width:100%;min-height:90px;border:1.5px solid var(--line);border-r
 textarea.grow:focus-visible{outline:3px solid var(--teal);outline-offset:0;border-color:var(--teal-deep)}
 .autosave{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--teal-deep);font-weight:600;margin-top:8px}
 .autosave svg{width:13px;height:13px}
+.status-note{margin-top:12px;border-left:4px solid var(--teal-deep);background:var(--teal-tint);border-radius:0 8px 8px 0;padding:12px 14px;font-size:13px;color:var(--navy)}
+.status-note[data-tone="warning"]{border-color:#D9A93B;background:var(--amber-tint)}
 
 /* offline banner */
 .offline-banner{display:flex;align-items:flex-start;gap:10px;background:var(--amber-tint);border:1.5px solid #D9A93B;border-radius:10px;padding:14px 16px;margin-bottom:16px}
@@ -239,9 +245,9 @@ textarea.grow:focus-visible{outline:3px solid var(--teal);outline-offset:0;borde
 .coarsen-row .cr-l b{color:var(--navy)}
 .coarsen-row .cr-l .fine{color:var(--danger);font-weight:600}
 .coarsen-row .cr-l .coarse{color:var(--teal-deep);font-weight:600}
-.switch{position:relative;width:52px;height:30px;flex-shrink:0}
+.switch{position:relative;width:52px;height:44px;flex-shrink:0}
 .switch input{position:absolute;opacity:0;width:100%;height:100%;cursor:pointer;margin:0}
-.switch .tr{position:absolute;inset:0;background:#C6CFDB;border-radius:20px;transition:background .15s}
+.switch .tr{position:absolute;left:0;right:0;top:7px;bottom:7px;background:#C6CFDB;border-radius:20px;transition:background .15s}
 .switch .th{position:absolute;top:3px;left:3px;width:24px;height:24px;background:#fff;border-radius:50%;transition:left .15s}
 .switch input:checked + .tr{background:var(--teal-deep)}
 .switch input:checked + .tr .th{left:25px}
@@ -297,9 +303,21 @@ footer.prov .row span{display:inline-flex;align-items:center;gap:6px}
 footer.prov .k{color:#FFD766}
 footer.prov p{font-size:12px;margin-top:12px;color:#8FA3BD;max-width:70ch}
 .card,.empty,.salary-card,.incident{overflow-wrap:anywhere}
+@media(max-width:520px){
+  .truth-grid{grid-template-columns:1fr}
+  .incident-row{display:grid;grid-template-columns:18px 1fr}
+  .incident-row .lbl{display:block;min-width:0}
+  .demo-bar{position:relative}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
 </style>
 </head>
 <body>
+
+<a class="skip-link" href="#main-content">Skip to company evidence</a>
 
 <!-- DEMO CONTROL BAR — REVIEW CHROME ONLY. NOT PART OF PRODUCTION UI. -->
 <div class="demo-bar" role="region" aria-label="Design demo controls — not production UI">
@@ -377,7 +395,8 @@ footer.prov p{font-size:12px;margin-top:12px;color:#8FA3BD;max-width:70ch}
   </div>
 </div>
 
-<main class="wrap">
+<main class="wrap" id="main-content" tabindex="-1">
+<div class="status-note" id="global-status" role="status" aria-live="polite" hidden></div>
 
 <!-- ==================== TWO TRUTH TYPES ==================== -->
 <section class="block" id="two-truths" aria-labelledby="tt-h">
@@ -528,7 +547,7 @@ footer.prov p{font-size:12px;margin-top:12px;color:#8FA3BD;max-width:70ch}
       <div class="ask-box"><span class="lbl">What to ask before you decide</span> "When will I hear the outcome, and who do I follow up with if that date passes?"</div>
       <div class="incident-foot">
         <span class="mono-note">PUBLISHED AFTER PRIVACY SHIELD · COARSE ATTRIBUTION ONLY</span>
-        <button class="report-link" type="button">Report this report</button>
+        <button class="report-link" type="button" data-report-kind="hiring report">Report this report</button>
       </div>
     </div>
   </div>
@@ -565,7 +584,7 @@ footer.prov p{font-size:12px;margin-top:12px;color:#8FA3BD;max-width:70ch}
       <div class="ask-box"><span class="lbl">What to ask before you decide</span> "Can I see the commission terms in writing before I sign, and what is the real finish time during campaign weeks?"</div>
       <div class="incident-foot">
         <span class="mono-note">PUBLISHED AFTER PRIVACY SHIELD · ROLE &amp; EXACT DATE REMOVED BY SYSTEM (D-23)</span>
-        <button class="report-link" type="button">Report this account</button>
+        <button class="report-link" type="button" data-report-kind="workplace account">Report this account</button>
       </div>
     </div>
     <p class="small muted">Individual accounts appear only when the publication threshold is met. Rare role/location/tenure combinations stay as aggregated signals (D-23).</p>
@@ -655,10 +674,10 @@ footer.prov p{font-size:12px;margin-top:12px;color:#8FA3BD;max-width:70ch}
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01M1.42 9a16 16 0 0 1 21.16 0" opacity=".4"/><path d="m2 2 20 20"/></svg>
     <div style="flex:1">
       <p class="ob-title">Connection lost — your answers are safe on this device</p>
-      <p class="ob-sub">Everything you entered is saved locally and will send when you are back online. Nothing is lost. This also works inside Viber / Messenger in-app browsers.</p>
+      <p class="ob-sub">This reference demo keeps your answers only in this browser so you can restore them after a refresh. It does not send anything. Production sync and in-app-browser support remain architecture and field-test gates.</p>
       <div class="ob-actions">
         <button class="btn btn-teal" type="button" id="restore-btn">Restore my draft</button>
-        <button class="btn btn-ghost" type="button">Discard draft</button>
+        <button class="btn btn-ghost" type="button" id="discard-btn">Discard local draft</button>
       </div>
     </div>
   </div>
@@ -667,12 +686,12 @@ footer.prov p{font-size:12px;margin-top:12px;color:#8FA3BD;max-width:70ch}
   <div class="card">
     <div class="flow-steps"><span class="fs on">1 · RELATIONSHIP</span><span class="fs">2 · WHAT HAPPENED</span><span class="fs">3 · PATTERN</span><span class="fs">4 · ADVICE</span><span class="fs">5 · PRIVACY SHIELD</span></div>
     <h3 style="font-size:16px;margin-bottom:10px">First — what was your relationship with this company?</h3>
-    <div class="choice-grid">
-      <button class="choice" type="button">
+    <div class="choice-grid" id="relationship-choices" role="group" aria-label="Relationship with this company">
+      <button class="choice" type="button" data-relationship="hiring" aria-pressed="false">
         <h4><span class="truth-chip hiring">HIRING</span> I applied or interviewed</h4>
         <p>Application, interview, offer stage. You can describe how hiring treated you — not what it is like to work there.</p>
       </button>
-      <button class="choice" type="button">
+      <button class="choice" type="button" data-relationship="workplace" aria-pressed="false">
         <h4><span class="truth-chip workplace">WORKPLACE</span> I work or worked there</h4>
         <p>Pay, hours, leave, management, promotion. Needs stronger proof of an employment relationship (D-21) before publication.</p>
       </button>
@@ -718,7 +737,7 @@ footer.prov p{font-size:12px;margin-top:12px;color:#8FA3BD;max-width:70ch}
         <button class="tap" type="button" aria-pressed="false">Never explained</button>
       </div>
     </div>
-    <span class="autosave"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Draft saved on this device · just now</span>
+    <span class="autosave"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Quiet-signal choices save locally when changed</span>
     <div class="mm-slot"><span class="slot-tag">MM SLOT — CCO TO AUTHOR · QUESTION REGISTER (FORMAL-POLITE) + REASSURANCE</span><p class="slot-body mm">[MM SLOT — CCO TO AUTHOR]</p></div>
   </div>
 
@@ -733,23 +752,23 @@ footer.prov p{font-size:12px;margin-top:12px;color:#8FA3BD;max-width:70ch}
       <div class="tap-opts"><button class="tap" type="button" aria-pressed="true">Pay amount / date</button><button class="tap" type="button" aria-pressed="false">Working hours</button><button class="tap" type="button" aria-pressed="false">Commission terms</button><button class="tap" type="button" aria-pressed="false">Promotion / probation</button><button class="tap" type="button" aria-pressed="false">Other</button></div>
     </div>
     <div class="q-block">
-      <p class="q-text">What happened in practice?</p>
-      <textarea class="grow" placeholder="Optional. One event is enough. Do not include your name, your team, or dates that identify you."></textarea>
+      <label class="q-text" for="incident-detail">What happened in practice?</label>
+      <textarea class="grow" id="incident-detail" data-draft-key="incidentDetail" placeholder="Optional. One event is enough. Do not include your name, your team, or dates that identify you."></textarea>
     </div>
     <div class="q-block">
       <p class="q-text">One-time event or repeated pattern?</p>
       <div class="tap-opts"><button class="tap" type="button" aria-pressed="false">One time</button><button class="tap" type="button" aria-pressed="true">Repeated pattern</button><button class="tap" type="button" aria-pressed="false">Not sure</button></div>
     </div>
     <div class="q-block">
-      <p class="q-text">What should another jobseeker ask before deciding?</p>
-      <textarea class="grow" placeholder="One question you wish you had asked."></textarea>
+      <label class="q-text" for="decision-question">What should another jobseeker ask before deciding?</label>
+      <textarea class="grow" id="decision-question" data-draft-key="decisionQuestion" placeholder="One question you wish you had asked."></textarea>
     </div>
     <div class="q-block">
       <p class="q-text">Which details could identify you?</p>
       <p class="q-note">The Privacy Shield on the next step checks this with you before anything is published.</p>
       <div class="tap-opts"><button class="tap" type="button" aria-pressed="true">My exact role</button><button class="tap" type="button" aria-pressed="false">My team / shift</button><button class="tap" type="button" aria-pressed="false">Exact dates</button><button class="tap" type="button" aria-pressed="false">None of these</button></div>
     </div>
-    <span class="autosave"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Draft saved on this device · just now — connection loss will not erase it</span>
+    <span class="autosave" id="autosave-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Local draft ready · answers save on this device</span>
     <div class="mm-slot"><span class="slot-tag">MM SLOT — CCO TO AUTHOR · GUIDED PROMPTS + ANADEH-SAFE INDIRECT PHRASING</span><p class="slot-body mm">[MM SLOT — CCO TO AUTHOR]</p></div>
   </div>
 
@@ -763,7 +782,7 @@ footer.prov p{font-size:12px;margin-top:12px;color:#8FA3BD;max-width:70ch}
     <div class="shield-body">
       <p class="preview-label">Exactly what the public will see</p>
       <div class="public-preview">
-        <div class="who" style="font-size:13px;color:var(--slate)"><strong style="color:var(--navy-ink);display:block;font-size:14px">A worker</strong> Yangon region · within the last year</div>
+        <div class="who" id="public-attribution" style="font-size:13px;color:var(--slate)"><strong style="color:var(--navy-ink);display:block;font-size:14px">A worker</strong> Yangon region · within the last year</div>
         <p style="font-size:14px;margin-top:8px">"Most days ended near 7 PM during campaign weeks. Commission terms were never given in writing, even after asking. Pay itself arrived on the promised date."</p>
         <p class="mono-note" style="margin-top:8px">VERIFIED CONTACT = AN INTERACTION HAPPENED · IT DOES NOT PROVE EVERY STATEMENT IS TRUE</p>
       </div>
@@ -771,8 +790,8 @@ footer.prov p{font-size:12px;margin-top:12px;color:#8FA3BD;max-width:70ch}
       <div class="risk-flag">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
         <div>
-          <p class="rf-t">Re-identification risk detected</p>
-          <p class="rf-s">Your original details — <em>SDR team · Yangon · 8 months tenure · submitted 12 Jun</em> — could identify you in a small team. The Shield has coarsened them below. You can generalise further.</p>
+          <p class="rf-t" id="risk-title">Re-identification risk detected</p>
+          <p class="rf-s" id="risk-copy">Your original details — <em>SDR team · Yangon · 8 months tenure · submitted 12 Jun</em> — could identify you in a small team. The Shield has coarsened them below. You can generalise further.</p>
         </div>
       </div>
 
@@ -801,9 +820,10 @@ footer.prov p{font-size:12px;margin-top:12px;color:#8FA3BD;max-width:70ch}
       </div>
 
       <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-        <button class="btn btn-teal" type="button">Approve shielded version</button>
-        <button class="btn btn-ghost" type="button">Share as quiet signals only</button>
+        <button class="btn btn-teal" type="button" data-review-action="shielded">Approve shielded version</button>
+        <button class="btn btn-ghost" type="button" data-review-action="quiet">Share as quiet signals only</button>
       </div>
+      <div class="status-note" id="review-status" role="status" aria-live="polite" hidden></div>
       <div class="mm-slot"><span class="slot-tag">MM SLOT — CCO TO AUTHOR · RISK WARNING + REASSURANCE REGISTER (MOST SENSITIVE SLOT)</span><p class="slot-body mm">[MM SLOT — CCO TO AUTHOR]</p></div>
     </div>
   </div>
@@ -873,8 +893,67 @@ footer.prov p{font-size:12px;margin-top:12px;color:#8FA3BD;max-width:70ch}
 <script>
 (function(){
   var state={data:'empty',salary:'none'};
+  var allowed={data:['empty','small','populated'],salary:['none','benchmark','mixed']};
+  var draftKey='refertrm-glassdoor-mm-v2-draft';
   var q=new URLSearchParams(location.search);
-  ['data','salary'].forEach(function(k){ if(q.get(k)) state[k]=q.get(k); });
+  ['data','salary'].forEach(function(k){ if(allowed[k].indexOf(q.get(k))>-1) state[k]=q.get(k); });
+
+  function safeRead(){
+    try{return JSON.parse(localStorage.getItem(draftKey)||'null');}catch(e){return null;}
+  }
+  function safeWrite(value){
+    try{localStorage.setItem(draftKey,JSON.stringify(value));return true;}catch(e){return false;}
+  }
+  function announce(message,tone){
+    var box=document.getElementById('global-status');
+    box.textContent=message; box.dataset.tone=tone||'success'; box.hidden=false;
+  }
+  function selectedText(group){
+    var selected=group.querySelector('.tap[aria-pressed="true"]');
+    return selected ? selected.textContent.trim() : '';
+  }
+  function collectDraft(){
+    var relationship=document.querySelector('.choice[aria-pressed="true"]');
+    return {
+      version:2,
+      savedAt:new Date().toISOString(),
+      relationship:relationship ? relationship.dataset.relationship : '',
+      taps:Array.prototype.map.call(document.querySelectorAll('.tap-opts'),selectedText),
+      incidentDetail:document.getElementById('incident-detail').value,
+      decisionQuestion:document.getElementById('decision-question').value,
+      shield:Array.prototype.map.call(document.querySelectorAll('.switch input'),function(input){return input.checked;})
+    };
+  }
+  function saveDraft(){
+    var ok=safeWrite(collectDraft());
+    var status=document.getElementById('autosave-status');
+    status.lastChild.textContent=ok ? ' Draft saved only on this device · just now' : ' Local saving unavailable in this browser';
+    status.style.color=ok?'var(--teal-deep)':'var(--danger)';
+  }
+  function restoreDraft(){
+    var draft=safeRead();
+    if(!draft){announce('No local draft was found. Nothing has been sent or lost.','warning');return;}
+    document.querySelectorAll('.choice').forEach(function(button){button.setAttribute('aria-pressed',String(button.dataset.relationship===draft.relationship));});
+    document.querySelectorAll('.tap-opts').forEach(function(group,index){
+      group.querySelectorAll('.tap').forEach(function(button){button.setAttribute('aria-pressed',String(button.textContent.trim()===(draft.taps||[])[index]));});
+    });
+    document.getElementById('incident-detail').value=draft.incidentDetail||'';
+    document.getElementById('decision-question').value=draft.decisionQuestion||'';
+    document.querySelectorAll('.switch input').forEach(function(input,index){if(Array.isArray(draft.shield)) input.checked=draft.shield[index]!==false;});
+    updateShield();
+    announce('Local draft restored. This demo has not sent it anywhere.');
+  }
+  function updateShield(){
+    var switches=document.querySelectorAll('.switch input');
+    var safeCount=Array.prototype.filter.call(switches,function(input){return input.checked;}).length;
+    var role=switches[0].checked?'A worker':'SDR team member';
+    var location=switches[1].checked?'Yangon region':'Yangon office';
+    var tenure=switches[2].checked?'':' · 8 months tenure';
+    var date=switches[3].checked?'within the last year':'submitted 12 Jun 2026';
+    document.getElementById('public-attribution').innerHTML='<strong style="color:var(--navy-ink);display:block;font-size:14px">'+role+'</strong> '+location+tenure+' · '+date;
+    document.getElementById('risk-title').textContent=safeCount===4?'Shielded preview reduces identification risk':'Identification risk remains — generalise more details';
+    document.getElementById('risk-copy').textContent=safeCount===4?'Role, location, tenure, and date are coarsened in the public preview. Minimum-cohort and delayed-publication gates still apply.':'One or more exact details remain visible in the preview. In a small team, combining them could identify the contributor.';
+  }
 
   function apply(){
     document.querySelectorAll('.demo-btn[data-k]').forEach(function(b){
@@ -888,6 +967,8 @@ footer.prov p{font-size:12px;margin-top:12px;color:#8FA3BD;max-width:70ch}
     document.querySelectorAll('[data-salary]').forEach(function(el){ el.hidden = el.dataset.salary !== state.salary; });
     var counts = state.data==='populated' ? ['1','1'] : ['0','0'];
     document.querySelectorAll('.t-count').forEach(function(el,i){ el.textContent = counts[i]||'0'; });
+    var next=new URLSearchParams(location.search); next.set('data',state.data); next.set('salary',state.salary);
+    history.replaceState(null,'',location.pathname+'?'+next.toString()+location.hash);
   }
   document.querySelectorAll('.demo-btn[data-k]').forEach(function(b){
     b.addEventListener('click',function(){ state[b.dataset.k]=b.dataset.v; apply(); });
@@ -901,7 +982,20 @@ footer.prov p{font-size:12px;margin-top:12px;color:#8FA3BD;max-width:70ch}
     if(on) ob.scrollIntoView({block:'center',behavior:'smooth'});
   });
   document.getElementById('restore-btn').addEventListener('click',function(){
+    restoreDraft(); ob.hidden=true; ot.setAttribute('aria-pressed','false');
+  });
+  document.getElementById('discard-btn').addEventListener('click',function(){
+    try{localStorage.removeItem(draftKey);}catch(e){}
+    document.getElementById('incident-detail').value='';
+    document.getElementById('decision-question').value='';
     ob.hidden=true; ot.setAttribute('aria-pressed','false');
+    announce('Local draft discarded. No server data existed to delete.','warning');
+  });
+
+  document.getElementById('relationship-choices').addEventListener('click',function(e){
+    var button=e.target.closest('.choice'); if(!button)return;
+    this.querySelectorAll('.choice').forEach(function(choice){choice.setAttribute('aria-pressed',String(choice===button));});
+    saveDraft();
   });
 
   document.querySelectorAll('.tap-opts').forEach(function(g){
@@ -909,8 +1003,23 @@ footer.prov p{font-size:12px;margin-top:12px;color:#8FA3BD;max-width:70ch}
       var b=e.target.closest('.tap'); if(!b) return;
       g.querySelectorAll('.tap').forEach(function(t){ t.setAttribute('aria-pressed','false'); });
       b.setAttribute('aria-pressed','true');
+      saveDraft();
     });
   });
+  document.querySelectorAll('[data-draft-key]').forEach(function(field){field.addEventListener('input',saveDraft);});
+  document.querySelectorAll('.switch input').forEach(function(input){input.addEventListener('change',function(){updateShield();saveDraft();});});
+  document.querySelectorAll('[data-review-action]').forEach(function(button){
+    button.addEventListener('click',function(){
+      var box=document.getElementById('review-status');
+      box.textContent=this.dataset.reviewAction==='shielded'?'Reference state approved: the shielded preview would enter moderation after architecture gates pass. Nothing was submitted.':'Reference state selected: only aggregated quiet signals would be retained. Nothing was submitted.';
+      box.hidden=false;
+    });
+  });
+  document.querySelectorAll('[data-report-kind]').forEach(function(button){
+    button.addEventListener('click',function(){announce('Report flow opened for the '+this.dataset.reportKind+' in the design reference. Production reporting requires moderation architecture.','warning');});
+  });
+  if(safeRead()) document.getElementById('autosave-status').lastChild.textContent=' Local draft found on this device · use Restore after simulating connection loss';
+  updateShield();
   apply();
 })();
 </script>
