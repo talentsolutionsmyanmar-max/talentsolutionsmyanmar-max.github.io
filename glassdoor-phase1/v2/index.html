@@ -1,453 +1,306 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#001F3F">
-<title>Workplace Truth — Thitsa Commerce Group — ReferTRM</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@500;600&family=Padauk:wght@400;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
-<style>
-/* ReferTRM Workplace Truth 2026 — reference design only. */
-:root{
-  /* primitives */
-  --p-navy-950:#001229;--p-navy-900:#001F3F;--p-navy-800:#0A3055;
-  --p-teal-700:#0A6E66;--p-teal-600:#0D9488;--p-teal-50:#EAF7F5;
-  --p-gold-500:#D4AF37;--p-gold-50:#FFF9E8;
-  --p-ink-950:#0B1728;--p-ink-700:#3E4B5D;--p-ink-500:#647184;
-  --p-line-300:#D5DDE6;--p-line-200:#E5EAF0;--p-surface-100:#F4F6F8;--p-white:#FFF;
-  --p-danger-700:#9F3328;--p-danger-50:#FFF1EF;
-  --p-amber-700:#775400;--p-amber-50:#FFF7DF;
-  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;
-  --space-6:24px;--space-8:32px;--space-10:40px;--space-12:48px;--space-16:64px;
-  --radius-sm:8px;--radius-md:12px;--radius-lg:18px;--radius-pill:999px;
-  --shadow-float:0 24px 60px rgb(0 18 41 / .18);--shadow-soft:0 1px 2px rgb(0 18 41 / .05);
-  --motion-fast:160ms;--motion-base:240ms;--z-skip:100;
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#001229">
+  <meta name="description" content="Real jobs, honest workplace evidence, and privacy-first career decisions for Myanmar.">
+  <title>Makro Myanmar — Workplace Truth by ReferTRM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;family=Padauk:wght@400;700&amp;family=Sora:wght@500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --night:#001229;--navy:#001f3f;--navy-2:#06335a;--gold:#d4af37;--gold-soft:#f2d77b;
+      --teal:#0d9488;--teal-light:#60d5c9;--paper:#f6f3ea;--white:#fff;--ink:#07182a;
+      --muted:#9fb0c3;--line:rgba(255,255,255,.13);--line-dark:rgba(0,31,63,.14);
+      --danger:#ef6a67;--radius-s:12px;--radius-m:20px;--radius-l:32px;--radius-xl:48px;
+      --shadow:0 30px 80px rgba(0,10,28,.24);--max:1240px;
+      --ease:cubic-bezier(.22,1,.36,1);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:var(--night)}
+    body{margin:0;color:var(--white);background:var(--night);font-family:"DM Sans",sans-serif;line-height:1.5;overflow-x:hidden}
+    button,a{font:inherit}a{color:inherit;text-decoration:none}button{color:inherit}
+    img{display:block;max-width:100%}
+    button,[role="tab"],a{touch-action:manipulation}
+    button{cursor:pointer}
+    :focus-visible{outline:3px solid var(--gold-soft);outline-offset:4px}
+    .skip{position:fixed;left:16px;top:12px;z-index:1000;transform:translateY(-150%);background:var(--gold);color:var(--night);padding:10px 16px;border-radius:10px;font-weight:700}
+    .skip:focus{transform:none}
+    .wrap{width:min(calc(100% - 40px),var(--max));margin-inline:auto}
+    .mono{font-family:"JetBrains Mono",monospace;font-variant-numeric:tabular-nums}
+    .eyebrow{display:flex;align-items:center;gap:10px;font:600 11px/1 "JetBrains Mono",monospace;letter-spacing:.13em;text-transform:uppercase;color:var(--gold-soft)}
+    .eyebrow::before{content:"";width:22px;height:1px;background:currentColor}
+    .btn{min-height:48px;border:1px solid transparent;border-radius:999px;padding:0 20px;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:700;transition:transform .24s var(--ease),background .24s,color .24s,border-color .24s}
+    .btn:hover{transform:translateY(-2px)}.btn:active{transform:scale(.97)}
+    .btn-gold{background:var(--gold);color:var(--night);box-shadow:0 12px 34px rgba(212,175,55,.18)}
+    .btn-dark{background:var(--night);color:var(--white)}
+    .btn-ghost{border-color:var(--line);background:rgba(255,255,255,.045)}
+    .btn svg{width:17px;height:17px}
 
-  /* semantics */
-  --canvas:var(--p-surface-100);--surface:var(--p-white);--surface-subtle:#FAFBFC;
-  --ink:var(--p-ink-950);--ink-muted:var(--p-ink-700);--ink-soft:var(--p-ink-500);
-  --brand:var(--p-navy-900);--brand-strong:var(--p-navy-950);--accent:var(--p-teal-600);
-  --accent-strong:var(--p-teal-700);--accent-soft:var(--p-teal-50);--focus:var(--p-teal-600);
-  --border:var(--p-line-200);--border-strong:var(--p-line-300);
+    .topbar{position:absolute;inset:0 0 auto;z-index:20;border-bottom:1px solid var(--line)}
+    .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;gap:11px;font-family:"Sora",sans-serif;font-weight:700}
+    .brand-mark{position:relative;width:29px;height:29px;transform:rotate(45deg);border:1px solid var(--gold);display:grid;place-items:center}
+    .brand-mark::after{content:"";width:9px;height:9px;background:var(--gold)}
+    .brand span:last-child{transform:translateY(1px)}
+    .nav-links{display:flex;align-items:center;gap:27px;color:#d7e0e9;font-size:14px}
+    .nav-links a{position:relative;padding-block:8px}.nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:2px;height:1px;background:var(--gold);transition:right .24s}.nav-links a:hover::after{right:0}
+    .nav-cta{min-height:44px;padding-inline:17px}
 
-  /* components */
-  --page-max:1184px;--control-height:44px;--card-radius:var(--radius-lg);
-  --card-bg:var(--surface);--card-border:var(--border);--button-bg:var(--brand);
-  --button-fg:var(--p-white);--button-hover:var(--p-navy-800);
-}
-*{box-sizing:border-box}
-[hidden]{display:none!important}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--canvas);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
-body.is-locked{overflow:hidden}
-button,select,textarea{font:inherit}
-button,a,select{touch-action:manipulation}
-button{cursor:pointer}
-a{color:inherit}
-h1,h2,h3,p{margin-top:0}
-h1,h2,h3{font-family:'Sora',sans-serif;line-height:1.15;letter-spacing:-.025em}
-svg{display:block;flex:0 0 auto}
-:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
-.wrap{width:min(calc(100% - 32px),var(--page-max));margin-inline:auto}
-.skip{position:fixed;z-index:var(--z-skip);left:16px;top:16px;transform:translateY(-180%);background:var(--surface);color:var(--brand);padding:10px 14px;border-radius:var(--radius-sm);font-weight:700;border:2px solid var(--accent)}
-.skip:focus{transform:none}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .hero{position:relative;isolation:isolate;min-height:830px;overflow:hidden;background:
+      radial-gradient(circle at var(--mx,78%) var(--my,18%),rgba(13,148,136,.24),transparent 25%),
+      radial-gradient(circle at 68% 54%,rgba(212,175,55,.1),transparent 31%),
+      linear-gradient(132deg,var(--night) 0%,var(--navy) 52%,#001a36 100%)}
+    .hero::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.28;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:72px 72px;mask-image:linear-gradient(to right,transparent,black 48%,black)}
+    .hero::after{content:"";position:absolute;width:520px;height:520px;right:-260px;top:140px;border:1px solid rgba(212,175,55,.23);border-radius:50%;box-shadow:0 0 0 92px rgba(212,175,55,.018),0 0 0 184px rgba(212,175,55,.014);z-index:-1}
+    .hero-grid{padding-top:148px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(420px,.95fr);gap:70px;align-items:center}
+    .company-pill{width:max-content;max-width:100%;display:flex;align-items:center;gap:12px;padding:8px 15px 8px 8px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.045);color:#dae4ed;font-size:13px}
+    .company-pill img{width:34px;height:34px;border-radius:50%;object-fit:cover;background:white}
+    .company-pill strong{color:white}.verified-dot{width:7px;height:7px;border-radius:50%;background:var(--teal-light);box-shadow:0 0 0 5px rgba(96,213,201,.1)}
+    h1,h2,h3,p{margin-top:0}.hero h1{font:600 clamp(52px,6.5vw,92px)/.97 "Sora",sans-serif;letter-spacing:-.065em;margin:29px 0 25px;max-width:9.5ch}
+    .hero h1 em{font-style:normal;color:var(--gold-soft)}
+    .hero-copy{max-width:590px;color:#bcc9d6;font-size:clamp(17px,1.6vw,20px);line-height:1.65}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:31px}
+    .source-note{display:flex;align-items:center;gap:10px;margin-top:25px;color:#8ea1b4;font-size:12px}
+    .source-note svg{width:15px;color:var(--teal-light)}
 
-/* slim review provenance */
-.reference-line{background:var(--brand-strong);color:#D9E4F0;border-bottom:2px solid var(--p-gold-500)}
-.reference-line .wrap{min-height:34px;display:flex;align-items:center;justify-content:space-between;gap:16px;font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase}
-.reference-line .status{display:inline-flex;align-items:center;gap:8px;color:#F5D96E}
-.reference-line .dot{width:7px;height:7px;border-radius:50%;background:var(--p-gold-500)}
+    .truth-orbit{position:relative;width:100%;aspect-ratio:1;max-width:540px;margin-inline:auto;display:grid;place-items:center}
+    .orbit-ring{position:absolute;border:1px solid rgba(255,255,255,.16);border-radius:50%}.orbit-ring.one{inset:5%}.orbit-ring.two{inset:19%;border-style:dashed;animation:spin 32s linear infinite}.orbit-ring.three{inset:34%;border-color:rgba(212,175,55,.32)}
+    .orbit-core{position:relative;z-index:2;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle at 40% 30%,#0b3e64,var(--night) 68%);border:1px solid rgba(242,215,123,.45);box-shadow:0 28px 80px rgba(0,0,0,.38),inset 0 0 40px rgba(13,148,136,.1);display:grid;place-content:center;text-align:center}
+    .orbit-core strong{font:600 54px/1 "Sora";letter-spacing:-.06em}.orbit-core span{color:#afbdca;font-size:11px;max-width:13ch;margin:8px auto 0}
+    .orbit-node{position:absolute;z-index:3;width:126px;padding:12px 13px;border:1px solid var(--line);border-radius:14px;background:#052443;box-shadow:0 16px 34px rgba(0,0,0,.24)}
+    .orbit-node b{display:block;font-size:13px}.orbit-node span{display:block;color:#91a5b8;font-size:11px;margin-top:4px}.orbit-node::before{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+    .n1{left:0;top:16%}.n1::before{right:-4px;top:22px}.n2{right:0;top:23%}.n2::before{left:-4px;top:22px}.n3{left:5%;bottom:15%}.n3::before{right:-4px;top:22px}.n4{right:3%;bottom:11%}.n4::before{left:-4px;top:22px}
+    .orbit-status{position:absolute;bottom:0;left:50%;transform:translateX(-50%);white-space:nowrap;color:#9dafc0;font:500 10px "JetBrains Mono";letter-spacing:.09em;text-transform:uppercase}
+    @keyframes spin{to{transform:rotate(360deg)}}
 
-/* application header */
-.app-header{background:var(--surface);border-bottom:1px solid var(--border)}
-.app-header .wrap{height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-family:'Sora',sans-serif;font-weight:700;color:var(--brand);font-size:18px}
-.brand-mark{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--p-gold-500);color:var(--brand);font-size:14px}
-.primary-nav{display:flex;align-items:center;gap:4px}
-.primary-nav a{min-height:44px;display:inline-flex;align-items:center;padding:0 12px;text-decoration:none;color:var(--ink-muted);font-size:14px;font-weight:600;border-radius:var(--radius-sm)}
-.primary-nav a[aria-current="page"],.primary-nav a:hover{color:var(--brand);background:var(--p-surface-100)}
+    .signal-bar{position:relative;z-index:4;margin-top:-66px}.signal-shell{display:grid;grid-template-columns:1.35fr repeat(3,1fr);border:1px solid rgba(255,255,255,.14);border-radius:22px;background:#fff;color:var(--ink);box-shadow:var(--shadow);overflow:hidden}
+    .signal{padding:25px 27px;border-left:1px solid var(--line-dark)}.signal:first-child{border-left:0;background:var(--paper)}
+    .signal small{display:block;color:#6b7885;font:600 10px "JetBrains Mono";letter-spacing:.1em;text-transform:uppercase;margin-bottom:9px}.signal strong{font:600 22px/1.25 "Sora"}.signal .big{font-size:31px;letter-spacing:-.05em}.signal p{margin:7px 0 0;color:#687583;font-size:12px}
 
-/* hero */
-.company-hero{background:var(--surface);border-bottom:1px solid var(--border)}
-.company-hero .wrap{padding-block:var(--space-10) var(--space-8)}
-.crumb{display:flex;align-items:center;gap:8px;color:var(--ink-soft);font-size:13px;margin-bottom:var(--space-6)}
-.crumb a{text-decoration:none}.crumb a:hover{text-decoration:underline}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:var(--space-12);align-items:end}
-.identity{display:grid;grid-template-columns:72px minmax(0,1fr);gap:var(--space-5);align-items:start}
-.company-logo{width:72px;height:72px;border-radius:20px;background:var(--brand);color:var(--p-gold-500);display:grid;place-items:center;font:700 23px 'Sora',sans-serif;box-shadow:inset 0 0 0 1px rgb(255 255 255 / .12)}
-.eyebrow{font:600 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-strong);margin:0 0 8px}
-.company-title{font-size:clamp(29px,4.2vw,48px);margin-bottom:12px;color:var(--brand);max-width:18ch}
-.company-meta{display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--ink-muted);font-size:14px}
-.company-meta span{display:inline-flex;align-items:center;gap:7px}
-.relationship{margin-top:16px;display:inline-flex;align-items:center;gap:8px;color:var(--ink-muted);font-size:12px}
-.relationship .line{width:20px;height:1px;background:var(--p-gold-500)}
-.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
-.btn{min-height:var(--control-height);border:1px solid transparent;border-radius:var(--radius-sm);display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:10px 17px;text-decoration:none;font-weight:700;font-size:14px;transition:background var(--motion-fast),border-color var(--motion-fast),color var(--motion-fast),transform var(--motion-fast)}
-.btn:active{transform:translateY(1px)}
-.btn:disabled{cursor:not-allowed;opacity:.45;transform:none}
-.btn-primary{background:var(--button-bg);color:var(--button-fg)}.btn-primary:hover{background:var(--button-hover)}
-.btn-secondary{background:var(--surface);border-color:var(--border-strong);color:var(--brand)}.btn-secondary:hover{border-color:var(--brand);background:var(--surface-subtle)}
-.btn-quiet{background:transparent;color:var(--ink-muted);padding-inline:8px}.btn-quiet:hover{color:var(--brand);background:var(--p-surface-100)}
+    .job-board{background:var(--paper);color:var(--ink);padding:130px 0 105px}
+    .section-head{display:grid;grid-template-columns:1fr minmax(280px,460px);gap:45px;align-items:end;margin-bottom:45px}
+    .section-head .eyebrow{color:var(--teal)}.section-head h2{font:600 clamp(38px,5vw,66px)/1.02 "Sora";letter-spacing:-.055em;margin:18px 0 0;max-width:12ch}.section-head p{color:#5c6b77;font-size:17px;line-height:1.7;margin-bottom:2px}
+    .jobs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .job-card{position:relative;min-height:330px;padding:24px;border:1px solid var(--line-dark);border-radius:var(--radius-m);background:#fff;display:flex;flex-direction:column;transition:transform .3s var(--ease),box-shadow .3s,border-color .3s;overflow:hidden}
+    .job-card::after{content:"";position:absolute;width:160px;height:160px;border-radius:50%;right:-100px;bottom:-100px;background:var(--teal);opacity:0;transition:transform .35s var(--ease),opacity .35s}
+    .job-card:hover{transform:translateY(-7px);box-shadow:0 24px 55px rgba(0,31,63,.13);border-color:rgba(13,148,136,.45)}.job-card:hover::after{opacity:.1;transform:scale(1.5)}
+    .job-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.job-tag{font:600 10px "JetBrains Mono";letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+    .job-arrow{width:38px;height:38px;border:1px solid var(--line-dark);border-radius:50%;display:grid;place-items:center;transition:background .2s,color .2s}.job-card:hover .job-arrow{background:var(--night);color:white}.job-arrow svg{width:16px}
+    .job-card h3{font:600 21px/1.25 "Sora";letter-spacing:-.025em;margin:30px 0 12px}.job-location{color:#6b7885;font-size:13px}
+    .job-bottom{margin-top:auto;border-top:1px solid var(--line-dark);padding-top:18px}.job-salary{font:600 17px "JetBrains Mono"}.job-meta{display:flex;justify-content:space-between;gap:12px;color:#71808c;font-size:11px;margin-top:7px}
+    .jobs-foot{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:26px;color:#62717d;font-size:14px}.jobs-foot strong{color:var(--ink)}
 
-.truth-intro{border-left:1px solid var(--border);padding-left:var(--space-8)}
-.truth-intro h2{font-size:21px;margin-bottom:8px;color:var(--brand)}
-.truth-intro>p{font-size:14px;color:var(--ink-muted);margin-bottom:18px;max-width:38ch}
-.mini-signals{display:grid;gap:11px}
-.mini-signal{display:grid;grid-template-columns:10px 1fr auto;align-items:center;gap:10px;font-size:13px}
-.mini-signal .mark{width:8px;height:8px;border-radius:50%;background:var(--accent)}
-.mini-signal.warn .mark{background:var(--p-gold-500)}
-.mini-signal .label{color:var(--ink-muted)}
-.mini-signal strong{font:600 12px 'JetBrains Mono',monospace;color:var(--brand)}
-.confidence-line{display:flex;align-items:center;gap:8px;margin-top:15px;color:var(--ink-soft);font-size:12px}
-.confidence-line svg{color:var(--accent-strong)}
+    .loop{position:relative;padding:120px 0;background:#fff;color:var(--ink);overflow:hidden}
+    .loop::before{content:"TRUST LOOP";position:absolute;left:-8px;top:24px;color:rgba(0,31,63,.035);font:700 clamp(90px,15vw,230px)/1 "Sora";letter-spacing:-.08em;white-space:nowrap}
+    .loop .section-head{position:relative}.loop-steps{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line-dark);border-radius:var(--radius-l);overflow:hidden}
+    .loop-step{position:relative;padding:34px 27px 37px;min-height:290px;border-left:1px solid var(--line-dark);background:rgba(255,255,255,.88)}.loop-step:first-child{border-left:0}.loop-step:nth-child(3){background:var(--night);color:#fff}.loop-step:nth-child(3) p{color:#aebdca}
+    .step-no{display:flex;justify-content:space-between;align-items:center;font:600 11px "JetBrains Mono";color:var(--teal)}.step-no svg{width:18px}.loop-step h3{font:600 21px/1.25 "Sora";margin:48px 0 12px}.loop-step p{color:#667582;font-size:14px;line-height:1.65}.loop-step .micro{position:absolute;bottom:28px;color:#8b98a3;font:500 10px "JetBrains Mono";letter-spacing:.05em;text-transform:uppercase}
 
-/* quiet demo controls */
-.demo-shell{padding-block:18px}
-.demo-card{background:#EEF2F5;border:1px solid var(--border);border-radius:var(--radius-md);padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.demo-copy{display:flex;align-items:center;gap:10px;color:var(--ink-muted);font-size:12px}
-.demo-copy .tag{font:600 10px 'JetBrains Mono',monospace;color:var(--brand);letter-spacing:.06em}
-.demo-fields{display:flex;align-items:center;gap:8px}
-.demo-field{display:flex;align-items:center;gap:8px}
-.demo-field label{font-size:11px;color:var(--ink-soft)}
-.demo-field select{height:44px;border:1px solid var(--border-strong);background:var(--surface);color:var(--brand);border-radius:8px;padding:0 30px 0 10px;font-size:12px;font-weight:600}
+    .evidence{background:var(--night);padding:120px 0;position:relative;overflow:hidden}
+    .evidence::after{content:"";position:absolute;inset:auto -180px -280px auto;width:650px;height:650px;border-radius:50%;background:radial-gradient(circle,rgba(13,148,136,.17),transparent 66%)}
+    .evidence-head{display:flex;justify-content:space-between;gap:35px;align-items:end;margin-bottom:34px}.evidence h2{font:600 clamp(40px,5vw,66px)/1.02 "Sora";letter-spacing:-.055em;margin:17px 0 0}.evidence-head p{max-width:440px;color:#9fb0c0;font-size:16px}
+    .tabs{display:flex;gap:7px;overflow-x:auto;padding:5px;margin:0 0 24px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:999px;width:max-content;max-width:100%;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}
+    .tab{min-height:44px;border:0;border-radius:999px;background:transparent;padding:0 17px;color:#9fb0c0;white-space:nowrap;font-weight:600}.tab[aria-selected="true"]{background:#fff;color:var(--night)}
+    .truth-panel{position:relative;z-index:1;display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+    .empty-truth{min-height:430px;border:1px solid var(--line);border-radius:var(--radius-l);background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.025));padding:43px;display:flex;flex-direction:column}
+    .empty-symbol{width:72px;height:72px;border:1px solid rgba(242,215,123,.5);border-radius:50%;display:grid;place-items:center;color:var(--gold-soft);box-shadow:inset 0 0 0 10px rgba(212,175,55,.045)}.empty-symbol svg{width:29px}
+    .empty-truth h3{font:600 30px/1.18 "Sora";letter-spacing:-.035em;margin:39px 0 15px;max-width:15ch}.empty-truth p{max-width:590px;color:#aebdca;line-height:1.75}
+    .empty-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:auto;padding-top:25px}
+    .truth-aside{display:grid;gap:16px}.principle{border-radius:var(--radius-m);padding:28px;border:1px solid var(--line);background:#06203d;min-height:130px}.principle.gold{background:var(--gold);color:var(--night);border-color:var(--gold)}
+    .principle .label{font:600 10px "JetBrains Mono";letter-spacing:.1em;text-transform:uppercase;color:var(--gold-soft)}.principle.gold .label{color:#4f4217}.principle h3{font:600 19px/1.35 "Sora";margin:21px 0 0}.principle p{color:#9fb0c0;font-size:13px;margin:10px 0 0}.principle.gold p{color:#524617}
+    [hidden]{display:none!important}
 
-/* tabs + core layout */
-.product-nav{border-bottom:1px solid var(--border)}
-.tabs{display:flex;align-items:center;gap:4px;overflow:auto;scrollbar-width:none}
-.tabs::-webkit-scrollbar{display:none}
-.tab{position:relative;min-height:52px;border:0;background:transparent;color:var(--ink-muted);font-weight:700;font-size:14px;padding:0 16px;white-space:nowrap}
-.tab::after{content:"";position:absolute;left:16px;right:16px;bottom:-1px;height:3px;background:transparent;border-radius:3px 3px 0 0}
-.tab[aria-selected="true"]{color:var(--brand)}.tab[aria-selected="true"]::after{background:var(--accent)}
-.content-grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:var(--space-8);align-items:start;padding-block:var(--space-8) var(--space-16)}
-.panel{min-width:0}.panel[hidden]{display:none}
-.section-heading{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:20px}
-.section-heading h2{font-size:clamp(23px,3vw,31px);color:var(--brand);margin-bottom:6px}
-.section-heading p{margin:0;color:var(--ink-muted);font-size:14px;max-width:60ch}
-.sample-label{font:600 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.06em;color:var(--p-amber-700);background:var(--p-amber-50);border:1px solid #E5C968;border-radius:var(--radius-pill);padding:7px 10px;white-space:nowrap}
+    .privacy{background:var(--teal);color:#fff;padding:100px 0;position:relative;overflow:hidden}
+    .privacy::before{content:"";position:absolute;inset:-30% auto auto 58%;width:540px;height:540px;border:1px solid rgba(255,255,255,.25);transform:rotate(45deg);box-shadow:0 0 0 80px rgba(255,255,255,.025),0 0 0 160px rgba(255,255,255,.02)}
+    .privacy-grid{position:relative;display:grid;grid-template-columns:.9fr 1.1fr;gap:90px;align-items:center}.shield{width:210px;aspect-ratio:1;margin:auto;position:relative;display:grid;place-items:center}.shield::before,.shield::after{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.4);transform:rotate(45deg);border-radius:28px}.shield::after{inset:31px;border-color:rgba(255,255,255,.22)}.shield svg{width:65px;position:relative;z-index:1}
+    .privacy h2{font:600 clamp(42px,5vw,70px)/1 "Sora";letter-spacing:-.06em;margin:18px 0 24px;max-width:10ch}.privacy-copy{font-size:18px;line-height:1.7;max-width:620px;color:#e5fffc}.privacy-rules{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:30px}.privacy-rule{border-top:1px solid rgba(255,255,255,.35);padding-top:15px;font-size:13px}.privacy-rule strong{display:block;font-family:"Sora";margin-bottom:5px}
 
-.surface{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--card-radius);box-shadow:var(--shadow-soft)}
-.empty-state{padding:clamp(28px,5vw,48px);display:grid;grid-template-columns:48px 1fr;gap:20px;align-items:start}
-.empty-icon{width:48px;height:48px;border-radius:15px;background:var(--accent-soft);color:var(--accent-strong);display:grid;place-items:center}
-.empty-state h3{font-size:19px;color:var(--brand);margin-bottom:8px}.empty-state p{color:var(--ink-muted);max-width:58ch;margin-bottom:16px}
-.truth-list{overflow:hidden}
-.truth-row{display:grid;grid-template-columns:minmax(180px,1fr) minmax(140px,.7fr) 96px;gap:18px;align-items:center;padding:20px 22px;border-top:1px solid var(--border)}
-.truth-row:first-child{border-top:0}
-.signal-name{font-weight:700;color:var(--brand);font-size:14px}.signal-meta{display:block;color:var(--ink-soft);font:500 10px 'JetBrains Mono',monospace;margin-top:4px;letter-spacing:.02em}
-.signal-read{font-size:13px;color:var(--ink-muted)}.signal-read strong{color:var(--ink);font-weight:700}
-.meter{height:7px;border-radius:var(--radius-pill);background:#EBEFF3;overflow:hidden}.meter span{display:block;height:100%;border-radius:inherit;background:var(--accent)}.meter.concern span{background:var(--p-gold-500)}
-.truth-more{border-top:1px solid var(--border);padding:10px;display:flex;justify-content:center}
-.truth-note{display:flex;gap:10px;margin-top:14px;padding:0 4px;color:var(--ink-soft);font-size:12px}.truth-note svg{color:var(--accent-strong);margin-top:2px}
+    footer{background:#000d1e;padding:60px 0 38px;color:#91a4b6}.footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;padding-bottom:45px;border-bottom:1px solid var(--line)}.footer-statement{font:500 clamp(25px,3vw,40px)/1.2 "Sora";letter-spacing:-.04em;color:white;max-width:18ch}.footer-links{display:flex;gap:35px;font-size:13px}.footer-bottom{display:flex;justify-content:space-between;gap:25px;padding-top:25px;font-size:11px}.footer-bottom strong{color:#d6e0e9}
+    .demo-trigger{position:fixed;right:18px;bottom:18px;z-index:50;width:48px;height:48px;border:1px solid var(--line);border-radius:50%;background:var(--night);box-shadow:0 12px 35px rgba(0,0,0,.3);display:grid;place-items:center}.demo-trigger svg{width:18px}.demo-trigger:hover{background:var(--gold);color:var(--night)}
+    .demo-menu{position:fixed;right:18px;bottom:76px;z-index:49;width:min(310px,calc(100vw - 36px));padding:18px;background:#fff;color:var(--ink);border:1px solid var(--line-dark);border-radius:18px;box-shadow:var(--shadow)}.demo-menu h3{font:600 15px "Sora";margin:0 0 7px}.demo-menu p{font-size:12px;color:#697884;margin-bottom:15px}.demo-option{width:100%;min-height:44px;text-align:left;padding:10px 12px;border:1px solid var(--line-dark);border-radius:10px;background:#fff;margin-top:7px;font-weight:600;color:var(--ink)}.demo-option:hover{background:var(--paper)}
 
-/* evidence narratives */
-.story{padding:26px}.story-top{display:flex;align-items:start;justify-content:space-between;gap:16px;margin-bottom:22px}
-.story-label{display:inline-flex;align-items:center;gap:7px;font:600 10px 'JetBrains Mono',monospace;letter-spacing:.06em;color:var(--accent-strong);text-transform:uppercase}
-.story-person{color:var(--ink-soft);font-size:12px;margin-top:7px}
-.verified{display:inline-flex;align-items:center;gap:7px;color:var(--accent-strong);font-size:12px;font-weight:700;background:var(--accent-soft);border-radius:var(--radius-pill);padding:7px 10px}
-.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden}
-.story-cell{background:var(--surface);padding:20px}.story-cell span{display:block;font:600 10px 'JetBrains Mono',monospace;color:var(--ink-soft);letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px}.story-cell p{margin:0;color:var(--ink-muted);font-size:14px}
-.decision-prompt{margin-top:18px;border-left:3px solid var(--accent);padding:4px 0 4px 15px}.decision-prompt span{font:600 10px 'JetBrains Mono',monospace;color:var(--accent-strong);letter-spacing:.05em}.decision-prompt p{margin:5px 0 0;font-weight:700;color:var(--brand)}
-.story-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:20px;color:var(--ink-soft);font-size:11px}
+    dialog{width:min(620px,calc(100% - 28px));border:0;border-radius:28px;padding:0;background:#fff;color:var(--ink);box-shadow:0 40px 120px rgba(0,0,0,.45)}dialog::backdrop{background:rgba(0,10,28,.82)}
+    .modal-head{padding:25px 27px;border-bottom:1px solid var(--line-dark);display:flex;justify-content:space-between;gap:20px;align-items:center}.modal-head h2{font:600 20px "Sora";margin:0}.icon-btn{width:44px;height:44px;border:1px solid var(--line-dark);border-radius:50%;background:#fff;display:grid;place-items:center}.icon-btn svg{width:18px}
+    .modal-body{padding:31px 27px 28px}.step-kicker{color:var(--teal);font:600 10px "JetBrains Mono";letter-spacing:.1em;text-transform:uppercase}.modal-body h3{font:600 27px/1.2 "Sora";letter-spacing:-.03em;margin-bottom:12px}.modal-copy{color:#667582;margin-bottom:24px}.choice{width:100%;min-height:76px;padding:16px 18px;text-align:left;border:1px solid var(--line-dark);border-radius:14px;background:#fff;margin-top:10px;display:flex;justify-content:space-between;align-items:center;gap:20px}.choice strong{display:block}.choice span{display:block;color:#70808d;font-size:12px;margin-top:4px}.choice:hover{border-color:var(--teal);background:#f4fbfa}.choice svg{width:18px;flex:0 0 auto}
+    .notice{border-radius:14px;background:var(--paper);padding:17px;margin-top:22px;font-size:13px;color:#52616e}.notice strong{color:var(--ink)}
+    .modal-actions{display:flex;justify-content:space-between;gap:12px;margin-top:26px}.modal-actions .btn{border-color:var(--line-dark)}
 
-/* salary */
-.pay-summary{padding:26px}.pay-source{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.pay-source strong{color:var(--brand)}
-.source-chip{font:600 10px 'JetBrains Mono',monospace;color:var(--accent-strong);border:1px solid #9ED6D0;background:var(--accent-soft);border-radius:var(--radius-pill);padding:7px 10px}
-.pay-total{font:700 clamp(30px,5vw,46px)/1.1 'Sora',sans-serif;color:var(--brand);letter-spacing:-.04em}.pay-total small{font:500 13px 'DM Sans',sans-serif;color:var(--ink-soft);letter-spacing:0}
-.pay-breakdown{margin-top:24px}.pay-line{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0;border-top:1px solid var(--border);font-size:14px}.pay-line span{color:var(--ink-muted)}.pay-line strong{font-family:'JetBrains Mono',monospace;color:var(--ink);font-size:12px}.pay-line.total strong,.pay-line.total span{color:var(--brand);font-weight:700}
-.pay-caveat{margin-top:18px;background:var(--surface-subtle);border-radius:var(--radius-md);padding:14px;color:var(--ink-muted);font-size:12px}
-
-/* decision rail */
-.decision-rail{position:sticky;top:20px;display:grid;gap:16px}
-.decision-card{padding:22px}.decision-card h2{font-size:18px;color:var(--brand);margin-bottom:7px}.decision-card>p{font-size:13px;color:var(--ink-muted);margin-bottom:18px}
-.question-list{display:grid;gap:0}.question{padding:15px 0;border-top:1px solid var(--border)}.question:first-child{border-top:0;padding-top:0}.question p{font-size:14px;color:var(--ink);font-weight:600;margin:0}.question span{font:500 9px 'JetBrains Mono',monospace;color:var(--ink-soft);letter-spacing:.04em;display:block;margin-top:5px}
-.share-card{background:var(--brand);color:var(--p-white);padding:24px;border-radius:var(--card-radius);position:relative;overflow:hidden}
-.share-card::after{content:"";position:absolute;width:120px;height:120px;border:1px solid rgb(212 175 55 / .4);border-radius:50%;right:-45px;bottom:-60px}
-.share-card h2{color:var(--p-white);font-size:19px;margin-bottom:8px}.share-card p{color:#CFDBE7;font-size:13px;max-width:30ch;margin-bottom:18px}.share-card .btn{background:var(--p-white);color:var(--brand);position:relative;z-index:1;width:100%}.share-card .btn:hover{background:var(--p-gold-50)}
-.privacy-small{display:flex;align-items:start;gap:9px;margin-top:14px;color:#B8C8D9;font-size:11px}.privacy-small svg{color:#F5D96E;margin-top:2px}
-
-/* open jobs */
-.jobs-strip{margin-top:16px;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}.jobs-strip strong{display:block;color:var(--brand)}.jobs-strip span{color:var(--ink-soft);font-size:12px}
-
-/* contribution dialog */
-.truth-dialog{width:min(680px,calc(100% - 32px));max-height:min(780px,calc(100dvh - 32px));padding:0;border:0;border-radius:22px;background:var(--surface);color:var(--ink);box-shadow:var(--shadow-float);overflow:hidden}
-.truth-dialog::backdrop{background:rgb(0 18 41 / .66)}
-.dialog-head{display:flex;align-items:start;justify-content:space-between;gap:20px;padding:24px 26px 20px;border-bottom:1px solid var(--border)}
-.dialog-head h2{font-size:22px;color:var(--brand);margin-bottom:5px}.dialog-head p{font-size:13px;color:var(--ink-muted);margin:0}
-.icon-button{width:44px;height:44px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--brand);display:grid;place-items:center;flex:0 0 auto}.icon-button:hover{background:var(--p-surface-100)}
-.dialog-progress{height:3px;background:var(--border)}.dialog-progress span{display:block;height:100%;background:var(--accent);transition:width var(--motion-base)}
-.dialog-body{padding:26px;overflow:auto;max-height:calc(100dvh - 190px)}
-.step-kicker{font:600 10px 'JetBrains Mono',monospace;color:var(--accent-strong);letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px}.dialog-step h3{font-size:21px;color:var(--brand);margin-bottom:8px}.step-copy{font-size:14px;color:var(--ink-muted);margin-bottom:20px;max-width:58ch}
-.choice-stack{display:grid;gap:10px}.choice-card{width:100%;min-height:72px;text-align:left;border:1px solid var(--border-strong);background:var(--surface);border-radius:var(--radius-md);padding:15px 16px;color:var(--ink)}.choice-card strong{display:block;color:var(--brand);font-size:14px}.choice-card span{display:block;color:var(--ink-soft);font-size:12px;margin-top:3px}.choice-card[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
-.field{margin-top:20px}.field-label{display:block;font-weight:700;color:var(--brand);font-size:14px;margin-bottom:7px}.field-help{font-size:12px;color:var(--ink-soft);margin:0 0 9px}
-.chip-group{display:flex;gap:8px;flex-wrap:wrap}.chip{min-height:44px;border:1px solid var(--border-strong);background:var(--surface);border-radius:var(--radius-pill);padding:8px 14px;color:var(--ink-muted);font-size:13px}.chip[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--p-white)}
-textarea{width:100%;min-height:110px;resize:vertical;border:1px solid var(--border-strong);border-radius:var(--radius-md);padding:12px 14px;color:var(--ink);background:var(--surface);font-size:16px}
-.save-line{display:flex;align-items:center;gap:7px;color:var(--accent-strong);font-size:12px;margin-top:10px}.save-line svg{width:14px;height:14px}
-.privacy-preview{border:1px solid var(--border);background:var(--surface-subtle);border-radius:var(--radius-md);padding:18px}.preview-label{font:600 9px 'JetBrains Mono',monospace;color:var(--ink-soft);letter-spacing:.06em;text-transform:uppercase}.public-name{display:block;color:var(--brand);font-weight:700;margin-top:11px}.public-meta{color:var(--ink-soft);font-size:12px}.public-story{font-size:14px;color:var(--ink-muted);margin:12px 0 0}
-.risk{display:flex;gap:10px;background:var(--p-amber-50);border:1px solid #E5C968;color:var(--p-amber-700);border-radius:var(--radius-md);padding:13px;margin-top:14px;font-size:12px}.risk svg{margin-top:2px}
-.privacy-options{margin-top:16px;display:grid;gap:2px}.privacy-option{min-height:52px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid var(--border);font-size:13px}.privacy-option:first-child{border-top:0}.privacy-option input{width:20px;height:20px;accent-color:var(--accent)}
-.dialog-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:24px;padding-top:20px;border-top:1px solid var(--border)}
-.dialog-actions .right{display:flex;gap:9px}
-.step-status{margin-top:12px;border-left:3px solid var(--accent);background:var(--accent-soft);padding:11px 13px;color:var(--brand);font-size:12px;border-radius:0 8px 8px 0}
-
-footer{background:var(--brand-strong);color:#AFC0D2;margin-top:0}
-footer .wrap{padding-block:22px;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:11px}
-footer .proof{font-family:'JetBrains Mono',monospace;letter-spacing:.03em}footer a{color:#E5EDF5}
-
-@media(max-width:960px){
-  .hero-grid{grid-template-columns:1fr}.truth-intro{border-left:0;border-top:1px solid var(--border);padding:24px 0 0}.mini-signals{grid-template-columns:repeat(3,1fr)}
-  .content-grid{grid-template-columns:1fr}.decision-rail{position:static;grid-template-columns:1fr 1fr}.share-card{min-height:100%}
-}
-@media(max-width:680px){
-  .wrap{width:min(calc(100% - 24px),var(--page-max))}.reference-line .wrap{min-height:30px}.reference-line .proof-id{display:none}
-  .app-header .wrap{height:60px}.primary-nav a:not([aria-current="page"]){display:none}.primary-nav a{padding-inline:10px}
-  .company-hero .wrap{padding-block:28px 24px}.crumb{margin-bottom:18px}.identity{grid-template-columns:58px 1fr;gap:14px}.company-logo{width:58px;height:58px;border-radius:16px;font-size:19px}.company-title{font-size:29px}.company-meta{display:grid;gap:5px}.relationship{align-items:start}
-  .hero-actions{grid-column:1/-1}.hero-actions .btn{flex:1}.mini-signals{grid-template-columns:1fr}.truth-intro h2{font-size:19px}
-  .demo-card{align-items:flex-start;flex-direction:column}.demo-copy{width:100%}.demo-fields{width:100%;display:grid;grid-template-columns:1fr 1fr}.demo-field{display:grid;gap:4px}.demo-field select{width:100%}
-  .tabs{margin-inline:-12px;padding-inline:12px}.tab{padding-inline:13px}.tab::after{left:13px;right:13px}
-  .content-grid{padding-top:24px;gap:20px}.section-heading{align-items:start;flex-direction:column}.sample-label{align-self:flex-start}
-  .truth-row{grid-template-columns:1fr 76px;gap:8px 14px;padding:17px 16px}.signal-read{grid-column:1/-1}.meter{grid-row:1;grid-column:2}.truth-note{padding-inline:0}
-  .empty-state{grid-template-columns:1fr;padding:26px 20px}.empty-icon{width:44px;height:44px}
-  .story{padding:20px 16px}.story-top{display:grid}.verified{justify-self:start}.story-grid{grid-template-columns:1fr}.story-foot{align-items:start;flex-direction:column}
-  .pay-summary{padding:22px 18px}.pay-source{align-items:start;flex-direction:column}.pay-line{align-items:start}.pay-line strong{text-align:right}
-  .decision-rail{grid-template-columns:1fr}.jobs-strip{align-items:start;flex-direction:column}
-  .truth-dialog{width:100%;max-width:none;max-height:calc(100dvh - 12px);margin:auto 0 0;border-radius:22px 22px 0 0}.dialog-head{padding:20px 18px 16px}.dialog-body{padding:20px 18px;max-height:calc(100dvh - 160px)}.dialog-actions{align-items:stretch;flex-direction:column-reverse}.dialog-actions .right{display:grid;grid-template-columns:1fr 1fr}.dialog-actions .btn{width:100%}
-  footer .wrap{align-items:flex-start;flex-direction:column}
-}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
-</style>
+    @media(max-width:1050px){
+      .hero-grid{grid-template-columns:1fr 430px;gap:30px}.hero h1{font-size:62px}.jobs-grid{grid-template-columns:repeat(2,1fr)}.loop-steps{grid-template-columns:repeat(2,1fr)}.loop-step:nth-child(3){border-left:0;border-top:1px solid var(--line-dark)}.loop-step:nth-child(4){border-top:1px solid var(--line-dark)}
+    }
+    @media(max-width:820px){
+      .nav-links a:not(.nav-cta){display:none}.hero{min-height:auto;padding-bottom:125px}.hero-grid{grid-template-columns:1fr;padding-top:125px}.hero h1{font-size:clamp(49px,14vw,72px)}.hero-copy{max-width:650px}.truth-orbit{width:min(100%,500px);margin-top:28px}.signal-bar{margin-top:-58px}.signal-shell{grid-template-columns:repeat(2,1fr)}.signal:nth-child(3){border-left:0;border-top:1px solid var(--line-dark)}.signal:nth-child(4){border-top:1px solid var(--line-dark)}
+      .section-head{grid-template-columns:1fr}.job-board,.loop,.evidence{padding-block:95px}.truth-panel{grid-template-columns:1fr}.truth-aside{grid-template-columns:repeat(2,1fr)}.privacy-grid{grid-template-columns:1fr;gap:45px}.shield{width:160px}.privacy h2{max-width:13ch}.footer-top{display:grid}.footer-links{flex-wrap:wrap}.evidence-head{display:grid}
+    }
+    @media(max-width:580px){
+      .wrap{width:min(calc(100% - 28px),var(--max))}.nav{height:68px}.brand span:last-child{font-size:14px}.nav-cta{padding-inline:13px;font-size:12px}.hero-grid{padding-top:105px}.company-pill{font-size:11px}.hero h1{margin-top:24px;font-size:clamp(40px,13vw,48px);letter-spacing:-.055em}.hero-copy{font-size:16px}.hero-actions{display:grid}.hero-actions .btn{width:100%}.source-note{align-items:flex-start}.truth-orbit{width:350px;max-width:112%;margin-left:-6%}.orbit-core{width:132px;height:132px}.orbit-core strong{font-size:44px}.orbit-node{width:113px;padding:10px}.orbit-node b{font-size:11px}.orbit-node span{font-size:9px}.n1{left:2%}.n2{right:2%}.n3{left:4%}.n4{right:1%}.signal-shell{display:block}.signal{border-left:0;border-top:1px solid var(--line-dark);padding:20px}.signal:first-child{border-top:0}.section-head h2{font-size:40px}.jobs-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-14px;padding:0 14px 18px;scrollbar-width:none}.job-card{min-width:84vw;scroll-snap-align:center}.jobs-foot{align-items:flex-start;display:grid}.loop-steps{display:block}.loop-step{border-left:0;border-top:1px solid var(--line-dark);min-height:240px}.loop-step:first-child{border-top:0}.truth-aside{grid-template-columns:1fr}.empty-truth{padding:27px;min-height:480px}.empty-actions{display:grid}.privacy{padding-block:80px}.privacy-rules{grid-template-columns:1fr}.footer-links{display:grid;gap:15px}.footer-bottom{display:grid}.tabs{width:100%}.tab{padding-inline:14px}.demo-trigger{right:12px;bottom:12px}.demo-menu{right:12px;bottom:69px}.modal-actions{display:grid}.modal-actions .btn{width:100%}
+    }
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+  </style>
 </head>
 <body>
-<a class="skip" href="#main-content">Skip to workplace evidence</a>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="https://www.refertrm.com" aria-label="ReferTRM home"><span class="brand-mark" aria-hidden="true"></span><span>ReferTRM / Truth</span></a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#jobs">Open roles</a><a href="#truth">Workplace truth</a><a href="#privacy">Privacy</a>
+        <a class="btn btn-gold nav-cta" href="https://www.refertrm.com/jobs">Browse free jobs</a>
+      </nav>
+    </div>
+  </header>
 
-<div class="reference-line" role="note" aria-label="Reference design status">
-  <div class="wrap">
-    <span class="status"><span class="dot"></span>Reference design · no production data</span>
-    <span class="proof-id">Cultural Truth v3 · July 2026</span>
-  </div>
-</div>
-
-<header class="app-header">
-  <div class="wrap">
-    <a class="brand" href="#"><span class="brand-mark">R</span>ReferTRM</a>
-    <nav class="primary-nav" aria-label="Primary navigation">
-      <a href="#">Jobs</a><a href="#" aria-current="page">Companies</a><a href="#">Academy</a><a href="#">Sign in</a>
-    </nav>
-  </div>
-</header>
-
-<main id="main-content" tabindex="-1">
-  <section class="company-hero" aria-labelledby="company-name">
-    <div class="wrap">
-      <nav class="crumb" aria-label="Breadcrumb"><a href="#">Companies</a><span aria-hidden="true">/</span><span>Thitsa Commerce Group</span></nav>
-      <div class="hero-grid">
-        <div class="identity">
-          <div class="company-logo" aria-hidden="true">TC</div>
-          <div>
-            <p class="eyebrow">Myanmar workplace truth</p>
-            <h1 class="company-title" id="company-name">Thitsa Commerce Group</h1>
-            <div class="company-meta">
-              <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V8l8-5 8 5v12"/><path d="M9 20v-6h6v6"/></svg>E-commerce &amp; retail</span>
-              <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>Yangon, Myanmar</span>
-              <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 20v-2a4 4 0 0 0-3-3.9"/></svg>51–200 people</span>
-            </div>
-            <div class="relationship"><span class="line"></span><span>Premium client is a commercial relationship—not a trust or evidence signal.</span></div>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="#jobs">View 3 open roles</a>
-              <button class="btn btn-secondary js-open-share" type="button">Share workplace truth</button>
-            </div>
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="company-pill"><img src="https://www.refertrm.com/partner-logo-1.jpg" width="34" height="34" alt="Makro Myanmar logo"><span><strong>Makro Myanmar</strong> · Premium retail client</span><i class="verified-dot" aria-hidden="true"></i></div>
+          <h1 id="hero-title">Know the work <em>before the yes.</em></h1>
+          <p class="hero-copy">A Myanmar-first decision layer for real jobs. See what is publicly known, what workers have safely verified, and—just as importantly—what nobody can honestly claim yet.</p>
+          <div class="hero-actions">
+            <a class="btn btn-gold" href="#jobs">Explore 20 open roles <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a>
+            <a class="btn btn-ghost" href="#truth">Inspect workplace truth</a>
           </div>
+          <div class="source-note"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/><path d="m9 12 2 2 4-4"/></svg><span>Real production company and job data. No invented rating, review, or salary testimony.</span></div>
         </div>
-        <aside class="truth-intro" aria-label="Evidence snapshot" data-populated-summary>
-          <p class="eyebrow">At a glance</p>
-          <h2>What people consistently report</h2>
-          <p>Evidence is shown as patterns, never as a verdict.</p>
-          <div class="mini-signals">
-            <div class="mini-signal"><span class="mark"></span><span class="label">Pay timing</span><strong>21 / 24</strong></div>
-            <div class="mini-signal warn"><span class="mark"></span><span class="label">Real finish time</span><strong>13 / 22 late</strong></div>
-            <div class="mini-signal warn"><span class="mark"></span><span class="label">Terms in writing</span><strong>9 / 23</strong></div>
-          </div>
-          <div class="confidence-line"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>Verified contacts · last 6 months · sample data</div>
-        </aside>
-        <aside class="truth-intro" aria-label="No evidence snapshot" data-empty-summary hidden>
-          <p class="eyebrow">At a glance</p><h2>No workplace evidence yet</h2>
-          <p>This is an honest zero—not a hidden score and not a reason to assume good or bad.</p>
-          <div class="confidence-line"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg>Questions remain available to help you decide safely.</div>
-        </aside>
+
+        <div class="truth-orbit" aria-label="Workplace truth evidence map: zero verified contributors">
+          <div class="orbit-ring one"></div><div class="orbit-ring two"></div><div class="orbit-ring three"></div>
+          <div class="orbit-core"><strong class="mono">0</strong><span>verified workplace contributors</span></div>
+          <div class="orbit-node n1"><b>Hiring clarity</b><span>Awaiting evidence</span></div>
+          <div class="orbit-node n2"><b>Pay reality</b><span>Awaiting evidence</span></div>
+          <div class="orbit-node n3"><b>Hours & leave</b><span>Awaiting evidence</span></div>
+          <div class="orbit-node n4"><b>Manager practice</b><span>Awaiting evidence</span></div>
+          <div class="orbit-status">Truth map · launch state</div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <div class="wrap demo-shell">
-    <div class="demo-card" aria-label="Reference state controls">
-      <div class="demo-copy"><span class="tag">REVIEW MODE</span><span>Change evidence without adding visual noise to the product.</span></div>
-      <div class="demo-fields">
-        <div class="demo-field"><label for="evidence-state">Evidence</label><select id="evidence-state"><option value="empty">Launch empty</option><option value="small">Small sample</option><option value="populated">Populated sample</option></select></div>
-        <div class="demo-field"><label for="salary-state">Salary</label><select id="salary-state"><option value="none">No evidence</option><option value="benchmark">Market benchmark</option><option value="mixed">Company + market</option></select></div>
+    <section class="signal-bar" aria-label="Live platform signals">
+      <div class="wrap signal-shell">
+        <div class="signal"><small>Company in focus</small><strong>Makro Myanmar</strong><p>Retail & Wholesale · Yangon</p></div>
+        <div class="signal"><small>Open now</small><strong class="big mono">20</strong><p>Production job records</p></div>
+        <div class="signal"><small>ReferTRM network</small><strong class="big mono">54+</strong><p>Licensed employer clients</p></div>
+        <div class="signal"><small>Evidence integrity</small><strong class="big mono">0 ≠ rating</strong><p>Silence is never a score</p></div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="product-nav">
-    <div class="wrap tabs" role="tablist" aria-label="Company truth sections">
-      <button class="tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true" data-tab="overview">Overview</button>
-      <button class="tab" role="tab" id="tab-hiring" aria-controls="panel-hiring" aria-selected="false" tabindex="-1" data-tab="hiring">Hiring</button>
-      <button class="tab" role="tab" id="tab-workplace" aria-controls="panel-workplace" aria-selected="false" tabindex="-1" data-tab="workplace">Work life</button>
-      <button class="tab" role="tab" id="tab-pay" aria-controls="panel-pay" aria-selected="false" tabindex="-1" data-tab="pay">Pay</button>
-    </div>
-  </div>
-
-  <div class="wrap content-grid">
-    <div>
-      <section class="panel" role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" data-panel="overview">
-        <div class="section-heading"><div><h2>What the evidence says</h2><p>The facts people need before accepting an offer—without a single score flattening the truth.</p></div><span class="sample-label" data-sample-label>Sample layout data</span></div>
-
-        <div class="surface empty-state" data-evidence-state="empty">
-          <div class="empty-icon"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5l5 3 6-3 5 3v11l-5-3-6 3-5-3Z"/><path d="M9 8v11m6-14v11"/></svg></div>
-          <div><h3>No verified workplace signals yet</h3><p>Nobody with a verified ReferTRM contact has shared structured evidence about this company. We will not manufacture a rating from silence.</p><button class="btn btn-secondary js-open-share" type="button">Be the first to share safely</button></div>
+    <section class="job-board" id="jobs" aria-labelledby="jobs-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="eyebrow">Free job marketplace</div><h2 id="jobs-title">Opportunity first. Confidence beside it.</h2></div>
+          <p>Job discovery and workplace truth belong in one journey. Every real role opens the company’s evidence layer before a candidate decides to apply.</p>
         </div>
-
-        <div data-evidence-state="small" hidden>
-          <div class="surface truth-list">
-            <div class="truth-row"><div><span class="signal-name">Pay arrived as promised</span><span class="signal-meta">n=4 · last 6 months</span></div><div class="signal-read"><strong>3 of 4</strong> said usually yes</div><div class="meter"><span style="width:75%"></span></div></div>
-            <div class="truth-row"><div><span class="signal-name">Actual finish time</span><span class="signal-meta">n=4 · last 6 months</span></div><div class="signal-read"><strong>2 of 4</strong> left later</div><div class="meter concern"><span style="width:50%"></span></div></div>
-            <div class="truth-row"><div><span class="signal-name">Targets given in writing</span><span class="signal-meta">n=4 · small sample</span></div><div class="signal-read"><strong>1 of 4</strong> said yes</div><div class="meter concern"><span style="width:25%"></span></div></div>
-            <div class="truth-row"><div><span class="signal-name">Private, respectful correction</span><span class="signal-meta">n=4 · small sample</span></div><div class="signal-read"><strong>3 of 4</strong> said usually</div><div class="meter"><span style="width:75%"></span></div></div>
-          </div>
-          <div class="truth-note"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01"/><circle cx="12" cy="12" r="9"/></svg><span>Small samples are labelled. Signals that could identify a person remain suppressed.</span></div>
+        <div class="jobs-grid">
+          <a class="job-card" href="https://www.refertrm.com/jobs/makro-hr-operation-manager" aria-label="View HR Operation Manager at Makro Myanmar">
+            <div class="job-top"><span class="job-tag">Senior · Full-time</span><span class="job-arrow"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 17 10-10M7 7h10v10"/></svg></span></div><h3>HR Operation Manager</h3><div class="job-location">Mingalar Taung Nyunt, Yangon</div><div class="job-bottom"><div class="job-salary">800K–1.5M MMK</div><div class="job-meta"><span>Salary shown</span><span>Apply free</span></div></div>
+          </a>
+          <a class="job-card" href="https://www.refertrm.com/jobs/makro-ecommerce-cs-manager" aria-label="View E-Commerce and Customer Service Manager at Makro Myanmar">
+            <div class="job-top"><span class="job-tag">Urgent · Senior</span><span class="job-arrow"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 17 10-10M7 7h10v10"/></svg></span></div><h3>E-Commerce &amp; Customer Service Manager</h3><div class="job-location">Mingalar Taung Nyunt, Yangon</div><div class="job-bottom"><div class="job-salary">800K–1.5M MMK</div><div class="job-meta"><span>Salary shown</span><span>Apply free</span></div></div>
+          </a>
+          <a class="job-card" href="https://www.refertrm.com/jobs/makro-engineering-coordinator" aria-label="View Engineering Coordinator at Makro Myanmar">
+            <div class="job-top"><span class="job-tag">Mid · Full-time</span><span class="job-arrow"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 17 10-10M7 7h10v10"/></svg></span></div><h3>Engineering Coordinator</h3><div class="job-location">Mingalar Taung Nyunt, Yangon</div><div class="job-bottom"><div class="job-salary">500K–900K MMK</div><div class="job-meta"><span>Salary shown</span><span>Apply free</span></div></div>
+          </a>
+          <a class="job-card" href="https://www.refertrm.com/jobs/makro-treasury-executive" aria-label="View Treasury Executive at Makro Myanmar">
+            <div class="job-top"><span class="job-tag">Mid · Full-time</span><span class="job-arrow"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 17 10-10M7 7h10v10"/></svg></span></div><h3>Treasury Executive</h3><div class="job-location">Mingalar Taung Nyunt, Yangon</div><div class="job-bottom"><div class="job-salary">400K–700K MMK</div><div class="job-meta"><span>Salary shown</span><span>Apply free</span></div></div>
+          </a>
         </div>
+        <div class="jobs-foot"><span><strong>Real data:</strong> roles, locations, levels, and salary bands come from the production job catalogue.</span><a class="btn btn-dark" href="https://www.refertrm.com/jobs">View all free jobs <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a></div>
+      </div>
+    </section>
 
-        <div data-evidence-state="populated" hidden>
-          <div class="surface truth-list">
-            <div class="truth-row"><div><span class="signal-name">Pay arrived as promised</span><span class="signal-meta">n=24 · last 6 months</span></div><div class="signal-read"><strong>21 of 24</strong> said usually yes</div><div class="meter"><span style="width:88%"></span></div></div>
-            <div class="truth-row"><div><span class="signal-name">Actual finish time</span><span class="signal-meta">n=22 · last 6 months</span></div><div class="signal-read"><strong>13 of 22</strong> left later</div><div class="meter concern"><span style="width:59%"></span></div></div>
-            <div class="truth-row"><div><span class="signal-name">Commission terms in writing</span><span class="signal-meta">n=18 · last 6 months</span></div><div class="signal-read"><strong>6 of 18</strong> said yes</div><div class="meter concern"><span style="width:33%"></span></div></div>
-            <div class="truth-row"><div><span class="signal-name">Leave and family events</span><span class="signal-meta">n=21 · last 6 months</span></div><div class="signal-read"><strong>17 of 21</strong> felt respected</div><div class="meter"><span style="width:81%"></span></div></div>
-            <div id="more-signals" hidden>
-              <div class="truth-row"><div><span class="signal-name">Overtime expectation</span><span class="signal-meta">n=20 · last 6 months</span></div><div class="signal-read"><strong>11 of 20</strong> said usually unpaid</div><div class="meter concern"><span style="width:55%"></span></div></div>
-              <div class="truth-row"><div><span class="signal-name">Private, respectful correction</span><span class="signal-meta">n=22 · last 6 months</span></div><div class="signal-read"><strong>18 of 22</strong> said usually</div><div class="meter"><span style="width:82%"></span></div></div>
-              <div class="truth-row"><div><span class="signal-name">Promotion path explained</span><span class="signal-meta">n=19 · last 6 months</span></div><div class="signal-read"><strong>7 of 19</strong> said yes</div><div class="meter concern"><span style="width:37%"></span></div></div>
-            </div>
-            <div class="truth-more"><button class="btn btn-quiet" id="toggle-signals" type="button" aria-expanded="false" aria-controls="more-signals">Show 3 more signals</button></div>
-          </div>
-          <div class="truth-note"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg><span>Verified contact means an interaction happened. It does not prove every statement is true.</span></div>
+    <section class="loop" aria-labelledby="loop-title">
+      <div class="wrap">
+        <div class="section-head"><div><div class="eyebrow">One connected product</div><h2 id="loop-title">Jobs create intent. Truth earns confidence.</h2></div><p>The job board is not a traffic link beside the product. It is the start of a privacy-safe evidence flywheel.</p></div>
+        <div class="loop-steps">
+          <article class="loop-step"><div class="step-no"><span>01 / DISCOVER</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></div><h3>Find a real, free-to-apply role.</h3><p>Search by company, career family, location, and transparent salary where available.</p><span class="micro">No login wall to browse</span></article>
+          <article class="loop-step"><div class="step-no"><span>02 / INSPECT</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/></svg></div><h3>See what is known—and unknown.</h3><p>Hiring evidence, workplace evidence, and market benchmarks keep their own labels.</p><span class="micro">No false star score</span></article>
+          <article class="loop-step"><div class="step-no"><span>03 / APPLY</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></div><h3>Apply with context, still free.</h3><p>A verified platform interaction can later support eligibility without exposing a person publicly.</p><span class="micro">Provenance, not publicity</span></article>
+          <article class="loop-step"><div class="step-no"><span>04 / CONTRIBUTE</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M3 12h18"/></svg></div><h3>Return evidence safely.</h3><p>Structured patterns appear only after moderation and the required privacy threshold.</p><span class="micro">The loop compounds trust</span></article>
         </div>
+      </div>
+    </section>
 
-        <div class="surface jobs-strip" id="jobs"><div><strong>3 roles open now</strong><span>Sales development · Customer support · Operations</span></div><a class="btn btn-secondary" href="#">See open roles</a></div>
-      </section>
+    <section class="evidence" id="truth" aria-labelledby="truth-title">
+      <div class="wrap">
+        <div class="evidence-head"><div><div class="eyebrow">Myanmar Workplace Truth Map</div><h2 id="truth-title">No theatre. Only evidence.</h2></div><p>Classic review sites turn one opinion into a public verdict. This system waits for safe, structured patterns.</p></div>
+        <div class="tabs" role="tablist" aria-label="Workplace truth categories">
+          <button class="tab" id="tab-workplace" role="tab" aria-selected="true" aria-controls="panel-workplace" data-tab="workplace">Workplace</button>
+          <button class="tab" id="tab-hiring" role="tab" aria-selected="false" aria-controls="panel-hiring" data-tab="hiring">Hiring</button>
+          <button class="tab" id="tab-pay" role="tab" aria-selected="false" aria-controls="panel-pay" data-tab="pay">Pay reality</button>
+          <button class="tab" id="tab-jobs" role="tab" aria-selected="false" aria-controls="panel-jobs" data-tab="jobs">Open roles</button>
+        </div>
+        <div class="truth-panel" id="panel-workplace" role="tabpanel" aria-labelledby="tab-workplace" data-panel="workplace">
+          <div class="empty-truth"><div class="empty-symbol"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4h16v12H7l-3 3V4Z"/><path d="M8 9h8M8 12h5"/></svg></div><h3>No verified workplace pattern yet.</h3><p>Makro Myanmar has no moderated workplace submissions in this launch dataset. We will not convert an empty record into a rating, guess, or endorsement.</p><div class="empty-actions"><button class="btn btn-gold js-share" type="button">Check if I can contribute</button><a class="btn btn-ghost" href="#privacy">See the privacy model</a></div></div>
+          <aside class="truth-aside"><div class="principle gold"><div class="label">The zero-state promise</div><h3>“Nothing yet” is useful truth.</h3><p>It protects candidates and companies from manufactured certainty.</p></div><div class="principle"><div class="label">Publishing rule</div><h3>Patterns, never identifiable stories.</h3><p>Low-volume signals stay private until aggregation is safe.</p></div></aside>
+        </div>
+        <div class="truth-panel" id="panel-hiring" role="tabpanel" aria-labelledby="tab-hiring" data-panel="hiring" hidden>
+          <div class="empty-truth"><div class="empty-symbol"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="3"/><path d="M5 20c.7-4 3-6 7-6s6.3 2 7 6"/></svg></div><h3>Hiring evidence stays separate.</h3><p>An interview experience can describe response time, clarity, and treatment. It cannot claim anything about daily work inside the company.</p><div class="empty-actions"><button class="btn btn-gold js-share" type="button">Share a verified hiring experience</button></div></div>
+          <aside class="truth-aside"><div class="principle gold"><div class="label">Eligibility source</div><h3>Applied through ReferTRM.</h3><p>A real interaction can establish provenance without displaying identity.</p></div><div class="principle"><div class="label">Moderation</div><h3>Incident first. Labels later.</h3><p>Structured facts are checked before any aggregate is shown.</p></div></aside>
+        </div>
+        <div class="truth-panel" id="panel-pay" role="tabpanel" aria-labelledby="tab-pay" data-panel="pay" hidden>
+          <div class="empty-truth"><div class="empty-symbol"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18m-4 4h.01"/></svg></div><h3>No verified company pay evidence yet.</h3><p>Open-job salary bands are shown with each role. They are not presented as worker-reported take-home pay, allowances, deductions, or guaranteed offers.</p><div class="empty-actions"><a class="btn btn-gold" href="#jobs">Compare open-role bands</a></div></div>
+          <aside class="truth-aside"><div class="principle gold"><div class="label">Source separation</div><h3>Job band ≠ payroll evidence.</h3><p>Every number keeps its origin, sample size, and caveat.</p></div><div class="principle"><div class="label">Future detail</div><h3>Base, commission, allowance, deduction.</h3><p>The complete pay reality matters more than one headline number.</p></div></aside>
+        </div>
+        <div class="truth-panel" id="panel-jobs" role="tabpanel" aria-labelledby="tab-jobs" data-panel="jobs" hidden>
+          <div class="empty-truth"><div class="empty-symbol"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 7h18v13H3z"/><path d="M3 12h18"/></svg></div><h3>20 real roles are open now.</h3><p>Workplace truth is embedded in the job decision—not built as an isolated review destination candidates must discover later.</p><div class="empty-actions"><a class="btn btn-gold" href="#jobs">Return to featured roles</a><a class="btn btn-ghost" href="https://www.refertrm.com/jobs">Open the full job board</a></div></div>
+          <aside class="truth-aside"><div class="principle gold"><div class="label">Candidate promise</div><h3>Browsing and applying stay free.</h3><p>ReferTRM earns from employers, never from job seekers.</p></div><div class="principle"><div class="label">Flywheel</div><h3>Every honest step improves the next decision.</h3><p>Discovery, application, and safe contribution form one system.</p></div></aside>
+        </div>
+      </div>
+    </section>
 
-      <section class="panel" role="tabpanel" id="panel-hiring" aria-labelledby="tab-hiring" data-panel="hiring" hidden>
-        <div class="section-heading"><div><h2>Hiring experience</h2><p>Applying and interviewing are not the same as working there. The evidence stays separate.</p></div><span class="sample-label" data-hiring-sample>Sample account</span></div>
-        <div class="surface empty-state" data-hiring-empty><div class="empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m22 2-9 20-3-9-8-4 20-7Z"/></svg></div><div><h3>No verified hiring account yet</h3><p>Ask when you will hear the outcome, whether the salary is clear before interview, and whether any payment is requested.</p></div></div>
-        <article class="surface story" data-hiring-story hidden>
-          <div class="story-top"><div><span class="story-label">Hiring experience</span><div class="story-person">An applicant · sales role · within 6 months</div></div><span class="verified"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>Contact verified</span></div>
-          <div class="story-grid"><div class="story-cell"><span>Promised</span><p>Outcome within one week. Salary stated before interview.</p></div><div class="story-cell"><span>In practice</span><p>Outcome arrived after three weeks. Both interviews started on time. No payment was requested.</p></div></div>
-          <div class="decision-prompt"><span>ASK BEFORE YOU DECIDE</span><p>“When will I hear the outcome, and who should I follow up with?”</p></div>
-          <div class="story-foot"><span>Coarse attribution · Privacy Shield applied</span><button class="btn btn-quiet js-report" type="button">Report this account</button></div>
-        </article>
-      </section>
+    <section class="privacy" id="privacy" aria-labelledby="privacy-title">
+      <div class="wrap privacy-grid">
+        <div class="shield" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m12 3 7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <div><div class="eyebrow">Privacy Shield</div><h2 id="privacy-title">Truth without a target.</h2><p class="privacy-copy">Myanmar workplaces can be small, interconnected, and easy to identify from one detail. Before submission, the system warns when a role, date, branch, or incident could reveal someone.</p><div class="privacy-rules"><div class="privacy-rule"><strong>Re-identification warning</strong>Details are checked before a person can submit.</div><div class="privacy-rule"><strong>Quiet aggregation</strong>Small samples remain unpublished.</div><div class="privacy-rule"><strong>Draft recovery</strong>Long contributions survive weak connections.</div><div class="privacy-rule"><strong>Commercial separation</strong>Employer status never changes the truth rules.</div></div></div>
+      </div>
+    </section>
+  </main>
 
-      <section class="panel" role="tabpanel" id="panel-workplace" aria-labelledby="tab-workplace" data-panel="workplace" hidden>
-        <div class="section-heading"><div><h2>Work life</h2><p>One incident at a time: what was promised, what happened, and whether it became a pattern.</p></div><span class="sample-label" data-work-sample>Sample account</span></div>
-        <div class="surface empty-state" data-work-empty><div class="empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div><div><h3>No account is safe to publish yet</h3><p>Quiet signals may exist even when a small role, city, or tenure combination would identify the contributor.</p></div></div>
-        <article class="surface story" data-work-story hidden>
-          <div class="story-top"><div><span class="story-label">Workplace experience</span><div class="story-person">A worker · Yangon region · within 1 year</div></div><span class="verified"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>Contact verified</span></div>
-          <div class="story-grid"><div class="story-cell"><span>Promised</span><p>Finish at 5:30 PM. Commission terms explained after probation.</p></div><div class="story-cell"><span>In practice</span><p>Campaign weeks often ended near 7 PM. Commission terms were not provided in writing. Pay arrived on time.</p></div></div>
-          <div class="decision-prompt"><span>ASK BEFORE YOU DECIDE</span><p>“Can I see the commission terms in writing, and what is the real finish time in campaign weeks?”</p></div>
-          <div class="story-foot"><span>Repeated pattern · exact role and date removed</span><button class="btn btn-quiet js-report" type="button">Report this account</button></div>
-        </article>
-      </section>
+  <footer><div class="wrap"><div class="footer-top"><a class="brand" href="https://www.refertrm.com"><span class="brand-mark" aria-hidden="true"></span><span>ReferTRM / Truth</span></a><div class="footer-statement">A better career decision begins with what is real.</div><div class="footer-links"><a href="https://www.refertrm.com/jobs">Jobs</a><a href="https://www.refertrm.com/safety">Safety</a><a href="https://www.refertrm.com/privacy">Privacy</a></div></div><div class="footer-bottom"><span><strong>Research prototype.</strong> Real public company and job data; zero fabricated workplace claims.</span><span>Myanmar copy slots remain reserved for CCO review.</span></div></div></footer>
 
-      <section class="panel" role="tabpanel" id="panel-pay" aria-labelledby="tab-pay" data-panel="pay" hidden>
-        <div class="section-heading"><div><h2>Pay, made legible</h2><p>Base, commission, allowances and deductions stay separate. Market data never becomes an employer promise.</p></div><span class="sample-label" data-pay-sample>Sample figures</span></div>
-        <div class="surface empty-state" data-salary-panel="none"><div class="empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18m4 4h4"/></svg></div><div><h3>No salary evidence yet</h3><p>No company submission or matching market benchmark is available. We will not estimate a number.</p></div></div>
-        <div class="surface pay-summary" data-salary-panel="benchmark" hidden><div class="pay-source"><strong>Sales Development Representative</strong><span class="source-chip">MARKET · n=85</span></div><div class="pay-total">350K–550K <small>MMK / month · gross</small></div><div class="pay-caveat">Market-wide orientation only. This is not Thitsa Commerce Group payroll and not an offer.</div></div>
-        <div class="surface pay-summary" data-salary-panel="mixed" hidden><div class="pay-source"><strong>Sales Development Representative</strong><span class="source-chip">COMPANY · n=4</span></div><div class="pay-total">395K–435K <small>MMK / month · take-home</small></div><div class="pay-breakdown"><div class="pay-line"><span>Base · monthly gross</span><strong>350,000</strong></div><div class="pay-line"><span>Commission · variable</span><strong>+40K–80K</strong></div><div class="pay-line"><span>Transport allowance · 2 of 4</span><strong>+15,000</strong></div><div class="pay-line"><span>Uniform deposit · first month</span><strong>−10,000</strong></div><div class="pay-line total"><span>Typical take-home</span><strong>395K–435K</strong></div></div><div class="pay-caveat">Small company sample. Commission varies. Ask for the full breakdown in writing before accepting.</div></div>
-      </section>
+  <button class="demo-trigger" id="demo-trigger" type="button" aria-label="Open prototype controls" aria-expanded="false" aria-controls="demo-menu"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M7 12h10M9 17h6"/></svg></button>
+  <div class="demo-menu" id="demo-menu" hidden><h3>Prototype controls</h3><p>Review deep-linked product states without changing the real-company evidence baseline.</p><button class="demo-option" type="button" data-jump="workplace">Workplace launch state</button><button class="demo-option" type="button" data-jump="hiring">Hiring evidence boundary</button><button class="demo-option" type="button" data-jump="pay">Salary source separation</button><button class="demo-option" type="button" data-jump="jobs">Free job-board connection</button></div>
+
+  <dialog id="share-dialog" aria-labelledby="share-title">
+    <div class="modal-head"><h2 id="share-title">Contribute safely</h2><button class="icon-btn" id="close-dialog" type="button" aria-label="Close dialog"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+    <div class="modal-body"><p class="step-kicker">Step 1 of 3 · Relationship</p><h3>How do you know Makro Myanmar?</h3><p class="modal-copy">Hiring evidence and workplace evidence are collected separately so neither can speak for the other.</p>
+      <button class="choice" type="button" data-choice="hiring"><span><strong>I applied or interviewed</strong><span>Response time, process clarity, and candidate treatment.</span></span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
+      <button class="choice" type="button" data-choice="workplace"><span><strong>I work or worked here</strong><span>Pay, hours, leave, manager practice, and progression.</span></span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
+      <div class="notice" role="note"><strong>Before you continue:</strong> this prototype demonstrates the privacy-first eligibility flow. It does not write to production.</div>
+      <div class="modal-actions"><button class="btn" id="save-draft" type="button">Save draft locally</button><button class="btn btn-dark" id="continue-share" type="button" disabled>Continue</button></div>
     </div>
+  </dialog>
 
-    <aside class="decision-rail" aria-label="Decision support">
-      <section class="surface decision-card"><h2>Before you say yes</h2><p>Four calm questions expose more truth than a star rating.</p><div class="question-list"><div class="question"><p>Can I see base pay, commission, allowances and deductions in writing?</p><span>PAY CLARITY</span></div><div class="question"><p>What time do people actually leave during busy weeks?</p><span>REAL HOURS</span></div><div class="question"><p>How is urgent family leave handled?</p><span>FAMILY &amp; LEAVE</span></div><div class="question"><p>When will I hear the hiring outcome?</p><span>HIRING RESPECT</span></div></div></section>
-      <section class="share-card"><h2>Your truth can stay quiet</h2><p>Answer structured questions first. A public story is optional and passes through the Privacy Shield.</p><button class="btn js-open-share" type="button">Share safely</button><div class="privacy-small"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10Z"/></svg><span>Draft stays on this device. Nothing in this reference demo is sent.</span></div></section>
-    </aside>
-  </div>
-</main>
+  <script>
+    const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+    const hero=$('.hero');
+    hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();hero.style.setProperty('--mx',`${((e.clientX-r.left)/r.width)*100}%`);hero.style.setProperty('--my',`${((e.clientY-r.top)/r.height)*100}%`)});
 
-<dialog class="truth-dialog" id="truth-dialog" aria-labelledby="dialog-title">
-  <div class="dialog-head"><div><h2 id="dialog-title">Share workplace truth</h2><p>Short answers first. Public writing is always optional.</p></div><button class="icon-button" id="close-dialog" type="button" aria-label="Close contribution"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
-  <div class="dialog-progress" aria-hidden="true"><span id="progress-bar" style="width:33.33%"></span></div>
-  <div class="dialog-body">
-    <section class="dialog-step" data-step="1"><p class="step-kicker">Step 1 of 3 · relationship</p><h3>How do you know this company?</h3><p class="step-copy">Hiring and workplace evidence stay separate so one never speaks for the other.</p><div class="choice-stack" id="relationship-options" role="group" aria-label="Relationship with company"><button class="choice-card" data-relationship="hiring" aria-pressed="false" type="button"><strong>I applied or interviewed</strong><span>Hiring process only—not work life.</span></button><button class="choice-card" data-relationship="workplace" aria-pressed="false" type="button"><strong>I work or worked here</strong><span>Pay, hours, leave, management or progression.</span></button></div></section>
+    function activateTab(name,scroll=false){
+      $$('.tab').forEach(t=>{const active=t.dataset.tab===name;t.setAttribute('aria-selected',String(active));t.tabIndex=active?0:-1});
+      $$('[data-panel]').forEach(p=>p.hidden=p.dataset.panel!==name);
+      const url=new URL(location.href);url.searchParams.set('view',name);history.replaceState({},'',url);
+      if(scroll) $('#truth').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+    }
+    $$('.tab').forEach((tab,i)=>{tab.addEventListener('click',()=>activateTab(tab.dataset.tab));tab.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight'].includes(e.key))return;e.preventDefault();const tabs=$$('.tab'),next=(i+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;tabs[next].focus();activateTab(tabs[next].dataset.tab)})});
+    const initial=new URLSearchParams(location.search).get('view');if(['workplace','hiring','pay','jobs'].includes(initial))activateTab(initial);
 
-    <section class="dialog-step" data-step="2" hidden><p class="step-kicker">Step 2 of 3 · what happened</p><h3>Start with the facts</h3><p class="step-copy">These answers can join anonymous counts. No public story is required.</p><div class="field"><span class="field-label">What is this about?</span><div class="chip-group" role="group" aria-label="Evidence topic"><button class="chip" type="button" aria-pressed="true">Pay timing</button><button class="chip" type="button" aria-pressed="false">Working hours</button><button class="chip" type="button" aria-pressed="false">Commission</button><button class="chip" type="button" aria-pressed="false">Leave</button><button class="chip" type="button" aria-pressed="false">Hiring</button></div></div><div class="field"><label class="field-label" for="story-detail">What happened in practice? <span class="sr-only">Optional</span></label><p class="field-help">Optional. One event is enough. Avoid names, exact dates, team names and shifts.</p><textarea id="story-detail" data-draft="story" placeholder="Write only what another jobseeker needs to know."></textarea></div><div class="field"><span class="field-label">Was it one time or a pattern?</span><div class="chip-group" role="group" aria-label="Incident frequency"><button class="chip" type="button" aria-pressed="false">One time</button><button class="chip" type="button" aria-pressed="true">Repeated pattern</button><button class="chip" type="button" aria-pressed="false">Not sure</button></div></div><div class="save-line" id="save-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"/></svg>Draft saves only on this device</div></section>
+    const demoBtn=$('#demo-trigger'),demoMenu=$('#demo-menu');
+    demoBtn.addEventListener('click',()=>{const open=demoMenu.hidden;demoMenu.hidden=!open;demoBtn.setAttribute('aria-expanded',String(open))});
+    $$('.demo-option').forEach(b=>b.addEventListener('click',()=>{activateTab(b.dataset.jump,true);demoMenu.hidden=true;demoBtn.setAttribute('aria-expanded','false')}));
+    document.addEventListener('click',e=>{if(!demoMenu.hidden&&!demoMenu.contains(e.target)&&e.target!==demoBtn){demoMenu.hidden=true;demoBtn.setAttribute('aria-expanded','false')}});
 
-    <section class="dialog-step" data-step="3" hidden><p class="step-kicker">Step 3 of 3 · privacy shield</p><h3>See exactly what would be public</h3><p class="step-copy">The system removes details that could expose someone inside a small workplace.</p><div class="privacy-preview"><span class="preview-label">Public preview</span><strong class="public-name" id="preview-name">A worker</strong><span class="public-meta" id="preview-meta">Yangon region · within the last year</span><p class="public-story" id="preview-story">Your optional account will appear here after identifying details are removed.</p></div><div class="risk"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span id="risk-copy">Role, office, tenure and date are coarsened. Minimum-cohort and delayed-publication gates still apply.</span></div><div class="privacy-options"><label class="privacy-option"><span>Replace exact role with “a worker”</span><input type="checkbox" data-shield="role" checked></label><label class="privacy-option"><span>Use region, not office</span><input type="checkbox" data-shield="location" checked></label><label class="privacy-option"><span>Remove exact tenure</span><input type="checkbox" data-shield="tenure" checked></label><label class="privacy-option"><span>Delay publication date</span><input type="checkbox" data-shield="date" checked></label></div><div class="step-status" id="submission-status" role="status" aria-live="polite" hidden></div></section>
-
-    <div class="dialog-actions"><button class="btn btn-quiet" id="test-recovery" type="button">Test draft recovery</button><div class="right"><button class="btn btn-secondary" id="back-step" type="button" hidden>Back</button><button class="btn btn-primary" id="next-step" type="button">Continue</button></div></div>
-  </div>
-</dialog>
-
-<div class="sr-only" id="global-status" role="status" aria-live="polite"></div>
-
-<footer><div class="wrap"><span class="proof">REFERENCE ONLY · 297 COMPANIES · 0 REVIEWS · 85 BENCHMARKS AT BASELINE</span><span>Burmese copy requires CCO review · Field Walk required before cultural seal</span></div></footer>
-
-<script>
-(function(){
-  var allowed={data:['empty','small','populated'],salary:['none','benchmark','mixed'],tab:['overview','hiring','workplace','pay']};
-  var query=new URLSearchParams(location.search);
-  var state={data:allowed.data.indexOf(query.get('data'))>-1?query.get('data'):'empty',salary:allowed.salary.indexOf(query.get('salary'))>-1?query.get('salary'):'none',tab:allowed.tab.indexOf(query.get('tab'))>-1?query.get('tab'):'overview'};
-  var draftKey='refertrm-workplace-truth-v3';
-  var dialog=document.getElementById('truth-dialog');
-  var step=1;
-
-  function updateUrl(){var next=new URLSearchParams(location.search);next.set('data',state.data);next.set('salary',state.salary);next.set('tab',state.tab);history.replaceState(null,'',location.pathname+'?'+next.toString()+location.hash)}
-  function applyState(){
-    document.getElementById('evidence-state').value=state.data;document.getElementById('salary-state').value=state.salary;
-    document.querySelectorAll('[data-evidence-state]').forEach(function(el){el.hidden=el.dataset.evidenceState!==state.data});
-    document.querySelectorAll('[data-salary-panel]').forEach(function(el){el.hidden=el.dataset.salaryPanel!==state.salary});
-    var hasEvidence=state.data!=='empty';
-    document.querySelectorAll('[data-populated-summary]').forEach(function(el){el.hidden=!hasEvidence});document.querySelectorAll('[data-empty-summary]').forEach(function(el){el.hidden=hasEvidence});
-    document.querySelector('[data-sample-label]').hidden=state.data==='empty';document.querySelector('[data-pay-sample]').hidden=state.salary==='none';
-    document.querySelector('[data-hiring-empty]').hidden=hasEvidence;document.querySelector('[data-hiring-story]').hidden=!hasEvidence;document.querySelector('[data-hiring-sample]').hidden=!hasEvidence;document.querySelector('[data-work-empty]').hidden=hasEvidence;document.querySelector('[data-work-story]').hidden=!hasEvidence;document.querySelector('[data-work-sample]').hidden=!hasEvidence;
-    setTab(state.tab,false);updateUrl();
-  }
-  function setTab(name,focus){
-    state.tab=name;
-    document.querySelectorAll('[role="tab"]').forEach(function(tab){var on=tab.dataset.tab===name;tab.setAttribute('aria-selected',String(on));tab.tabIndex=on?0:-1;if(on&&focus)tab.focus()});
-    document.querySelectorAll('[data-panel]').forEach(function(panel){panel.hidden=panel.dataset.panel!==name});updateUrl();
-  }
-  document.getElementById('evidence-state').addEventListener('change',function(){state.data=this.value;applyState()});
-  document.getElementById('salary-state').addEventListener('change',function(){state.salary=this.value;applyState()});
-  document.querySelector('.tabs').addEventListener('click',function(event){var tab=event.target.closest('[role="tab"]');if(tab)setTab(tab.dataset.tab,false)});
-  document.querySelector('.tabs').addEventListener('keydown',function(event){if(event.key!=='ArrowRight'&&event.key!=='ArrowLeft')return;var tabs=[].slice.call(this.querySelectorAll('[role="tab"]'));var current=tabs.indexOf(document.activeElement);var next=event.key==='ArrowRight'?(current+1)%tabs.length:(current-1+tabs.length)%tabs.length;event.preventDefault();setTab(tabs[next].dataset.tab,true)});
-
-  var moreButton=document.getElementById('toggle-signals');
-  moreButton.addEventListener('click',function(){var more=document.getElementById('more-signals');var open=more.hidden;more.hidden=!open;this.setAttribute('aria-expanded',String(open));this.textContent=open?'Show fewer signals':'Show 3 more signals'});
-
-  function safeRead(){try{return JSON.parse(localStorage.getItem(draftKey)||'null')}catch(error){return null}}
-  function safeWrite(value){try{localStorage.setItem(draftKey,JSON.stringify(value));return true}catch(error){return false}}
-  function selected(group){var item=group.querySelector('[aria-pressed="true"]');return item?item.textContent.trim():''}
-  function collectDraft(){var relation=document.querySelector('.choice-card[aria-pressed="true"]');return{relationship:relation?relation.dataset.relationship:'',story:document.getElementById('story-detail').value,groups:[].map.call(document.querySelectorAll('.chip-group'),selected),shield:[].map.call(document.querySelectorAll('[data-shield]'),function(el){return el.checked}),savedAt:new Date().toISOString()}}
-  function saveDraft(){var ok=safeWrite(collectDraft());var status=document.getElementById('save-status');status.lastChild.textContent=ok?' Draft saved only on this device':' Local saving is unavailable in this browser'}
-  function restoreDraft(){var draft=safeRead();if(!draft)return false;document.querySelectorAll('.choice-card').forEach(function(button){button.setAttribute('aria-pressed',String(button.dataset.relationship===draft.relationship))});document.getElementById('story-detail').value=draft.story||'';document.querySelectorAll('.chip-group').forEach(function(group,index){group.querySelectorAll('.chip').forEach(function(button){button.setAttribute('aria-pressed',String(button.textContent.trim()===(draft.groups||[])[index]))})});document.querySelectorAll('[data-shield]').forEach(function(input,index){if(Array.isArray(draft.shield))input.checked=draft.shield[index]!==false});updatePreview();return true}
-  function updateNextAvailability(){document.getElementById('next-step').disabled=step===1&&!document.querySelector('.choice-card[aria-pressed="true"]')}
-  function setStep(value){step=Math.max(1,Math.min(3,value));document.querySelectorAll('.dialog-step').forEach(function(el){el.hidden=Number(el.dataset.step)!==step});document.getElementById('progress-bar').style.width=Math.round(step*100/3)+'%';document.getElementById('back-step').hidden=step===1;document.getElementById('next-step').textContent=step===3?'Approve reference':'Continue';updateNextAvailability();document.querySelector('.dialog-body').scrollTop=0}
-  function openDialog(){restoreDraft();setStep(1);dialog.showModal();document.body.classList.add('is-locked')}
-  function closeDialog(){dialog.close();document.body.classList.remove('is-locked')}
-  document.querySelectorAll('.js-open-share').forEach(function(button){button.addEventListener('click',openDialog)});document.getElementById('close-dialog').addEventListener('click',closeDialog);
-  dialog.addEventListener('click',function(event){if(event.target===dialog)closeDialog()});dialog.addEventListener('cancel',function(){document.body.classList.remove('is-locked')});
-  document.getElementById('relationship-options').addEventListener('click',function(event){var button=event.target.closest('.choice-card');if(!button)return;this.querySelectorAll('.choice-card').forEach(function(item){item.setAttribute('aria-pressed',String(item===button))});updateNextAvailability();saveDraft()});
-  document.querySelectorAll('.chip-group').forEach(function(group){group.addEventListener('click',function(event){var button=event.target.closest('.chip');if(!button)return;group.querySelectorAll('.chip').forEach(function(item){item.setAttribute('aria-pressed',String(item===button))});saveDraft()})});
-  document.getElementById('story-detail').addEventListener('input',function(){saveDraft();updatePreview()});
-  document.querySelectorAll('[data-shield]').forEach(function(input){input.addEventListener('change',function(){saveDraft();updatePreview()})});
-  function updatePreview(){var switches=[].slice.call(document.querySelectorAll('[data-shield]'));var checked=switches.filter(function(el){return el.checked}).length;document.getElementById('preview-name').textContent=switches[0].checked?'A worker':'SDR team member';document.getElementById('preview-meta').textContent=(switches[1].checked?'Yangon region':'Yangon office')+(switches[2].checked?'':' · 8 months')+' · '+(switches[3].checked?'within the last year':'12 Jun 2026');document.getElementById('preview-story').textContent=document.getElementById('story-detail').value||'Your optional account will appear here after identifying details are removed.';document.getElementById('risk-copy').textContent=checked===4?'Role, office, tenure and date are coarsened. Minimum-cohort and delayed-publication gates still apply.':'Exact details remain. In a small workplace, combining them could identify the contributor.'}
-  document.getElementById('back-step').addEventListener('click',function(){setStep(step-1)});
-  document.getElementById('next-step').addEventListener('click',function(){if(step<3){setStep(step+1);return}var status=document.getElementById('submission-status');status.hidden=false;status.textContent='Reference approved. Nothing was submitted; production moderation and privacy architecture remain gated.';this.textContent='Approved'});
-  document.getElementById('test-recovery').addEventListener('click',function(){saveDraft();var status=document.getElementById('global-status');status.textContent='Draft recovery is ready. Refreshing this page will not remove your local answers.';document.getElementById('save-status').lastChild.textContent=' Recovery ready · refresh and reopen this form'});
-  document.querySelectorAll('.js-report').forEach(function(button){button.addEventListener('click',function(){document.getElementById('global-status').textContent='Report flow is a reference state. Production moderation is not connected.'})});
-  updatePreview();applyState();
-})();
-</script>
+    const dialog=$('#share-dialog'),continueBtn=$('#continue-share');let selected='';
+    $$('.js-share').forEach(b=>b.addEventListener('click',()=>dialog.showModal()));
+    $('#close-dialog').addEventListener('click',()=>dialog.close());
+    dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
+    $$('.choice').forEach(b=>b.addEventListener('click',()=>{selected=b.dataset.choice;$$('.choice').forEach(x=>{x.style.borderColor=x===b?'var(--teal)':'';x.setAttribute('aria-pressed',String(x===b))});continueBtn.disabled=false}));
+    $('#save-draft').addEventListener('click',e=>{localStorage.setItem('refertrm-truth-draft',JSON.stringify({company:'Makro Myanmar',relationship:selected,savedAt:new Date().toISOString()}));e.currentTarget.textContent='Draft saved on this device'});
+    continueBtn.addEventListener('click',()=>{if(!selected)return;$('.modal-body').innerHTML=`<p class="step-kicker">Prototype boundary</p><h3>Your relationship is noted.</h3><p class="modal-copy">Production continuation requires authenticated eligibility, moderation, privacy-threshold logic, and row-level security. Those safeguards are architecture-gated.</p><div class="notice"><strong>Nothing was submitted.</strong> This frontend intentionally stops before a production write.</div><div class="modal-actions"><button class="btn btn-dark" type="button" onclick="document.getElementById('share-dialog').close()">Done</button></div>`});
+  </script>
 </body>
 </html>
