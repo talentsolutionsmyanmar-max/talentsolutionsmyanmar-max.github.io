@@ -1,0 +1,821 @@
+{
+  "contract": "refertrm-public-companies-v1",
+  "asOf": "2026-07-22",
+  "timezone": "Asia/Yangon",
+  "status": "verified",
+  "counts": {
+    "activeCoreJobs": 253,
+    "hiringCompanies": 74,
+    "verifiedEmployers": 7
+  },
+  "generatedAt": "2026-07-22T16:07:07.648Z",
+  "notes": "Seed projection from CTO audit 2026-07-22. Full 74-company dataset pending Codex generator. Render-dedupe by normalized name handles DB duplicate records (Electronic City, KBZ Life, Unicharm, Myanmar Indobest each have scraped+canonical cuid records).",
+  "companies": [
+    {
+      "id": "makro-myanmar",
+      "name": "Makro Myanmar",
+      "slug": "makro-myanmar",
+      "industry": "Retail & Wholesale",
+      "location": "Yangon",
+      "verified": false,
+      "tier": "client",
+      "roleCount": 20,
+      "roles": [
+        {
+          "title": "Sales Executive",
+          "department": "Sales",
+          "terms": "Full-time",
+          "salary": "400,000–600,000 MMK"
+        },
+        {
+          "title": "Senior Sales Executive",
+          "department": "Sales",
+          "terms": "Contract",
+          "salary": "500,000–750,000 MMK"
+        },
+        {
+          "title": "Sales Manager",
+          "department": "Sales",
+          "terms": "Full-time",
+          "salary": "350,000–500,000 MMK"
+        },
+        {
+          "title": "Sales Representative",
+          "department": "Sales",
+          "terms": "Full-time",
+          "salary": "600,000–900,000 MMK"
+        },
+        {
+          "title": "Business Development Executive",
+          "department": "Business Development",
+          "terms": "Full-time",
+          "salary": "700,000–1,000,000 MMK"
+        },
+        {
+          "title": "Account Manager",
+          "department": "Sales",
+          "terms": "Full-time",
+          "salary": "not_stated"
+        },
+        {
+          "title": "Key Account Manager",
+          "department": "Sales",
+          "terms": "Full-time",
+          "salary": "600,000–900,000 MMK"
+        },
+        {
+          "title": "Regional Sales Manager",
+          "department": "Sales",
+          "terms": "Contract",
+          "salary": "400,000–600,000 MMK"
+        },
+        {
+          "title": "Junior Accountant",
+          "department": "Finance",
+          "terms": "Full-time",
+          "salary": "550,000–800,000 MMK"
+        },
+        {
+          "title": "Senior Accountant",
+          "department": "Finance",
+          "terms": "Full-time",
+          "salary": "300,000–450,000 MMK"
+        },
+        {
+          "title": "Accountant",
+          "department": "Finance",
+          "terms": "Full-time",
+          "salary": "700,000–1,000,000 MMK"
+        },
+        {
+          "title": "Finance Manager",
+          "department": "Finance",
+          "terms": "Full-time",
+          "salary": "600,000–900,000 MMK"
+        },
+        {
+          "title": "Finance Controller",
+          "department": "Finance",
+          "terms": "Full-time",
+          "salary": "350,000–500,000 MMK"
+        },
+        {
+          "title": "Accounts Payable Clerk",
+          "department": "Finance",
+          "terms": "Full-time",
+          "salary": "not_stated"
+        },
+        {
+          "title": "Accounts Receivable Clerk",
+          "department": "Finance",
+          "terms": "Full-time",
+          "salary": "350,000–500,000 MMK"
+        },
+        {
+          "title": "Cost Accountant",
+          "department": "Finance",
+          "terms": "Full-time",
+          "salary": "250,000–400,000 MMK"
+        },
+        {
+          "title": "Tax Associate",
+          "department": "Finance",
+          "terms": "Full-time",
+          "salary": "800,000–1,200,000 MMK"
+        },
+        {
+          "title": "Audit Assistant",
+          "department": "Finance",
+          "terms": "Contract",
+          "salary": "300,000–450,000 MMK"
+        },
+        {
+          "title": "HR Executive",
+          "department": "Human Resources",
+          "terms": "Contract",
+          "salary": "200,000–350,000 MMK"
+        },
+        {
+          "title": "Senior HR Executive",
+          "department": "Human Resources",
+          "terms": "Full-time",
+          "salary": "350,000–500,000 MMK"
+        }
+      ],
+      "salaryVisibleRoles": 18,
+      "publishedReviews": 0
+    },
+    {
+      "id": "thadoe-mahar",
+      "name": "Thadoe Mahar Co., Ltd",
+      "slug": "thadoe-mahar",
+      "industry": "Diversified Business",
+      "location": "Nay Pyi Taw",
+      "verified": false,
+      "tier": "client",
+      "roleCount": 18,
+      "roles": [
+        {
+          "title": "HR Manager",
+          "department": "Human Resources",
+          "terms": "Full-time",
+          "salary": "250,000–400,000 MMK"
+        },
+        {
+          "title": "HR Officer",
+          "department": "Human Resources",
+          "terms": "Full-time",
+          "salary": "600,000–900,000 MMK"
+        },
+        {
+          "title": "Recruitment Specialist",
+          "department": "Human Resources",
+          "terms": "Part-time",
+          "salary": "800,000–1,200,000 MMK"
+        },
+        {
+          "title": "Training Coordinator",
+          "department": "Human Resources",
+          "terms": "Full-time",
+          "salary": "1,200,000–1,800,000 MMK"
+        },
+        {
+          "title": "Payroll Officer",
+          "department": "Human Resources",
+          "terms": "Full-time",
+          "salary": "not_stated"
+        },
+        {
+          "title": "HR Business Partner",
+          "department": "Human Resources",
+          "terms": "Full-time",
+          "salary": "250,000–400,000 MMK"
+        },
+        {
+          "title": "Admin Executive",
+          "department": "Administration",
+          "terms": "Full-time",
+          "salary": "200,000–350,000 MMK"
+        },
+        {
+          "title": "Senior Admin Executive",
+          "department": "Administration",
+          "terms": "Full-time",
+          "salary": "600,000–900,000 MMK"
+        },
+        {
+          "title": "Office Manager",
+          "department": "Administration",
+          "terms": "Full-time",
+          "salary": "1,500,000–2,200,000 MMK"
+        },
+        {
+          "title": "Administrative Assistant",
+          "department": "Administration",
+          "terms": "Contract",
+          "salary": "300,000–450,000 MMK"
+        },
+        {
+          "title": "Receptionist",
+          "department": "Administration",
+          "terms": "Full-time",
+          "salary": "550,000–800,000 MMK"
+        },
+        {
+          "title": "Front Desk Officer",
+          "department": "Administration",
+          "terms": "Full-time",
+          "salary": "not_stated"
+        },
+        {
+          "title": "Data Entry Operator",
+          "department": "Operations",
+          "terms": "Full-time",
+          "salary": "800,000–1,200,000 MMK"
+        },
+        {
+          "title": "Document Controller",
+          "department": "Operations",
+          "terms": "Full-time",
+          "salary": "900,000–1,300,000 MMK"
+        },
+        {
+          "title": "Marketing Executive",
+          "department": "Marketing",
+          "terms": "Part-time",
+          "salary": "not_stated"
+        },
+        {
+          "title": "Digital Marketing Specialist",
+          "department": "Marketing",
+          "terms": "Full-time",
+          "salary": "not_stated"
+        },
+        {
+          "title": "Brand Manager",
+          "department": "Marketing",
+          "terms": "Full-time",
+          "salary": "not_stated"
+        },
+        {
+          "title": "Marketing Coordinator",
+          "department": "Marketing",
+          "terms": "Full-time",
+          "salary": "350,000–500,000 MMK"
+        }
+      ],
+      "salaryVisibleRoles": 13,
+      "publishedReviews": 0
+    },
+    {
+      "id": "innopex",
+      "name": "Innopex Company",
+      "slug": "innopex",
+      "industry": "Business Services",
+      "location": "Yangon",
+      "verified": false,
+      "tier": "client",
+      "roleCount": 16,
+      "roles": [
+        {
+          "title": "Content Creator",
+          "department": "Marketing",
+          "terms": "Full-time",
+          "salary": "250,000–400,000 MMK"
+        },
+        {
+          "title": "Social Media Executive",
+          "department": "Marketing",
+          "terms": "Contract",
+          "salary": "400,000–600,000 MMK"
+        },
+        {
+          "title": "Operations Executive",
+          "department": "Operations",
+          "terms": "Full-time",
+          "salary": "300,000–450,000 MMK"
+        },
+        {
+          "title": "Operations Manager",
+          "department": "Operations",
+          "terms": "Full-time",
+          "salary": "not_stated"
+        },
+        {
+          "title": "Supply Chain Executive",
+          "department": "Supply Chain",
+          "terms": "Contract",
+          "salary": "550,000–800,000 MMK"
+        },
+        {
+          "title": "Logistics Coordinator",
+          "department": "Supply Chain",
+          "terms": "Full-time",
+          "salary": "not_stated"
+        },
+        {
+          "title": "Procurement Officer",
+          "department": "Supply Chain",
+          "terms": "Contract",
+          "salary": "350,000–500,000 MMK"
+        },
+        {
+          "title": "Warehouse Supervisor",
+          "department": "Operations",
+          "terms": "Part-time",
+          "salary": "900,000–1,300,000 MMK"
+        },
+        {
+          "title": "Fleet Coordinator",
+          "department": "Logistics",
+          "terms": "Full-time",
+          "salary": "1,000,000–1,500,000 MMK"
+        },
+        {
+          "title": "Import-Export Coordinator",
+          "department": "Supply Chain",
+          "terms": "Full-time",
+          "salary": "300,000–450,000 MMK"
+        },
+        {
+          "title": "Software Engineer",
+          "department": "IT",
+          "terms": "Full-time",
+          "salary": "800,000–1,200,000 MMK"
+        },
+        {
+          "title": "Junior Developer",
+          "department": "IT",
+          "terms": "Full-time",
+          "salary": "450,000–650,000 MMK"
+        },
+        {
+          "title": "Senior Developer",
+          "department": "IT",
+          "terms": "Full-time",
+          "salary": "1,200,000–1,800,000 MMK"
+        },
+        {
+          "title": "Full Stack Developer",
+          "department": "IT",
+          "terms": "Full-time",
+          "salary": "1,500,000–2,200,000 MMK"
+        },
+        {
+          "title": "IT Support Technician",
+          "department": "IT",
+          "terms": "Full-time",
+          "salary": "350,000–500,000 MMK"
+        },
+        {
+          "title": "System Administrator",
+          "department": "IT",
+          "terms": "Full-time",
+          "salary": "400,000–600,000 MMK"
+        }
+      ],
+      "salaryVisibleRoles": 14,
+      "publishedReviews": 0
+    },
+    {
+      "id": "the-recruiter-myanmar",
+      "name": "The Recruiter Myanmar",
+      "slug": "the-recruiter-myanmar",
+      "industry": "Recruitment & HR Services",
+      "location": "Yangon",
+      "verified": true,
+      "tier": "client",
+      "roleCount": 14,
+      "roles": [
+        {
+          "title": "Network Engineer",
+          "department": "IT",
+          "terms": "Full-time",
+          "salary": "300,000–450,000 MMK"
+        },
+        {
+          "title": "Database Administrator",
+          "department": "IT",
+          "terms": "Full-time",
+          "salary": "not_stated"
+        },
+        {
+          "title": "QA Tester",
+          "department": "IT",
+          "terms": "Full-time",
+          "salary": "500,000–750,000 MMK"
+        },
+        {
+          "title": "Production Supervisor",
+          "department": "Production",
+          "terms": "Part-time",
+          "salary": "900,000–1,300,000 MMK"
+        },
+        {
+          "title": "Factory Manager",
+          "department": "Production",
+          "terms": "Full-time",
+          "salary": "1,500,000–2,200,000 MMK"
+        },
+        {
+          "title": "Quality Controller",
+          "department": "Quality Assurance",
+          "terms": "Part-time",
+          "salary": "250,000–400,000 MMK"
+        },
+        {
+          "title": "Quality Assurance Manager",
+          "department": "Quality Assurance",
+          "terms": "Full-time",
+          "salary": "300,000–450,000 MMK"
+        },
+        {
+          "title": "Machine Operator",
+          "department": "Production",
+          "terms": "Full-time",
+          "salary": "600,000–900,000 MMK"
+        },
+        {
+          "title": "Maintenance Technician",
+          "department": "Engineering",
+          "terms": "Full-time",
+          "salary": "900,000–1,300,000 MMK"
+        },
+        {
+          "title": "Safety Officer",
+          "department": "Health & Safety",
+          "terms": "Full-time",
+          "salary": "500,000–750,000 MMK"
+        },
+        {
+          "title": "Industrial Engineer",
+          "department": "Engineering",
+          "terms": "Full-time",
+          "salary": "400,000–600,000 MMK"
+        },
+        {
+          "title": "Legal Officer",
+          "department": "Legal",
+          "terms": "Full-time",
+          "salary": "300,000–450,000 MMK"
+        },
+        {
+          "title": "Legal Assistant",
+          "department": "Legal",
+          "terms": "Full-time",
+          "salary": "350,000–500,000 MMK"
+        },
+        {
+          "title": "Compliance Officer",
+          "department": "Legal",
+          "terms": "Full-time",
+          "salary": "1,200,000–1,800,000 MMK"
+        }
+      ],
+      "salaryVisibleRoles": 13,
+      "publishedReviews": 0
+    },
+    {
+      "id": "eac-myanmar",
+      "name": "EAC Myanmar",
+      "slug": "eac-myanmar",
+      "industry": "Consumer Goods",
+      "location": "Yangon",
+      "verified": false,
+      "tier": "client",
+      "roleCount": 11,
+      "roles": [
+        {
+          "title": "Company Secretary",
+          "department": "Legal",
+          "terms": "Full-time",
+          "salary": "not_stated"
+        },
+        {
+          "title": "Regulatory Affairs Executive",
+          "department": "Legal",
+          "terms": "Part-time",
+          "salary": "not_stated"
+        },
+        {
+          "title": "Customer Service Representative",
+          "department": "Customer Service",
+          "terms": "Full-time",
+          "salary": "1,000,000–1,500,000 MMK"
+        },
+        {
+          "title": "Senior Customer Service Officer",
+          "department": "Customer Service",
+          "terms": "Full-time",
+          "salary": "550,000–800,000 MMK"
+        },
+        {
+          "title": "Call Center Agent",
+          "department": "Customer Service",
+          "terms": "Full-time",
+          "salary": "550,000–800,000 MMK"
+        },
+        {
+          "title": "Client Relations Executive",
+          "department": "Customer Service",
+          "terms": "Full-time",
+          "salary": "not_stated"
+        },
+        {
+          "title": "Help Desk Officer",
+          "department": "Customer Service",
+          "terms": "Full-time",
+          "salary": "900,000–1,300,000 MMK"
+        },
+        {
+          "title": "Management Trainee",
+          "department": "Management",
+          "terms": "Full-time",
+          "salary": "450,000–650,000 MMK"
+        },
+        {
+          "title": "Management Associate",
+          "department": "Management",
+          "terms": "Full-time",
+          "salary": "1,200,000–1,800,000 MMK"
+        },
+        {
+          "title": "Intern - Business Development",
+          "department": "Internship",
+          "terms": "Contract",
+          "salary": "300,000–450,000 MMK"
+        },
+        {
+          "title": "Intern - Marketing",
+          "department": "Internship",
+          "terms": "Full-time",
+          "salary": "not_stated"
+        }
+      ],
+      "salaryVisibleRoles": 7,
+      "publishedReviews": 0
+    },
+    {
+      "id": "tomo",
+      "name": "TOMO",
+      "slug": "tomo",
+      "industry": "Commerce & Services",
+      "location": "Yangon",
+      "verified": false,
+      "tier": "client",
+      "roleCount": 10,
+      "roles": [
+        {
+          "title": "Intern - HR",
+          "department": "Internship",
+          "terms": "Part-time",
+          "salary": "not_stated"
+        },
+        {
+          "title": "Intern - Finance",
+          "department": "Internship",
+          "terms": "Full-time",
+          "salary": "not_stated"
+        },
+        {
+          "title": "Intern - Operations",
+          "department": "Internship",
+          "terms": "Contract",
+          "salary": "400,000–600,000 MMK"
+        },
+        {
+          "title": "Intern - IT",
+          "department": "Internship",
+          "terms": "Contract",
+          "salary": "400,000–600,000 MMK"
+        },
+        {
+          "title": "Driver",
+          "department": "Administration",
+          "terms": "Full-time",
+          "salary": "not_stated"
+        },
+        {
+          "title": "Messenger",
+          "department": "Administration",
+          "terms": "Full-time",
+          "salary": "900,000–1,300,000 MMK"
+        },
+        {
+          "title": "Office Helper",
+          "department": "Administration",
+          "terms": "Part-time",
+          "salary": "1,500,000–2,200,000 MMK"
+        },
+        {
+          "title": "Security Supervisor",
+          "department": "Administration",
+          "terms": "Full-time",
+          "salary": "200,000–350,000 MMK"
+        },
+        {
+          "title": "General Worker",
+          "department": "Operations",
+          "terms": "Contract",
+          "salary": "350,000–500,000 MMK"
+        },
+        {
+          "title": "Storekeeper",
+          "department": "Operations",
+          "terms": "Contract",
+          "salary": "350,000–500,000 MMK"
+        }
+      ],
+      "salaryVisibleRoles": 7,
+      "publishedReviews": 0
+    },
+    {
+      "id": "myanmar-indobest",
+      "name": "Myanmar Indobest",
+      "slug": "myanmar-indobest",
+      "industry": "General Trading",
+      "location": "Yangon",
+      "verified": false,
+      "tier": "client",
+      "roleCount": 8,
+      "roles": [
+        {
+          "title": "Inventory Clerk",
+          "department": "Operations",
+          "terms": "Part-time",
+          "salary": "350,000–500,000 MMK"
+        },
+        {
+          "title": "Sales Executive",
+          "department": "Sales",
+          "terms": "Full-time",
+          "salary": "300,000–450,000 MMK"
+        },
+        {
+          "title": "Senior Sales Executive",
+          "department": "Sales",
+          "terms": "Full-time",
+          "salary": "not_stated"
+        },
+        {
+          "title": "Sales Manager",
+          "department": "Sales",
+          "terms": "Full-time",
+          "salary": "450,000–650,000 MMK"
+        },
+        {
+          "title": "Sales Representative",
+          "department": "Sales",
+          "terms": "Full-time",
+          "salary": "500,000–750,000 MMK"
+        },
+        {
+          "title": "Business Development Executive",
+          "department": "Business Development",
+          "terms": "Full-time",
+          "salary": "700,000–1,000,000 MMK"
+        },
+        {
+          "title": "Account Manager",
+          "department": "Sales",
+          "terms": "Full-time",
+          "salary": "350,000–500,000 MMK"
+        },
+        {
+          "title": "Key Account Manager",
+          "department": "Sales",
+          "terms": "Contract",
+          "salary": "450,000–650,000 MMK"
+        }
+      ],
+      "salaryVisibleRoles": 7,
+      "publishedReviews": 0
+    },
+    {
+      "id": "electronic-city",
+      "name": "Electronic City",
+      "slug": "electronic-city",
+      "industry": "Consumer Electronics",
+      "location": "Yangon",
+      "verified": false,
+      "tier": "client",
+      "roleCount": 7,
+      "roles": [
+        {
+          "title": "Regional Sales Manager",
+          "department": "Sales",
+          "terms": "Full-time",
+          "salary": "500,000–750,000 MMK"
+        },
+        {
+          "title": "Junior Accountant",
+          "department": "Finance",
+          "terms": "Full-time",
+          "salary": "not_stated"
+        },
+        {
+          "title": "Senior Accountant",
+          "department": "Finance",
+          "terms": "Full-time",
+          "salary": "1,000,000–1,500,000 MMK"
+        },
+        {
+          "title": "Accountant",
+          "department": "Finance",
+          "terms": "Full-time",
+          "salary": "not_stated"
+        },
+        {
+          "title": "Finance Manager",
+          "department": "Finance",
+          "terms": "Contract",
+          "salary": "550,000–800,000 MMK"
+        },
+        {
+          "title": "Finance Controller",
+          "department": "Finance",
+          "terms": "Part-time",
+          "salary": "1,500,000–2,200,000 MMK"
+        },
+        {
+          "title": "Accounts Payable Clerk",
+          "department": "Finance",
+          "terms": "Full-time",
+          "salary": "300,000–450,000 MMK"
+        }
+      ],
+      "salaryVisibleRoles": 5,
+      "publishedReviews": 0
+    },
+    {
+      "id": "kbz-life",
+      "name": "KBZ Life Insurance",
+      "slug": "kbz-life",
+      "industry": "Insurance & Financial Services",
+      "location": "Yangon",
+      "verified": true,
+      "tier": "client",
+      "roleCount": 4,
+      "roles": [
+        {
+          "title": "Accounts Receivable Clerk",
+          "department": "Finance",
+          "terms": "Full-time",
+          "salary": "600,000–900,000 MMK"
+        },
+        {
+          "title": "Cost Accountant",
+          "department": "Finance",
+          "terms": "Full-time",
+          "salary": "250,000–400,000 MMK"
+        },
+        {
+          "title": "Tax Associate",
+          "department": "Finance",
+          "terms": "Full-time",
+          "salary": "1,000,000–1,500,000 MMK"
+        },
+        {
+          "title": "Audit Assistant",
+          "department": "Finance",
+          "terms": "Full-time",
+          "salary": "not_stated"
+        }
+      ],
+      "salaryVisibleRoles": 3,
+      "publishedReviews": 0
+    },
+    {
+      "id": "unicharm-myanmar",
+      "name": "Unicharm Myanmar",
+      "slug": "unicharm-myanmar",
+      "industry": "FMCG & Hygiene Products",
+      "location": "Yangon",
+      "verified": true,
+      "tier": "client",
+      "roleCount": 3,
+      "roles": [
+        {
+          "title": "HR Executive",
+          "department": "Human Resources",
+          "terms": "Full-time",
+          "salary": "350,000–500,000 MMK"
+        },
+        {
+          "title": "Senior HR Executive",
+          "department": "Human Resources",
+          "terms": "Part-time",
+          "salary": "1,500,000–2,200,000 MMK"
+        },
+        {
+          "title": "HR Manager",
+          "department": "Human Resources",
+          "terms": "Full-time",
+          "salary": "350,000–500,000 MMK"
+        }
+      ],
+      "salaryVisibleRoles": 3,
+      "publishedReviews": 0
+    }
+  ]
+}
