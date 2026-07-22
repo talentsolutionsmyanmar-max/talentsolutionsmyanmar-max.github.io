@@ -9,7 +9,7 @@
   <link rel="icon" href="../assets/refertrm-logo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;family=Padauk:wght@400;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;family=Padauk:wght@400;700&amp;family=Sora:wght@500;600;700&amp;display=swap" rel="stylesheet">
   <style>
     :root{
       /* primitive */
@@ -32,8 +32,6 @@
     img{display:block;max-width:100%}:focus-visible{outline:3px solid var(--gold);outline-offset:3px}.screen h1[tabindex="-1"]:focus{outline:none}
     .skip{position:fixed;left:12px;top:8px;z-index:100;transform:translateY(-150%);background:var(--gold);color:var(--navy-deep);padding:10px 14px;border-radius:8px;font-weight:700}.skip:focus{transform:none}
     .mono{font-family:"JetBrains Mono",monospace}.mm{font-family:"Padauk","Inter",sans-serif;line-height:1.8;font-style:normal}
-    .cur-dot,.cur-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:300;border-radius:50%;display:none}.cur-dot{width:6px;height:6px;background:var(--gold);transform:translate(-50%,-50%)}.cur-ring{width:34px;height:34px;border:1px solid rgb(212 175 55 / .45);transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s}.cur-ring.big{width:64px;height:64px;border-color:rgb(212 175 55 / .9)}
-    @media(hover:hover) and (pointer:fine){.cur-dot,.cur-ring{display:block}}
     .app-header{position:fixed;z-index:50;inset:0 0 auto;height:calc(var(--header-h) + env(safe-area-inset-top));padding-top:env(safe-area-inset-top);border-bottom:1px solid var(--line);background:rgb(247 245 240 / .96)}
     .header-inner{height:var(--header-h);width:min(100% - 32px,1240px);margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
     .brand{min-height:44px;display:flex;align-items:center;gap:10px;font-family:"Bricolage Grotesque",sans-serif;font-weight:700}.brand-logo{width:30px;height:30px;flex:0 0 auto;border-radius:7px}.brand-name{font-size:14px;letter-spacing:-.015em}
@@ -81,11 +79,39 @@
     @media(max-width:430px){.brand-name{font-size:13px}.employer-link span{display:none}.employer-link{width:44px;padding:0;justify-content:center}.hub-intro h1{font-size:45px}.intent-card h2{font-size:18px}.jobs-card h2{font-size:27px}.game-card .intent-copy{max-width:63%}.small-card .intent-copy{max-width:78%}.spot-art{right:-16px;width:100px;height:100px;opacity:.9}.live-proof-text{font-size:11px}.youth-ribbon{grid-template-columns:68px 1fr}.youth-art{width:68px;height:68px}.youth-ribbon .intent-arrow{display:none}}
     .soul-touching{transform:scale(.975)!important;transition:transform 420ms cubic-bezier(.22,1,.36,1)!important}.soul-touch-release{transform:none!important;transition:transform 420ms cubic-bezier(.22,1,.36,1)!important}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}[data-v4-mag]{transform:none!important}.intent-card::before,.route-card::before,.live-proof::after{display:none}.cur-dot,.cur-ring{display:none!important}}
-    html[data-lite="true"] .game-thumb{display:none}html[data-lite="true"] .game-card .intent-copy{max-width:100%}html[data-lite="true"] .lite-badge{display:flex}html[data-lite="true"] .scene-frame img{display:none}html[data-lite="true"] .scene-frame::before{content:"Scene art paused in data-lite mode";position:absolute;inset:0;display:grid;place-items:center;color:#9aabbc;font:500 9px "JetBrains Mono"}html[data-lite="true"] [data-v4-mag]{transform:none!important}html[data-lite="true"] .intent-card::before,html[data-lite="true"] .route-card::before,html[data-lite="true"] .live-proof::after,html[data-lite="true"] .cur-dot,html[data-lite="true"] .cur-ring{display:none!important}
+    html[data-lite="true"] .game-thumb{display:none}html[data-lite="true"] .game-card .intent-copy{max-width:100%}html[data-lite="true"] .lite-badge{display:flex}html[data-lite="true"] .scene-frame img{display:none}html[data-lite="true"] .scene-frame::before{content:"Scene art paused in data-lite mode";position:absolute;inset:0;display:grid;place-items:center;color:#9aabbc;font:500 9px "JetBrains Mono"}html[data-lite="true"] [data-v4-mag]{transform:none!important}html[data-lite="true"] .intent-card::before,html[data-lite="true"] .route-card::before,html[data-lite="true"] .live-proof::after{display:none!important}
+
+    /* 2026 professional door system: stable bounds, one cinematic surface. */
+    .brand,.hub-intro h1,.intent-card h2,.live-proof-text,.youth-ribbon strong,.door-head h1,.route-card h2,.scene-title h1,.question,.science-card h3,.bridge-head h3{font-family:"Sora",sans-serif}
+    .intent-card{isolation:isolate;transition:border-color var(--normal) var(--ease),box-shadow var(--normal) var(--ease),background-color var(--normal) var(--ease)}
+    .intent-card::before{z-index:-1;background:radial-gradient(270px circle at var(--mx,50%) var(--my,50%),rgb(212 175 55 / .16),transparent 66%);transition:opacity var(--normal) var(--ease)}
+    .intent-card:hover,.intent-card.is-soul-active{border-color:rgb(212 175 55 / .72);box-shadow:0 18px 44px rgb(0 31 63 / .13),inset 0 0 0 1px rgb(255 255 255 / .52)}
+    .intent-card h2{line-height:1.08;letter-spacing:-.04em}.intent-card p{max-width:30ch}
+    .intent-arrow{width:38px;height:38px;transition:color var(--normal) var(--ease),background var(--normal) var(--ease),border-color var(--normal) var(--ease)}
+    .intent-arrow svg{transition:transform var(--normal) var(--ease)}.intent-card:hover .intent-arrow svg,.youth-ribbon:hover .intent-arrow svg{transform:translateX(3px)}
+    .intent-card:hover .intent-arrow{background:var(--navy);border-color:var(--navy);color:var(--white)}
+    .door-symbol{position:relative;width:48px;height:48px;border:1px solid currentColor;border-radius:14px;display:grid;place-items:center;color:var(--teal);background:rgb(255 255 255 / .68)}
+    .door-symbol svg{width:24px;height:24px}.door-symbol::after{content:"";position:absolute;width:8px;height:8px;right:-3px;top:-3px;border:2px solid var(--surface);border-radius:50%;background:var(--gold)}
+    .professional-body{display:flex;align-items:flex-end;justify-content:space-between;gap:14px}
+    .jobs-card::after{z-index:-2;width:210px;height:210px;right:-82px;bottom:-118px;box-shadow:0 0 0 42px rgb(212 175 55 / .035),0 0 0 84px rgb(212 175 55 / .025)}
+    .jobs-card:hover{border-color:rgb(212 175 55 / .9);box-shadow:0 20px 52px rgb(0 18 41 / .25),inset 0 0 0 1px rgb(212 175 55 / .18)}.jobs-card p{color:#c3ced8}.jobs-card h2{max-width:11ch}
+    .jobs-card:hover .intent-arrow{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+    .jobs-card .door-symbol{width:54px;height:54px;color:var(--gold);border-color:rgb(212 175 55 / .48);background:rgb(255 255 255 / .055)}.jobs-card .door-symbol::after{border-color:var(--navy);background:#70d3c8}
+    .game-thumb{z-index:-2}.game-thumb img{filter:saturate(.88) contrast(1.02)}.game-card:hover{border-color:rgb(212 175 55 / .84);box-shadow:0 22px 54px rgb(0 31 63 / .18)}
+    .learn-card{background:#fffaf0}.refer-card{background:#eff8f6}.small-card::after{display:none}.small-card .intent-copy{max-width:72%}.learn-card .intent-no{color:var(--amber)}.refer-card .intent-no{color:var(--teal)}
+    .learn-card .door-symbol{color:var(--amber);background:#fff7dc}.refer-card .door-symbol{color:var(--teal);background:#e2f4ef}
+    .youth-ribbon{--mx:50%;--my:50%;position:relative;grid-template-columns:52px 1fr auto;padding:12px 14px;gap:14px;border-color:rgb(15 118 110 / .26);background:#f4f9f6;transition:border-color var(--normal) var(--ease),box-shadow var(--normal) var(--ease)}
+    .youth-ribbon::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgb(15 118 110 / .11),transparent 66%);opacity:0;transition:opacity var(--normal) var(--ease)}
+    .youth-ribbon:hover{border-color:rgb(15 118 110 / .58);box-shadow:0 14px 34px rgb(0 31 63 / .1)}.youth-ribbon:hover::before,.youth-ribbon.is-soul-active::before{opacity:1}.youth-ribbon>*{position:relative}
+    .youth-ribbon .door-symbol{width:48px;height:48px;color:var(--teal);background:#e4f3ee}.youth-ribbon .door-symbol::after{border-color:#f4f9f6}
+    .route-card{transform:none!important}.soul-touching,.soul-touch-release{transform:none!important}.soul-touching{border-color:var(--gold)!important;box-shadow:inset 0 0 0 2px rgb(212 175 55 / .18)!important}
+    @media(max-width:699px){.game-card{grid-column:1/-1;min-height:278px}.game-card .intent-copy{max-width:55%}.game-card .intent-copy h2{font-size:24px}.game-thumb{inset:0 0 0 44%}.game-thumb::after{background:linear-gradient(90deg,var(--paper) 0%,rgb(255 253 248 / .92) 35%,transparent 74%),linear-gradient(0deg,rgb(255 253 248 / .16),transparent)}}
+    @media(min-width:1060px){.intent-grid{grid-template-areas:"work game" "learn game" "refer proof" "youth youth" "owner owner"}.jobs-card{grid-area:work}.game-card{grid-area:game}.learn-card{grid-area:learn}.refer-card{grid-area:refer}.live-proof{grid-area:proof}.youth-ribbon{grid-area:youth}.ownership{grid-area:owner}}
+    @media(max-width:430px){.youth-ribbon{grid-template-columns:48px 1fr}.youth-ribbon .door-symbol{width:44px;height:44px}.small-card .intent-copy{max-width:74%}}
+    @media(prefers-reduced-motion:reduce){.intent-card::before,.route-card::before,.live-proof::after,.youth-ribbon::before{display:none}}
   </style>
 </head>
 <body>
-  <div class="cur-dot" id="curDot" aria-hidden="true"></div><div class="cur-ring" id="curRing" aria-hidden="true"></div>
   <a class="skip" href="#screen-home">Skip to choices</a>
   <header class="app-header">
     <div class="header-inner">
@@ -104,12 +130,12 @@
           <div class="proof-line"><span class="proof"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"/></svg>Real opportunities</span><span class="proof"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18"/></svg>No fee to apply</span><span class="proof"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5l3 2"/></svg>Your pace</span></div>
         </div>
         <div class="intent-grid" aria-label="Choose your next move">
-          <button class="intent-card jobs-card js-door" type="button" data-target="jobs" data-v4-mag data-v4-sheen><span class="intent-top"><span class="intent-no">01 / FIND WORK</span><span class="intent-arrow"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></span></span><span><h2>Know the work before you say yes.</h2><p>Core jobs and the separate Free Branch Board—real terms, no fees, honest publication boundaries.</p></span></button>
-          <button class="intent-card game-card js-door" type="button" data-target="game" data-v4-mag data-v4-sheen><span class="game-thumb" aria-hidden="true"><img src="assets/game-card-portrait.webp" alt="" width="1080" height="1935" fetchpriority="high"></span><span class="intent-top"><span class="intent-no">02 / CAREER GAME</span><span class="intent-arrow"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 5 11 7-11 7z"/></svg></span></span><span class="intent-copy"><h2>See how you decide under pressure.</h2><p>Real workplace dilemmas. Your choices shape a career DNA—not a quiz score.</p></span></button>
-          <button class="intent-card small-card learn-card js-door" type="button" data-target="learn" data-v4-mag data-v4-sheen><img class="spot-art" src="assets/learn-vignette.webp" srcset="assets/learn-vignette.webp 1x, assets/learn-vignette@2x.webp 2x" alt="" width="240" height="240" loading="lazy"><span class="intent-top"><span class="intent-no">03 / LEARN</span><span class="intent-arrow"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></span></span><span class="intent-copy"><h2>Build what comes next.</h2><p>176 bilingual courses, with Maya beside you as an advisor.</p></span></button>
-          <button class="intent-card small-card refer-card js-door" type="button" data-target="refer" data-v4-mag data-v4-sheen><img class="spot-art" src="assets/refer-vignette.webp" srcset="assets/refer-vignette.webp 1x, assets/refer-vignette@2x.webp 2x" alt="" width="240" height="240" loading="lazy"><span class="intent-top"><span class="intent-no">04 / REFER &amp; EARN</span><span class="intent-arrow"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></span></span><span class="intent-copy"><h2>Open a door for someone.</h2><p>Grow from Pocket Money to BD Freelancer through real outcomes.</p></span></button>
-          <aside class="live-proof" id="live-proof" data-state="loading" data-v4-mag data-v4-sheen aria-label="Live Find Work proof"><div class="live-proof-copy"><span class="live-proof-label">Find Work · live proof</span><p class="live-proof-text" id="live-proof-text" aria-live="polite">Checking live jobs · no fee, ever</p></div><a class="live-proof-link js-door" data-target="jobs" href="?door=jobs"><span>See all</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a></aside>
-          <a class="youth-ribbon" href="https://talentsolutionsmyanmar-max.github.io/ydc-canvas/#/map"><img class="youth-art" src="assets/youth-vignette.webp" srcset="assets/youth-vignette.webp 1x, assets/youth-vignette@2x.webp 2x" alt="" width="240" height="240" loading="lazy"><span><strong>Your children can learn here too.</strong><span>Youth Development Center · a family pathway into skills and work</span></span><span class="intent-arrow"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></span></a>
+          <button class="intent-card jobs-card js-door" type="button" data-target="jobs" data-sheen><span class="intent-top"><span class="intent-no">01 / FIND WORK</span><span class="intent-arrow"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></span></span><span class="professional-body"><span><h2>Know the work before you say yes.</h2><p>Core jobs and the separate Free Branch Board—real terms, no fees, honest publication boundaries.</p></span><span class="door-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 8h14v11H5zM9 8V5h6v3"/><path d="M9 13l2 2 4-4"/></svg></span></span></button>
+          <button class="intent-card game-card js-door" type="button" data-target="game" data-sheen><span class="game-thumb" aria-hidden="true"><img src="assets/game-card-portrait.webp" alt="" width="1080" height="1935" fetchpriority="high"></span><span class="intent-top"><span class="intent-no">02 / CAREER GAME</span><span class="intent-arrow"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 5 11 7-11 7z"/></svg></span></span><span class="intent-copy"><h2>See how you decide under pressure.</h2><p>Real workplace dilemmas. Your choices shape a career DNA—not a quiz score.</p></span></button>
+          <button class="intent-card small-card learn-card js-door" type="button" data-target="learn" data-sheen><span class="intent-top"><span class="intent-no">03 / LEARN</span><span class="intent-arrow"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></span></span><span class="professional-body"><span class="intent-copy"><h2>Build what comes next.</h2><p>176 bilingual courses, with Maya beside you as an advisor.</p></span><span class="door-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 6.5A3.5 3.5 0 0 1 7.5 3H11v16H7.5A3.5 3.5 0 0 0 4 22zM20 6.5A3.5 3.5 0 0 0 16.5 3H13v16h3.5A3.5 3.5 0 0 1 20 22z"/></svg></span></span></button>
+          <button class="intent-card small-card refer-card js-door" type="button" data-target="refer" data-sheen><span class="intent-top"><span class="intent-no">04 / REFER &amp; EARN</span><span class="intent-arrow"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></span></span><span class="professional-body"><span class="intent-copy"><h2>Open a door for someone.</h2><p>Grow from Pocket Money to BD Freelancer through real outcomes.</p></span><span class="door-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="m8.2 10.8 7.5-3.7M8.2 13.2l7.5 3.7"/></svg></span></span></button>
+          <aside class="live-proof" id="live-proof" data-state="loading" data-sheen aria-label="Live Find Work proof"><div class="live-proof-copy"><span class="live-proof-label">Find Work · live proof</span><p class="live-proof-text" id="live-proof-text" aria-live="polite">Checking live jobs · no fee, ever</p></div><a class="live-proof-link js-door" data-target="jobs" href="?door=jobs"><span>See all</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a></aside>
+          <a class="youth-ribbon" data-sheen href="https://talentsolutionsmyanmar-max.github.io/ydc-canvas/#/map"><span class="door-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 20c0-7 4-11 7-11s7 4 7 11"/><path d="M12 9V4m0 0c-3 0-5 1.5-5 4 3 0 5-1.5 5-4Zm0 0c3 0 5 1.5 5 4-3 0-5-1.5-5-4Z"/></svg></span><span><strong>Your children can learn here too.</strong><span>Youth Development Center · a family pathway into skills and work</span></span><span class="intent-arrow"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></span></a>
           <div class="ownership"><strong>Platform:</strong> ReferTRM · company of record: Talent Resources Myanmar Co., Ltd. · manpower services remain with the sister company, The Recruiter (Myanmar).</div>
         </div>
       </div>
@@ -120,9 +146,9 @@
         <button class="back js-door" type="button" data-target="home"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>All paths</button>
         <div class="door-head"><div><div class="fig">FIG 02 / Find work</div><h1 id="jobs-title">Choose the right work surface.</h1><p>Core jobs, the independently cleared Free Branch Board, and the later Workplace Truth layer have separate responsibilities.</p></div></div>
         <div class="door-stack">
-          <article class="route-card dark" data-v4-mag data-v4-sheen><div><span class="route-note">CORE / LIVE JOBS</span><h2>Find a role that fits.</h2><p>Search ReferTRM opportunities, see clear job terms, then sign in to view your fit and apply without a candidate fee.</p></div><div class="route-actions"><a class="button button-gold" href="https://www.refertrm.com/eq/jobs">Browse live jobs<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a></div></article>
-          <article class="route-card" data-v4-mag data-v4-sheen><div><span class="route-note">SEPARATE SURFACE / FREE BRANCH BOARD</span><h2>Browse only independently cleared work.</h2><p>The public board stays honestly empty until a free job passes its own source, identity, terms and branch-publication checks. Core client jobs are never copied into it.</p></div><div class="route-actions"><a class="button button-navy" href="../glassdoor-phase1/v2/?screen=home">Open the Free Branch Board<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a></div></article>
-          <article class="route-card" data-v4-mag data-v4-sheen><div><span class="route-note">LATER / WORKPLACE TRUTH</span><h2>Company evidence needs governance first.</h2><p>Reviews, salary evidence, eligibility, aggregation, employer response and appeals remain a separate VLER-gated product. The Free Branch Board does not manufacture this layer.</p></div></article>
+          <article class="route-card dark" data-sheen><div><span class="route-note">CORE / LIVE JOBS</span><h2>Find a role that fits.</h2><p>Search ReferTRM opportunities, see clear job terms, then sign in to view your fit and apply without a candidate fee.</p></div><div class="route-actions"><a class="button button-gold" href="https://www.refertrm.com/eq/jobs">Browse live jobs<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a></div></article>
+          <article class="route-card" data-sheen><div><span class="route-note">SEPARATE SURFACE / FREE BRANCH BOARD</span><h2>Browse only independently cleared work.</h2><p>The public board stays honestly empty until a free job passes its own source, identity, terms and branch-publication checks. Core client jobs are never copied into it.</p></div><div class="route-actions"><a class="button button-navy" href="../glassdoor-phase1/v2/?screen=home">Open the Free Branch Board<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a></div></article>
+          <article class="route-card" data-sheen><div><span class="route-note">LATER / WORKPLACE TRUTH</span><h2>Company evidence needs governance first.</h2><p>Reviews, salary evidence, eligibility, aggregation, employer response and appeals remain a separate VLER-gated product. The Free Branch Board does not manufacture this layer.</p></div></article>
         </div>
       </div>
     </section>
@@ -171,7 +197,7 @@
       let animateTruthCards=()=>{};
       const show=(name,{history=true}={})=>{
         if(!allowed.has(name))name='home';
-        $$('[data-v4-mag]').forEach(surface=>{surface.style.transform='';surface.classList.remove('soul-touching','soul-touch-release','is-soul-active')});
+        $$('[data-sheen]').forEach(surface=>surface.classList.remove('soul-touching','is-soul-active'));
         $$('.screen').forEach(x=>x.classList.toggle('is-active',x.dataset.door===name));
         const active=$(`[data-door="${name}"]`);active.scrollTop=0;
         if(history){const url=new URL(location.href);url.searchParams.set('door',name);window.history.pushState({door:name},'',url)}
@@ -192,7 +218,7 @@
         const result=outcomes[b.dataset.choice];$('#coach-copy').textContent=result.copy;$('#delta').textContent=result.delta;
         $('#signal-pill').textContent=result.signal;$('#coach').classList.add('is-visible');$('#science').classList.add('is-visible');$('#career-bridge').classList.add('is-visible');
       }));
-      /* v4 soul port: literal source values, not a new motion system. */
+      /* Stable 2026 feedback: the surface never moves; light follows intent. */
       const connection=navigator.connection||navigator.mozConnection||navigator.webkitConnection||{};
       const effectiveType=connection.effectiveType||'';
       const slowNet=Boolean(connection.saveData)||['slow-2g','2g','3g'].includes(effectiveType);
@@ -202,24 +228,12 @@
       const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
       const reduced=reducedMotion.matches||lite;
       const fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
-      const soulSurfaces=$$('[data-v4-mag]');
+      const soulSurfaces=$$('[data-sheen]');
       if(lite)document.documentElement.dataset.lite='true';
 
       if(fine&&!reduced){
-        const dot=$('#curDot'),ring=$('#curRing');
-        let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
-        addEventListener('mousemove',event=>{mx=event.clientX;my=event.clientY;dot.style.transform=`translate(${mx-3}px,${my-3}px)`},{passive:true});
-        (function loop(){rx+=(mx-rx)*.14;ry+=(my-ry)*.14;ring.style.transform=`translate(${rx-ring.offsetWidth/2}px,${ry-ring.offsetHeight/2}px)`;requestAnimationFrame(loop)})();
-        $$('a,button,[data-v4-mag]').forEach(element=>{
-          element.addEventListener('mouseenter',()=>ring.classList.add('big'));
-          element.addEventListener('mouseleave',()=>ring.classList.remove('big'));
-        });
         soulSurfaces.forEach(element=>{
-          element.addEventListener('mousemove',event=>{const rect=element.getBoundingClientRect();element.style.transform=`translate(${(event.clientX-rect.left-rect.width/2)*.18}px,${(event.clientY-rect.top-rect.height/2)*.28}px)`});
-          element.addEventListener('mouseleave',()=>{element.style.transform=''});
-        });
-        $$('[data-v4-sheen]').forEach(element=>{
-          element.addEventListener('mousemove',event=>{const rect=element.getBoundingClientRect();element.style.setProperty('--mx',`${event.clientX-rect.left}px`);element.style.setProperty('--my',`${event.clientY-rect.top}px`)});
+          element.addEventListener('pointermove',event=>{const rect=element.getBoundingClientRect();element.style.setProperty('--mx',`${event.clientX-rect.left}px`);element.style.setProperty('--my',`${event.clientY-rect.top}px`)},{passive:true});
         });
       }
 
@@ -227,16 +241,15 @@
         soulSurfaces.forEach(element=>{
           const release=()=>{
             if(!element.classList.contains('soul-touching'))return;
-            element.classList.remove('soul-touching');element.classList.add('soul-touch-release');
-            clearTimeout(element.soulReleaseTimer);clearTimeout(element.soulSheenTimer);
+            element.classList.remove('soul-touching');
+            clearTimeout(element.soulSheenTimer);
             element.soulSheenTimer=setTimeout(()=>element.classList.remove('is-soul-active'),260);
-            element.soulReleaseTimer=setTimeout(()=>element.classList.remove('soul-touch-release'),420);
           };
           element.addEventListener('pointerdown',event=>{
             if(event.pointerType==='mouse')return;
             const rect=element.getBoundingClientRect();
             element.style.setProperty('--mx',`${event.clientX-rect.left}px`);element.style.setProperty('--my',`${event.clientY-rect.top}px`);
-            element.classList.remove('soul-touch-release');element.classList.add('soul-touching','is-soul-active');
+            element.classList.add('soul-touching','is-soul-active');
           });
           ['pointerup','pointercancel','pointerleave'].forEach(type=>element.addEventListener(type,release));
         });
