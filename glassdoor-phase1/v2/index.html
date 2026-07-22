@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#F7F5F0">
   <meta name="description" content="The Free Branch Board: a separate, referral-first job discovery surface feeding the ReferTRM core without exposing client data.">
   <title>Free Branch Board — Know the work before you say yes</title>
+  <link rel="icon" href="../../assets/refertrm-logo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;family=Padauk:wght@400;700&amp;display=swap" rel="stylesheet">
@@ -50,7 +51,7 @@
     .topbar{position:fixed;z-index:60;inset:0 0 auto;height:calc(var(--topbar-h) + env(safe-area-inset-top));padding-top:env(safe-area-inset-top);background:rgb(247 245 240 / .96);border-bottom:1px solid var(--line-soft)}
     .topbar-inner{height:var(--topbar-h);width:min(100%,1280px);margin:auto;padding:0 var(--sp-4);display:flex;align-items:center;justify-content:space-between;gap:var(--sp-3)}
     .brand{min-height:44px;border:0;background:none;padding:0;display:flex;align-items:center;gap:10px;font-family:"Bricolage Grotesque",sans-serif;font-size:14px;font-weight:700;letter-spacing:-.02em}
-    .brand-mark{width:26px;height:26px;border:1.5px solid var(--brand);transform:rotate(45deg);display:grid;place-items:center;flex:0 0 auto}.brand-mark::after{content:"";width:7px;height:7px;background:var(--accent)}
+    .brand-logo{width:30px;height:30px;object-fit:contain;border-radius:7px;flex:0 0 auto}
     .brand-sep{height:18px;width:1px;background:var(--line)}.branch-label{font:500 9px/1 "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-quiet)}
     .employer-door{min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 13px;border:1px solid var(--line);border-radius:var(--radius-pill);background:var(--surface);font-size:11px;font-weight:700}.employer-door svg{width:15px;height:15px}
 
@@ -74,7 +75,7 @@
     .hero-island h1{font:600 clamp(46px,11.5vw,104px)/.88 "Bricolage Grotesque",sans-serif;letter-spacing:-.07em;margin:clamp(30px,7vw,70px) 0 20px;max-width:10ch}.hero-island h1 em{font-style:normal;color:var(--p-gold-200)}
     .hero-copy{font-size:clamp(14px,2vw,17px);line-height:1.65;color:var(--on-dark-subtle);max-width:56ch;margin:0}.hero-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:var(--sp-6)}
     .hero-island .button-quiet{background:transparent;border-color:rgb(255 255 255 / .24);color:var(--on-dark)}
-    .proof-tape{position:relative;z-index:1;margin-top:clamp(38px,8vw,76px);display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgb(255 255 255 / .16);padding-top:var(--sp-4)}.proof{padding:0 var(--sp-3);border-left:1px solid rgb(255 255 255 / .16)}.proof:first-child{padding-left:0;border-left:0}.proof strong{display:block;font:600 clamp(21px,4vw,34px)/1 "JetBrains Mono",monospace;color:var(--p-gold-200)}.proof span{display:block;color:var(--on-dark-subtle);font-size:9px;line-height:1.4;margin-top:7px;text-transform:uppercase;letter-spacing:.06em}
+    .proof-tape{position:relative;z-index:1;margin-top:clamp(38px,8vw,76px);display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgb(255 255 255 / .16);padding-top:var(--sp-4)}.proof{padding:0 var(--sp-3);border-left:1px solid rgb(255 255 255 / .16)}.proof:first-child{padding-left:0;border-left:0}.proof strong{display:block;font:600 clamp(21px,4vw,34px)/1 "JetBrains Mono",monospace;color:var(--p-gold-200)}.proof span{display:block;color:var(--on-dark-subtle);font-size:9px;line-height:1.4;margin-top:7px;text-transform:uppercase;letter-spacing:.06em}.count-asof{position:relative;z-index:1;margin-top:12px;font:500 8px/1.5 "JetBrains Mono";letter-spacing:.05em;color:var(--on-dark-subtle)}
     .editorial-note{display:grid;gap:var(--sp-4);padding:var(--sp-8) var(--sp-2)}.editorial-note h2{font:600 clamp(26px,5vw,44px)/1.05 "Bricolage Grotesque";letter-spacing:-.045em;margin:10px 0}.editorial-note p{margin:0;color:var(--ink-subtle);font-size:14px;line-height:1.7}
     .trust-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.trust-card{min-height:155px;padding:var(--sp-4);border:1px solid var(--line);border-radius:var(--radius-m);background:var(--surface)}.trust-icon{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:rgb(15 118 110 / .09);color:var(--verified)}.trust-icon svg{width:17px;height:17px}.trust-card h3{font:600 14px "Bricolage Grotesque";margin:22px 0 6px}.trust-card p{font-size:10px;line-height:1.5;color:var(--ink-quiet);margin:0}.trust-card.caution .trust-icon{background:var(--p-amber-100);color:var(--caution)}
     .welds{padding:var(--sp-8) 0}.welds-head{display:flex;align-items:end;justify-content:space-between;gap:var(--sp-4);margin-bottom:var(--sp-5)}.welds h2{font:600 clamp(27px,5vw,44px)/1.05 "Bricolage Grotesque";letter-spacing:-.045em;margin:10px 0 0}.welds-caption{max-width:42ch;font-size:11px;color:var(--ink-quiet)}
@@ -113,7 +114,7 @@
       .referral-flow,.safety-grid{grid-template-columns:repeat(3,1fr)}.employer-split{grid-template-columns:1fr 1fr}.contract-grid{grid-template-columns:repeat(4,1fr)}
       .dialog-backdrop{place-items:center}.dialog{padding:var(--sp-8)}
     }
-    @media(min-width:1080px){.tabbar{left:50%;right:auto;bottom:18px;width:520px;transform:translateX(-50%);height:68px;padding:4px;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow-soft)}.tabbar-inner{height:58px}.shell{padding-bottom:110px}.toast{bottom:104px}}
+    @media(min-width:1080px){.tabbar{position:relative;inset:auto;width:520px;transform:none;height:68px;padding:4px;margin:0 auto 24px;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow-soft)}.tabbar-inner{height:58px}.shell{padding-bottom:24px}.toast{bottom:24px}}
     @media(max-width:430px){.branch-label{display:none}.hero-actions .button{width:100%}.proof span{font-size:8px}.contract-actions,.share-actions,.dialog-actions{grid-template-columns:1fr}.screen-head{display:block}.screen-head .back{margin-top:12px}.employer-door span{display:none}.inventory-proof{grid-template-columns:1fr 1fr}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
   </style>
@@ -121,7 +122,7 @@
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="topbar"><div class="topbar-inner">
-    <button class="brand js-nav" type="button" data-target="home" aria-label="Free Branch Board home"><span class="brand-mark" aria-hidden="true"></span><span>ReferTRM</span><span class="brand-sep" aria-hidden="true"></span><span class="branch-label">Free Branch Board</span></button>
+    <button class="brand js-nav" type="button" data-target="home" aria-label="Free Branch Board home"><img class="brand-logo" src="../../assets/refertrm-logo.png" alt="" width="30" height="30"><span>ReferTRM</span><span class="brand-sep" aria-hidden="true"></span><span class="branch-label">Free Branch Board</span></button>
     <button class="employer-door js-nav" type="button" data-target="employers" aria-label="Employers"><span>Employers</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V7h16v13M8 7V4h8v3M8 11h2m4 0h2M8 15h2m4 0h2"/></svg></button>
   </div></header>
 
@@ -133,7 +134,8 @@
           <h1 id="home-title">Know the work before you <em>say yes.</em></h1>
           <p class="hero-copy">A free public branch for discovering work safely, sharing opportunity with someone you know, and entering the ReferTRM core only when you want your fit, CV, or referral identity.</p>
           <div class="hero-actions"><button class="button button-accent js-nav" type="button" data-target="jobs">Browse verified jobs<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></button><button class="button button-quiet js-nav" type="button" data-target="refer">How sharing works</button></div>
-          <div class="proof-tape" aria-label="Current branch inventory"><div class="proof"><strong>0</strong><span>branch jobs cleared for publication</span></div><div class="proof"><strong>460</strong><span>employer prospects researched</span></div><div class="proof"><strong>0</strong><span>worker claims presented as evidence</span></div></div>
+          <div class="proof-tape" aria-label="Current governed public inventory"><div class="proof"><strong data-public-count="aggregatedBranchJobs">—</strong><span>branch jobs cleared for publication</span></div><div class="proof"><strong data-public-count="activeCoreJobs">—</strong><span>active core jobs, not copied here</span></div><div class="proof"><strong data-public-count="verifiedEmployers">—</strong><span>verified employers in the public contract</span></div></div>
+          <div class="count-asof" id="count-asof" role="status" aria-live="polite">Checking the governed public-count contract</div>
         </div></article>
         <aside class="editorial-note"><div><div class="fig">FIG 01 / The public promise</div><h2>Truth is useful even when it is empty.</h2><p>The production platform has real companies and jobs. They remain behind the core/client fence. Until a listing is separately cleared for this branch, this board shows zero—not borrowed inventory.</p></div><div class="trust-grid">
           <article class="trust-card"><div class="trust-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 3 7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/><path d="m9 12 2 2 4-4"/></svg></div><h3>Verified employer</h3><p>Identity must be proven before a listing becomes public.</p></article>
@@ -148,16 +150,16 @@
         <article class="weld-card"><span class="weld-no">WELD 02 / LEAD</span><h3>Share the job</h3><p>Every future listing is a share-object. The core attaches the signed-in member's real referral code; this public demo never invents one.</p><button class="weld-route js-nav" type="button" data-target="refer">Inspect the share contract<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></button></article>
         <article class="weld-card"><span class="weld-no">WELD 03</span><h3>Claim the employer</h3><p>A claim starts verification and a prospect record. It never grants edit rights, contracted status, or access to candidate data.</p><button class="weld-route js-nav" type="button" data-target="employers">Open the claim stub<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></button></article>
       </div></section>
-      <div class="separation-note"><strong>The separation is the safety architecture.</strong><span>Core client records, client PII, audit history, and recruiter-workable requisitions never render on this public branch. Branch incidents cannot touch the paid engine because the surfaces do not share a deployment.</span></div>
+      <div class="separation-note"><strong>The separation is the safety architecture.</strong><span>Core client records, client PII, audit history, and recruiter-workable requisitions never render on this public branch. Workplace Truth is also a separate, later VLER-gated product; the Board never creates reviews, ratings, salary claims, moderation decisions, or employer-response rights.</span></div>
     </div></section>
 
     <section class="screen" data-screen="jobs" aria-labelledby="jobs-title"><div class="wrap">
       <header class="screen-head"><div><div class="fig">FIG 03 / Free jobs</div><h1 class="section-title" id="jobs-title">Only publish what can be proven.</h1><p class="section-lead">This is the launch truth for the separate branch feed. Core jobs are not silently republished here.</p></div><button class="back js-nav" type="button" data-target="home"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>Hub</button></header>
       <div class="filter-row" aria-label="Job filters"><button class="filter" type="button" aria-pressed="true">All verified</button><button class="filter" type="button" aria-pressed="false" disabled>Entry level</button><button class="filter" type="button" aria-pressed="false" disabled>Clear salary</button><button class="filter" type="button" aria-pressed="false" disabled>Verified employer</button></div>
       <div class="empty-layout">
-        <article class="empty-hero"><div><div class="empty-zero">0</div><h2>No branch listings have cleared verification yet.</h2><p>That is not a loading error. It is the honest launch state. The production inventory remains inside ReferTRM's core until a source, employer identity, public terms, and branch classification are verified.</p></div><div class="empty-actions"><a class="button button-primary" href="https://www.refertrm.com/login?redirectTo=/eq/cv-builder" data-handoff="core-register-cv-trinity">Prepare my fit profile</a><button class="button button-quiet js-share" type="button">Share this search<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.6-4.5M8.2 13.2l7.6 4.5"/></svg></button></div></article>
+        <article class="empty-hero"><div><div class="empty-zero" data-public-count="aggregatedBranchJobs">—</div><h2>No branch listings have cleared verification yet.</h2><p>That is not a loading error. It is the honest launch state. The production inventory remains inside ReferTRM's core until a source, employer identity, public terms, and branch classification are verified.</p></div><div class="empty-actions"><a class="button button-primary" href="https://www.refertrm.com/login?redirectTo=/eq/cv-builder" data-handoff="core-register-cv-trinity">Prepare my fit profile</a><button class="button button-quiet js-share" type="button">Share this search<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.6-4.5M8.2 13.2l7.6 4.5"/></svg></button></div></article>
         <article class="contract-card" aria-labelledby="contract-title"><div class="contract-top"><div class="fig">Future card contract</div><span class="contract-state">No employer data</span></div><h2 id="contract-title">What every verified listing must carry.</h2><p>This is a component contract, not a sample company or job. It contains no fabricated employer, salary, rating, or referral code.</p><div class="contract-grid"><div class="contract-part"><span>Identity</span><strong>Verified employer source</strong></div><div class="contract-part"><span>Safety</span><strong>No-fee warning</strong></div><div class="contract-part"><span>Terms</span><strong>Salary truth or unknown</strong></div><div class="contract-part"><span>Referral</span><strong>Share + real member code</strong></div></div><div class="contract-actions"><a class="button button-accent" href="https://www.refertrm.com/login?redirectTo=/eq/cv-builder">See my fit</a><button class="button button-quiet js-share" type="button">Share contract</button></div></article>
-        <div class="inventory-proof"><div class="inventory-cell"><strong>253</strong><span>active jobs audited inside the separate core; none copied here</span></div><div class="inventory-cell verified"><strong>460</strong><span>non-client prospects researched; research is not publication</span></div></div>
+        <div class="inventory-proof"><div class="inventory-cell"><strong data-public-count="activeCoreJobs">—</strong><span>active jobs inside the separate core; none copied here</span></div><div class="inventory-cell verified"><strong data-public-count="verifiedEmployers">—</strong><span>verified employers; internal prospect counts are not public proof</span></div></div>
       </div>
     </div></section>
 
@@ -173,7 +175,7 @@
     <section class="screen" data-screen="safety" aria-labelledby="safety-title"><div class="narrow">
       <header class="screen-head"><div><div class="fig">FIG 05 / Safety and dignity</div><h1 class="section-title" id="safety-title">Before you apply, protect the person who depends on that income.</h1><p class="section-lead">Trust signals are content. Unknowns remain visible questions instead of decorative badges.</p></div><button class="back js-nav" type="button" data-target="home"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>Hub</button></header>
       <div class="safety-grid"><article class="safety-card"><span class="safety-no">01 / IDENTITY</span><h2>Check the employer.</h2><p>Use the exact legal or trading name and an official public source. A claim is not verification.</p></article><article class="safety-card"><span class="safety-no">02 / PAYMENT</span><h2>Pay nothing to apply.</h2><p>No registration fee, interview fee, placement fee, uniform deposit, or processing payment.</p></article><article class="safety-card"><span class="safety-no">03 / TERMS</span><h2>Get the work in writing.</h2><p>Confirm salary, hours, location, reporting line, probation, and leave before accepting.</p></article></div>
-      <article class="dignity-wall"><div class="fig" style="color:var(--p-gold-200)">The dignity wall</div><h2>Evidence must protect workers, not expose them.</h2><p>Zero seeker PII is public. Reviews, salaries, and workplace claims remain empty until consent, eligibility, moderation, aggregation, and the VLER-certified lifecycle exist.</p><div class="evidence-row"><div class="evidence"><strong>0</strong><span>verified branch reviews shown</span></div><div class="evidence"><strong>0</strong><span>verified branch salary submissions shown</span></div><div class="evidence"><strong>0</strong><span>candidate identities exposed</span></div><div class="evidence"><strong>0</strong><span>eligibility decisions hard-wired</span></div></div></article>
+      <article class="dignity-wall"><div class="fig" style="color:var(--p-gold-200)">The dignity wall</div><h2>Evidence must protect workers, not expose them.</h2><p>No seeker PII is public. Reviews, salaries, and workplace claims remain empty until consent, eligibility, moderation, aggregation, and the VLER-certified lifecycle exist.</p><div class="evidence-row"><div class="evidence"><strong>None</strong><span>verified branch reviews published</span></div><div class="evidence"><strong>None</strong><span>verified branch salary submissions published</span></div><div class="evidence"><strong>None</strong><span>candidate identities exposed</span></div><div class="evidence"><strong>None</strong><span>eligibility decisions hard-wired</span></div></div></article>
     </div></section>
 
     <section class="screen" data-screen="employers" aria-labelledby="employers-title"><div class="wrap">
@@ -218,12 +220,44 @@
     selectAll('.js-nav').forEach(control=>control.addEventListener('click',()=>showScreen(control.dataset.target)));
     addEventListener('popstate',()=>showScreen(new URLSearchParams(location.search).get('screen')||'home',{historyMode:null,focus:true}));
 
-    function openShare(trigger){lastFocus=trigger;select('#share-url').textContent=shareLink.href;select('#share-dialog').classList.add('is-open');document.body.classList.add('modal-open');select('#native-share').focus()}
-    function closeShare(){select('#share-dialog').classList.remove('is-open');document.body.classList.remove('modal-open');lastFocus?.focus()}
+    async function loadPublicCounts(){
+      const started=performance.now(),status=select('#count-asof');
+      try{
+        const response=await fetch('../../data/public-counts-v1.json',{headers:{Accept:'application/json'}});
+        if(!response.ok)throw new Error(`Public-count contract failed: ${response.status}`);
+        const contract=await response.json(),counts=contract.counts||{};
+        const required=['activeCoreJobs','verifiedEmployers','aggregatedBranchJobs'];
+        if(contract.contract!=='refertrm-public-counts-v1'||!required.every(key=>Number.isSafeInteger(counts[key])&&counts[key]>=0))throw new Error('Invalid public-count contract');
+        selectAll('[data-public-count]').forEach(node=>{node.textContent=counts[node.dataset.publicCount].toLocaleString('en-US')});
+        status.textContent=`Verified public-count contract · ${contract.asOf} · internal prospect counts excluded`;
+        document.documentElement.dataset.countState='ready';
+        dispatchEvent(new CustomEvent('refertrm:public-counts',{detail:{status:'ready',contract:contract.contract,asOf:contract.asOf,durationMs:Math.round(performance.now()-started)}}));
+      }catch(error){
+        selectAll('[data-public-count]').forEach(node=>{node.textContent='—'});
+        status.textContent='Public counts unavailable · no internal or borrowed inventory shown';
+        document.documentElement.dataset.countState='error';
+        dispatchEvent(new CustomEvent('refertrm:public-counts',{detail:{status:'error',durationMs:Math.round(performance.now()-started)}}));
+      }
+    }
+
+    const modalBackground=[select('#main'),select('.topbar'),select('.tabbar')];
+    function setModalBackground(inert){modalBackground.forEach(node=>{if(node)node.inert=inert})}
+    function openShare(trigger){lastFocus=trigger;select('#share-url').textContent=shareLink.href;select('#share-dialog').classList.add('is-open');document.body.classList.add('modal-open');setModalBackground(true);select('#native-share').focus()}
+    function closeShare(){select('#share-dialog').classList.remove('is-open');document.body.classList.remove('modal-open');setModalBackground(false);lastFocus?.focus()}
     selectAll('.js-share').forEach(button=>button.addEventListener('click',()=>openShare(button)));
     select('#close-share').addEventListener('click',closeShare);
     select('#share-dialog').addEventListener('click',event=>{if(event.target===select('#share-dialog'))closeShare()});
-    addEventListener('keydown',event=>{if(event.key==='Escape'&&select('#share-dialog').classList.contains('is-open'))closeShare()});
+    addEventListener('keydown',event=>{
+      const dialog=select('#share-dialog');if(!dialog.classList.contains('is-open'))return;
+      if(event.key==='Escape'){closeShare();return}
+      if(event.key==='Tab'){
+        const focusable=selectAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])',dialog).filter(node=>!node.disabled&&!node.hidden);
+        if(!focusable.length)return;
+        const first=focusable[0],last=focusable[focusable.length-1];
+        if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}
+        else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}
+      }
+    });
 
     function toast(message){const el=select('#toast');el.textContent=message;el.classList.add('is-visible');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove('is-visible'),2200)}
     async function copyShare(){try{await navigator.clipboard.writeText(shareLink.href);toast('Board link copied')}catch{toast('Copy unavailable — select the link manually')}}
@@ -232,7 +266,7 @@
 
     select('#claim-form').addEventListener('submit',event=>{event.preventDefault();const name=select('#company-name');const site=select('#company-site');if(!name.value.trim()||!site.value.trim()){toast('Add the company name and official public page');(!name.value.trim()?name:site).focus();return}try{if(new URL(site.value).protocol!=='https:')throw new Error('HTTPS required')}catch{toast('Use a complete public URL beginning with https://');site.focus();return}select('#toast').classList.remove('is-visible');select('#claim-status').classList.add('is-visible');select('#claim-status').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'})});
 
-    const initial=new URLSearchParams(location.search).get('screen')||'home';showScreen(initial,{historyMode:'replace',focus:false});
+    const initial=new URLSearchParams(location.search).get('screen')||'home';showScreen(initial,{historyMode:'replace',focus:false});loadPublicCounts();
   </script>
 </body>
 </html>
