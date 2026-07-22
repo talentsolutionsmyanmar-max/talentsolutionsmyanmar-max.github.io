@@ -143,7 +143,191 @@
         }
       ],
       "salaryVisibleRoles": 18,
-      "publishedReviews": 0
+      "publishedReviews": 0,
+      "truthFamilies": [
+        {
+          "id": "money",
+          "label": "Money & promises",
+          "question": "Is the offered pay clear?",
+          "signals": [
+            {
+              "signal": "Base salary",
+              "promised": "Stated in job posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Can you show me the exact base salary in writing?"
+            },
+            {
+              "signal": "Allowances",
+              "promised": "Listed when applicable",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Which allowances are included — transport, meals, phone?"
+            },
+            {
+              "signal": "Overtime pay",
+              "promised": "Per labour law",
+              "experienced": null,
+              "pattern": null,
+              "ask": "How is overtime calculated and when is it paid?"
+            },
+            {
+              "signal": "Deductions",
+              "promised": "Disclosed at offer",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What deductions come off the gross — tax, SSF, insurance?"
+            }
+          ]
+        },
+        {
+          "id": "time",
+          "label": "Real working time",
+          "question": "What are the actual hours?",
+          "signals": [
+            {
+              "signal": "Stated schedule",
+              "promised": "Monday–Saturday or per posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What are the official start and finish times?"
+            },
+            {
+              "signal": "Actual finish time",
+              "promised": "As scheduled",
+              "experienced": null,
+              "pattern": null,
+              "ask": "How often does the team work past the stated finishing time?"
+            },
+            {
+              "signal": "Rest days",
+              "promised": "Per contract",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are rest days guaranteed or frequently rescheduled?"
+            },
+            {
+              "signal": "Shift pattern",
+              "promised": "When applicable",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Is the shift rotation fixed or does it change week to week?"
+            }
+          ]
+        },
+        {
+          "id": "respect",
+          "label": "Respect & leave",
+          "question": "How are people treated?",
+          "signals": [
+            {
+              "signal": "Leave access",
+              "promised": "Per labour law",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Can leave be requested without penalty or informal pressure?"
+            },
+            {
+              "signal": "Correction style",
+              "promised": "Professional",
+              "experienced": null,
+              "pattern": null,
+              "ask": "When mistakes happen, are corrections private or public?"
+            },
+            {
+              "signal": "Safety",
+              "promised": "Workplace standards",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Is safety equipment provided and actually used on the floor?"
+            },
+            {
+              "signal": "Family realities",
+              "promised": "Standard policy",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are parental and family leave policies applied in practice?"
+            }
+          ]
+        },
+        {
+          "id": "growth",
+          "label": "Growth & management",
+          "question": "Can you grow here?",
+          "signals": [
+            {
+              "signal": "Training",
+              "promised": "When mentioned in posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What training happens in the first 90 days?"
+            },
+            {
+              "signal": "Supervision",
+              "promised": "Standard reporting line",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Who reports to whom, and how are decisions communicated?"
+            },
+            {
+              "signal": "Promotion rules",
+              "promised": "Merit-based when stated",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are promotion criteria written down and applied consistently?"
+            },
+            {
+              "signal": "Skill development",
+              "promised": "On-the-job learning",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Does the company support Academy courses or external learning?"
+            }
+          ]
+        }
+      ],
+      "hiringExperience": {
+        "status": "honest-empty",
+        "description": "Nobody has safely contributed hiring evidence yet.",
+        "signals": [
+          "Application acknowledged",
+          "Salary explained at offer",
+          "Interview respectful and on-time",
+          "Outcome communicated",
+          "No fee requested"
+        ]
+      },
+      "workplaceExperience": {
+        "status": "honest-empty",
+        "description": "Nobody has safely contributed workplace evidence yet.",
+        "signals": [
+          "Pay arrived as promised",
+          "Real finish time matched stated",
+          "Overtime paid correctly",
+          "Leave requestable safely",
+          "Promotion rules written and followed",
+          "Corrections private, not public"
+        ]
+      },
+      "salarySources": {
+        "posted": {
+          "label": "Posted in a real job",
+          "description": "Salary range stated directly in the active ReferTRM role posting.",
+          "count": 18
+        },
+        "benchmark": {
+          "label": "Market benchmark",
+          "description": "Independent market rate for this role type and location in Myanmar.",
+          "count": 0,
+          "status": "building"
+        },
+        "worker": {
+          "label": "Worker-reported",
+          "description": "What eligible workers actually received — empty until governed contribution path exists.",
+          "count": 0,
+          "status": "honest-empty"
+        }
+      }
     },
     {
       "id": "thadoe-mahar",
@@ -265,7 +449,191 @@
         }
       ],
       "salaryVisibleRoles": 13,
-      "publishedReviews": 0
+      "publishedReviews": 0,
+      "truthFamilies": [
+        {
+          "id": "money",
+          "label": "Money & promises",
+          "question": "Is the offered pay clear?",
+          "signals": [
+            {
+              "signal": "Base salary",
+              "promised": "Stated in job posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Can you show me the exact base salary in writing?"
+            },
+            {
+              "signal": "Allowances",
+              "promised": "Listed when applicable",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Which allowances are included — transport, meals, phone?"
+            },
+            {
+              "signal": "Overtime pay",
+              "promised": "Per labour law",
+              "experienced": null,
+              "pattern": null,
+              "ask": "How is overtime calculated and when is it paid?"
+            },
+            {
+              "signal": "Deductions",
+              "promised": "Disclosed at offer",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What deductions come off the gross — tax, SSF, insurance?"
+            }
+          ]
+        },
+        {
+          "id": "time",
+          "label": "Real working time",
+          "question": "What are the actual hours?",
+          "signals": [
+            {
+              "signal": "Stated schedule",
+              "promised": "Monday–Saturday or per posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What are the official start and finish times?"
+            },
+            {
+              "signal": "Actual finish time",
+              "promised": "As scheduled",
+              "experienced": null,
+              "pattern": null,
+              "ask": "How often does the team work past the stated finishing time?"
+            },
+            {
+              "signal": "Rest days",
+              "promised": "Per contract",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are rest days guaranteed or frequently rescheduled?"
+            },
+            {
+              "signal": "Shift pattern",
+              "promised": "When applicable",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Is the shift rotation fixed or does it change week to week?"
+            }
+          ]
+        },
+        {
+          "id": "respect",
+          "label": "Respect & leave",
+          "question": "How are people treated?",
+          "signals": [
+            {
+              "signal": "Leave access",
+              "promised": "Per labour law",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Can leave be requested without penalty or informal pressure?"
+            },
+            {
+              "signal": "Correction style",
+              "promised": "Professional",
+              "experienced": null,
+              "pattern": null,
+              "ask": "When mistakes happen, are corrections private or public?"
+            },
+            {
+              "signal": "Safety",
+              "promised": "Workplace standards",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Is safety equipment provided and actually used on the floor?"
+            },
+            {
+              "signal": "Family realities",
+              "promised": "Standard policy",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are parental and family leave policies applied in practice?"
+            }
+          ]
+        },
+        {
+          "id": "growth",
+          "label": "Growth & management",
+          "question": "Can you grow here?",
+          "signals": [
+            {
+              "signal": "Training",
+              "promised": "When mentioned in posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What training happens in the first 90 days?"
+            },
+            {
+              "signal": "Supervision",
+              "promised": "Standard reporting line",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Who reports to whom, and how are decisions communicated?"
+            },
+            {
+              "signal": "Promotion rules",
+              "promised": "Merit-based when stated",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are promotion criteria written down and applied consistently?"
+            },
+            {
+              "signal": "Skill development",
+              "promised": "On-the-job learning",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Does the company support Academy courses or external learning?"
+            }
+          ]
+        }
+      ],
+      "hiringExperience": {
+        "status": "honest-empty",
+        "description": "Nobody has safely contributed hiring evidence yet.",
+        "signals": [
+          "Application acknowledged",
+          "Salary explained at offer",
+          "Interview respectful and on-time",
+          "Outcome communicated",
+          "No fee requested"
+        ]
+      },
+      "workplaceExperience": {
+        "status": "honest-empty",
+        "description": "Nobody has safely contributed workplace evidence yet.",
+        "signals": [
+          "Pay arrived as promised",
+          "Real finish time matched stated",
+          "Overtime paid correctly",
+          "Leave requestable safely",
+          "Promotion rules written and followed",
+          "Corrections private, not public"
+        ]
+      },
+      "salarySources": {
+        "posted": {
+          "label": "Posted in a real job",
+          "description": "Salary range stated directly in the active ReferTRM role posting.",
+          "count": 13
+        },
+        "benchmark": {
+          "label": "Market benchmark",
+          "description": "Independent market rate for this role type and location in Myanmar.",
+          "count": 0,
+          "status": "building"
+        },
+        "worker": {
+          "label": "Worker-reported",
+          "description": "What eligible workers actually received — empty until governed contribution path exists.",
+          "count": 0,
+          "status": "honest-empty"
+        }
+      }
     },
     {
       "id": "innopex",
@@ -375,7 +743,191 @@
         }
       ],
       "salaryVisibleRoles": 14,
-      "publishedReviews": 0
+      "publishedReviews": 0,
+      "truthFamilies": [
+        {
+          "id": "money",
+          "label": "Money & promises",
+          "question": "Is the offered pay clear?",
+          "signals": [
+            {
+              "signal": "Base salary",
+              "promised": "Stated in job posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Can you show me the exact base salary in writing?"
+            },
+            {
+              "signal": "Allowances",
+              "promised": "Listed when applicable",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Which allowances are included — transport, meals, phone?"
+            },
+            {
+              "signal": "Overtime pay",
+              "promised": "Per labour law",
+              "experienced": null,
+              "pattern": null,
+              "ask": "How is overtime calculated and when is it paid?"
+            },
+            {
+              "signal": "Deductions",
+              "promised": "Disclosed at offer",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What deductions come off the gross — tax, SSF, insurance?"
+            }
+          ]
+        },
+        {
+          "id": "time",
+          "label": "Real working time",
+          "question": "What are the actual hours?",
+          "signals": [
+            {
+              "signal": "Stated schedule",
+              "promised": "Monday–Saturday or per posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What are the official start and finish times?"
+            },
+            {
+              "signal": "Actual finish time",
+              "promised": "As scheduled",
+              "experienced": null,
+              "pattern": null,
+              "ask": "How often does the team work past the stated finishing time?"
+            },
+            {
+              "signal": "Rest days",
+              "promised": "Per contract",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are rest days guaranteed or frequently rescheduled?"
+            },
+            {
+              "signal": "Shift pattern",
+              "promised": "When applicable",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Is the shift rotation fixed or does it change week to week?"
+            }
+          ]
+        },
+        {
+          "id": "respect",
+          "label": "Respect & leave",
+          "question": "How are people treated?",
+          "signals": [
+            {
+              "signal": "Leave access",
+              "promised": "Per labour law",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Can leave be requested without penalty or informal pressure?"
+            },
+            {
+              "signal": "Correction style",
+              "promised": "Professional",
+              "experienced": null,
+              "pattern": null,
+              "ask": "When mistakes happen, are corrections private or public?"
+            },
+            {
+              "signal": "Safety",
+              "promised": "Workplace standards",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Is safety equipment provided and actually used on the floor?"
+            },
+            {
+              "signal": "Family realities",
+              "promised": "Standard policy",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are parental and family leave policies applied in practice?"
+            }
+          ]
+        },
+        {
+          "id": "growth",
+          "label": "Growth & management",
+          "question": "Can you grow here?",
+          "signals": [
+            {
+              "signal": "Training",
+              "promised": "When mentioned in posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What training happens in the first 90 days?"
+            },
+            {
+              "signal": "Supervision",
+              "promised": "Standard reporting line",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Who reports to whom, and how are decisions communicated?"
+            },
+            {
+              "signal": "Promotion rules",
+              "promised": "Merit-based when stated",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are promotion criteria written down and applied consistently?"
+            },
+            {
+              "signal": "Skill development",
+              "promised": "On-the-job learning",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Does the company support Academy courses or external learning?"
+            }
+          ]
+        }
+      ],
+      "hiringExperience": {
+        "status": "honest-empty",
+        "description": "Nobody has safely contributed hiring evidence yet.",
+        "signals": [
+          "Application acknowledged",
+          "Salary explained at offer",
+          "Interview respectful and on-time",
+          "Outcome communicated",
+          "No fee requested"
+        ]
+      },
+      "workplaceExperience": {
+        "status": "honest-empty",
+        "description": "Nobody has safely contributed workplace evidence yet.",
+        "signals": [
+          "Pay arrived as promised",
+          "Real finish time matched stated",
+          "Overtime paid correctly",
+          "Leave requestable safely",
+          "Promotion rules written and followed",
+          "Corrections private, not public"
+        ]
+      },
+      "salarySources": {
+        "posted": {
+          "label": "Posted in a real job",
+          "description": "Salary range stated directly in the active ReferTRM role posting.",
+          "count": 14
+        },
+        "benchmark": {
+          "label": "Market benchmark",
+          "description": "Independent market rate for this role type and location in Myanmar.",
+          "count": 0,
+          "status": "building"
+        },
+        "worker": {
+          "label": "Worker-reported",
+          "description": "What eligible workers actually received — empty until governed contribution path exists.",
+          "count": 0,
+          "status": "honest-empty"
+        }
+      }
     },
     {
       "id": "the-recruiter-myanmar",
@@ -473,7 +1025,191 @@
         }
       ],
       "salaryVisibleRoles": 13,
-      "publishedReviews": 0
+      "publishedReviews": 0,
+      "truthFamilies": [
+        {
+          "id": "money",
+          "label": "Money & promises",
+          "question": "Is the offered pay clear?",
+          "signals": [
+            {
+              "signal": "Base salary",
+              "promised": "Stated in job posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Can you show me the exact base salary in writing?"
+            },
+            {
+              "signal": "Allowances",
+              "promised": "Listed when applicable",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Which allowances are included — transport, meals, phone?"
+            },
+            {
+              "signal": "Overtime pay",
+              "promised": "Per labour law",
+              "experienced": null,
+              "pattern": null,
+              "ask": "How is overtime calculated and when is it paid?"
+            },
+            {
+              "signal": "Deductions",
+              "promised": "Disclosed at offer",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What deductions come off the gross — tax, SSF, insurance?"
+            }
+          ]
+        },
+        {
+          "id": "time",
+          "label": "Real working time",
+          "question": "What are the actual hours?",
+          "signals": [
+            {
+              "signal": "Stated schedule",
+              "promised": "Monday–Saturday or per posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What are the official start and finish times?"
+            },
+            {
+              "signal": "Actual finish time",
+              "promised": "As scheduled",
+              "experienced": null,
+              "pattern": null,
+              "ask": "How often does the team work past the stated finishing time?"
+            },
+            {
+              "signal": "Rest days",
+              "promised": "Per contract",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are rest days guaranteed or frequently rescheduled?"
+            },
+            {
+              "signal": "Shift pattern",
+              "promised": "When applicable",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Is the shift rotation fixed or does it change week to week?"
+            }
+          ]
+        },
+        {
+          "id": "respect",
+          "label": "Respect & leave",
+          "question": "How are people treated?",
+          "signals": [
+            {
+              "signal": "Leave access",
+              "promised": "Per labour law",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Can leave be requested without penalty or informal pressure?"
+            },
+            {
+              "signal": "Correction style",
+              "promised": "Professional",
+              "experienced": null,
+              "pattern": null,
+              "ask": "When mistakes happen, are corrections private or public?"
+            },
+            {
+              "signal": "Safety",
+              "promised": "Workplace standards",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Is safety equipment provided and actually used on the floor?"
+            },
+            {
+              "signal": "Family realities",
+              "promised": "Standard policy",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are parental and family leave policies applied in practice?"
+            }
+          ]
+        },
+        {
+          "id": "growth",
+          "label": "Growth & management",
+          "question": "Can you grow here?",
+          "signals": [
+            {
+              "signal": "Training",
+              "promised": "When mentioned in posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What training happens in the first 90 days?"
+            },
+            {
+              "signal": "Supervision",
+              "promised": "Standard reporting line",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Who reports to whom, and how are decisions communicated?"
+            },
+            {
+              "signal": "Promotion rules",
+              "promised": "Merit-based when stated",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are promotion criteria written down and applied consistently?"
+            },
+            {
+              "signal": "Skill development",
+              "promised": "On-the-job learning",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Does the company support Academy courses or external learning?"
+            }
+          ]
+        }
+      ],
+      "hiringExperience": {
+        "status": "honest-empty",
+        "description": "Nobody has safely contributed hiring evidence yet.",
+        "signals": [
+          "Application acknowledged",
+          "Salary explained at offer",
+          "Interview respectful and on-time",
+          "Outcome communicated",
+          "No fee requested"
+        ]
+      },
+      "workplaceExperience": {
+        "status": "honest-empty",
+        "description": "Nobody has safely contributed workplace evidence yet.",
+        "signals": [
+          "Pay arrived as promised",
+          "Real finish time matched stated",
+          "Overtime paid correctly",
+          "Leave requestable safely",
+          "Promotion rules written and followed",
+          "Corrections private, not public"
+        ]
+      },
+      "salarySources": {
+        "posted": {
+          "label": "Posted in a real job",
+          "description": "Salary range stated directly in the active ReferTRM role posting.",
+          "count": 13
+        },
+        "benchmark": {
+          "label": "Market benchmark",
+          "description": "Independent market rate for this role type and location in Myanmar.",
+          "count": 0,
+          "status": "building"
+        },
+        "worker": {
+          "label": "Worker-reported",
+          "description": "What eligible workers actually received — empty until governed contribution path exists.",
+          "count": 0,
+          "status": "honest-empty"
+        }
+      }
     },
     {
       "id": "eac-myanmar",
@@ -553,7 +1289,191 @@
         }
       ],
       "salaryVisibleRoles": 7,
-      "publishedReviews": 0
+      "publishedReviews": 0,
+      "truthFamilies": [
+        {
+          "id": "money",
+          "label": "Money & promises",
+          "question": "Is the offered pay clear?",
+          "signals": [
+            {
+              "signal": "Base salary",
+              "promised": "Stated in job posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Can you show me the exact base salary in writing?"
+            },
+            {
+              "signal": "Allowances",
+              "promised": "Listed when applicable",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Which allowances are included — transport, meals, phone?"
+            },
+            {
+              "signal": "Overtime pay",
+              "promised": "Per labour law",
+              "experienced": null,
+              "pattern": null,
+              "ask": "How is overtime calculated and when is it paid?"
+            },
+            {
+              "signal": "Deductions",
+              "promised": "Disclosed at offer",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What deductions come off the gross — tax, SSF, insurance?"
+            }
+          ]
+        },
+        {
+          "id": "time",
+          "label": "Real working time",
+          "question": "What are the actual hours?",
+          "signals": [
+            {
+              "signal": "Stated schedule",
+              "promised": "Monday–Saturday or per posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What are the official start and finish times?"
+            },
+            {
+              "signal": "Actual finish time",
+              "promised": "As scheduled",
+              "experienced": null,
+              "pattern": null,
+              "ask": "How often does the team work past the stated finishing time?"
+            },
+            {
+              "signal": "Rest days",
+              "promised": "Per contract",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are rest days guaranteed or frequently rescheduled?"
+            },
+            {
+              "signal": "Shift pattern",
+              "promised": "When applicable",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Is the shift rotation fixed or does it change week to week?"
+            }
+          ]
+        },
+        {
+          "id": "respect",
+          "label": "Respect & leave",
+          "question": "How are people treated?",
+          "signals": [
+            {
+              "signal": "Leave access",
+              "promised": "Per labour law",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Can leave be requested without penalty or informal pressure?"
+            },
+            {
+              "signal": "Correction style",
+              "promised": "Professional",
+              "experienced": null,
+              "pattern": null,
+              "ask": "When mistakes happen, are corrections private or public?"
+            },
+            {
+              "signal": "Safety",
+              "promised": "Workplace standards",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Is safety equipment provided and actually used on the floor?"
+            },
+            {
+              "signal": "Family realities",
+              "promised": "Standard policy",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are parental and family leave policies applied in practice?"
+            }
+          ]
+        },
+        {
+          "id": "growth",
+          "label": "Growth & management",
+          "question": "Can you grow here?",
+          "signals": [
+            {
+              "signal": "Training",
+              "promised": "When mentioned in posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What training happens in the first 90 days?"
+            },
+            {
+              "signal": "Supervision",
+              "promised": "Standard reporting line",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Who reports to whom, and how are decisions communicated?"
+            },
+            {
+              "signal": "Promotion rules",
+              "promised": "Merit-based when stated",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are promotion criteria written down and applied consistently?"
+            },
+            {
+              "signal": "Skill development",
+              "promised": "On-the-job learning",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Does the company support Academy courses or external learning?"
+            }
+          ]
+        }
+      ],
+      "hiringExperience": {
+        "status": "honest-empty",
+        "description": "Nobody has safely contributed hiring evidence yet.",
+        "signals": [
+          "Application acknowledged",
+          "Salary explained at offer",
+          "Interview respectful and on-time",
+          "Outcome communicated",
+          "No fee requested"
+        ]
+      },
+      "workplaceExperience": {
+        "status": "honest-empty",
+        "description": "Nobody has safely contributed workplace evidence yet.",
+        "signals": [
+          "Pay arrived as promised",
+          "Real finish time matched stated",
+          "Overtime paid correctly",
+          "Leave requestable safely",
+          "Promotion rules written and followed",
+          "Corrections private, not public"
+        ]
+      },
+      "salarySources": {
+        "posted": {
+          "label": "Posted in a real job",
+          "description": "Salary range stated directly in the active ReferTRM role posting.",
+          "count": 7
+        },
+        "benchmark": {
+          "label": "Market benchmark",
+          "description": "Independent market rate for this role type and location in Myanmar.",
+          "count": 0,
+          "status": "building"
+        },
+        "worker": {
+          "label": "Worker-reported",
+          "description": "What eligible workers actually received — empty until governed contribution path exists.",
+          "count": 0,
+          "status": "honest-empty"
+        }
+      }
     },
     {
       "id": "tomo",
@@ -627,7 +1547,191 @@
         }
       ],
       "salaryVisibleRoles": 7,
-      "publishedReviews": 0
+      "publishedReviews": 0,
+      "truthFamilies": [
+        {
+          "id": "money",
+          "label": "Money & promises",
+          "question": "Is the offered pay clear?",
+          "signals": [
+            {
+              "signal": "Base salary",
+              "promised": "Stated in job posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Can you show me the exact base salary in writing?"
+            },
+            {
+              "signal": "Allowances",
+              "promised": "Listed when applicable",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Which allowances are included — transport, meals, phone?"
+            },
+            {
+              "signal": "Overtime pay",
+              "promised": "Per labour law",
+              "experienced": null,
+              "pattern": null,
+              "ask": "How is overtime calculated and when is it paid?"
+            },
+            {
+              "signal": "Deductions",
+              "promised": "Disclosed at offer",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What deductions come off the gross — tax, SSF, insurance?"
+            }
+          ]
+        },
+        {
+          "id": "time",
+          "label": "Real working time",
+          "question": "What are the actual hours?",
+          "signals": [
+            {
+              "signal": "Stated schedule",
+              "promised": "Monday–Saturday or per posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What are the official start and finish times?"
+            },
+            {
+              "signal": "Actual finish time",
+              "promised": "As scheduled",
+              "experienced": null,
+              "pattern": null,
+              "ask": "How often does the team work past the stated finishing time?"
+            },
+            {
+              "signal": "Rest days",
+              "promised": "Per contract",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are rest days guaranteed or frequently rescheduled?"
+            },
+            {
+              "signal": "Shift pattern",
+              "promised": "When applicable",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Is the shift rotation fixed or does it change week to week?"
+            }
+          ]
+        },
+        {
+          "id": "respect",
+          "label": "Respect & leave",
+          "question": "How are people treated?",
+          "signals": [
+            {
+              "signal": "Leave access",
+              "promised": "Per labour law",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Can leave be requested without penalty or informal pressure?"
+            },
+            {
+              "signal": "Correction style",
+              "promised": "Professional",
+              "experienced": null,
+              "pattern": null,
+              "ask": "When mistakes happen, are corrections private or public?"
+            },
+            {
+              "signal": "Safety",
+              "promised": "Workplace standards",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Is safety equipment provided and actually used on the floor?"
+            },
+            {
+              "signal": "Family realities",
+              "promised": "Standard policy",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are parental and family leave policies applied in practice?"
+            }
+          ]
+        },
+        {
+          "id": "growth",
+          "label": "Growth & management",
+          "question": "Can you grow here?",
+          "signals": [
+            {
+              "signal": "Training",
+              "promised": "When mentioned in posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What training happens in the first 90 days?"
+            },
+            {
+              "signal": "Supervision",
+              "promised": "Standard reporting line",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Who reports to whom, and how are decisions communicated?"
+            },
+            {
+              "signal": "Promotion rules",
+              "promised": "Merit-based when stated",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are promotion criteria written down and applied consistently?"
+            },
+            {
+              "signal": "Skill development",
+              "promised": "On-the-job learning",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Does the company support Academy courses or external learning?"
+            }
+          ]
+        }
+      ],
+      "hiringExperience": {
+        "status": "honest-empty",
+        "description": "Nobody has safely contributed hiring evidence yet.",
+        "signals": [
+          "Application acknowledged",
+          "Salary explained at offer",
+          "Interview respectful and on-time",
+          "Outcome communicated",
+          "No fee requested"
+        ]
+      },
+      "workplaceExperience": {
+        "status": "honest-empty",
+        "description": "Nobody has safely contributed workplace evidence yet.",
+        "signals": [
+          "Pay arrived as promised",
+          "Real finish time matched stated",
+          "Overtime paid correctly",
+          "Leave requestable safely",
+          "Promotion rules written and followed",
+          "Corrections private, not public"
+        ]
+      },
+      "salarySources": {
+        "posted": {
+          "label": "Posted in a real job",
+          "description": "Salary range stated directly in the active ReferTRM role posting.",
+          "count": 7
+        },
+        "benchmark": {
+          "label": "Market benchmark",
+          "description": "Independent market rate for this role type and location in Myanmar.",
+          "count": 0,
+          "status": "building"
+        },
+        "worker": {
+          "label": "Worker-reported",
+          "description": "What eligible workers actually received — empty until governed contribution path exists.",
+          "count": 0,
+          "status": "honest-empty"
+        }
+      }
     },
     {
       "id": "myanmar-indobest",
@@ -689,7 +1793,191 @@
         }
       ],
       "salaryVisibleRoles": 7,
-      "publishedReviews": 0
+      "publishedReviews": 0,
+      "truthFamilies": [
+        {
+          "id": "money",
+          "label": "Money & promises",
+          "question": "Is the offered pay clear?",
+          "signals": [
+            {
+              "signal": "Base salary",
+              "promised": "Stated in job posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Can you show me the exact base salary in writing?"
+            },
+            {
+              "signal": "Allowances",
+              "promised": "Listed when applicable",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Which allowances are included — transport, meals, phone?"
+            },
+            {
+              "signal": "Overtime pay",
+              "promised": "Per labour law",
+              "experienced": null,
+              "pattern": null,
+              "ask": "How is overtime calculated and when is it paid?"
+            },
+            {
+              "signal": "Deductions",
+              "promised": "Disclosed at offer",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What deductions come off the gross — tax, SSF, insurance?"
+            }
+          ]
+        },
+        {
+          "id": "time",
+          "label": "Real working time",
+          "question": "What are the actual hours?",
+          "signals": [
+            {
+              "signal": "Stated schedule",
+              "promised": "Monday–Saturday or per posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What are the official start and finish times?"
+            },
+            {
+              "signal": "Actual finish time",
+              "promised": "As scheduled",
+              "experienced": null,
+              "pattern": null,
+              "ask": "How often does the team work past the stated finishing time?"
+            },
+            {
+              "signal": "Rest days",
+              "promised": "Per contract",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are rest days guaranteed or frequently rescheduled?"
+            },
+            {
+              "signal": "Shift pattern",
+              "promised": "When applicable",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Is the shift rotation fixed or does it change week to week?"
+            }
+          ]
+        },
+        {
+          "id": "respect",
+          "label": "Respect & leave",
+          "question": "How are people treated?",
+          "signals": [
+            {
+              "signal": "Leave access",
+              "promised": "Per labour law",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Can leave be requested without penalty or informal pressure?"
+            },
+            {
+              "signal": "Correction style",
+              "promised": "Professional",
+              "experienced": null,
+              "pattern": null,
+              "ask": "When mistakes happen, are corrections private or public?"
+            },
+            {
+              "signal": "Safety",
+              "promised": "Workplace standards",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Is safety equipment provided and actually used on the floor?"
+            },
+            {
+              "signal": "Family realities",
+              "promised": "Standard policy",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are parental and family leave policies applied in practice?"
+            }
+          ]
+        },
+        {
+          "id": "growth",
+          "label": "Growth & management",
+          "question": "Can you grow here?",
+          "signals": [
+            {
+              "signal": "Training",
+              "promised": "When mentioned in posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What training happens in the first 90 days?"
+            },
+            {
+              "signal": "Supervision",
+              "promised": "Standard reporting line",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Who reports to whom, and how are decisions communicated?"
+            },
+            {
+              "signal": "Promotion rules",
+              "promised": "Merit-based when stated",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are promotion criteria written down and applied consistently?"
+            },
+            {
+              "signal": "Skill development",
+              "promised": "On-the-job learning",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Does the company support Academy courses or external learning?"
+            }
+          ]
+        }
+      ],
+      "hiringExperience": {
+        "status": "honest-empty",
+        "description": "Nobody has safely contributed hiring evidence yet.",
+        "signals": [
+          "Application acknowledged",
+          "Salary explained at offer",
+          "Interview respectful and on-time",
+          "Outcome communicated",
+          "No fee requested"
+        ]
+      },
+      "workplaceExperience": {
+        "status": "honest-empty",
+        "description": "Nobody has safely contributed workplace evidence yet.",
+        "signals": [
+          "Pay arrived as promised",
+          "Real finish time matched stated",
+          "Overtime paid correctly",
+          "Leave requestable safely",
+          "Promotion rules written and followed",
+          "Corrections private, not public"
+        ]
+      },
+      "salarySources": {
+        "posted": {
+          "label": "Posted in a real job",
+          "description": "Salary range stated directly in the active ReferTRM role posting.",
+          "count": 7
+        },
+        "benchmark": {
+          "label": "Market benchmark",
+          "description": "Independent market rate for this role type and location in Myanmar.",
+          "count": 0,
+          "status": "building"
+        },
+        "worker": {
+          "label": "Worker-reported",
+          "description": "What eligible workers actually received — empty until governed contribution path exists.",
+          "count": 0,
+          "status": "honest-empty"
+        }
+      }
     },
     {
       "id": "electronic-city",
@@ -745,7 +2033,191 @@
         }
       ],
       "salaryVisibleRoles": 5,
-      "publishedReviews": 0
+      "publishedReviews": 0,
+      "truthFamilies": [
+        {
+          "id": "money",
+          "label": "Money & promises",
+          "question": "Is the offered pay clear?",
+          "signals": [
+            {
+              "signal": "Base salary",
+              "promised": "Stated in job posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Can you show me the exact base salary in writing?"
+            },
+            {
+              "signal": "Allowances",
+              "promised": "Listed when applicable",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Which allowances are included — transport, meals, phone?"
+            },
+            {
+              "signal": "Overtime pay",
+              "promised": "Per labour law",
+              "experienced": null,
+              "pattern": null,
+              "ask": "How is overtime calculated and when is it paid?"
+            },
+            {
+              "signal": "Deductions",
+              "promised": "Disclosed at offer",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What deductions come off the gross — tax, SSF, insurance?"
+            }
+          ]
+        },
+        {
+          "id": "time",
+          "label": "Real working time",
+          "question": "What are the actual hours?",
+          "signals": [
+            {
+              "signal": "Stated schedule",
+              "promised": "Monday–Saturday or per posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What are the official start and finish times?"
+            },
+            {
+              "signal": "Actual finish time",
+              "promised": "As scheduled",
+              "experienced": null,
+              "pattern": null,
+              "ask": "How often does the team work past the stated finishing time?"
+            },
+            {
+              "signal": "Rest days",
+              "promised": "Per contract",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are rest days guaranteed or frequently rescheduled?"
+            },
+            {
+              "signal": "Shift pattern",
+              "promised": "When applicable",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Is the shift rotation fixed or does it change week to week?"
+            }
+          ]
+        },
+        {
+          "id": "respect",
+          "label": "Respect & leave",
+          "question": "How are people treated?",
+          "signals": [
+            {
+              "signal": "Leave access",
+              "promised": "Per labour law",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Can leave be requested without penalty or informal pressure?"
+            },
+            {
+              "signal": "Correction style",
+              "promised": "Professional",
+              "experienced": null,
+              "pattern": null,
+              "ask": "When mistakes happen, are corrections private or public?"
+            },
+            {
+              "signal": "Safety",
+              "promised": "Workplace standards",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Is safety equipment provided and actually used on the floor?"
+            },
+            {
+              "signal": "Family realities",
+              "promised": "Standard policy",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are parental and family leave policies applied in practice?"
+            }
+          ]
+        },
+        {
+          "id": "growth",
+          "label": "Growth & management",
+          "question": "Can you grow here?",
+          "signals": [
+            {
+              "signal": "Training",
+              "promised": "When mentioned in posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What training happens in the first 90 days?"
+            },
+            {
+              "signal": "Supervision",
+              "promised": "Standard reporting line",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Who reports to whom, and how are decisions communicated?"
+            },
+            {
+              "signal": "Promotion rules",
+              "promised": "Merit-based when stated",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are promotion criteria written down and applied consistently?"
+            },
+            {
+              "signal": "Skill development",
+              "promised": "On-the-job learning",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Does the company support Academy courses or external learning?"
+            }
+          ]
+        }
+      ],
+      "hiringExperience": {
+        "status": "honest-empty",
+        "description": "Nobody has safely contributed hiring evidence yet.",
+        "signals": [
+          "Application acknowledged",
+          "Salary explained at offer",
+          "Interview respectful and on-time",
+          "Outcome communicated",
+          "No fee requested"
+        ]
+      },
+      "workplaceExperience": {
+        "status": "honest-empty",
+        "description": "Nobody has safely contributed workplace evidence yet.",
+        "signals": [
+          "Pay arrived as promised",
+          "Real finish time matched stated",
+          "Overtime paid correctly",
+          "Leave requestable safely",
+          "Promotion rules written and followed",
+          "Corrections private, not public"
+        ]
+      },
+      "salarySources": {
+        "posted": {
+          "label": "Posted in a real job",
+          "description": "Salary range stated directly in the active ReferTRM role posting.",
+          "count": 5
+        },
+        "benchmark": {
+          "label": "Market benchmark",
+          "description": "Independent market rate for this role type and location in Myanmar.",
+          "count": 0,
+          "status": "building"
+        },
+        "worker": {
+          "label": "Worker-reported",
+          "description": "What eligible workers actually received — empty until governed contribution path exists.",
+          "count": 0,
+          "status": "honest-empty"
+        }
+      }
     },
     {
       "id": "kbz-life",
@@ -783,7 +2255,191 @@
         }
       ],
       "salaryVisibleRoles": 3,
-      "publishedReviews": 0
+      "publishedReviews": 0,
+      "truthFamilies": [
+        {
+          "id": "money",
+          "label": "Money & promises",
+          "question": "Is the offered pay clear?",
+          "signals": [
+            {
+              "signal": "Base salary",
+              "promised": "Stated in job posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Can you show me the exact base salary in writing?"
+            },
+            {
+              "signal": "Allowances",
+              "promised": "Listed when applicable",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Which allowances are included — transport, meals, phone?"
+            },
+            {
+              "signal": "Overtime pay",
+              "promised": "Per labour law",
+              "experienced": null,
+              "pattern": null,
+              "ask": "How is overtime calculated and when is it paid?"
+            },
+            {
+              "signal": "Deductions",
+              "promised": "Disclosed at offer",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What deductions come off the gross — tax, SSF, insurance?"
+            }
+          ]
+        },
+        {
+          "id": "time",
+          "label": "Real working time",
+          "question": "What are the actual hours?",
+          "signals": [
+            {
+              "signal": "Stated schedule",
+              "promised": "Monday–Saturday or per posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What are the official start and finish times?"
+            },
+            {
+              "signal": "Actual finish time",
+              "promised": "As scheduled",
+              "experienced": null,
+              "pattern": null,
+              "ask": "How often does the team work past the stated finishing time?"
+            },
+            {
+              "signal": "Rest days",
+              "promised": "Per contract",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are rest days guaranteed or frequently rescheduled?"
+            },
+            {
+              "signal": "Shift pattern",
+              "promised": "When applicable",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Is the shift rotation fixed or does it change week to week?"
+            }
+          ]
+        },
+        {
+          "id": "respect",
+          "label": "Respect & leave",
+          "question": "How are people treated?",
+          "signals": [
+            {
+              "signal": "Leave access",
+              "promised": "Per labour law",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Can leave be requested without penalty or informal pressure?"
+            },
+            {
+              "signal": "Correction style",
+              "promised": "Professional",
+              "experienced": null,
+              "pattern": null,
+              "ask": "When mistakes happen, are corrections private or public?"
+            },
+            {
+              "signal": "Safety",
+              "promised": "Workplace standards",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Is safety equipment provided and actually used on the floor?"
+            },
+            {
+              "signal": "Family realities",
+              "promised": "Standard policy",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are parental and family leave policies applied in practice?"
+            }
+          ]
+        },
+        {
+          "id": "growth",
+          "label": "Growth & management",
+          "question": "Can you grow here?",
+          "signals": [
+            {
+              "signal": "Training",
+              "promised": "When mentioned in posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What training happens in the first 90 days?"
+            },
+            {
+              "signal": "Supervision",
+              "promised": "Standard reporting line",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Who reports to whom, and how are decisions communicated?"
+            },
+            {
+              "signal": "Promotion rules",
+              "promised": "Merit-based when stated",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are promotion criteria written down and applied consistently?"
+            },
+            {
+              "signal": "Skill development",
+              "promised": "On-the-job learning",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Does the company support Academy courses or external learning?"
+            }
+          ]
+        }
+      ],
+      "hiringExperience": {
+        "status": "honest-empty",
+        "description": "Nobody has safely contributed hiring evidence yet.",
+        "signals": [
+          "Application acknowledged",
+          "Salary explained at offer",
+          "Interview respectful and on-time",
+          "Outcome communicated",
+          "No fee requested"
+        ]
+      },
+      "workplaceExperience": {
+        "status": "honest-empty",
+        "description": "Nobody has safely contributed workplace evidence yet.",
+        "signals": [
+          "Pay arrived as promised",
+          "Real finish time matched stated",
+          "Overtime paid correctly",
+          "Leave requestable safely",
+          "Promotion rules written and followed",
+          "Corrections private, not public"
+        ]
+      },
+      "salarySources": {
+        "posted": {
+          "label": "Posted in a real job",
+          "description": "Salary range stated directly in the active ReferTRM role posting.",
+          "count": 3
+        },
+        "benchmark": {
+          "label": "Market benchmark",
+          "description": "Independent market rate for this role type and location in Myanmar.",
+          "count": 0,
+          "status": "building"
+        },
+        "worker": {
+          "label": "Worker-reported",
+          "description": "What eligible workers actually received — empty until governed contribution path exists.",
+          "count": 0,
+          "status": "honest-empty"
+        }
+      }
     },
     {
       "id": "unicharm-myanmar",
@@ -815,7 +2471,191 @@
         }
       ],
       "salaryVisibleRoles": 3,
-      "publishedReviews": 0
+      "publishedReviews": 0,
+      "truthFamilies": [
+        {
+          "id": "money",
+          "label": "Money & promises",
+          "question": "Is the offered pay clear?",
+          "signals": [
+            {
+              "signal": "Base salary",
+              "promised": "Stated in job posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Can you show me the exact base salary in writing?"
+            },
+            {
+              "signal": "Allowances",
+              "promised": "Listed when applicable",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Which allowances are included — transport, meals, phone?"
+            },
+            {
+              "signal": "Overtime pay",
+              "promised": "Per labour law",
+              "experienced": null,
+              "pattern": null,
+              "ask": "How is overtime calculated and when is it paid?"
+            },
+            {
+              "signal": "Deductions",
+              "promised": "Disclosed at offer",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What deductions come off the gross — tax, SSF, insurance?"
+            }
+          ]
+        },
+        {
+          "id": "time",
+          "label": "Real working time",
+          "question": "What are the actual hours?",
+          "signals": [
+            {
+              "signal": "Stated schedule",
+              "promised": "Monday–Saturday or per posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What are the official start and finish times?"
+            },
+            {
+              "signal": "Actual finish time",
+              "promised": "As scheduled",
+              "experienced": null,
+              "pattern": null,
+              "ask": "How often does the team work past the stated finishing time?"
+            },
+            {
+              "signal": "Rest days",
+              "promised": "Per contract",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are rest days guaranteed or frequently rescheduled?"
+            },
+            {
+              "signal": "Shift pattern",
+              "promised": "When applicable",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Is the shift rotation fixed or does it change week to week?"
+            }
+          ]
+        },
+        {
+          "id": "respect",
+          "label": "Respect & leave",
+          "question": "How are people treated?",
+          "signals": [
+            {
+              "signal": "Leave access",
+              "promised": "Per labour law",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Can leave be requested without penalty or informal pressure?"
+            },
+            {
+              "signal": "Correction style",
+              "promised": "Professional",
+              "experienced": null,
+              "pattern": null,
+              "ask": "When mistakes happen, are corrections private or public?"
+            },
+            {
+              "signal": "Safety",
+              "promised": "Workplace standards",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Is safety equipment provided and actually used on the floor?"
+            },
+            {
+              "signal": "Family realities",
+              "promised": "Standard policy",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are parental and family leave policies applied in practice?"
+            }
+          ]
+        },
+        {
+          "id": "growth",
+          "label": "Growth & management",
+          "question": "Can you grow here?",
+          "signals": [
+            {
+              "signal": "Training",
+              "promised": "When mentioned in posting",
+              "experienced": null,
+              "pattern": null,
+              "ask": "What training happens in the first 90 days?"
+            },
+            {
+              "signal": "Supervision",
+              "promised": "Standard reporting line",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Who reports to whom, and how are decisions communicated?"
+            },
+            {
+              "signal": "Promotion rules",
+              "promised": "Merit-based when stated",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Are promotion criteria written down and applied consistently?"
+            },
+            {
+              "signal": "Skill development",
+              "promised": "On-the-job learning",
+              "experienced": null,
+              "pattern": null,
+              "ask": "Does the company support Academy courses or external learning?"
+            }
+          ]
+        }
+      ],
+      "hiringExperience": {
+        "status": "honest-empty",
+        "description": "Nobody has safely contributed hiring evidence yet.",
+        "signals": [
+          "Application acknowledged",
+          "Salary explained at offer",
+          "Interview respectful and on-time",
+          "Outcome communicated",
+          "No fee requested"
+        ]
+      },
+      "workplaceExperience": {
+        "status": "honest-empty",
+        "description": "Nobody has safely contributed workplace evidence yet.",
+        "signals": [
+          "Pay arrived as promised",
+          "Real finish time matched stated",
+          "Overtime paid correctly",
+          "Leave requestable safely",
+          "Promotion rules written and followed",
+          "Corrections private, not public"
+        ]
+      },
+      "salarySources": {
+        "posted": {
+          "label": "Posted in a real job",
+          "description": "Salary range stated directly in the active ReferTRM role posting.",
+          "count": 3
+        },
+        "benchmark": {
+          "label": "Market benchmark",
+          "description": "Independent market rate for this role type and location in Myanmar.",
+          "count": 0,
+          "status": "building"
+        },
+        "worker": {
+          "label": "Worker-reported",
+          "description": "What eligible workers actually received — empty until governed contribution path exists.",
+          "count": 0,
+          "status": "honest-empty"
+        }
+      }
     }
   ]
 }
