@@ -146,11 +146,18 @@ window.VIDEO_REGISTRY = {
    Preview switch (?video=preview) is device-local demo state ONLY —
    canon flags stay pending; the facade says so out loud. */
 function videoPreviewMode(){
-  try{
-    if(/[?&]video=preview/.test(location.search)) localStorage.setItem('ydc-canvas-video-preview','1');
-    if(/[?&]video=off/.test(location.search)) localStorage.removeItem('ydc-canvas-video-preview');
-    return localStorage.getItem('ydc-canvas-video-preview') === '1';
-  }catch(e){ return false; }
+  /* the URL flag is authoritative on every render (hash navigation keeps
+     location.search intact) — localStorage is only the persistence backup,
+     so storage-blocked browsers still preview */
+  if(/[?&]video=preview/.test(location.search)){
+    try{ localStorage.setItem('ydc-canvas-video-preview','1'); }catch(e){}
+    return true;
+  }
+  if(/[?&]video=off/.test(location.search)){
+    try{ localStorage.removeItem('ydc-canvas-video-preview'); }catch(e){}
+    return false;
+  }
+  try{ return localStorage.getItem('ydc-canvas-video-preview') === '1'; }catch(e){ return false; }
 }
 function videoEntry(modId, n){
   const e = (window.VIDEO_REGISTRY || {})[modId + ':' + n];
