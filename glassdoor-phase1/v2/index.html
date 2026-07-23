@@ -143,6 +143,11 @@
     .spa-tabbar{position:fixed;bottom:0;left:0;right:0;z-index:70;display:flex;gap:4px;padding:6px 8px calc(6px + env(safe-area-inset-bottom));background:rgba(0,18,41,.96);border-top:1px solid var(--line);backdrop-filter:blur(12px)}
     .spa-tab{flex:1;min-height:52px;border:0;border-radius:12px;background:transparent;color:#9fb0c0;display:grid;place-content:center;justify-items:center;gap:4px;font-size:9px;font-weight:600;font-family:"DM Sans",sans-serif}
     .spa-tab svg{width:18px;height:18px}.spa-tab[aria-selected="true"]{background:var(--gold);color:var(--night)}
+    /* WARM LAYER — CCO-owned Myanmar warmth at emotional moments (dashed slots until filled) */
+    .warm-mm{display:block;font-family:'Padauk','DM Sans',sans-serif;font-size:13px;line-height:2;color:rgba(255,255,255,.55);border-top:1px dashed rgba(255,255,255,.12);padding-top:10px;margin-top:16px;font-style:normal;letter-spacing:0}
+    .warm-mm-dark{color:rgba(0,31,63,.4);border-top-color:rgba(0,31,63,.1)}
+    .warm-mm-slot{display:block;min-height:1.6em;border:1px dashed rgba(255,255,255,.15);border-radius:6px;padding:6px 10px;margin-top:6px;font-size:12px;color:rgba(255,255,255,.3);font-family:'Padauk','DM Sans',sans-serif}
+    .warm-mm-slot::before{content:"CCO · Myanmar warmth slot"}
   </style>
 </head>
 <body>
@@ -195,6 +200,7 @@
           <div class="company-pill"><img src="https://www.refertrm.com/partner-logo-1.jpg" width="34" height="34" alt="Makro Myanmar logo"><span><strong id="decide-company-name">—</strong> · <span id="decide-company-industry">—</span></span><i class="verified-dot" aria-hidden="true"></i></div>
           <h1 id="hero-title">Know the work <em>before the yes.</em></h1>
           <p class="hero-copy">A Myanmar-first decision layer for real jobs. See what is publicly known, what workers have safely verified, and—just as importantly—what nobody can honestly claim yet.</p>
+          <span class="warm-mm warm-mm-slot" lang="my"></span>
           <div class="hero-actions">
             <a class="btn btn-gold" href="#jobs">Explore <span id="decide-role-count">—</span> open roles <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a>
             <a class="btn btn-ghost" href="#truth">Inspect workplace truth</a>
@@ -241,7 +247,7 @@
           <article class="loop-step"><div class="step-no"><span>01 / DISCOVER</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></div><h3>Find a real, free-to-apply role.</h3><p>Search by company, career family, location, and transparent salary where available.</p><span class="micro">No login wall to browse</span></article>
           <article class="loop-step"><div class="step-no"><span>02 / INSPECT</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/></svg></div><h3>See what is known—and unknown.</h3><p>Hiring evidence, workplace evidence, and market benchmarks keep their own labels.</p><span class="micro">No false star score</span></article>
           <article class="loop-step"><div class="step-no"><span>03 / APPLY</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></div><h3>Apply with context, still free.</h3><p>A verified platform interaction can later support eligibility without exposing a person publicly.</p><span class="micro">Provenance, not publicity</span></article>
-          <article class="loop-step"><div class="step-no"><span>04 / CONTRIBUTE</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M3 12h18"/></svg></div><h3>Return evidence safely.</h3><p>Structured patterns appear only after moderation and the required privacy threshold.</p><span class="micro">The loop compounds trust</span></article>
+          <article class="loop-step"><div class="step-no"><span>04 / CONTRIBUTE</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M3 12h18"/></svg></div><h3>Return evidence safely.</h3><p>Structured patterns appear only after moderation and the required privacy threshold.</p><span class="micro">The loop compounds trust</span><span class="warm-mm warm-mm-slot" lang="my"></span></article>
         </div>
       </div>
     </section>
@@ -256,7 +262,7 @@
           <button class="tab" id="tab-jobs" role="tab" aria-selected="false" aria-controls="panel-jobs" data-tab="jobs">Open roles</button>
         </div>
         <div class="truth-panel" id="panel-workplace" role="tabpanel" aria-labelledby="tab-workplace" data-panel="workplace">
-          <div class="empty-truth"><div class="empty-symbol"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4h16v12H7l-3 3V4Z"/><path d="M8 9h8M8 12h5"/></svg></div><h3>No verified workplace pattern yet.</h3><p><span id="decide-empty-company">This company</span> has no moderated workplace submissions in this launch dataset. We will not convert an empty record into a rating, guess, or endorsement.</p><div class="empty-actions"><button class="btn btn-gold js-share" type="button">Check if I can contribute</button><a class="btn btn-ghost" href="#privacy">See the privacy model</a></div></div>
+          <div class="empty-truth"><div class="empty-symbol"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4h16v12H7l-3 3V4Z"/><path d="M8 9h8M8 12h5"/></svg></div><h3>No verified workplace pattern yet.</h3><p><span id="decide-empty-company">This company</span> has no moderated workplace submissions in this launch dataset. We will not convert an empty record into a rating, guess, or endorsement.</p><span class="warm-mm warm-mm-slot" lang="my"></span><div class="empty-actions"><button class="btn btn-gold js-share" type="button">Check if I can contribute</button><a class="btn btn-ghost" href="#privacy">See the privacy model</a></div></div>
           <aside class="truth-aside"><div class="principle gold"><div class="label">The zero-state promise</div><h3>“Nothing yet” is useful truth.</h3><p>It protects candidates and companies from manufactured certainty.</p></div><div class="principle"><div class="label">Publishing rule</div><h3>Patterns, never identifiable stories.</h3><p>Low-volume signals stay private until aggregation is safe.</p></div></aside>
         </div>
         <div class="truth-panel" id="panel-hiring" role="tabpanel" aria-labelledby="tab-hiring" data-panel="hiring" hidden>
@@ -277,7 +283,7 @@
     <section class="privacy" id="privacy" aria-labelledby="privacy-title">
       <div class="wrap privacy-grid">
         <div class="shield" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m12 3 7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/><path d="m9 12 2 2 4-4"/></svg></div>
-        <div><div class="eyebrow">Privacy Shield</div><h2 id="privacy-title">Truth without a target.</h2><p class="privacy-copy">Myanmar workplaces can be small, interconnected, and easy to identify from one detail. Before submission, the system warns when a role, date, branch, or incident could reveal someone.</p><div class="privacy-rules"><div class="privacy-rule"><strong>Re-identification warning</strong>Details are checked before a person can submit.</div><div class="privacy-rule"><strong>Quiet aggregation</strong>Small samples remain unpublished.</div><div class="privacy-rule"><strong>Draft recovery</strong>Long contributions survive weak connections.</div><div class="privacy-rule"><strong>Commercial separation</strong>Employer status never changes the truth rules.</div></div></div>
+        <div><div class="eyebrow">Privacy Shield</div><h2 id="privacy-title">Truth without a target.</h2><p class="privacy-copy">Myanmar workplaces can be small, interconnected, and easy to identify from one detail. Before submission, the system warns when a role, date, branch, or incident could reveal someone.</p><span class="warm-mm warm-mm-slot" lang="my"></span><div class="privacy-rules"><div class="privacy-rule"><strong>Re-identification warning</strong>Details are checked before a person can submit.</div><div class="privacy-rule"><strong>Quiet aggregation</strong>Small samples remain unpublished.</div><div class="privacy-rule"><strong>Draft recovery</strong>Long contributions survive weak connections.</div><div class="privacy-rule"><strong>Commercial separation</strong>Employer status never changes the truth rules.</div></div></div>
       </div>
     </section>
   
