@@ -122,9 +122,99 @@
     @media(min-width:1080px){.tabbar{position:relative;inset:auto;width:520px;transform:none;height:68px;padding:4px;margin:0 auto 24px;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow-soft)}.tabbar-inner{height:58px}.shell{padding-bottom:24px}.toast{bottom:24px}}
     @media(max-width:600px){.branch-label,.employer-door span{display:none}.topbar-inner,.hero-content,.home-grid,.hero-island{min-width:0}.hero-actions{display:grid;grid-template-columns:1fr}.hero-actions .button{width:100%}.hero-island{padding:24px}.hero-island h1{font-size:clamp(44px,14vw,64px);max-width:8ch}.proof span{font-size:7px;letter-spacing:.035em}.contract-actions,.share-actions,.dialog-actions{grid-template-columns:1fr}.screen-head{display:block}.screen-head .back{margin-top:12px}.inventory-proof{grid-template-columns:1fr 1fr}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+    /* ==== v4 SOUL LAYER × v2 ESSENCE (S323 reshape) ==== */
+    .grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:90;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 8s steps(10) infinite}
+    @keyframes grain{0%,100%{transform:translate(0,0)}10%{transform:translate(-2%,-3%)}30%{transform:translate(3%,-2%)}50%{transform:translate(-3%,2%)}70%{transform:translate(2%,3%)}90%{transform:translate(-1%,1%)}}
+    .cur-dot,.cur-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:300;border-radius:50%}
+    .cur-dot{width:6px;height:6px;background:#9a5a00;transform:translate(-50%,-50%)}
+    .cur-ring{width:34px;height:34px;border:1px solid rgb(154 90 0 / .5);transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s}
+    .cur-ring.big{width:64px;height:64px;border-color:rgb(154 90 0 / .9)}
+    .soul-line{font-size:13.5px;font-style:italic;color:var(--on-dark-subtle);max-width:520px;margin:18px 0 0;padding-bottom:16px;border-bottom:1px solid rgb(255 255 255 / .16);line-height:1.65}
+    .soul-line b{font-style:normal;color:var(--p-gold-200);font-weight:600}
+    .hero-island{background:radial-gradient(640px circle at var(--mx,82%) var(--my,18%),rgb(212 175 55 / .09),transparent 56%),var(--brand-deep)}
+    .warm-slot{display:block;margin-top:16px}
+    .warm-slot-dash{display:block;min-height:1.7em;border:1px dashed var(--line);border-radius:10px;padding:9px 13px;font-family:"Padauk",sans-serif;font-size:11px;color:var(--ink-quiet);line-height:1.8}
+    .warm-slot-dash::before{content:"CCO · Myanmar warmth slot — to be authored"}
+    .warm-slot-dash.on-dark{border-color:rgb(255 255 255 / .24);color:var(--on-dark-subtle)}
+    .truth-marquee{margin:var(--sp-8) calc(50% - 50vw) 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:18px 0;background:var(--p-white);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+    .tm-track{display:flex;width:max-content;animation:tm 46s linear infinite}
+    .truth-marquee:hover .tm-track{animation-play-state:paused}
+    @keyframes tm{to{transform:translateX(-50%)}}
+    .tm-w{font:600 clamp(24px,3.4vw,44px)/1 "Bricolage Grotesque",sans-serif;letter-spacing:-.02em;color:transparent;-webkit-text-stroke:1px rgb(0 31 63 / .28);padding:0 24px;white-space:nowrap}
+    .tm-w.g{color:var(--accent);-webkit-text-stroke:0}
+    .earn{padding:var(--sp-10) 0 0}
+    .earn h2,.faq h2{font:600 clamp(28px,5vw,46px)/1.03 "Bricolage Grotesque",sans-serif;letter-spacing:-.045em;margin:12px 0 10px;max-width:18ch}
+    .earn h2 em,.faq h2 em{font-style:normal;color:var(--caution)}
+    .earn-lead{font-size:13px;color:var(--ink-subtle);max-width:64ch;line-height:1.7;margin:0}
+    .earn-grid{display:grid;gap:10px;margin-top:var(--sp-6);grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+    .earn-step{position:relative;min-height:190px;padding:var(--sp-5);border:1px solid var(--line);border-radius:var(--radius-l);background:var(--surface);display:flex;flex-direction:column}
+    .earn-step .mono{font-size:9px;color:var(--verified)}
+    .earn-step h3{font:600 18px/1.15 "Bricolage Grotesque",sans-serif;margin:20px 0 7px;letter-spacing:-.02em}
+    .earn-step p{font-size:10.5px;color:var(--ink-quiet);line-height:1.6;margin:0}
+    .earn-state{margin-top:auto;padding-top:var(--sp-4);font:600 8px "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase}
+    .earn-state.live{color:var(--verified)}
+    .earn-state.soon{color:var(--ink-quiet)}
+    .earn-step.is-future{border-style:dashed;background:repeating-linear-gradient(135deg,var(--surface) 0 12px,rgb(0 31 63 / .015) 12px 24px)}
+    .earn-note{margin-top:var(--sp-5);font-size:11.5px;color:var(--ink-quiet);border-left:2px solid var(--accent);padding-left:14px;max-width:72ch;line-height:1.65}
+    .truth-island{margin-top:var(--sp-10);border-radius:var(--radius-xl);background:radial-gradient(620px circle at 50% 0%,rgb(212 175 55 / .08),transparent 62%),var(--brand-deep);color:var(--on-dark);padding:clamp(26px,5vw,52px);overflow:hidden}
+    .truth-island .fig{color:var(--p-gold-200)}
+    .truth-island h2{font:600 clamp(30px,6vw,56px)/1 "Bricolage Grotesque",sans-serif;letter-spacing:-.05em;margin:14px 0 10px;max-width:20ch}
+    .truth-island h2 em{font-style:normal;color:var(--p-gold-200)}
+    .truth-lead{color:var(--on-dark-subtle);font-size:13px;line-height:1.7;max-width:62ch;margin:0}
+    .lane-grid{display:grid;gap:10px;margin-top:var(--sp-6)}
+    @media(min-width:760px){.lane-grid{grid-template-columns:1fr 1fr}}
+    .lane-card{border:1px solid rgb(255 255 255 / .16);border-radius:var(--radius-l);padding:var(--sp-5);background:rgb(255 255 255 / .04)}
+    .lane-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+    .lane-card h3{font:600 19px "Bricolage Grotesque",sans-serif;margin:0}
+    .lane-pill{font:600 8px "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--p-gold-200);border:1px solid rgb(212 175 55 / .4);border-radius:999px;padding:6px 11px;display:inline-flex;gap:7px;align-items:center}
+    .lane-pill::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor}
+    .lane-card>p{font-size:11.5px;color:var(--on-dark-subtle);line-height:1.65;margin:12px 0 0}
+    .lane-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+    .lane-chip{font-size:10.5px;color:var(--on-dark);border:1px solid rgb(255 255 255 / .16);border-radius:999px;padding:6px 12px}
+    .lane-proof{margin-top:16px;font:600 8px/1.8 "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--on-dark-subtle)}
+    .lane-big{font:600 clamp(20px,3.2vw,32px)/1.2 "Bricolage Grotesque",sans-serif;letter-spacing:-.03em;margin:var(--sp-8) 0 0;max-width:26ch}
+    .lane-big em{font-style:normal;color:var(--p-gold-200)}
+    .faq{padding:var(--sp-10) 0 0}
+    .faq-list{max-width:820px;margin-top:var(--sp-6)}
+    .faq-item{border:1px solid var(--line);border-radius:var(--radius-m);margin-bottom:9px;background:var(--surface);overflow:hidden}
+    .faq-item[open]{border-color:rgb(212 175 55 / .6)}
+    .faq-q{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:18px 20px;font-size:14px;font-weight:700;color:var(--brand-deep);cursor:pointer;list-style:none;min-height:44px}
+    .faq-q::-webkit-details-marker{display:none}
+    .faq-pm{flex:none;width:26px;height:26px;border-radius:50%;border:1px solid rgb(212 175 55 / .55);display:grid;place-items:center;color:var(--caution);font-size:15px;transition:transform .3s;font-weight:400}
+    .faq-item[open] .faq-pm{transform:rotate(45deg)}
+    .faq-a{padding:0 20px 18px;font-size:12.5px;color:var(--ink-subtle);line-height:1.75;max-width:64ch}
+    .home-footer{margin-top:var(--sp-12);border-top:1px solid var(--line);padding-top:var(--sp-6);padding-bottom:var(--sp-6);display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+    .home-footer .f-brand{font:700 15px "Bricolage Grotesque",sans-serif;color:var(--brand-deep)}
+    .home-footer p{font-size:10px;color:var(--ink-quiet);line-height:1.7;margin:6px 0 0}
+    .f-links{display:flex;gap:22px;flex-wrap:wrap;align-items:start}
+    .f-links a{font-size:11px;color:var(--ink-subtle);min-height:44px;display:inline-flex;align-items:center}
+    .f-links a:hover{color:var(--caution)}
+    .f-demo{width:100%;font:600 8px "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--caution);line-height:1.8}
+    @keyframes card-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+    .company-card{animation:card-in .55s var(--ease) both}
+    .company-card:nth-child(2){animation-delay:.06s}
+    .company-card:nth-child(3){animation-delay:.12s}
+    .company-card:nth-child(4){animation-delay:.18s}
+    .company-card:nth-child(5){animation-delay:.24s}
+    .company-card:nth-child(6){animation-delay:.3s}
+    .rv3{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+    .rv3.in{opacity:1;transform:none}
+    .lite .grain{display:none}
+    @media(max-width:860px){.grain{display:none}}
+    @media(prefers-reduced-motion:reduce){.rv3{opacity:1;transform:none}}
+    .lite .rv3,.noanim .rv3{opacity:1;transform:none;transition:none}
+    .lite .tm-track,.noanim .tm-track{animation:none}
   </style>
+  <noscript><style>
+    .rv3{opacity:1!important;transform:none!important}
+    .tm-track{animation:none!important}
+    .grain,.cur-dot,.cur-ring{display:none!important}
+    .company-card{animation:none!important}
+  </style></noscript>
 </head>
 <body>
+  <div class="grain" aria-hidden="true"></div>
   <a class="skip" href="#main">Skip to content</a>
   <header class="topbar"><div class="topbar-inner">
     <button class="brand js-nav" type="button" data-target="home" aria-label="Jobs and Workplace Truth home"><img class="brand-logo" src="../../assets/refertrm-logo.png" alt="" width="30" height="30"><span>ReferTRM</span><span class="brand-sep" aria-hidden="true"></span><span class="branch-label">Jobs &amp; Workplace Truth</span></button>
@@ -136,8 +226,11 @@
       <div class="home-grid">
         <article class="hero-island"><div class="hero-content">
           <div class="hero-kicker">Myanmar jobs · workplace truth</div>
+          <p class="soul-line">Workplace truth, <b>freely shared</b> — so every Myanmar worker can say yes, or no, with open eyes.</p>
           <h1 id="home-title">Know the work before you <em>say yes.</em></h1>
           <p class="hero-copy">Browse real client opportunities, understand the terms, explore workplace evidence, or bring a new job forward for free. Every path stays inside one clear ReferTRM experience.</p>
+          <!-- CCO-PENDING: home hero warmth (F50) -->
+          <span class="warm-slot" lang="my"><span class="warm-slot-dash on-dark"></span></span>
           <div class="hero-actions"><a class="button button-accent" href="https://www.refertrm.com/eq/jobs">Browse 253 jobs<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a><button class="button button-quiet js-nav" type="button" data-target="companies">Explore real companies</button></div>
           <div class="proof-tape" aria-label="Current governed public inventory"><div class="proof"><strong data-public-count="activeCoreJobs">—</strong><span>active client roles</span></div><div class="proof"><strong data-public-count="clientCompanies">—</strong><span>client companies hiring</span></div><div class="proof"><strong data-public-count="communityJobsCleared">—</strong><span>community listings cleared</span></div></div>
           <div class="count-asof" id="count-asof" role="status" aria-live="polite">Checking the governed public-count contract</div>
@@ -150,19 +243,45 @@
         </div></aside>
       </div>
 
-      <section class="welds" aria-labelledby="welds-title"><div class="welds-head"><div><div class="fig">FIG 02 / How it connects</div><h2 id="welds-title">Discovery should lead somewhere useful.</h2></div><p class="welds-caption">Jobs, fit, referrals and employer verification connect without blurring their responsibilities.</p></div><div class="weld-grid">
+      <section class="welds" aria-labelledby="welds-title"><div class="welds-head rv3"><div><div class="fig">FIG 02 / How it connects</div><h2 id="welds-title">Discovery should lead somewhere useful.</h2></div><p class="welds-caption">Jobs, fit, referrals and employer verification connect without blurring their responsibilities.</p></div><div class="weld-grid">
         <article class="weld-card"><span class="weld-no">WELD 01</span><h3>See my fit</h3><p>Anonymous discovery hands into sign-in, CV Builder, Trinity, and the authenticated matcher. This demo calculates no profile.</p><a class="weld-route" href="https://www.refertrm.com/login?redirectTo=/eq/cv-builder">Enter the core fit path<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></a></article>
         <article class="weld-card"><span class="weld-no">WELD 02 / LEAD</span><h3>Know the company</h3><p>A real role connects to a real client identity, current hiring evidence and an honest review state before anyone is asked to trust it.</p><button class="weld-route js-nav" type="button" data-target="companies">Explore company evidence<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></button></article>
         <article class="weld-card"><span class="weld-no">WELD 03</span><h3>Claim the employer</h3><p>A claim starts verification and a prospect record. It never grants edit rights, contracted status, or access to candidate data.</p><button class="weld-route js-nav" type="button" data-target="employers">Open the claim stub<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></button></article>
       </div></section>
       <div class="separation-note"><strong>One public experience can still protect important boundaries.</strong><span>Client records, candidate PII and recruiter-workable requisitions never enter the community posting channel. Workplace reviews, salary submissions and employer responses appear only after their eligibility, moderation and appeal paths are ready.</span></div>
+
+      <div class="truth-marquee" aria-hidden="true"><div class="tm-track" id="tmTrack"><span class="tm-w">Know the work</span><span class="tm-w g">&mdash;</span><span class="tm-w">before the yes</span><span class="tm-w g">&mdash;</span><span class="tm-w">No invented ratings</span><span class="tm-w g">&mdash;</span><span class="tm-w">Jobs are not reviews</span><span class="tm-w g">&mdash;</span><span class="tm-w">Evidence earns its place</span><span class="tm-w g">&mdash;</span><span class="tm-w">Free for job seekers</span><span class="tm-w g">&mdash;</span></div></div>
+
+      <section class="earn rv3" aria-labelledby="earn-title"><div class="fig">How truth is earned</div><h2 id="earn-title">Slow on purpose. <em>So it can be trusted.</em></h2><p class="earn-lead">Workplace evidence is not collected by asking strangers to rate their boss. It is earned through a governed path &mdash; each step exists to protect the worker first.</p><div class="earn-grid">
+        <article class="earn-step"><span class="mono">01 / POST</span><h3>A real job is posted</h3><p>A licensed employer publishes a role with terms in writing &mdash; salary stated, or honestly marked unknown.</p><span class="earn-state live">Live today</span></article>
+        <article class="earn-step"><span class="mono">02 / CONTACT</span><h3>Contact really happens</h3><p>A worker applies or is contacted through ReferTRM. The contact is timestamped &mdash; proof an interaction existed, nothing more.</p><span class="earn-state live">Live today</span></article>
+        <article class="earn-step is-future"><span class="mono">03 / TIME</span><h3>Time does its work</h3><p>Eligibility opens only after a governed period. Fresh impressions cool before they become words. Rushed anger never becomes evidence.</p><span class="earn-state soon">Being built</span></article>
+        <article class="earn-step is-future"><span class="mono">04 / SHIELD</span><h3>Contribution, protected</h3><p>Voluntary, guided, identity-shielded. Nobody is ever asked to criticise an employer &mdash; small factual answers are enough.</p><span class="earn-state soon">Being built</span></article>
+        <article class="earn-step is-future"><span class="mono">05 / EARN</span><h3>Truth earns publication</h3><p>Only aggregated, threshold-passing signals appear. One story alone never becomes a score. Sparse data stays silent, not suspicious.</p><span class="earn-state soon">Being built</span></article>
+      </div><p class="earn-note">Steps 03&ndash;05 are still being built. Until they exist, this page shows the framework &mdash; and says so, in every empty slot. An honest &ldquo;not yet&rdquo; is worth more than a convincing number.</p></section>
+
+      <section class="truth-island rv3" aria-labelledby="truth-title"><div class="fig">Two kinds of truth</div><h2 id="truth-title">An applicant is not an employee. <em>Jobs are not reviews.</em></h2><p class="truth-lead">Applying to a company proves you met its hiring process &mdash; nothing about working there. These two experiences are measured separately, and neither is published until it is earned.</p><div class="lane-grid">
+        <article class="lane-card"><div class="lane-top"><h3>Hiring Experience</h3><span class="lane-pill">Awaiting evidence</span></div><p>What it is like to be recruited by this company. Nobody has safely contributed hiring evidence yet &mdash; so instead of a score, here is what will be measured.</p><div class="lane-chips"><span class="lane-chip">Application acknowledged</span><span class="lane-chip">Salary explained at offer</span><span class="lane-chip">Interview respectful &amp; on time</span><span class="lane-chip">Outcome communicated</span><span class="lane-chip">No fee ever requested</span></div><div class="lane-proof">Proof standard &mdash; a timestamped contact through ReferTRM &middot; it proves an interaction, not that every claim is true</div></article>
+        <article class="lane-card"><div class="lane-top"><h3>Workplace Experience</h3><span class="lane-pill">Awaiting evidence</span></div><p>What it is like to actually work here. Applying alone never qualifies. Only eligible workers will be able to contribute, once the governed path exists.</p><div class="lane-chips"><span class="lane-chip">Pay arrived as promised</span><span class="lane-chip">Real finish time matched stated</span><span class="lane-chip">Overtime paid correctly</span><span class="lane-chip">Leave requestable safely</span><span class="lane-chip">Promotion rules written</span><span class="lane-chip">Correction private, not public</span></div><div class="lane-proof">Proof standard &mdash; governed eligibility &middot; identity shield &middot; aggregation threshold before anything goes public</div></article>
+      </div><p class="lane-big">Nothing here is a score. <em>Everything here is a promise about how a score would be earned.</em></p><!-- CCO-PENDING: two-truths warmth (F50) --><span class="warm-slot" lang="my"><span class="warm-slot-dash on-dark"></span></span></section>
+
+      <section class="faq rv3" aria-labelledby="faq-title"><div class="fig">Questions</div><h2 id="faq-title">Fair questions. <em>Straight answers.</em></h2><div class="faq-list">
+        <details class="faq-item" open><summary class="faq-q">Why are there no star ratings here?<span class="faq-pm">+</span></summary><div class="faq-a">A single number cannot carry the truth of a workplace &mdash; and a rating manufactured from empty data would be decoration dressed as evidence. This surface shows structured signals with their source, and shows nothing until evidence exists.</div></details>
+        <details class="faq-item"><summary class="faq-q">When will real worker evidence appear?<span class="faq-pm">+</span></summary><div class="faq-a">When the governed path is built: proven eligibility, an identity shield, and aggregation thresholds that protect small teams. No date is promised, because the protection matters more than the schedule.</div></details>
+        <details class="faq-item"><summary class="faq-q">Where do these company cards come from?<span class="faq-pm">+</span></summary><div class="faq-a">A governed public projection of ReferTRM&rsquo;s client inventory, audited 2026-07-22. Real companies, real active-role counts, salary-visibility counts &mdash; and the contract is rejected unless every published review count is zero. No ratings are inferred.</div></details>
+        <details class="faq-item"><summary class="faq-q">Can an employer pay for a better badge or position?<span class="faq-pm">+</span></summary><div class="faq-a">No. A commercial relationship with ReferTRM never changes evidence, ordering, labels, or visibility. Money buys nothing on this page.</div></details>
+        <details class="faq-item"><summary class="faq-q">Is this free for job seekers?<span class="faq-pm">+</span></summary><div class="faq-a">Yes &mdash; always. ReferTRM earns from employer placement fees, never from candidates. Looking, learning, and deciding cost you nothing.</div></details>
+      </div></section>
+
+      <footer class="home-footer"><div><div class="f-brand">ReferTRM</div><p>Talent Resources Myanmar Co., Ltd.<br>License No. 211/2024 &middot; Ministry of Labour</p></div><div class="f-links"><a href="https://www.refertrm.com/eq/jobs">Real jobs</a><a href="https://www.refertrm.com/eq/academy">Academy</a><a href="https://www.refertrm.com">ReferTRM home</a><a href="https://www.refertrm.com/employers?source=board_claim">For employers</a></div><p class="f-demo">Design demo &mdash; isolated Pages host &middot; real governed public projection &middot; zero inferred ratings &middot; Myanmar text pending CCO</p></footer>
+
     </div></section>
 
     <section class="screen" data-screen="jobs" aria-labelledby="jobs-title"><div class="wrap">
       <header class="screen-head"><div><div class="fig">FIG 03 / Free job portal</div><h1 class="section-title" id="jobs-title">Only publish what can be proven.</h1><p class="section-lead">ReferTRM client roles are live now. Community-submitted jobs use a separate publication gate and are never presented as cleared before verification.</p></div><button class="back js-nav" type="button" data-target="home"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>Hub</button></header>
       <div class="filter-row" aria-label="Job filters"><button class="filter" type="button" aria-pressed="true">All verified</button><button class="filter" type="button" aria-pressed="false" disabled>Entry level</button><button class="filter" type="button" aria-pressed="false" disabled>Clear salary</button><button class="filter" type="button" aria-pressed="false" disabled>Verified employer</button></div>
       <div class="empty-layout">
-        <article class="empty-hero"><div><div class="empty-zero" data-public-count="communityJobsCleared">—</div><h2>No community listings have cleared publication yet.</h2><p>That is not a loading error. Every independently submitted job must establish its source, employer identity and public terms before it appears here. Existing ReferTRM client roles remain available through the live job search.</p></div><div class="empty-actions"><a class="button button-primary" href="https://www.refertrm.com/eq/jobs">Browse client jobs</a><button class="button button-quiet js-nav" type="button" data-target="employers">Post a job — free</button></div></article>
+        <article class="empty-hero"><div><div class="empty-zero" data-public-count="communityJobsCleared">—</div><h2>No community listings have cleared publication yet.</h2><p>That is not a loading error. Every independently submitted job must establish its source, employer identity and public terms before it appears here. Existing ReferTRM client roles remain available through the live job search.</p><!-- CCO-PENDING: jobs honest-zero warmth (F50) --><span class="warm-slot" lang="my"><span class="warm-slot-dash"></span></span></div><div class="empty-actions"><a class="button button-primary" href="https://www.refertrm.com/eq/jobs">Browse client jobs</a><button class="button button-quiet js-nav" type="button" data-target="employers">Post a job — free</button></div></article>
         <article class="contract-card" aria-labelledby="contract-title"><div class="contract-top"><div class="fig">Future card contract</div><span class="contract-state">No employer data</span></div><h2 id="contract-title">What every verified listing must carry.</h2><p>This is a component contract, not a sample company or job. It contains no fabricated employer, salary, rating, or referral code.</p><div class="contract-grid"><div class="contract-part"><span>Identity</span><strong>Verified employer source</strong></div><div class="contract-part"><span>Safety</span><strong>No-fee warning</strong></div><div class="contract-part"><span>Terms</span><strong>Salary truth or unknown</strong></div><div class="contract-part"><span>Referral</span><strong>Share + real member code</strong></div></div><div class="contract-actions"><a class="button button-accent" href="https://www.refertrm.com/login?redirectTo=/eq/cv-builder">See my fit</a><button class="button button-quiet js-share" type="button">Share contract</button></div></article>
         <div class="inventory-proof"><div class="inventory-cell"><strong data-public-count="activeCoreJobs">—</strong><span>active roles available through ReferTRM</span></div><div class="inventory-cell verified"><strong data-public-count="clientCompanies">—</strong><span>client companies connected to those roles</span></div></div>
       </div>
@@ -171,6 +290,8 @@
     <section class="screen" data-screen="refer" aria-labelledby="refer-title"><div class="narrow">
       <header class="screen-head"><div><div class="fig">FIG 04 / Referral first</div><h1 class="section-title" id="refer-title">A useful job travels through someone you trust.</h1><p class="section-lead">The first job of a public opportunity is to remain honest and shareable—not to chase listing vanity.</p></div><button class="back js-nav" type="button" data-target="home"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>Hub</button></header>
       <article class="refer-island"><div class="fig" style="color:var(--p-gold-200)">The natural referral act</div><h2>Send the work to the right person.</h2><p>When a verified job exists, its title, employer source, safety signals, terms and canonical URL move together. A signed-in ReferTRM member's real referral code is attached by the platform—not guessed by this public page.</p>
+        <!-- CCO-PENDING: refer warmth (F50) -->
+        <span class="warm-slot" lang="my"><span class="warm-slot-dash on-dark"></span></span>
         <div class="share-object"><div class="share-object-top"><span class="share-object-label">Community job search</span><span class="share-status">Generic link · no referral code</span></div><h3>Free jobs — verified before publication</h3><p>There is no cleared community job to share today. You can still share the honest search surface or sign in to use your real referral identity with live ReferTRM opportunities.</p><div class="share-actions"><button class="button button-accent js-share" type="button">Share the search<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.6-4.5M8.2 13.2l7.6 4.5"/></svg></button><a class="button button-quiet" href="https://www.refertrm.com/login?redirectTo=/eq/referrals">Use my real referral code</a></div></div>
       </article>
       <div class="referral-flow"><article class="flow-step"><span class="mono">01 / DISCOVER</span><h3>Find a verified role</h3><p>A shareable job object appears only after a real listing clears publication.</p></article><article class="flow-step"><span class="mono">02 / IDENTIFY</span><h3>Sign in to ReferTRM</h3><p>ReferTRM resolves the member's canonical referral identity.</p></article><article class="flow-step"><span class="mono">03 / PROPAGATE</span><h3>Share one canonical link</h3><p>Your friend enters the same registration, CV, Trinity and fit path.</p></article></div>
@@ -191,7 +312,7 @@
     <section class="screen" data-screen="safety" aria-labelledby="safety-title"><div class="narrow">
       <header class="screen-head"><div><div class="fig">FIG 05 / Safety and dignity</div><h1 class="section-title" id="safety-title">Before you apply, protect the person who depends on that income.</h1><p class="section-lead">Trust signals are content. Unknowns remain visible questions instead of decorative badges.</p></div><button class="back js-nav" type="button" data-target="home"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>Hub</button></header>
       <div class="safety-grid"><article class="safety-card"><span class="safety-no">01 / IDENTITY</span><h2>Check the employer.</h2><p>Use the exact legal or trading name and an official public source. A claim is not verification.</p></article><article class="safety-card"><span class="safety-no">02 / PAYMENT</span><h2>Pay nothing to apply.</h2><p>No registration fee, interview fee, placement fee, uniform deposit, or processing payment.</p></article><article class="safety-card"><span class="safety-no">03 / TERMS</span><h2>Get the work in writing.</h2><p>Confirm salary, hours, location, reporting line, probation, and leave before accepting.</p></article></div>
-      <article class="dignity-wall"><div class="fig" style="color:var(--p-gold-200)">The dignity wall</div><h2>Evidence must protect workers, not expose them.</h2><p>No seeker PII is public. Reviews, salaries and workplace claims remain empty until consent, eligibility, moderation, aggregation and the governed lifecycle exist.</p><div class="evidence-row"><div class="evidence"><strong>None</strong><span>community reviews published</span></div><div class="evidence"><strong>None</strong><span>community salary submissions published</span></div><div class="evidence"><strong>None</strong><span>candidate identities exposed</span></div><div class="evidence"><strong>None</strong><span>eligibility decisions hard-wired</span></div></div></article>
+      <article class="dignity-wall"><div class="fig" style="color:var(--p-gold-200)">The dignity wall</div><h2>Evidence must protect workers, not expose them.</h2><p>No seeker PII is public. Reviews, salaries and workplace claims remain empty until consent, eligibility, moderation, aggregation and the governed lifecycle exist.</p><!-- CCO-PENDING: dignity wall warmth (F50) --><span class="warm-slot" lang="my"><span class="warm-slot-dash on-dark"></span></span><div class="evidence-row"><div class="evidence"><strong>None</strong><span>community reviews published</span></div><div class="evidence"><strong>None</strong><span>community salary submissions published</span></div><div class="evidence"><strong>None</strong><span>candidate identities exposed</span></div><div class="evidence"><strong>None</strong><span>eligibility decisions hard-wired</span></div></div></article>
     </div></section>
 
     <section class="screen" data-screen="employers" aria-labelledby="employers-title"><div class="wrap">
@@ -260,7 +381,7 @@
 
     function renderCompany(company){
       document.title=`${company.name} — Jobs & Workplace Truth`;
-      select('#company-portrait').innerHTML=`${markFor(company)}<div class="fig" style="color:var(--p-gold-200);margin-top:28px">Real client company · current hiring evidence</div><h1 id="company-title">${escapeHTML(company.name)}</h1><p>${escapeHTML(company.industry)} · ${escapeHTML(company.location)}. This public surface connects the company identity to live opportunities without inventing workplace sentiment.</p><div class="company-detail-actions"><a class="button button-accent" href="${coreJobsURL(company)}">Browse ${company.activeRoles} roles</a><a class="button button-quiet" href="${coreCompanyURL(company)}" style="background:transparent;border-color:rgb(255 255 255 / .25);color:white">Open in ReferTRM</a><button class="button button-quiet js-share" type="button" data-company-share="${escapeHTML(company.slug)}" style="background:transparent;border-color:rgb(255 255 255 / .25);color:white">Share company</button></div>`;
+      select('#company-portrait').innerHTML=`${markFor(company)}<div class="fig" style="color:var(--p-gold-200);margin-top:28px">Real client company · current hiring evidence</div><h1 id="company-title">${escapeHTML(company.name)}</h1><p>${escapeHTML(company.industry)} · ${escapeHTML(company.location)}. This public surface connects the company identity to live opportunities without inventing workplace sentiment.</p><span class="warm-slot" lang="my"><span class="warm-slot-dash on-dark"></span></span><!-- CCO-PENDING: company portrait warmth (F50) --><div class="company-detail-actions"><a class="button button-accent" href="${coreJobsURL(company)}">Browse ${company.activeRoles} roles</a><a class="button button-quiet" href="${coreCompanyURL(company)}" style="background:transparent;border-color:rgb(255 255 255 / .25);color:white">Open in ReferTRM</a><button class="button button-quiet js-share" type="button" data-company-share="${escapeHTML(company.slug)}" style="background:transparent;border-color:rgb(255 255 255 / .25);color:white">Share company</button></div>`;
       select('#company-evidence').innerHTML=`<article class="evidence-panel"><div class="fig">Hiring now</div><div class="evidence-number">${company.activeRoles}</div><h2>Active opportunities</h2><p>Browse these roles in ReferTRM core, where job and application responsibilities remain governed.</p></article><article class="evidence-panel"><div class="fig">Salary clarity</div><div class="evidence-number">${company.salaryVisibleRoles}</div><h2>Roles show salary</h2><p>This is a current inventory count, not a market benchmark or worker-submitted salary claim.</p></article><article class="evidence-panel"><div class="fig">Workplace voice</div><div class="evidence-number">0</div><h2>No workplace reviews published yet.</h2><p>No stars, sentiment score, or “best workplace” badge is manufactured from an empty evidence state.</p></article><article class="evidence-panel"><div class="fig">Share safely</div><h2>Send one honest company link.</h2><p>The public link carries this company identity and evidence. ReferTRM core adds a real member referral identity only after sign-in.</p><div class="company-detail-actions"><button class="button button-primary js-share" type="button" data-company-share="${escapeHTML(company.slug)}">Share company</button></div></article>`;
       bindCompanyLogos(select('#company-portrait'));
     }
@@ -325,6 +446,81 @@
     select('#claim-form').addEventListener('submit',event=>{event.preventDefault();const name=select('#company-name');const site=select('#company-site');if(!name.value.trim()||!site.value.trim()){toast('Add the company name and official public page');(!name.value.trim()?name:site).focus();return}try{if(new URL(site.value).protocol!=='https:')throw new Error('HTTPS required')}catch{toast('Use a complete public URL beginning with https://');site.focus();return}select('#toast').classList.remove('is-visible');select('#claim-status').classList.add('is-visible');select('#claim-status').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'})});
 
     Promise.all([loadCompanies(),loadPublicCounts()]).finally(()=>openInitialRoute({historyMode:'replace',focus:false}));
+  </script>
+
+  <script>
+  (function(){
+  "use strict";
+  /* v4 seals: 3G-lite + reduced-motion */
+  var conn=navigator.connection||navigator.mozConnection||navigator.webkitConnection||{};
+  var ect=conn.effectiveType||"";
+  var slowNet=!!conn.saveData||ect==="slow-2g"||ect==="2g"||ect==="3g";
+  var lowMem=typeof navigator.deviceMemory==="number"&&navigator.deviceMemory<=4;
+  var q=new URLSearchParams(location.search);
+  var lite=q.get("lite")==="1"||(q.get("full")!=="1"&&(slowNet||lowMem));
+  var reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(lite)document.body.classList.add("lite");
+  var calm=reduced||lite;
+
+  /* marquee: double the track for the seamless -50% loop */
+  var tm=document.getElementById("tmTrack");
+  if(tm)tm.innerHTML+=tm.innerHTML;
+
+  /* scroll reveals (IntersectionObserver — works across SPA screens, no library) */
+  var rvEls=document.querySelectorAll(".rv3");
+  if(calm||!("IntersectionObserver" in window)){
+    rvEls.forEach(function(el){el.classList.add("in")});
+  }else{
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}
+    })},{threshold:.12,rootMargin:"0px 0px -8% 0px"});
+    rvEls.forEach(function(el){io.observe(el)});
+  }
+
+  /* honest count-up once the governed count contract lands */
+  addEventListener("refertrm:public-counts",function(ev){
+    if(calm||!ev.detail||ev.detail.status!=="ready")return;
+    document.querySelectorAll("[data-public-count]").forEach(function(el){
+      var final=parseInt(el.textContent.replace(/[^0-9]/g,""),10);
+      if(!final)return;
+      var t0=null,d=1400;
+      requestAnimationFrame(function step(ts){
+        if(!t0)t0=ts;
+        var p=Math.min(1,(ts-t0)/d),v=Math.round(final*(1-Math.pow(1-p,3)));
+        el.textContent=v.toLocaleString("en-US");
+        if(p<1)requestAnimationFrame(step);
+      });
+    });
+  });
+
+  /* pointer soul: cursor dot+ring, magnetic accents, hero aura — fine pointers only */
+  var fine=matchMedia("(hover:hover) and (pointer:fine)").matches;
+  if(fine&&!calm){
+    var dot=document.createElement("div"),ring=document.createElement("div");
+    dot.className="cur-dot";ring.className="cur-ring";
+    dot.setAttribute("aria-hidden","true");ring.setAttribute("aria-hidden","true");
+    document.body.appendChild(dot);document.body.appendChild(ring);
+    var mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
+    addEventListener("mousemove",function(e){mx=e.clientX;my=e.clientY;dot.style.transform="translate("+(mx-3)+"px,"+(my-3)+"px)"},{passive:true});
+    (function loop(){rx+=(mx-rx)*.14;ry+=(my-ry)*.14;ring.style.transform="translate("+(rx-ring.offsetWidth/2)+"px,"+(ry-ring.offsetHeight/2)+"px)";requestAnimationFrame(loop)})();
+    document.addEventListener("mouseover",function(e){
+      if(e.target.closest&&e.target.closest("a,button,summary,input"))ring.classList.add("big");
+    },{passive:true});
+    document.addEventListener("mouseout",function(e){
+      if(e.target.closest&&e.target.closest("a,button,summary,input"))ring.classList.remove("big");
+    },{passive:true});
+    document.querySelectorAll(".button-accent").forEach(function(el){
+      el.addEventListener("mousemove",function(e){var r=el.getBoundingClientRect();
+        el.style.transform="translate("+((e.clientX-r.left-r.width/2)*.16)+"px,"+((e.clientY-r.top-r.height/2)*.24)+"px)"});
+      el.addEventListener("mouseleave",function(){el.style.transform=""});
+    });
+    var island=document.querySelector(".hero-island");
+    if(island)island.addEventListener("mousemove",function(e){var r=island.getBoundingClientRect();
+      island.style.setProperty("--mx",((e.clientX-r.left)/r.width*100)+"%");
+      island.style.setProperty("--my",((e.clientY-r.top)/r.height*100)+"%");
+    },{passive:true});
+  }
+  })();
   </script>
 </body>
 </html>
