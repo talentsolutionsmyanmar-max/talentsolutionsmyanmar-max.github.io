@@ -147,7 +147,7 @@ html.js.live .line{display:block;will-change:transform,opacity}
       <span class="line">Nothing is asked of you yet.</span>
       <span class="line"><em>Being here is enough.</em></span>
     </p>
-    <div class="hint line"><i></i>Hold anywhere — let the morning come</div>
+    <div class="hint line"><i></i>Hold — fill the morning light</div>
   </div>
 </section>
 
@@ -160,7 +160,7 @@ html.js.live .line{display:block;will-change:transform,opacity}
       <span class="line">to say it hurt.</span>
       <span class="line"><em>You are still whole.</em></span>
     </p>
-    <div class="hint line"><i></i>Touch it — warmth answers warmth</div>
+    <div class="hint line"><i></i>Tap — keep the ember warm</div>
   </div>
 </section>
 
@@ -173,7 +173,7 @@ html.js.live .line{display:block;will-change:transform,opacity}
       <span class="line">That's just caring.</span>
       <span class="line"><em>Breathe with me, once.</em></span>
     </p>
-    <div class="hint line"><i></i>Hold — breathe in · let go — breathe out</div>
+    <div class="hint line"><i></i>Hold to inhale · release · three breaths</div>
   </div>
 </section>
 
@@ -199,7 +199,7 @@ html.js.live .line{display:block;will-change:transform,opacity}
       <span class="line">You can set it down now.</span>
       <span class="line"><em>I'll keep the light on.</em></span>
     </p>
-    <div class="hint line"><i></i>Rest — the light will come to you</div>
+    <div class="hint line"><i></i>Be still — the light gathers</div>
     <div class="opt">
       <details class="optI">
         <summary>Breathe with this — 5.5 / min</summary>
@@ -231,7 +231,7 @@ html.js.live .line{display:block;will-change:transform,opacity}
       <span class="line">once stood where you stand.</span>
       <span class="line"><em>Beginning is brave.</em></span>
     </p>
-    <div class="hint line"><i></i>Tap — watch yourself grow</div>
+    <div class="hint line"><i></i>Tap — grow your rings</div>
   </div>
 </section>
 
@@ -281,6 +281,8 @@ document.documentElement.classList.add('js');
   /* ---------- orb dynamics ---------- */
   var scl=1,sv=0,sTarget=1,glow=0,m5x=0,m5y=0;
   function impulse(v){sv+=v;}
+  var _ox=0,_oy=0;
+  function orbCXw(){return _ox;} function orbCYw(){return _oy;}
 
   /* ---------- canvas systems ---------- */
   var dust=[],sparks=[],flyers=[],orbiters=[],rings=[],stayRings=[];
@@ -291,11 +293,13 @@ document.documentElement.classList.add('js');
   }
 
   /* ---------- per-scene gestures ---------- */
-  var breathF=0,holding3=false;
+  var breathF=0,holding3=false,wasFull=false,breaths=0;
+  var dawnF=0,warm=.4,bloomDone=false,motes=[];
+  for(var mi=0;mi<5;mi++)motes.push({x:Math.random(),y:Math.random(),ph:Math.random()*6.28});
   scenes.forEach(function(sc,idx){
     sc.addEventListener('pointerdown',function(e){
       if(idx===0){sTarget=1.12;sc.classList.add('held');}
-      else if(idx===1){spawnSparks(e.clientX,e.clientY,[240,214,146],10,3.2,1.6);impulse(0.06);glow=Math.min(.5,glow+.18);}
+      else if(idx===1){spawnSparks(e.clientX,e.clientY,[240,214,146],10,3.2,1.6);impulse(0.06);warm=Math.min(1,warm+.13);glow=Math.min(.5,glow+.12);}
       else if(idx===2){holding3=true;sTarget=1.06;}
       else if(idx===3){flyers.push({x:e.clientX,y:e.clientY,t:0});impulse(0.05);}
       else if(idx===5){rings.push({x:e.clientX,y:e.clientY,r:6,vr:2.6,a:.8});impulse(0.05);}
@@ -357,6 +361,17 @@ document.documentElement.classList.add('js');
     if(holding3) breathF=Math.min(1,breathF+dt/4000);
     else breathF=Math.max(0,breathF-dt/6000);
 
+    /* m1 tiny game: hold to fill the morning */
+    if(act===0 && sTarget>1){ dawnF=Math.min(1,dawnF+dt/2500);
+      if(dawnF>=1){ dawnF=0; spawnSparks(orbCXw(),orbCYw(),[246,224,150],16,3.4,1.8); glow=Math.min(.6,glow+.45); impulse(0.08); } }
+    else dawnF=Math.max(0,dawnF-dt/1200);
+    /* m2 tiny game: the ember dims, taps rekindle (never dies) */
+    warm=Math.max(.15,warm-dt*.00006);
+    /* m3 breath counter */
+    if(breathF>=1) wasFull=true;
+    if(wasFull && breathF<=0){ wasFull=false; breaths++;
+      if(breaths%3===0){ glow=Math.min(.6,glow+.4); spawnSparks(orbCXw(),orbCYw(),[126,154,172],8,1.8,.9); } }
+
     /* canvas */
     ctx.clearRect(0,0,vw,vh);
     var dark=DARK[act];
@@ -368,6 +383,7 @@ document.documentElement.classList.add('js');
       ctx.fillStyle=dark?'rgba(230,220,190,.10)':'rgba(0,31,63,.07)';ctx.fill();}
     /* orbiting embers (m4) */
     var orbCX=ox+parX+m5x, orbCY=oy+parY+m5y;
+    _ox=orbCX;_oy=orbCY;
     for(i=0;i<orbiters.length;i++){var ob=orbiters[i];
       ob.ang+=dt*.0009*ob.spd;
       var rr=size*.72+ob.ro;
@@ -392,7 +408,9 @@ document.documentElement.classList.add('js');
     /* rings (m6) */
     for(i=rings.length-1;i>=0;i--){var rg=rings[i];
       rg.r+=rg.vr*dt*.06;rg.a-=dt*.0006;
-      if(rg.a<=0){stayRings.push({x:rg.x,y:rg.y,r:rg.r});if(stayRings.length>7)stayRings.shift();rings.splice(i,1);continue;}
+      if(rg.a<=0){stayRings.push({x:rg.x,y:rg.y,r:rg.r});if(stayRings.length>7)stayRings.shift();
+        if(stayRings.length===5&&!bloomDone){bloomDone=true;spawnSparks(orbCX,orbCY,[143,180,140],18,3.2,2.2);glow=Math.min(.6,glow+.4);}
+        rings.splice(i,1);continue;}
       ctx.beginPath();ctx.arc(rg.x,rg.y,rg.r,0,6.28);
       ctx.strokeStyle='rgba(94,133,96,'+rg.a+')';ctx.lineWidth=1.5;ctx.stroke();}
     for(i=0;i<stayRings.length;i++){var st=stayRings[i];
@@ -407,6 +425,31 @@ document.documentElement.classList.add('js');
         ctx.strokeStyle='rgba(62,100,120,.85)';ctx.lineWidth=2.4;ctx.lineCap='round';ctx.stroke();}
     }
 
+    /* m1 dawn fill arc */
+    if(act===0 && dawnF>0){
+      ctx.beginPath();ctx.arc(orbCX,orbCY,size*.8,-Math.PI/2,-Math.PI/2+dawnF*Math.PI*2);
+      ctx.strokeStyle='rgba(212,175,55,.75)';ctx.lineWidth=2.2;ctx.lineCap='round';ctx.stroke();}
+    /* m2 ember warmth arc (always shows; it only dims, never dies) */
+    if(act===1){
+      ctx.beginPath();ctx.arc(orbCX,orbCY,size*.9,-Math.PI/2,-Math.PI/2+warm*Math.PI*2);
+      ctx.strokeStyle='rgba(240,214,146,'+(.25+warm*.55)+')';ctx.lineWidth=2.2;ctx.lineCap='round';ctx.stroke();}
+    /* m3 breath dots */
+    if(act===2){ var bd=breaths%3; if(breaths>0&&bd===0)bd=3;
+      for(var bi=0;bi<bd;bi++){ var ba=Math.PI/3+bi*.5;
+        ctx.beginPath();ctx.arc(orbCX+Math.cos(ba)*size*.95,orbCY+Math.sin(ba)*size*.95,3,0,6.28);
+        ctx.fillStyle='rgba(62,100,120,.8)';ctx.fill(); } }
+    /* m5 motes: quiet things finding their way home on their own */
+    if(act===4){
+      for(var mo=0;mo<motes.length;mo++){ var mt=motes[mo];
+        mt.ph+=dt*.001;
+        var tx=mt.x*vw, ty=mt.y*vh;
+        var dxm=orbCX-tx, dym=orbCY-ty, dist=Math.sqrt(dxm*dxm+dym*dym)+1;
+        mt.x+=dxm/dist*dt*.00004 + Math.sin(mt.ph)*.00004*dt;
+        mt.y+=dym/dist*dt*.00004 + Math.cos(mt.ph*.8)*.00003*dt;
+        if(dist<size*.7){ glow=Math.min(.5,glow+.18);
+          mt.x=Math.random(); mt.y=Math.random()<.5?-.05:1.05; continue; }
+        ctx.beginPath();ctx.arc(tx,ty,2.4,0,6.28);
+        ctx.fillStyle='rgba(79,179,166,.7)';ctx.shadowColor='rgba(79,179,166,.7)';ctx.shadowBlur=8;ctx.fill();ctx.shadowBlur=0; } }
     /* line reveals + nav */
     for(i=0;i<scenes.length;i++){
       var sc=scenes[i],lines=sc.querySelectorAll('.line');
