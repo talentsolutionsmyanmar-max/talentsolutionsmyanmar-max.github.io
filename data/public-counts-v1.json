@@ -1,30 +1,7 @@
 {
   "contract": "refertrm-public-counts-v1",
-  "asOf": "2026-07-22",
-  "timezone": "Asia/Yangon",
-  "status": "verified",
-  "counts": {
-    "activeCoreJobs": 212,
-    "clientCompanies": 49,
-    "salaryVisibleJobs": 211,
-    "locationTaggedJobs": 212,
-    "levelTaggedJobs": 212,
-    "communityJobsCleared": 0
-  },
-  "definitions": {
-    "activeCoreJobs": "COUNT(public.\"Job\") WHERE lower(status) = 'active'; active ReferTRM client-role inventory",
-    "clientCompanies": "COUNT(DISTINCT public.\"Job\".\"companyId\") for active jobs with a matching canonical public.\"Company\" record",
-    "salaryVisibleJobs": "Active jobs with salaryMin, salaryMax, or salaryDisplay present",
-    "locationTaggedJobs": "Active jobs with a recorded location",
-    "levelTaggedJobs": "Active jobs with a recorded job level",
-    "communityJobsCleared": "Independently submitted free listings cleared for public publication; currently honest-empty"
-  },
-  "governance": {
-    "authority": "S322-JOBS-WORKPLACE-TRUTH-PUBLIC-IDENTITY; production read-only audit 2026-07-22",
-    "internalCountsExcluded": [
-      "employer_prospects"
-    ],
-    "clientStatusMayInfluenceTransparency": false,
-    "nextReview": "CTO re-probe before any production integration"
-  }
+  "active_roles": null,
+  "verified_employers": null,
+  "aggregated_branch": null,
+  "generated_at": null
 }
