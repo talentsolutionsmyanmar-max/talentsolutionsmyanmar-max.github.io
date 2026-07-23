@@ -205,6 +205,129 @@
     @media(prefers-reduced-motion:reduce){.rv3{opacity:1;transform:none}}
     .lite .rv3,.noanim .rv3{opacity:1;transform:none;transition:none}
     .lite .tm-track,.noanim .tm-track{animation:none}
+
+    /* ==== CANONICAL COMPANY STACK (GDMM-STRUCT-S324) ==== */
+    .stk{padding-top:clamp(56px,8vw,88px);border-top:1px solid var(--line-soft);margin-top:clamp(56px,8vw,88px)}
+    .stk:first-of-type{border-top:0}
+    .stk-h{font:600 clamp(28px,4.6vw,48px)/1.03 "Bricolage Grotesque",sans-serif;letter-spacing:-.045em;margin:12px 0 12px;max-width:22ch}
+    .stk-h em{font-style:normal;color:var(--caution)}
+    .stk-sub{font-size:13.5px;color:var(--ink-subtle);max-width:66ch;line-height:1.7;margin:0}
+    .warm-slot-dash[data-tag]::before{content:attr(data-tag)}
+    /* 02 two-truths */
+    .tt-grid{display:grid;gap:10px;margin-top:var(--sp-6)}
+    @media(min-width:760px){.tt-grid{grid-template-columns:1fr 1fr}}
+    .tt-card{border:1px solid var(--line);border-radius:var(--radius-l);background:var(--surface);padding:var(--sp-5)}
+    .tt-card h3{font:600 19px "Bricolage Grotesque",sans-serif;margin:0 0 12px}
+    .tt-scope{margin:0;padding:0;list-style:none}
+    .tt-scope li{font-size:11.5px;color:var(--ink-subtle);line-height:1.6;padding:7px 0 7px 18px;border-bottom:1px solid var(--line-soft);position:relative}
+    .tt-scope li::before{content:"";position:absolute;left:0;top:14px;width:7px;height:7px;border-radius:50%;border:1.5px solid var(--verified)}
+    .tt-scope li:last-child{border-bottom:0}
+    .prov-badge{display:inline-flex;align-items:center;gap:7px;margin-top:16px;padding:7px 12px;border:1px solid rgb(15 118 110 / .3);border-radius:var(--radius-pill);color:var(--verified);font:600 9px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase}
+    .prov-badge svg{width:13px;height:13px}
+    .prov-badge .tag-code{opacity:.65;margin-left:3px}
+    .tt-caveat{margin:12px 0 0;font-size:10.5px;color:var(--ink-quiet);line-height:1.65}
+    /* 03 truth map */
+    .tmap-grid{display:grid;gap:9px;margin-top:var(--sp-6);grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+    .tmap-tile{border:1px dashed rgb(0 31 63 / .22);border-radius:var(--radius-m);background:var(--surface);padding:16px}
+    .tmap-tile.hiring{border-style:solid;border-color:rgb(15 118 110 / .3)}
+    .tmt-q{margin:0;font-size:12.5px;font-weight:600;color:var(--brand-deep);line-height:1.5}
+    .tmt-s{margin:10px 0 0;font-size:10px;color:var(--ink-quiet);line-height:1.55}
+    .tmt-s b{color:var(--caution);font-weight:600}
+    .tmt-tag{display:inline-block;margin-top:8px;font:600 7.5px "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--verified)}
+    .tmap-note{margin:var(--sp-5) 0 0;font-size:11px;color:var(--ink-quiet);line-height:1.65;border-left:2px solid var(--accent);padding-left:14px;max-width:72ch}
+    /* 04/05 incidents + explainers */
+    .inci{margin-top:var(--sp-6);border:1px solid var(--line);border-radius:var(--radius-l);background:var(--surface);padding:var(--sp-5)}
+    .inci-row{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line-soft)}
+    .inci-row:last-child{border-bottom:0}
+    .inci-l{font:600 9px "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--verified);padding-top:3px}
+    .inci-v{font-size:12.5px;color:var(--brand-deep);line-height:1.6}
+    .inci-v.empty{color:var(--ink-quiet);font-style:italic}
+    .qualify{margin-top:var(--sp-4);padding:14px 16px;border-radius:var(--radius-m);background:var(--p-amber-100);color:var(--caution);font-size:11.5px;line-height:1.65}
+    .d21{margin-top:var(--sp-4);padding:var(--sp-5);border:1px dashed rgb(212 175 55 / .55);border-radius:var(--radius-m);background:rgb(212 175 55 / .06);font-size:12px;color:var(--ink-subtle);line-height:1.7}
+    .d21 strong{color:var(--caution)}
+    /* 06 salaries */
+    .pay-break{margin-top:var(--sp-6);border:1px solid var(--line);border-radius:var(--radius-l);background:var(--surface);padding:var(--sp-5)}
+    .pay-break.worker{margin-top:var(--sp-4);border-style:dashed}
+    .pb-head{margin:0 0 8px;font:600 9px "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-quiet)}
+    .pay-row{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--line-soft)}
+    .pay-row:last-child{border-bottom:0}
+    .pay-row .k{font-size:12px;color:var(--ink-subtle)}
+    .pay-row .v{font:600 12.5px "JetBrains Mono",monospace;color:var(--brand-deep);text-align:right}
+    .pay-row .v.fill{color:var(--verified)}
+    .pay-row .v.dim{color:var(--ink-quiet);font-family:"Inter",sans-serif;font-weight:500;font-style:italic}
+    .sal-posted{margin:var(--sp-4) 0 0;font-size:12.5px;color:var(--ink-subtle);line-height:1.7}
+    .sal-posted strong{color:var(--verified)}
+    .sal-note{margin:10px 0 0;font-size:10.5px;color:var(--ink-quiet);line-height:1.65}
+    .mono-tag{display:inline-block;margin-left:6px;font:600 8px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--caution);border:1px dashed rgb(212 175 55 / .55);border-radius:4px;padding:3px 7px}
+    /* 07 contribute */
+    .ct-card{margin-top:var(--sp-4);border:1px solid var(--line);border-radius:var(--radius-l);background:var(--surface);padding:var(--sp-5)}
+    .ct-h{margin:0;font-size:15px;font-weight:700;color:var(--brand-deep);font-family:"Bricolage Grotesque",sans-serif;letter-spacing:-.01em}
+    .q-text{margin:14px 0 8px;font-size:13px;font-weight:600;color:var(--brand-deep)}
+    .q-note{margin:0 0 10px;font-size:10.5px;color:var(--ink-quiet);line-height:1.6}
+    .flow-steps{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+    .fs{font:600 8px "JetBrains Mono",monospace;letter-spacing:.1em;color:var(--ink-quiet);border:1px solid var(--line);border-radius:var(--radius-pill);padding:5px 10px}
+    .fs.on{color:var(--verified);border-color:rgb(15 118 110 / .35)}
+    .tap-opts{display:flex;gap:7px;flex-wrap:wrap}
+    .tap{min-height:44px;border:1px solid var(--line);border-radius:var(--radius-pill);background:var(--surface);padding:0 16px;font-size:11.5px;font-weight:600;color:var(--ink-subtle);transition:border-color .2s,background .2s,color .2s}
+    .tap:hover{border-color:rgb(212 175 55 / .6)}
+    .tap[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--on-dark)}
+    .grow{width:100%;min-height:84px;border:1px solid var(--line);border-radius:var(--radius-s);background:var(--p-white);padding:12px 13px;font:inherit;font-size:12.5px;color:var(--ink);resize:vertical}
+    .grow::placeholder{color:var(--p-slate-500)}
+    .grow:focus{outline:3px solid var(--accent);outline-offset:2px}
+    .autosave{display:inline-flex;align-items:center;gap:7px;margin-top:12px;font-size:9.5px;color:var(--verified)}
+    .autosave svg{width:13px;height:13px}
+    .offline-banner{margin-top:var(--sp-4);display:flex;gap:12px;align-items:flex-start;padding:var(--sp-4);border-radius:var(--radius-m);background:var(--p-amber-100);color:var(--caution)}
+    .offline-banner[hidden]{display:none}
+    .offline-banner svg{flex:0 0 auto;margin-top:2px}
+    .ob-title{margin:0;font-weight:700;font-size:12px}
+    .ob-sub{margin:4px 0 0;font-size:10.5px;line-height:1.6}
+    .ob-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .shield{margin-top:var(--sp-4);border-radius:var(--radius-xl);background:var(--brand-deep);color:var(--on-dark);padding:clamp(22px,4vw,38px);overflow:hidden}
+    .shield-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .shield-head h3{margin:0;font:600 20px "Bricolage Grotesque",sans-serif;flex:1;min-width:200px}
+    .shield-head .mono-note{font:600 8px "JetBrains Mono",monospace;letter-spacing:.12em;color:var(--p-gold-200)}
+    .preview-label{margin:20px 0 8px;font:600 8px "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--p-gold-200)}
+    .public-preview{border:1px solid rgb(255 255 255 / .16);border-radius:var(--radius-m);background:rgb(255 255 255 / .05);padding:var(--sp-4)}
+    .public-preview .who{font-size:12px;color:var(--on-dark-subtle);line-height:1.7}
+    .public-preview .who strong{color:var(--on-dark)}
+    .public-preview .who .risky{color:#ffd766;font-style:italic}
+    .public-preview .said{font-size:13px;margin:10px 0 0;line-height:1.7;color:var(--on-dark)}
+    .public-preview .vcaveat{margin:10px 0 0;font:600 8px/1.8 "JetBrains Mono",monospace;letter-spacing:.1em;color:var(--on-dark-subtle)}
+    .risk-flag{display:flex;gap:10px;margin-top:14px;padding:12px 14px;border-radius:var(--radius-m);background:rgb(255 215 102 / .1);border:1px solid rgb(255 215 102 / .3)}
+    .risk-flag svg{flex:0 0 auto;margin-top:2px;color:#ffd766}
+    .rf-t{margin:0;font-weight:700;font-size:11.5px;color:#ffd766}
+    .rf-s{margin:4px 0 0;font-size:10.5px;color:var(--on-dark-subtle);line-height:1.6}
+    .coarsen-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:11px 0;border-bottom:1px solid rgb(255 255 255 / .1);font-size:11.5px}
+    .coarsen-row:last-of-type{border-bottom:0}
+    .cr-l .fine{color:var(--on-dark-subtle);text-decoration:line-through}
+    .cr-l .coarse{color:#ffd766;font-weight:600}
+    .switch{position:relative;display:inline-block;flex:0 0 auto}
+    .switch input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+    .switch .tr{display:block;width:44px;height:26px;border-radius:999px;background:rgb(255 255 255 / .14);border:1px solid rgb(255 255 255 / .22);transition:background .25s}
+    .switch .th{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .25s}
+    .switch input:checked + .tr{background:var(--verified);border-color:var(--verified)}
+    .switch input:checked + .tr .th{transform:translateX(18px)}
+    .switch input:focus-visible + .tr{outline:3px solid var(--accent);outline-offset:2px}
+    .delay-row{display:flex;gap:10px;margin-top:14px;padding:12px 14px;border-radius:var(--radius-m);background:rgb(255 255 255 / .05);font-size:10.5px;color:var(--on-dark-subtle);line-height:1.65}
+    .delay-row svg{flex:0 0 auto;margin-top:2px}
+    .delay-row strong{color:var(--on-dark)}
+    .shield-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+    .ct-confirm{margin-top:16px;padding:14px 16px;border-radius:var(--radius-m);background:rgb(15 118 110 / .16);border:1px solid rgb(45 212 191 / .4);color:#c9f5ec;font-size:11.5px;line-height:1.7}
+    .ct-confirm[hidden]{display:none}
+    .shield .warm-slot-dash{border-color:rgb(255 255 255 / .24);color:var(--on-dark-subtle)}
+    /* 08 decide */
+    .ask-grid{display:grid;gap:9px;margin-top:var(--sp-6)}
+    @media(min-width:760px){.ask-grid{grid-template-columns:1fr 1fr}}
+    .ask-card{border:1px solid var(--line);border-radius:var(--radius-m);background:var(--surface);padding:var(--sp-4)}
+    .ask-card .q{margin:0;font-size:13px;font-weight:600;color:var(--brand-deep);line-height:1.55}
+    .ask-card .src{margin:10px 0 0;font:600 7.5px/1.7 "JetBrains Mono",monospace;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-quiet)}
+    /* 09 roles */
+    .roles-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:var(--sp-5)}
+    .origin-note{margin-top:var(--sp-4);font-size:11px;color:var(--ink-quiet);line-height:1.65;max-width:66ch}
+    /* companies card stack chips */
+    .stack-chips{display:flex;flex-wrap:wrap;gap:5px;margin:12px 0 4px}
+    .sc{font:600 7.5px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-quiet);border:1px solid var(--line);border-radius:4px;padding:4px 7px}
+    .sc.ok{color:var(--verified);border-color:rgb(15 118 110 / .3)}
   </style>
   <noscript><style>
     .rv3{opacity:1!important;transform:none!important}
@@ -307,6 +430,193 @@
     <section class="screen" data-screen="company" aria-labelledby="company-title"><div class="wrap">
       <header class="screen-head"><button class="back js-nav" type="button" data-target="companies"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>All companies</button></header>
       <div class="company-detail"><article class="company-portrait" id="company-portrait"></article><div class="company-evidence" id="company-evidence"></div></div>
+
+      <!-- ======== CANONICAL COMPANY PAGE STACK (GDMM-STRUCT-S324) ======== -->
+      <!-- MODULE 02 — TWO-TRUTHS STRIP -->
+      <section class="stk" id="stack-truths" aria-labelledby="stk-tt-h">
+        <div class="fig">Two kinds of truth</div>
+        <h2 class="stk-h" id="stk-tt-h">An applicant is not an employee. <em>Jobs are not reviews.</em></h2>
+        <p class="stk-sub">Applying to a company and working at a company are different experiences. Evidence about each is collected, labelled, and shown separately &mdash; one never speaks for the other.</p>
+        <div class="tt-grid">
+          <article class="tt-card">
+            <h3>Hiring Experience</h3>
+            <ul class="tt-scope"><li>Application acknowledged or silent</li><li>Interview respect and punctuality</li><li>Job and salary explained clearly</li><li>Any request for payment (warning signal)</li><li>Outcome communicated, time between stages</li></ul>
+            <div class="prov-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>Contacted via ReferTRM<span class="tag-code">P1-VERIFIED</span></div>
+            <p class="tt-caveat"><strong>What verification means:</strong> a real, timestamped contact/apply action happened. It proves an <em>interaction occurred</em> &mdash; it does not prove every statement is true, and it does not prove the person worked there.</p>
+          </article>
+          <article class="tt-card">
+            <h3>Workplace Experience</h3>
+            <ul class="tt-scope"><li>Pay reliability, commission and deductions</li><li>Actual hours versus official schedule</li><li>Leave, family events, private correction</li><li>Management, respect, safety</li><li>Promotion path, targets in writing, job security</li></ul>
+            <div class="prov-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>Contacted via ReferTRM<span class="tag-code">P1-VERIFIED</span></div>
+            <p class="tt-caveat"><strong>Stronger claim, stricter rules (D-21):</strong> workplace statements need stronger evidence of an employment relationship. Until then, workplace narratives are held or aggregated, never published bare.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- MODULE 03 — WORKPLACE TRUTH MAP -->
+      <section class="stk" id="stack-map" aria-labelledby="stk-tm-h">
+        <div class="fig">Workplace Truth Map</div>
+        <h2 class="stk-h" id="stk-tm-h">Every signal visible &mdash; <em>even at zero.</em></h2>
+        <p class="stk-sub">Ten structured questions about working here. Each tile shows the question it answers. None has signals yet &mdash; that is the current reality, not a hidden score.</p>
+        <div class="tmap-grid">
+          <div class="tmap-tile"><p class="tmt-q">Did pay arrive on the promised date?</p><p class="tmt-s">No signals yet &middot; publishes at the D-22 safety threshold &middot; <b>be among the first</b></p></div>
+          <div class="tmap-tile"><p class="tmt-q">What time do people usually finish, compared with the official time?</p><p class="tmt-s">No signals yet &middot; publishes at the D-22 safety threshold &middot; <b>be among the first</b></p></div>
+          <div class="tmap-tile"><p class="tmt-q">Is overtime paid, unpaid, or unclear?</p><p class="tmt-s">No signals yet &middot; publishes at the D-22 safety threshold &middot; <b>be among the first</b></p></div>
+          <div class="tmap-tile"><p class="tmt-q">Can leave be requested without penalty or pressure?</p><p class="tmt-s">No signals yet &middot; publishes at the D-22 safety threshold &middot; <b>be among the first</b></p></div>
+          <div class="tmap-tile"><p class="tmt-q">Were targets explained in writing?</p><p class="tmt-s">No signals yet &middot; publishes at the D-22 safety threshold &middot; <b>be among the first</b></p></div>
+          <div class="tmap-tile"><p class="tmt-q">Were commission or incentive terms given in writing?</p><p class="tmt-s">No signals yet &middot; publishes at the D-22 safety threshold &middot; <b>be among the first</b></p></div>
+          <div class="tmap-tile"><p class="tmt-q">When mistakes happen, are corrections private or public?</p><p class="tmt-s">No signals yet &middot; publishes at the D-22 safety threshold &middot; <b>be among the first</b></p></div>
+          <div class="tmap-tile"><p class="tmt-q">Do people feel respected and safe to speak up?</p><p class="tmt-s">No signals yet &middot; publishes at the D-22 safety threshold &middot; <b>be among the first</b></p></div>
+          <div class="tmap-tile"><p class="tmt-q">Is the promotion path explained and followed?</p><p class="tmt-s">No signals yet &middot; publishes at the D-22 safety threshold &middot; <b>be among the first</b></p></div>
+          <div class="tmap-tile hiring"><p class="tmt-q">Was the hiring outcome communicated?</p><p class="tmt-s">No signals yet &middot; publishes at the D-22 safety threshold &middot; <b>be among the first</b></p><span class="tmt-tag">Hiring signal</span></div>
+        </div>
+        <p class="tmap-note">Signals come only from governed, identity-shielded contributions. Tiles with too few answers stay suppressed &mdash; small groups can identify a person (D-23). An empty tile is not a bad company; it is an invitation to build the picture safely.</p>
+        <span class="warm-slot" lang="my"><span class="warm-slot-dash" data-tag="MM SLOT — CCO TO AUTHOR"></span></span>
+      </section>
+
+      <!-- MODULE 04 — HIRING EXPERIENCE -->
+      <section class="stk" id="stack-hiring" aria-labelledby="stk-hi-h">
+        <div class="fig">Hiring Experience</div>
+        <h2 class="stk-h" id="stk-hi-h">How hiring treated people. <em>Proven, or not shown.</em></h2>
+        <p class="stk-sub">No applicant with a verified ReferTRM contact has shared how this company&rsquo;s hiring treated them &mdash; yet. This is the exact shape a verified hiring account will take when one is earned:</p>
+        <div class="inci" aria-label="Verified hiring account structure">
+          <div class="inci-row"><span class="inci-l">Promised</span><span class="inci-v empty">What the process said would happen &mdash; filled by a real account.</span></div>
+          <div class="inci-row"><span class="inci-l">In practice</span><span class="inci-v empty">What actually happened &mdash; filled by a real account.</span></div>
+          <div class="inci-row"><span class="inci-l">Pattern</span><span class="inci-v empty">One-time event or repeated pattern &mdash; filled by a real account.</span></div>
+          <div class="inci-row"><span class="inci-l">What to ask</span><span class="inci-v empty">The question this experience teaches &mdash; filled by a real account.</span></div>
+        </div>
+        <div class="qualify"><strong>One warning that matters even with zero data:</strong> a legitimate employer never asks an applicant for money. If any company asks you for a fee, deposit, or &ldquo;training payment&rdquo;, treat it as a danger sign and report it.</div>
+        <span class="warm-slot" lang="my"><span class="warm-slot-dash" data-tag="MM SLOT — CCO TO AUTHOR · SCAM-FEE WARNING NEEDS CAREFUL REGISTER"></span></span>
+      </section>
+
+      <!-- MODULE 05 — WORKPLACE EXPERIENCE -->
+      <section class="stk" id="stack-workplace" aria-labelledby="stk-wp-h">
+        <div class="fig">Workplace Experience</div>
+        <h2 class="stk-h" id="stk-wp-h">What it is like to work here. <em>Held to a stricter standard.</em></h2>
+        <p class="stk-sub">No publishable workplace accounts pass the privacy threshold for this company yet. Quiet signals may already be building the Truth Map above &mdash; individual stories stay unpublished until they cannot identify the person who shared them.</p>
+        <div class="d21"><strong>D-21 &mdash; stronger claim, stricter rules:</strong> a workplace statement claims an employment relationship, so it is held until that relationship is proven &mdash; an application alone never qualifies. And because role + city + tenure can identify a worker in a small team, aggregated counts publish first; individual accounts only when publication is safe (D-23, D-24).</div>
+        <span class="warm-slot" lang="my"><span class="warm-slot-dash" data-tag="MM SLOT — CCO TO AUTHOR"></span></span>
+      </section>
+
+      <!-- MODULE 06 — SALARIES -->
+      <section class="stk" id="stack-salary" aria-labelledby="stk-sa-h">
+        <div class="fig">Salaries</div>
+        <h2 class="stk-h" id="stk-sa-h">The breakdown, <em>always shown.</em></h2>
+        <p class="stk-sub">Base, commission, allowances and deductions are different claims about money &mdash; shown separately, never blended into one number.</p>
+        <div class="pay-break" aria-label="Posted salary structure">
+          <div class="pay-row"><span class="k">Base salary (monthly, gross)</span><span class="v fill" id="sal-base">&mdash;</span></div>
+          <div class="pay-row"><span class="k">Commission / incentive</span><span class="v dim">Not published in the posting &mdash; ask</span></div>
+          <div class="pay-row"><span class="k">Allowances (transport, meals, phone)</span><span class="v dim">Not published in the posting &mdash; ask</span></div>
+          <div class="pay-row"><span class="k">Deductions</span><span class="v dim">Not published in the posting &mdash; ask</span></div>
+        </div>
+        <p class="sal-posted" id="sal-posted-line">&mdash;</p>
+        <p class="sal-note">Posted figures live on the real job listings &mdash; follow the open positions below to read them in context. <span class="mono-tag">Lakh display &mdash; CCO review pending (D-27)</span></p>
+        <div class="pay-break worker" aria-label="Worker-reported salary structure">
+          <p class="pb-head">Worker-reported &mdash; empty until the governed path</p>
+          <div class="pay-row"><span class="k">Base (reported)</span><span class="v dim">Publishes at the D-22 threshold</span></div>
+          <div class="pay-row"><span class="k">Commission (reported)</span><span class="v dim">Publishes at the D-22 threshold</span></div>
+          <div class="pay-row"><span class="k">Allowances (reported)</span><span class="v dim">Publishes at the D-22 threshold</span></div>
+          <div class="pay-row"><span class="k">Deductions (reported)</span><span class="v dim">Publishes at the D-22 threshold</span></div>
+        </div>
+        <span class="warm-slot" lang="my"><span class="warm-slot-dash" data-tag="MM SLOT — CCO TO AUTHOR"></span></span>
+      </section>
+
+      <!-- MODULE 07 — CONTRIBUTE + PRIVACY SHIELD (G-12 front door) -->
+      <section class="stk" id="stack-contribute" aria-labelledby="stk-ct-h">
+        <div class="fig">Share truth safely &middot; G-12 front door</div>
+        <h2 class="stk-h" id="stk-ct-h">Contribute &mdash; <em>protected first.</em></h2>
+        <p class="stk-sub">Two ways to contribute. <strong>Quiet signals</strong> answer private fact questions &mdash; only aggregated counts ever appear. A <strong>guided account</strong> tells one incident carefully, then passes through the Privacy Shield. On this isolated host nothing leaves your device &mdash; the governed G-12 path opens later.</p>
+        <div class="offline-banner" id="ct-offline" hidden role="alert">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12.55a11 11 0 0 1 14.08 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01M1.42 9a16 16 0 0 1 21.16 0" opacity=".4"/><path d="m2 2 20 20"/></svg>
+          <div style="flex:1"><p class="ob-title">Connection lost &mdash; your answers are safe on this device</p><p class="ob-sub">Everything you entered is saved locally. Nothing is lost &mdash; this also works inside Viber / Messenger in-app browsers.</p><div class="ob-actions"><button class="button button-primary" type="button" id="ct-restore">Restore my draft</button><button class="button button-quiet" type="button" id="ct-discard">Discard draft</button></div></div>
+        </div>
+        <div class="ct-card">
+          <div class="flow-steps"><span class="fs on">1 &middot; RELATIONSHIP</span><span class="fs">2 &middot; SIGNALS / INCIDENT</span><span class="fs">3 &middot; PRIVACY SHIELD</span></div>
+          <p class="q-text" style="margin-top:0">First &mdash; what was your relationship with this company?</p>
+          <div class="tap-opts" id="ct-rel">
+            <button class="tap" type="button" data-rel="hiring" aria-pressed="false">I applied or interviewed</button>
+            <button class="tap" type="button" data-rel="workplace" aria-pressed="false">I work or worked there</button>
+          </div>
+          <p class="q-note" style="margin-top:10px">An application proves contact, not employment. Workplace statements need stronger proof of an employment relationship (D-21) before publication.</p>
+          <span class="warm-slot" lang="my"><span class="warm-slot-dash" data-tag="MM SLOT — CCO TO AUTHOR · RELATIONSHIP CHOICE WORDING IS SENSITIVE"></span></span>
+        </div>
+        <div class="ct-card">
+          <p class="ct-h">Quiet signals &mdash; answer privately, only counts appear</p>
+          <p class="q-note">No story, no name, no public text. Your answers join anonymous counts on the Truth Map after the D-22 aggregation threshold.</p>
+          <p class="q-text">Did pay arrive on the promised date?</p>
+          <div class="tap-opts" id="ct-q1"><button class="tap" type="button" aria-pressed="false">Usually yes</button><button class="tap" type="button" aria-pressed="false">Sometimes late</button><button class="tap" type="button" aria-pressed="false">Often late</button><button class="tap" type="button" aria-pressed="false">Prefer not to say</button></div>
+          <p class="q-text">What time did you usually finish, compared with the official time?</p>
+          <div class="tap-opts" id="ct-q2"><button class="tap" type="button" aria-pressed="false">On time</button><button class="tap" type="button" aria-pressed="false">Up to 1 hour later</button><button class="tap" type="button" aria-pressed="false">Much later</button><button class="tap" type="button" aria-pressed="false">Prefer not to say</button></div>
+          <p class="q-text">Was overtime paid, unpaid, or unclear?</p>
+          <div class="tap-opts" id="ct-q3"><button class="tap" type="button" aria-pressed="false">Paid</button><button class="tap" type="button" aria-pressed="false">Unpaid</button><button class="tap" type="button" aria-pressed="false">Unclear</button></div>
+          <p class="q-text">Were target or commission terms available in writing?</p>
+          <div class="tap-opts" id="ct-q4"><button class="tap" type="button" aria-pressed="false">Yes, in writing</button><button class="tap" type="button" aria-pressed="false">Verbal only</button><button class="tap" type="button" aria-pressed="false">Never explained</button></div>
+          <span class="autosave" id="ct-save-quiet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Draft saves on this device as you tap</span></span>
+          <span class="warm-slot" lang="my"><span class="warm-slot-dash" data-tag="MM SLOT — CCO TO AUTHOR · QUESTION REGISTER (FORMAL-POLITE) + REASSURANCE"></span></span>
+        </div>
+        <div class="ct-card">
+          <p class="ct-h">Or guide one incident &mdash; step by step</p>
+          <p class="q-note">Short taps first; writing is always optional. One event at a time &mdash; no open &ldquo;criticise your employer&rdquo; box.</p>
+          <p class="q-text">What was promised?</p>
+          <div class="tap-opts" id="ct-promised"><button class="tap" type="button" aria-pressed="false">Pay amount / date</button><button class="tap" type="button" aria-pressed="false">Working hours</button><button class="tap" type="button" aria-pressed="false">Commission terms</button><button class="tap" type="button" aria-pressed="false">Promotion / probation</button><button class="tap" type="button" aria-pressed="false">Other</button></div>
+          <p class="q-text">What happened in practice?</p>
+          <textarea class="grow" id="ct-practice" placeholder="Optional. One event is enough. Do not include your name, your team, or dates that identify you."></textarea>
+          <p class="q-text">One-time event or repeated pattern?</p>
+          <div class="tap-opts" id="ct-pattern"><button class="tap" type="button" aria-pressed="false">One time</button><button class="tap" type="button" aria-pressed="false">Repeated pattern</button><button class="tap" type="button" aria-pressed="false">Not sure</button></div>
+          <p class="q-text">What should another jobseeker ask before deciding?</p>
+          <textarea class="grow" id="ct-advice" placeholder="One question you wish you had asked."></textarea>
+          <p class="q-text">Which details could identify you?</p>
+          <p class="q-note">The Privacy Shield on the next step checks this with you before anything is published.</p>
+          <div class="tap-opts" id="ct-identify"><button class="tap" type="button" aria-pressed="false">My exact role</button><button class="tap" type="button" aria-pressed="false">My team / shift</button><button class="tap" type="button" aria-pressed="false">Exact dates</button><button class="tap" type="button" aria-pressed="false">None of these</button></div>
+          <span class="autosave" id="ct-save-incident"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Draft saves on this device &mdash; connection loss will not erase it</span></span>
+          <span class="warm-slot" lang="my"><span class="warm-slot-dash" data-tag="MM SLOT — CCO TO AUTHOR · GUIDED PROMPTS + ANADEH-SAFE INDIRECT PHRASING"></span></span>
+        </div>
+        <div class="shield" id="ct-shield">
+          <div class="shield-head">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFD766" stroke-width="2" aria-hidden="true"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10Z"/></svg>
+            <h3>Privacy Shield &mdash; check before anything is public</h3>
+            <span class="mono-note">STEP 3 &middot; PRE-PUBLICATION</span>
+          </div>
+          <p class="preview-label">Exactly what the public would see</p>
+          <div class="public-preview" id="ct-preview" aria-live="polite"></div>
+          <div class="risk-flag">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+            <div><p class="rf-t" id="ct-risk-title">Coarsened by default</p><p class="rf-s" id="ct-risk-sub">Role, location, tenure and date are generalised before anything publishes &mdash; the combination can identify a person in a small team. Switch any row off to see the risk return.</p></div>
+          </div>
+          <div style="margin-top:6px">
+            <div class="coarsen-row"><span class="cr-l">Role: <span class="fine">exact role</span> &rarr; <span class="coarse">a worker / an applicant</span></span><label class="switch"><input type="checkbox" id="cr-role" checked aria-label="Coarsen role"><span class="tr"><span class="th"></span></span></label></div>
+            <div class="coarsen-row"><span class="cr-l">Location: <span class="fine">exact office / city</span> &rarr; <span class="coarse">region only</span></span><label class="switch"><input type="checkbox" id="cr-loc" checked aria-label="Coarsen location"><span class="tr"><span class="th"></span></span></label></div>
+            <div class="coarsen-row"><span class="cr-l">Tenure: <span class="fine">exact months</span> &rarr; <span class="coarse">removed</span></span><label class="switch"><input type="checkbox" id="cr-ten" checked aria-label="Remove tenure"><span class="tr"><span class="th"></span></span></label></div>
+            <div class="coarsen-row"><span class="cr-l">Date: <span class="fine">exact day</span> &rarr; <span class="coarse">within the last year</span></span><label class="switch"><input type="checkbox" id="cr-date" checked aria-label="Coarsen date"><span class="tr"><span class="th"></span></span></label></div>
+          </div>
+          <div class="delay-row">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            <div><strong>Delayed publication (recommended):</strong> publish only when enough similar contributors exist to keep you unidentifiable (D-23 minimum-cohort, D-24 delayed release). If the threshold is never met, your account stays as quiet aggregated signals &mdash; it never appears bare. Your identity is never shown to the employer.</div>
+          </div>
+          <div class="shield-actions">
+            <button class="button button-accent" type="button" id="ct-approve">Approve shielded version</button>
+            <button class="button button-quiet" type="button" id="ct-quiet" style="background:transparent;border-color:rgb(255 255 255 / .24);color:var(--on-dark)">Share as quiet signals only</button>
+          </div>
+          <div class="ct-confirm" id="ct-confirm" hidden role="status"></div>
+          <span class="warm-slot" lang="my"><span class="warm-slot-dash on-dark" data-tag="MM SLOT — CCO TO AUTHOR · RISK WARNING + REASSURANCE REGISTER (MOST SENSITIVE SLOT)"></span></span>
+        </div>
+      </section>
+
+      <!-- MODULE 08 — QUESTIONS TO ASK BEFORE YOU DECIDE -->
+      <section class="stk" id="stack-decide" aria-labelledby="stk-da-h">
+        <div class="fig">Questions to ask before you decide</div>
+        <h2 class="stk-h" id="stk-da-h">Derived from evidence &mdash; <em>never a diagnosis.</em></h2>
+        <div class="ask-grid" id="ask-grid"></div>
+        <span class="warm-slot" lang="my"><span class="warm-slot-dash" data-tag="MM SLOT — CCO TO AUTHOR · QUESTION TONE MUST NOT SOUND ACCUSATORY"></span></span>
+      </section>
+
+      <!-- MODULE 09 — OPEN POSITIONS -->
+      <section class="stk" id="stack-roles" aria-labelledby="stk-rl-h">
+        <div class="fig">Open positions</div>
+        <h2 class="stk-h" id="stk-rl-h"><span id="roles-count">&mdash;</span> active roles. <em>Apply via ReferTRM.</em></h2>
+        <p class="stk-sub">Applying through ReferTRM creates the timestamped contact that later proves an interaction happened &mdash; the origin of every verified hiring-experience account on this page.</p>
+        <div class="roles-actions"><a class="button button-accent" id="roles-browse" href="https://www.refertrm.com/eq/jobs">Browse this company&rsquo;s roles</a><a class="button button-quiet" id="roles-core" href="https://www.refertrm.com">Open the company in ReferTRM</a></div>
+      </section>
     </div></section>
 
     <section class="screen" data-screen="safety" aria-labelledby="safety-title"><div class="narrow">
@@ -375,7 +685,7 @@
     function renderCompanies(contract){
       companyData=contract.companies;
       select('#company-asof').textContent=`Audited ${contract.asOf} · ${companyData.length} real client examples · no inferred ratings`;
-      select('#company-grid').innerHTML=companyData.map(company=>`<article class="company-card"><div class="company-brand-row">${markFor(company)}<span class="company-state">Real client · hiring</span></div><h2>${escapeHTML(company.name)}</h2><p class="company-meta">${escapeHTML(company.industry)} · ${escapeHTML(company.location)}</p><div class="company-proof"><div><strong>${company.activeRoles}</strong><span>active roles</span></div><div><strong>${company.salaryVisibleRoles}</strong><span>salary-visible</span></div></div><div class="company-actions"><button class="button button-primary js-company" type="button" data-company="${escapeHTML(company.slug)}">View company</button><a class="button button-quiet" href="${coreJobsURL(company)}">Browse roles</a><button class="button button-quiet js-share" type="button" data-company-share="${escapeHTML(company.slug)}">Share</button></div></article>`).join('');
+      select('#company-grid').innerHTML=companyData.map(company=>`<article class="company-card"><div class="company-brand-row">${markFor(company)}<span class="company-state">Real client · hiring</span></div><h2>${escapeHTML(company.name)}</h2><p class="company-meta">${escapeHTML(company.industry)} · ${escapeHTML(company.location)}</p><div class="company-proof"><div><strong>${company.activeRoles}</strong><span>active roles</span></div><div><strong>${company.salaryVisibleRoles}</strong><span>salary-visible</span></div></div><div class="stack-chips" aria-label="Evidence stack state"><span class="sc">MAP n=0</span><span class="sc">HIRING awaiting</span><span class="sc">WORK awaiting</span><span class="sc ${company.salaryVisibleRoles>0?'ok':''}">${company.salaryVisibleRoles>0?'SAL posted':'SAL &mdash;'}</span><span class="sc ok">ROLES ${company.activeRoles}</span></div><div class="company-actions"><button class="button button-primary js-company" type="button" data-company="${escapeHTML(company.slug)}">View company</button><a class="button button-quiet" href="${coreJobsURL(company)}">Browse roles</a><button class="button button-quiet js-share" type="button" data-company-share="${escapeHTML(company.slug)}">Share</button></div></article>`).join('');
       bindCompanyLogos(select('#company-grid'));bindCompanySheen(select('#company-grid'));
     }
 
@@ -520,6 +830,155 @@
       island.style.setProperty("--my",((e.clientY-r.top)/r.height*100)+"%");
     },{passive:true});
   }
+  })();
+  </script>
+
+  <script>
+  (function(){
+  "use strict";
+  var CARDS_URL='../../data/public-company-cards-v1.json';
+  var cards=null,draftKey='gdmm-draft';
+  function $(id){return document.getElementById(id)}
+  function escH(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+  function currentCompany(){
+    if(!cards)return null;
+    var slug=new URLSearchParams(location.search).get('company');
+    return cards.companies.filter(function(x){return x.slug===slug})[0]||null;
+  }
+  function fillStack(){
+    var c=currentCompany();if(!c)return;
+    var posted=c.salaryVisibleRoles,total=c.activeRoles;
+    var baseEl=$('sal-base');
+    if(baseEl)baseEl.textContent=posted>0?('Stated on '+posted+' of '+total+' live postings'):'Not stated on the live posting — ask';
+    var pl=$('sal-posted-line');
+    if(pl)pl.innerHTML=posted>0
+      ?'<strong>'+posted+' of '+total+'</strong> active roles state a salary on the live listing &mdash; real posted data, available now. We link to the figures rather than copy numbers we cannot audit.'
+      :'No active role states a salary on the live listing. That is a question to ask &mdash; not a defect, and not a hidden figure.';
+    var rc=$('roles-count');if(rc)rc.textContent=total;
+    var rb=$('roles-browse');if(rb)rb.href='https://www.refertrm.com/eq/jobs?company='+encodeURIComponent(c.slug);
+    var rk=$('roles-core');if(rk)rk.href='https://www.refertrm.com/company/'+encodeURIComponent(c.slug);
+    var g=$('ask-grid');
+    if(g){
+      var out=[];
+      if(posted<total)out.push({q:'“Can you confirm the exact salary band for this role in writing?”',src:'DERIVED FROM: SALARY VISIBILITY · '+(total-posted)+' OF '+total+' ROLES UNSTATED · LIVE CONTRACT'});
+      if(posted>0)out.push({q:'“Can I see the salary breakdown in writing — base, commission, allowances, deductions?”',src:'DERIVED FROM: SALARY VISIBILITY · '+posted+' ROLES STATE SALARY · A POSTING IS NOT A BREAKDOWN'});
+      out.push({q:'“When will I hear the outcome, and who do I follow up with if that date passes?”',src:'HIRING SIDE · NO VERIFIED HIRING REPORTS YET · GENERAL GUIDANCE'});
+      out.push({q:'“What is the official finish time, and what time do people actually leave?”',src:'WORKPLACE SIDE AT n=0 · GENERAL GUIDANCE · NOT COMPANY EVIDENCE'});
+      out.push({q:'“How is leave requested, and who approves it?”',src:'WORKPLACE SIDE AT n=0 · GENERAL GUIDANCE · NOT COMPANY EVIDENCE'});
+      g.innerHTML=out.map(function(x){return '<div class="ask-card"><p class="q">'+x.q+'</p><p class="src">'+x.src+'</p></div>'}).join('');
+    }
+    draftKey='gdmm-draft-'+c.slug;
+    loadDraft();
+  }
+  fetch(CARDS_URL,{headers:{Accept:'application/json'}}).then(function(r){return r.ok?r.json():null}).then(function(c){cards=c;fillStack()}).catch(function(){});
+  var portrait=$('company-portrait');
+  if(portrait)new MutationObserver(function(){fillStack()}).observe(portrait,{childList:true});
+  addEventListener('popstate',function(){setTimeout(fillStack,0)});
+
+  /* ---- MODULE 07 — contribute + privacy shield (live flow) ---- */
+  var stack=$('stack-contribute');
+  if(!stack)return;
+  function val(id){var el=$(id);return el?el.value:''}
+  function markSaved(txt){
+    ['ct-save-quiet','ct-save-incident'].forEach(function(id){
+      var el=$(id);if(!el)return;
+      el.querySelector('span').textContent=txt||('Draft saved on this device · '+new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}));
+    });
+  }
+  function saveDraft(){
+    var d={taps:{},practice:val('ct-practice'),advice:val('ct-advice')};
+    stack.querySelectorAll('.tap-opts').forEach(function(gr){
+      var b=gr.querySelector('.tap[aria-pressed="true"]');
+      if(b)d.taps[gr.id]=b.textContent.trim();
+    });
+    try{localStorage.setItem(draftKey,JSON.stringify(d));markSaved()}catch(e){}
+  }
+  function loadDraft(){
+    var raw=null;
+    try{raw=localStorage.getItem(draftKey)}catch(e){}
+    if(!raw)return;
+    var d;try{d=JSON.parse(raw)}catch(e){return}
+    if($('ct-practice')&&d.practice)$('ct-practice').value=d.practice;
+    if($('ct-advice')&&d.advice)$('ct-advice').value=d.advice;
+    if(d.taps)Object.keys(d.taps).forEach(function(gid){
+      var gr=$(gid);if(!gr)return;
+      gr.querySelectorAll('.tap').forEach(function(t){
+        t.setAttribute('aria-pressed',String(t.textContent.trim()===d.taps[gid]));
+      });
+    });
+    markSaved('Draft restored from this device');
+    updatePreview();
+  }
+  function clearDraft(){
+    try{localStorage.removeItem(draftKey)}catch(e){}
+    ['ct-practice','ct-advice'].forEach(function(id){if($(id))$(id).value=''});
+    stack.querySelectorAll('.tap').forEach(function(t){t.setAttribute('aria-pressed','false')});
+    markSaved('Draft discarded');
+    updatePreview();
+  }
+  var saveTimer=null;
+  function queueSave(){clearTimeout(saveTimer);saveTimer=setTimeout(saveDraft,400)}
+
+  stack.addEventListener('click',function(e){
+    var b=e.target.closest('.tap');if(!b)return;
+    var gr=b.closest('.tap-opts');
+    gr.querySelectorAll('.tap').forEach(function(t){t.setAttribute('aria-pressed','false')});
+    b.setAttribute('aria-pressed','true');
+    queueSave();updatePreview();
+  });
+  ['ct-practice','ct-advice'].forEach(function(id){
+    var el=$(id);if(el)el.addEventListener('input',function(){queueSave();updatePreview()});
+  });
+
+  /* shield coarsening — live preview */
+  function sw(id){var el=$(id);return el?el.checked:true}
+  function updatePreview(){
+    var pv=$('ct-preview');if(!pv)return;
+    var relB=document.querySelector('#ct-rel .tap[aria-pressed="true"]');
+    var rel=relB?relB.dataset.rel:null;
+    var who=rel==='workplace'?'A worker':(rel==='hiring'?'An applicant':'A contributor');
+    var segs=[
+      sw('cr-role')?who:'<span class="risky">role as written — identifying</span>',
+      sw('cr-loc')?'location coarsened':'<span class="risky">location as written — identifying</span>',
+      sw('cr-ten')?'tenure removed':'<span class="risky">tenure as written — identifying</span>',
+      sw('cr-date')?'within the last year':'<span class="risky">exact date — identifying</span>'
+    ];
+    var said=val('ct-practice').trim();
+    var saidHtml=said?('“'+escH(said)+'”'):'<span style="color:var(--on-dark-subtle);font-style:italic">Your guided account appears here as you write it — name, team and exact dates stay out by design.</span>';
+    pv.innerHTML='<div class="who"><strong>'+who+'</strong> · '+segs.slice(1).join(' · ')+'</div><p class="said">'+saidHtml+'</p><p class="vcaveat">VERIFIED CONTACT = AN INTERACTION HAPPENED · IT DOES NOT PROVE EVERY STATEMENT IS TRUE</p>';
+    var allOn=sw('cr-role')&&sw('cr-loc')&&sw('cr-ten')&&sw('cr-date');
+    var rt=$('ct-risk-title'),rs=$('ct-risk-sub');
+    if(rt)rt.textContent=allOn?'Coarsened by default':'Re-identification risk detected';
+    if(rs)rs.textContent=allOn
+      ?'Role, location, tenure and date are generalised before anything publishes — the combination can identify a person in a small team. Switch any row off to see the risk return.'
+      :'The highlighted details could identify you in a small team. Turn coarsening back on, or share as quiet signals only.';
+  }
+  ['cr-role','cr-loc','cr-ten','cr-date'].forEach(function(id){
+    var el=$(id);if(el)el.addEventListener('change',updatePreview);
+  });
+
+  /* offline / restore / discard */
+  var banner=$('ct-offline');
+  function setOffline(on){if(banner)banner.hidden=!on}
+  addEventListener('offline',function(){setOffline(true)});
+  addEventListener('online',function(){setOffline(false);markSaved('Back online — draft intact on this device')});
+  if(typeof navigator.onLine==='boolean'&&!navigator.onLine)setOffline(true);
+  var rsBtn=$('ct-restore');if(rsBtn)rsBtn.addEventListener('click',function(){loadDraft();setOffline(false)});
+  var dcBtn=$('ct-discard');if(dcBtn)dcBtn.addEventListener('click',function(){clearDraft();setOffline(false)});
+
+  /* approve / quiet-only — honest end state, nothing is sent */
+  function confirmFlow(kind){
+    var cf=$('ct-confirm');if(!cf)return;
+    cf.hidden=false;
+    cf.innerHTML=kind==='shield'
+      ?'<strong>Shielded version approved — and held on this device.</strong><br>Nothing was sent. When the governed G-12 path opens, this draft is what would be offered for moderation and delayed, threshold-checked publication. You can return, edit, or discard it anytime.'
+      :'<strong>Quiet signals noted — and held on this device.</strong><br>Nothing was sent. Only aggregated counts would ever appear, and only after the D-22 safety threshold is met. Your identity never travels with a signal.';
+    cf.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'});
+  }
+  var apBtn=$('ct-approve');if(apBtn)apBtn.addEventListener('click',function(){confirmFlow('shield')});
+  var qtBtn=$('ct-quiet');if(qtBtn)qtBtn.addEventListener('click',function(){confirmFlow('quiet')});
+
+  updatePreview();
   })();
   </script>
 </body>
