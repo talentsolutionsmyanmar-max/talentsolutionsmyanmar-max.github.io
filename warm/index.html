@@ -17,14 +17,10 @@ html{scroll-behavior:smooth}
 body{background:var(--ivory);color:var(--navy);font-family:var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit}
 [lang="my"]{font-family:'Padauk','Inter',sans-serif}
-
-/* ---------- grain (alive texture, light) ---------- */
 .grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:200;opacity:.05;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
   animation:grain 8s steps(10) infinite}
 @keyframes grain{0%,100%{transform:translate(0,0)}10%{transform:translate(-2%,-3%)}30%{transform:translate(3%,-2%)}50%{transform:translate(-3%,2%)}70%{transform:translate(2%,3%)}90%{transform:translate(-1%,1%)}}
-
-/* ---------- side nav (anchor-native, works without JS) ---------- */
 .nav{position:fixed;right:clamp(12px,2.5vw,28px);top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:14px}
 .nav a{display:flex;align-items:center;gap:9px;flex-direction:row-reverse;text-decoration:none}
 .nav .d{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.35;transition:opacity .3s,transform .3s;flex:none}
@@ -32,77 +28,88 @@ a{color:inherit}
 .nav a:hover .l,.nav a:focus-visible .l{opacity:.75;transform:none}
 .nav a.on .d{opacity:1;transform:scale(1.5)}
 .nav a.on .l{opacity:.8;transform:none}
-
-/* ---------- moments ---------- */
 .snap{scroll-snap-type:y proximity}
 .m{position:relative;min-height:100vh;min-height:100svh;scroll-snap-align:start;display:flex;align-items:center;overflow:hidden;
-  padding:clamp(24px,6vw,80px);color:var(--mi,var(--navy));
-  background:var(--mbg,var(--ivory));transition:background .6s}
-.mInner{position:relative;z-index:5;max-width:760px;width:100%;margin:0 auto}
-
-/* ghost numeral */
+  padding:clamp(24px,6vw,80px);color:var(--mi,var(--navy));background:var(--mbg,var(--ivory));
+  transition:background .6s,filter .8s;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.mInner{position:relative;z-index:6;max-width:760px;width:100%;margin:0 auto;pointer-events:none}
+.mInner a,.mInner details,.mInner summary{pointer-events:auto}
 .mNo{position:absolute;left:clamp(8px,3vw,40px);bottom:-4vh;z-index:1;font-family:var(--disp);font-weight:800;
-  font-size:clamp(180px,34vh,420px);line-height:1;letter-spacing:-.05em;color:var(--mno,rgba(0,31,63,.05));pointer-events:none;user-select:none}
-
-/* pointer aura (soul lineage — JS lerped, static fallback) */
+  font-size:clamp(180px,34vh,420px);line-height:1;letter-spacing:-.05em;color:var(--mno,rgba(0,31,63,.05));pointer-events:none}
 .mAura{position:absolute;inset:0;z-index:2;pointer-events:none;
   background:radial-gradient(560px circle at var(--px,68%) var(--py,32%),var(--maura,rgba(212,175,55,.08)),transparent 60%)}
-
-/* breathing ambience — 5.5 breaths/min = 10.9s */
 .mBreath{position:absolute;left:50%;top:50%;z-index:1;width:110vmin;height:110vmin;transform:translate(-50%,-50%);pointer-events:none;
   background:radial-gradient(circle,var(--mb,rgba(212,175,55,.10)),transparent 62%);
-  animation:breath 10.9s ease-in-out infinite}
+  animation:breath 10.9s ease-in-out infinite;transition:opacity .8s,filter .8s}
 @keyframes breath{0%,100%{transform:translate(-50%,-50%) scale(.86);opacity:.55}45%{transform:translate(-50%,-50%) scale(1.06);opacity:1}60%{transform:translate(-50%,-50%) scale(1.04);opacity:.95}}
-
-/* the orb — one abstract light, six weathers (non-human character art) */
 .mOrb{position:absolute;z-index:3;right:clamp(6%,12vw,18%);top:50%;width:clamp(120px,16vmin,190px);height:clamp(120px,16vmin,190px);
   transform:translateY(-58%);border-radius:50%;pointer-events:none;
   background:var(--morb,radial-gradient(circle at 36% 32%,#F2DCA6,#D4AF37 68%,#A98418));
   box-shadow:0 0 80px 10px var(--moglow,rgba(212,175,55,.28));
-  animation:orbBreath 10.9s ease-in-out infinite}
+  animation:orbBreath 10.9s ease-in-out infinite;transition:box-shadow .6s,filter .6s}
 @keyframes orbBreath{0%,100%{transform:translateY(-58%) scale(.94)}45%{transform:translateY(-58%) scale(1.05)}60%{transform:translateY(-58%) scale(1.03)}}
-
-/* copy */
 .mK{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;opacity:.62;font-weight:500}
 .mK::after{content:"";width:64px;height:1px;background:currentColor;opacity:.4}
 .mWords{margin-top:26px;font-family:var(--disp);font-size:clamp(26px,3.6vw,44px);font-weight:700;letter-spacing:-.02em;line-height:1.22;max-width:14em}
 .mWords em{font-style:normal;color:var(--mem,#96760E)}
-.mSlot{margin-top:30px;display:inline-flex;align-items:center;gap:9px;border:1px dashed currentColor;border-radius:7px;padding:8px 13px;
+.mSlot{margin-top:26px;display:inline-flex;align-items:center;gap:9px;border:1px dashed currentColor;border-radius:7px;padding:8px 13px;
   font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.55}
 .mSlot i{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
-
-/* ---------- the six temperatures (muted saturation always) ---------- */
-/* 01 WELCOME — dawn warmth */
+.mGround{margin-top:12px;display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;opacity:.48;line-height:1.7;max-width:520px}
+.mGround b{opacity:.9;font-weight:700}
+.mHint{display:none;margin-top:22px;align-items:center;gap:10px;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;opacity:.8;font-weight:700}
+.mHint i{width:9px;height:9px;border-radius:50%;background:var(--mem,#96760E);flex:none;animation:hintPulse 2.2s ease-in-out infinite}
+@keyframes hintPulse{0%,100%{transform:scale(.7);opacity:.5}50%{transform:scale(1.25);opacity:1}}
+html.js.rmOk .mHint{display:inline-flex}
+html.js .mK,html.js .mWords,html.js .mSlot,html.js .mGround,html.js .mHint,html.js .opt{opacity:0;transform:translateY(18px);transition:opacity .9s ease,transform .9s ease}
+html.js .m.in .mK,html.js .m.in .mWords,html.js .m.in .mSlot,html.js .m.in .mGround,html.js .m.in .mHint,html.js .m.in .opt{opacity:1;transform:none}
+html.js .m.in .mWords{transition-delay:.1s}html.js .m.in .mSlot{transition-delay:.24s}html.js .m.in .mGround{transition-delay:.32s}html.js .m.in .mHint{transition-delay:.4s}html.js .m.in .opt{transition-delay:.3s}
+html.js.rmOk .m.in .mSlot{opacity:.55}html.js.rmOk .m.in .mGround{opacity:.48}html.js.rmOk .m.in .mHint{opacity:.8}
 .m1{--mbg:linear-gradient(180deg,#F7F5F0 0%,#F6EEDB 72%,#F3E4C6 100%);--mi:#001F3F;
   --maura:rgba(224,172,92,.10);--mb:rgba(222,176,96,.13);--mno:rgba(0,31,63,.05);--mem:#96760E;
   --morb:radial-gradient(circle at 36% 32%,#F4E0AE,#DDB254 68%,#B08A20);--moglow:rgba(212,175,55,.30)}
-/* 02 REJECTION — dimmed dusk, one ember kept alive */
+.m1.held{filter:brightness(1.05) saturate(1.05)}
+.m1.held .mBreath{opacity:1;filter:brightness(1.35)}
+.m1.held .mOrb{box-shadow:0 0 130px 26px rgba(212,175,55,.5)}
 .m2{--mbg:linear-gradient(180deg,#081222 0%,#0A1526 60%,#0C1730 100%);--mi:#C2CEE0;
   --maura:rgba(212,175,55,.05);--mb:rgba(212,175,55,.05);--mno:rgba(255,255,255,.045);--mem:#E3C35B;
-  --morb:radial-gradient(circle at 38% 34%,#F0D692,#C9A02E 62%,#7A5E10);--moglow:rgba(212,175,55,.42)}
-.m2 .mOrb{width:clamp(88px,11vmin,130px);height:clamp(88px,11vmin,130px)}
+  --morb:radial-gradient(circle at 38% 34%,#F0D692,#C9A02E 62%,#7A5E10)}
+.m2 .mOrb{width:clamp(88px,11vmin,130px);height:clamp(88px,11vmin,130px);box-shadow:0 0 80px 12px rgba(212,175,55,var(--wg,.42))}
 .m2 .mWords{font-weight:600}
-/* 03 BEFORE THE INTERVIEW — clear composed light */
 .m3{--mbg:linear-gradient(180deg,#F2F5F7 0%,#EDF1F4 100%);--mi:#0B1D38;
   --maura:rgba(126,154,172,.10);--mb:rgba(126,154,172,.11);--mno:rgba(0,31,63,.045);--mem:#3E6478;
   --morb:radial-gradient(circle at 36% 32%,#D7E3EA,#9DB8C6 68%,#6E8E9E);--moglow:rgba(126,154,172,.26)}
-/* 04 STREAK — fullest hearth gold */
+.m3.held .mOrb{filter:brightness(1.06)}
 .m4{--mbg:linear-gradient(180deg,#F9F2DF 0%,#F7EBCD 100%);--mi:#001F3F;
   --maura:rgba(212,175,55,.13);--mb:rgba(212,175,55,.16);--mno:rgba(150,118,14,.07);--mem:#96760E;
-  --morb:radial-gradient(circle at 36% 32%,#F6E3AC,#D4AF37 60%,#96760E);--moglow:rgba(212,175,55,.44)}
-.m4 .mOrb{width:clamp(150px,20vmin,230px);height:clamp(150px,20vmin,230px)}
-/* 05 A HEAVY DAY — darkest, quietest, teal care light */
+  --morb:radial-gradient(circle at 36% 32%,#F6E3AC,#D4AF37 60%,#96760E)}
+.m4 .mOrb{width:clamp(150px,20vmin,230px);height:clamp(150px,20vmin,230px);box-shadow:0 0 90px 16px rgba(212,175,55,.44)}
+.m4 .mOrb.flare{box-shadow:0 0 150px 34px rgba(212,175,55,.62)}
 .m5{--mbg:linear-gradient(180deg,#030D19 0%,#04101F 100%);--mi:#9FB4C9;
   --maura:rgba(15,118,110,.08);--mb:rgba(15,118,110,.09);--mno:rgba(255,255,255,.03);--mem:#4FB3A6;
   --morb:radial-gradient(circle at 38% 34%,#7FB8AE,#0F766E 66%,#0A4A45);--moglow:rgba(15,118,110,.34)}
-.m5 .mOrb{width:clamp(76px,9vmin,110px);height:clamp(76px,9vmin,110px)}
+.m5 .mOrb{width:clamp(76px,9vmin,110px);height:clamp(76px,9vmin,110px);animation:none}
 .m5 .mWords{font-weight:600;opacity:.92}
-/* 06 YDC YOUTH — fresh morning green */
 .m6{--mbg:linear-gradient(180deg,#F2F6EF 0%,#EAF1E4 100%);--mi:#122B1C;
   --maura:rgba(110,154,114,.10);--mb:rgba(110,154,114,.12);--mno:rgba(18,43,28,.05);--mem:#3F6B45;
   --morb:radial-gradient(circle at 36% 32%,#D8E8CF,#8FB48C 68%,#5E8560);--moglow:rgba(110,154,114,.30)}
-
-/* ---------- cover & footer ---------- */
+.fx{position:absolute;inset:0;z-index:4;pointer-events:none;overflow:hidden}
+.spark{position:absolute;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#F4E2B0,#D4AF37 70%);box-shadow:0 0 14px 4px rgba(212,175,55,.55);animation:sparkUp 1s ease-out forwards}
+@keyframes sparkUp{0%{transform:translate(0,0) scale(1);opacity:1}70%{opacity:.9}100%{transform:translate(var(--sx,0),-90px) scale(.2);opacity:0}}
+.ember{position:absolute;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#F6E3AC,#D4AF37 70%);box-shadow:0 0 12px 3px rgba(212,175,55,.5);animation:emberPop .6s cubic-bezier(.2,1.6,.4,1) forwards;transform:scale(0)}
+@keyframes emberPop{to{transform:scale(1)}}
+.ring{position:absolute;border-radius:50%;border:1.5px solid rgba(95,133,96,.5);transform:translate(-50%,-50%) scale(0);animation:ringGrow 1.8s ease-out forwards}
+.ring.stay{animation:none;opacity:.28}
+@keyframes ringGrow{0%{transform:translate(-50%,-50%) scale(0);opacity:.85}100%{transform:translate(-50%,-50%) scale(5.2);opacity:0}}
+.bRing{position:absolute;z-index:3;right:clamp(6%,12vw,18%);top:50%;width:clamp(170px,22vmin,250px);height:clamp(170px,22vmin,250px);transform:translateY(-58%);pointer-events:none}
+.bRing svg{width:100%;height:100%;transform:rotate(-90deg)}
+.bRing circle{fill:none;stroke-width:2}
+.bRing .track{stroke:rgba(62,100,120,.18)}
+.bRing .prog{stroke:#3E6478;stroke-linecap:round;stroke-dasharray:308;stroke-dashoffset:308}
+.m3.inhale .prog{transition:stroke-dashoffset 4s linear;stroke-dashoffset:0}
+.m3.exhale .prog{transition:stroke-dashoffset 6s cubic-bezier(.4,0,.6,1);stroke-dashoffset:308}
+.bState{position:absolute;z-index:5;right:clamp(6%,12vw,18%);top:50%;transform:translateY(-58%);width:clamp(170px,22vmin,250px);display:grid;place-items:center;height:clamp(170px,22vmin,250px);pointer-events:none;
+  font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#3E6478;opacity:.85;text-align:center;line-height:2}
 .cover{position:relative;min-height:100vh;min-height:100svh;scroll-snap-align:start;display:flex;align-items:center;overflow:hidden;
   padding:clamp(24px,6vw,80px);background:linear-gradient(180deg,#F7F5F0,#F4EFE3);color:var(--navy)}
 .cInner{position:relative;z-index:5;max-width:760px;margin:0 auto}
@@ -115,15 +122,13 @@ a{color:inherit}
 .cBreathDot{width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 36% 32%,#F2DCA6,#D4AF37 70%);box-shadow:0 0 18px 3px rgba(212,175,55,.35);animation:dotBreath 10.9s ease-in-out infinite;flex:none}
 @keyframes dotBreath{0%,100%{transform:scale(.82)}45%{transform:scale(1.12)}60%{transform:scale(1.08)}}
 .cBreathT{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#75849A}
-.cIdx{margin-top:38px;display:flex;flex-direction:column;gap:2px;max-width:420px}
+.cIdx{margin-top:38px;display:flex;flex-direction:column;gap:2px;max-width:480px}
 .cIdx a{display:flex;justify-content:space-between;gap:14px;padding:11px 2px;border-bottom:1px solid rgba(0,31,63,.08);text-decoration:none;font-size:13.5px;color:#3E5069;transition:color .2s,padding-left .2s}
 .cIdx a:hover{color:#96760E;padding-left:8px}
-.cIdx a b{font-family:var(--mono);font-weight:700;font-size:11px;color:#96760E;letter-spacing:.1em}
+.cIdx a b{font-family:var(--mono);font-weight:700;font-size:11px;color:#96760E;letter-spacing:.1em;white-space:nowrap}
 .cFlags{margin-top:34px;display:flex;gap:8px;flex-wrap:wrap}
 .cF{display:inline-flex;align-items:center;gap:8px;border:1px dashed rgba(150,118,14,.5);border-radius:7px;padding:7px 12px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#96760E;background:rgba(212,175,55,.07)}
 .cF i{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
-
-/* ---------- heavy-day opt-ins (native details = noscript-usable, dismissible) ---------- */
 .opt{margin-top:34px;display:flex;flex-direction:column;gap:12px;max-width:520px}
 details.optI{border:1px solid rgba(159,180,201,.25);border-radius:12px;background:rgba(255,255,255,.02);overflow:hidden}
 details.optI summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:15px 18px;
@@ -135,7 +140,6 @@ details.optI[open] summary::after{transform:rotate(45deg)}
 .optBody p{font-size:13.5px;line-height:1.8;color:#8BA2B8;max-width:46em}
 .optBody a{color:#4FB3A6;text-decoration:none;border-bottom:1px solid rgba(79,179,166,.4);font-weight:600}
 .optBody a:hover{border-bottom-color:currentColor}
-/* guided breath — the ambience made explicit, opt-in */
 .gBreath{margin-top:18px;display:flex;align-items:center;gap:20px}
 .gC{position:relative;width:86px;height:86px;flex:none}
 .gC::before,.gC::after{content:"";position:absolute;inset:0;border-radius:50%}
@@ -148,25 +152,24 @@ details.optI[open] summary::after{transform:rotate(45deg)}
 @keyframes gIn{0%,42%{opacity:.9}52%,100%{opacity:0}}
 @keyframes gOut{0%,50%{opacity:0}58%,92%{opacity:.9}100%{opacity:0}}
 .careNote{margin-top:14px;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(159,180,201,.5)}
-
-/* ---------- footer gate ---------- */
 .gate{padding:26px clamp(24px,6vw,80px);background:#030D19;color:#54677F;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;border-top:1px solid rgba(255,255,255,.05)}
-
-/* ---------- fences: reduced motion collapse, small screens, 3G ---------- */
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
-  .grain,.mBreath,.mOrb,.cBreathDot,.gC::before,.gC::after,.gT span{animation:none !important}
+  .grain,.mBreath,.mOrb,.cBreathDot,.gC::before,.gC::after,.gT span,.mHint i{animation:none !important}
   .grain{display:none}
   .mBreath{opacity:.7;transform:translate(-50%,-50%) scale(.95)}
   .gT span:first-child{opacity:.9;position:static}
   .gT span.o{display:none}
+  html.js .mK,html.js .mWords,html.js .mSlot,html.js .mGround,html.js .mHint,html.js .opt{transition:none !important}
 }
 @media(max-width:860px){.grain{display:none}.nav .l{display:none}}
 @media(max-width:640px){
   .mOrb{position:relative;right:auto;top:auto;transform:none;margin:34px auto 0;animation-name:orbBreathM}
   @keyframes orbBreathM{0%,100%{transform:scale(.94)}45%{transform:scale(1.05)}60%{transform:scale(1.03)}}
-  .m{align-items:flex-start;padding-top:16vh}.mInner{margin:0}
+  .m5 .mOrb{animation:none}
+  .m{align-items:flex-start;padding-top:12vh}.mInner{margin:0}
+  .bRing,.bState{position:relative;right:auto;top:auto;transform:none;margin:26px auto 0}
 }
 </style>
 </head>
@@ -191,25 +194,25 @@ details.optI[open] summary::after{transform:rotate(45deg)}
   <div class="cInner">
     <div class="cK">ReferTRM · The warm layer</div>
     <h1 class="cTitle">A place<br>that <em>breathes</em></h1>
-    <p class="cSub">Six moments of short, real, dignified warmth — at the times that hurt. Witness, never lecture. Warmth for everyone, pity for no one. The ambience itself is the intervention: it breathes at 5.5 breaths a minute, and you may too.</p>
-    <div class="cBreath"><span class="cBreathDot" aria-hidden="true"></span><span class="cBreathT">5.5 breaths / min · coherent breathing · the ambience is the intervention</span></div>
+    <p class="cSub">Six moments of short, real, dignified warmth — at the times that hurt. Each one is a psychology path, grounded in published research and built as something you <b>do</b>, not just read: the gesture is the intervention. Witness, never lecture. Warmth for everyone, pity for no one.</p>
+    <div class="cBreath"><span class="cBreathDot" aria-hidden="true"></span><span class="cBreathT">5.5 breaths / min · resonance breathing · the ambience is the intervention</span></div>
     <nav class="cIdx" aria-label="Moment index">
-      <a href="#m1"><span>Welcome — the door opens</span><b>01 · DAWN</b></a>
-      <a href="#m2"><span>Rejection — one ember stays lit</span><b>02 · DUSK</b></a>
-      <a href="#m3"><span>Before the interview — composed light</span><b>03 · CLEAR</b></a>
-      <a href="#m4"><span>Streak — the hearth at its fullest</span><b>04 · HEARTH</b></a>
-      <a href="#m5"><span>A heavy day — the quietest room</span><b>05 · CARE</b></a>
-      <a href="#m6"><span>Youth — the morning is yours</span><b>06 · MORNING</b></a>
+      <a href="#m1"><span>Welcome — hold to step into the morning</span><b>01 · BELONGING</b></a>
+      <a href="#m2"><span>Rejection — touch the ember, keep it alive</span><b>02 · SELF-COMPASSION</b></a>
+      <a href="#m3"><span>Before the interview — one long exhale</span><b>03 · RESONANCE</b></a>
+      <a href="#m4"><span>Streak — add today to the fire</span><b>04 · HABIT</b></a>
+      <a href="#m5"><span>A heavy day — the light comes to you</span><b>05 · ACTIVATION</b></a>
+      <a href="#m6"><span>Youth — tap to grow a ring</span><b>06 · GROWTH</b></a>
     </nav>
     <div class="cFlags">
+      <span class="cF"><i></i>Every moment grounded in published research — tags on each frame</span>
       <span class="cF"><i></i>MM strings — CCO F50, pending sign-off</span>
-      <span class="cF"><i></i>EN below = layout stand-ins, not final copy</span>
       <span class="cF"><i></i>Reduced-motion &amp; noscript — fully usable</span>
     </div>
   </div>
 </header>
 
-<!-- 01 WELCOME -->
+<!-- 01 WELCOME — belonging -->
 <section class="m m1" id="m1" aria-label="Moment 01 — Welcome">
   <div class="mAura"></div><div class="mBreath"></div><div class="mOrb" aria-hidden="true"></div>
   <div class="mNo" aria-hidden="true">01</div>
@@ -217,43 +220,56 @@ details.optI[open] summary::after{transform:rotate(45deg)}
     <div class="mK">01 · Welcome — dawn warmth</div>
     <p class="mWords">You arrived.<br>Before anything begins —<br><em>that already counts.</em></p>
     <div class="mSlot"><i></i>MM string — CCO F50-01 · pending · EN is layout stand-in</div>
+    <span class="mGround"><b>Grounded</b> — doubt about belonging is normal and temporary: a one-hour social-belonging intervention lifted grades and health for three years (Walton &amp; Cohen, <i>Science</i> 2011). Arrival first, verdicts never.</span>
+    <div class="mHint"><i></i>Press &amp; hold anywhere — step into the morning</div>
   </div>
 </section>
 
-<!-- 02 REJECTION -->
+<!-- 02 REJECTION — self-compassion -->
 <section class="m m2" id="m2" aria-label="Moment 02 — Rejection">
   <div class="mAura"></div><div class="mBreath"></div><div class="mOrb" aria-hidden="true"></div>
+  <div class="fx" aria-hidden="true"></div>
   <div class="mNo" aria-hidden="true">02</div>
   <div class="mInner">
     <div class="mK">02 · Rejection — dimmed dusk, one ember</div>
     <p class="mWords">A no lands on one door,<br>not on you.<br><em>The ember stays lit.</em></p>
     <div class="mSlot"><i></i>MM string — CCO F50-02 · pending · EN is layout stand-in</div>
+    <span class="mGround"><b>Grounded</b> — self-compassion beats self-esteem for rejection: a field RCT with job seekers cut self-criticism and lifted affect (Neff lineage). Kindness here is an act, not a thought — so you tend the ember by hand.</span>
+    <div class="mHint"><i></i>Touch the ember — keep it alive</div>
   </div>
 </section>
 
-<!-- 03 BEFORE THE INTERVIEW -->
+<!-- 03 BEFORE THE INTERVIEW — resonance -->
 <section class="m m3" id="m3" aria-label="Moment 03 — Before the interview">
-  <div class="mAura"></div><div class="mBreath"></div><div class="mOrb" aria-hidden="true"></div>
+  <div class="mAura"></div><div class="mBreath"></div>
+  <div class="bRing" aria-hidden="true"><svg viewBox="0 0 110 110"><circle class="track" cx="55" cy="55" r="49"/><circle class="prog" cx="55" cy="55" r="49"/></svg></div>
+  <div class="bState" aria-hidden="true">Hold — breathe in<br><span style="opacity:.55">release — let it go</span></div>
+  <div class="mOrb" aria-hidden="true" style="width:clamp(64px,8vmin,96px);height:clamp(64px,8vmin,96px)"></div>
   <div class="mNo" aria-hidden="true">03</div>
   <div class="mInner">
     <div class="mK">03 · Before the interview — clear composed light</div>
     <p class="mWords">Steady. You prepared.<br>Breathe once —<br><em>and go in as yourself.</em></p>
     <div class="mSlot"><i></i>MM string — CCO F50-03 · pending · EN is layout stand-in</div>
+    <span class="mGround"><b>Grounded</b> — breathing at resonance (5.5–6.5 / min) raised HRV and cut perceived stress in an RCT of young adults; a long, extended exhale is the fastest lever the body has. Hold to inhale four seconds, release for six.</span>
+    <div class="mHint"><i></i>Press &amp; hold — breathe in · release — let it go</div>
   </div>
 </section>
 
-<!-- 04 STREAK -->
+<!-- 04 STREAK — habit -->
 <section class="m m4" id="m4" aria-label="Moment 04 — Streak">
   <div class="mAura"></div><div class="mBreath"></div><div class="mOrb" aria-hidden="true"></div>
+  <div class="fx" aria-hidden="true"></div>
   <div class="mNo" aria-hidden="true">04</div>
   <div class="mInner">
     <div class="mK">04 · Streak — fullest hearth gold</div>
     <p class="mWords">Another day kept.<br>Quietly, you are becoming<br><em>someone who keeps days.</em></p>
     <div class="mSlot"><i></i>MM string — CCO F50-04 · pending · EN is layout stand-in</div>
+    <span class="mGround"><b>Grounded</b> — missing once does not break a habit; the spiral after the miss does (Lally's formation curve). So this fire has no chain to break: embers only ever accumulate, never reset.</span>
+    <div class="mHint"><i></i>Tap — add today to the fire</div>
   </div>
 </section>
 
-<!-- 05 A HEAVY DAY -->
+<!-- 05 A HEAVY DAY — activation -->
 <section class="m m5" id="m5" aria-label="Moment 05 — A heavy day">
   <div class="mAura"></div><div class="mBreath"></div><div class="mOrb" aria-hidden="true"></div>
   <div class="mNo" aria-hidden="true">05</div>
@@ -261,6 +277,7 @@ details.optI[open] summary::after{transform:rotate(45deg)}
     <div class="mK">05 · A heavy day — darkest, quietest, care light</div>
     <p class="mWords">Today is heavy.<br>You don't have to<br><em>lift anything here.</em></p>
     <div class="mSlot"><i></i>MM string — CCO F50-05 · pending · EN is layout stand-in</div>
+    <span class="mGround"><b>Grounded</b> — behavioural activation: on the lowest days, a small action comes first and mood follows — never the reverse. So here the light moves toward you; nothing is asked of you at all.</span>
     <div class="opt">
       <details class="optI">
         <summary>Breathe with this — 5.5 / min</summary>
@@ -285,61 +302,168 @@ details.optI[open] summary::after{transform:rotate(45deg)}
   </div>
 </section>
 
-<!-- 06 YDC YOUTH -->
+<!-- 06 YDC YOUTH — growth -->
 <section class="m m6" id="m6" aria-label="Moment 06 — YDC youth">
   <div class="mAura"></div><div class="mBreath"></div><div class="mOrb" aria-hidden="true"></div>
+  <div class="fx" aria-hidden="true"></div>
   <div class="mNo" aria-hidden="true">06</div>
   <div class="mInner">
     <div class="mK">06 · YDC youth — fresh morning green</div>
     <p class="mWords">You are not behind.<br>You are at the beginning —<br><em>and the beginning is power.</em></p>
     <div class="mSlot"><i></i>MM string — CCO F50-06 · pending · EN is layout stand-in</div>
+    <span class="mGround"><b>Grounded</b> — growth mindset works at scale: a one-hour intervention in a nationally representative sample of 12,490 ninth-graders lifted grades and challenge-seeking (Yeager et al., <i>Nature</i> 2019). Growth you can see, one ring at a time.</span>
+    <div class="mHint"><i></i>Tap — grow a ring</div>
   </div>
 </section>
 
 </main>
 
 <footer class="gate">
-  <span>FEEL, NEVER STRUCTURE · DIGNITY / MOTHER-TEST · APOLITICAL · NO CULTURAL CLICHÉS · ABSTRACT NON-HUMAN ART · ZERO EMOJI · MM PENDING CCO · 3G-LIGHT · NOSCRIPT + REDUCED-MOTION USABLE · NO PII</span>
+  <span>FEEL, NEVER STRUCTURE · DIGNITY / MOTHER-TEST · APOLITICAL · NO CULTURAL CLICHÉS · ABSTRACT NON-HUMAN ART · ZERO EMOJI · MM PENDING CCO · RESEARCH-GROUNDED · 3G-LIGHT · NOSCRIPT + REDUCED-MOTION USABLE · NO PII</span>
   <span>WARM LAYER · S322 · KOKO RATES · GO×2</span>
 </footer>
 
 <script>
-/* Progressive enhancement only — the page is fully usable without this. */
+document.documentElement.classList.add('js');
 (function(){
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if(!reduced) document.documentElement.classList.add('rmOk');
 
-  /* pointer soul — lerp'd aura per section (v4 lineage) */
-  if(!reduced && fine){
-    var tx=0.68, ty=0.32, cx=tx, cy=ty;
-    addEventListener('mousemove',function(e){
-      tx=e.clientX/innerWidth; ty=e.clientY/innerHeight;
-    },{passive:true});
-    (function loop(){
-      cx+=(tx-cx)*0.06; cy+=(ty-cy)*0.06;
-      var auras=document.querySelectorAll('.mAura');
-      for(var i=0;i<auras.length;i++){
-        auras[i].style.setProperty('--px',(cx*100).toFixed(2)+'%');
-        auras[i].style.setProperty('--py',(cy*100).toFixed(2)+'%');
-      }
-      requestAnimationFrame(loop);
-    })();
+  var moments = Array.prototype.slice.call(document.querySelectorAll('.m'));
+  if('IntersectionObserver' in window && !reduced){
+    var ioR = new IntersectionObserver(function(es){
+      es.forEach(function(en){ if(en.isIntersecting) en.target.classList.add('in'); });
+    },{threshold:.35});
+    moments.forEach(function(s){ ioR.observe(s); });
+  } else { moments.forEach(function(s){ s.classList.add('in'); }); }
+
+  var px=.68, py=.32, ax=px, ay=py;
+  addEventListener('pointermove', function(e){ px=e.clientX/innerWidth; py=e.clientY/innerHeight; }, {passive:true});
+
+  var m5 = document.getElementById('m5'), orb5 = m5.querySelector('.mOrb');
+  var d5x=0, d5y=0, t5x=0, t5y=0;
+  if(fine && !reduced){
+    m5.addEventListener('pointermove', function(e){
+      var r = orb5.getBoundingClientRect();
+      t5x = Math.max(-90, Math.min(90, (e.clientX-(r.left+r.width/2))*.10));
+      t5y = Math.max(-90, Math.min(90, (e.clientY-(r.top+r.height/2))*.10));
+    }, {passive:true});
   }
 
-  /* nav active state */
+  var m2 = document.getElementById('m2'), orb2 = m2.querySelector('.mOrb'), fx2 = m2.querySelector('.fx');
+  var warm = .42, WARM_MAX = .68, WARM_MIN = .22;
+  function setWarm(){ orb2.style.setProperty('--wg', warm.toFixed(3)); }
+  setWarm();
+  function spark(fx, x, y, sx){
+    if(reduced) return;
+    var s = document.createElement('span');
+    s.className = 'spark';
+    s.style.left = x+'px'; s.style.top = y+'px';
+    s.style.setProperty('--sx', sx || ((Math.random()*60-30).toFixed(0)+'px'));
+    fx.appendChild(s);
+    s.addEventListener('animationend', function(){ s.remove(); });
+  }
+  m2.addEventListener('pointerdown', function(e){
+    var r = m2.getBoundingClientRect();
+    spark(fx2, e.clientX-r.left, e.clientY-r.top);
+    warm = Math.min(WARM_MAX, warm + .05); setWarm();
+  });
+  setInterval(function(){
+    if(!m2.classList.contains('in')) return;
+    if(warm > WARM_MIN){ warm = Math.max(WARM_MIN, warm - .008); setWarm(); }
+  }, 1400);
+
+  var m4 = document.getElementById('m4'), orb4 = m4.querySelector('.mOrb'), fx4 = m4.querySelector('.fx');
+  var emberN = 0;
+  m4.addEventListener('pointerdown', function(e){
+    var r = m4.getBoundingClientRect();
+    var or = orb4.getBoundingClientRect();
+    var ox = or.left - r.left + or.width/2, oy = or.top - r.top + or.height/2;
+    spark(fx4, e.clientX-r.left, e.clientY-r.top, (ox-(e.clientX-r.left))*.7+'px');
+    var d = document.createElement('span');
+    d.className = 'ember';
+    var ang = (-140 + (emberN*23) % 280) * Math.PI/180;
+    var rad = or.width*.78 + (emberN%3)*14;
+    d.style.left = (ox + Math.cos(ang)*rad - 4)+'px';
+    d.style.top  = (oy + Math.sin(ang)*rad - 4)+'px';
+    fx4.appendChild(d);
+    emberN++;
+    orb4.classList.add('flare');
+    setTimeout(function(){ orb4.classList.remove('flare'); }, 550);
+  });
+
+  var m6 = document.getElementById('m6'), orb6 = m6.querySelector('.mOrb'), fx6 = m6.querySelector('.fx');
+  var ringN = 0;
+  m6.addEventListener('pointerdown', function(){
+    if(reduced) return;
+    var r = m6.getBoundingClientRect();
+    var or = orb6.getBoundingClientRect();
+    var w = document.createElement('span');
+    w.className = 'ring';
+    w.style.left = (or.left - r.left + or.width/2)+'px';
+    w.style.top  = (or.top - r.top + or.height/2)+'px';
+    w.style.width = w.style.height = or.width+'px';
+    fx6.appendChild(w);
+    w.addEventListener('animationend', function(){
+      ringN++;
+      if(ringN <= 6){
+        var st = document.createElement('span');
+        st.className = 'ring stay';
+        st.style.left = w.style.left; st.style.top = w.style.top;
+        st.style.width = st.style.height = w.style.width;
+        st.style.transform = 'translate(-50%,-50%) scale('+(1 + ringN*.55).toFixed(2)+')';
+        fx6.appendChild(st);
+      }
+      w.remove();
+    });
+  });
+
+  var m1 = document.getElementById('m1');
+  m1.addEventListener('pointerdown', function(){ m1.classList.add('held'); });
+  ['pointerup','pointercancel','pointerleave'].forEach(function(ev){
+    m1.addEventListener(ev, function(){ m1.classList.remove('held'); });
+  });
+
+  var m3 = document.getElementById('m3');
+  m3.addEventListener('pointerdown', function(){
+    m3.classList.remove('exhale'); void m3.offsetWidth;
+    m3.classList.add('inhale','held');
+  });
+  ['pointerup','pointercancel','pointerleave'].forEach(function(ev){
+    m3.addEventListener(ev, function(){
+      if(!m3.classList.contains('inhale')) return;
+      m3.classList.remove('inhale','held'); void m3.offsetWidth;
+      m3.classList.add('exhale');
+    });
+  });
+
   if('IntersectionObserver' in window){
-    var links=document.querySelectorAll('.nav a');
-    var map={};
-    links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
-    var io=new IntersectionObserver(function(es){
+    var links = document.querySelectorAll('.nav a'), map = {};
+    links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+    var io = new IntersectionObserver(function(es){
       es.forEach(function(en){
         if(en.isIntersecting){
-          links.forEach(function(a){a.classList.remove('on');});
-          var a=map[en.target.id]; if(a)a.classList.add('on');
+          links.forEach(function(a){ a.classList.remove('on'); });
+          var a = map[en.target.id]; if(a) a.classList.add('on');
         }
       });
     },{threshold:.5});
-    document.querySelectorAll('.m').forEach(function(s){io.observe(s);});
+    moments.forEach(function(s){ io.observe(s); });
+  }
+
+  if(!reduced){
+    var auras = document.querySelectorAll('.mAura');
+    (function loop(){
+      ax += (px-ax)*.06; ay += (py-ay)*.06;
+      for(var i=0;i<auras.length;i++){
+        auras[i].style.setProperty('--px',(ax*100).toFixed(2)+'%');
+        auras[i].style.setProperty('--py',(ay*100).toFixed(2)+'%');
+      }
+      d5x += (t5x-d5x)*.03; d5y += (t5y-d5y)*.03;
+      orb5.style.transform = 'translate(calc(-50% + '+d5x.toFixed(1)+'px), calc(-50% + '+d5y.toFixed(1)+'px))';
+      requestAnimationFrame(loop);
+    })();
   }
 })();
 </script>
