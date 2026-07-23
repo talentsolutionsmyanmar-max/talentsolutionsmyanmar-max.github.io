@@ -142,12 +142,21 @@ window.VIDEO_REGISTRY = {
 };
 
 /* the gate, mechanical: nothing plays until review + CCO both
-   land AND the rot-recheck date is still in the future */
+   land AND the rot-recheck date is still in the future.
+   Preview switch (?video=preview) is device-local demo state ONLY —
+   canon flags stay pending; the facade says so out loud. */
+function videoPreviewMode(){
+  try{
+    if(/[?&]video=preview/.test(location.search)) localStorage.setItem('ydc-canvas-video-preview','1');
+    if(/[?&]video=off/.test(location.search)) localStorage.removeItem('ydc-canvas-video-preview');
+    return localStorage.getItem('ydc-canvas-video-preview') === '1';
+  }catch(e){ return false; }
+}
 function videoEntry(modId, n){
   const e = (window.VIDEO_REGISTRY || {})[modId + ':' + n];
   if(!e) return null;
-  const live = e.review === 'approved' && e.cco === 'signed' && Date.parse(e.recheck) > Date.now();
-  return { e, live };
+  const gated = e.review === 'approved' && e.cco === 'signed' && Date.parse(e.recheck) > Date.now();
+  return { e, live: gated || videoPreviewMode(), gated };
 }
 
 function lessonContent(modId, mod, mj, lesson, tm){
@@ -187,7 +196,7 @@ function viewLesson(modId, nStr){
       frame = `
     <div class="lframe"><div class="screen vfacade press" data-vid="${e.id}" onclick="videoAsk(this)"><span class="play">▶</span>
       <span class="vtitle">${e.title}</span><span class="vdur">Video · ${e.channel} · ${e.dur} · ~${e.mb} MB</span>
-      <span class="vbadges">reviewed ✓ · CCO signed ✓</span></div>
+      <span class="vbadges">${ve.gated ? 'reviewed ✓ · CCO signed ✓' : 'preview mode · gates still pending'}</span></div>
       <div class="vconsent" style="display:none">
         <p>Streams from YouTube in privacy mode (youtube-nocookie.com) — about <b>${e.mb} MB</b> of your data. Nothing loads until you choose it.</p>
         <div class="vrow">
@@ -200,7 +209,7 @@ function viewLesson(modId, nStr){
     } else if(ve){
       /* curated, moving through the gates — honest, no facade */
       frame = `
-    <div class="lframe"><div class="screen"><span class="play">▶</span>
+    <div class="lframe"><div class="screen press" onclick="videoIdle('review')"><span class="play">▶</span>
       <span class="vtitle">${ve.e.title}</span><span class="vdur">${ve.e.channel} · ${ve.e.dur} · curated, in review</span></div>
       ${watchList}
       <div class="honest">A curated video for this lesson is moving through review + CCO sign — it unlocks right here when both land. The brief below carries the lesson meanwhile.</div>
@@ -208,7 +217,7 @@ function viewLesson(modId, nStr){
     } else {
       /* no entry — honest-designed (empty Basic/OOS slots stay this way) */
       frame = `
-    <div class="lframe"><div class="screen press"><span class="play">▶</span>
+    <div class="lframe"><div class="screen press" onclick="videoIdle('designed')"><span class="play">▶</span>
       <span class="vtitle">${lesson.title}</span><span class="vdur">${tm.label} · ${lesson.dur} min</span></div>
       ${watchList}
       <div class="honest">Designed frame — the real video streams here in production, 3G-light.</div>
@@ -278,6 +287,11 @@ function checkOpt(btn, ok){
 
 /* video consent facade — the ONLY path from tap to iframe.
    Two taps by design: consent first, then the player itself. No autoplay. */
+function videoIdle(kind){
+  toast(kind === 'review'
+    ? 'Curated and moving through review + CCO sign — the brief below carries the lesson meanwhile'
+    : 'Designed frame — no video here yet. The brief below carries this lesson');
+}
 function videoAsk(sc){ const c = sc.parentElement.querySelector('.vconsent'); if(c) c.style.display = 'block'; }
 function videoNo(btn){ const c = btn.closest('.vconsent'); if(c) c.style.display = 'none'; }
 function videoGo(btn){
