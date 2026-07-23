@@ -4,12 +4,12 @@
   "timezone": "Asia/Yangon",
   "status": "verified",
   "counts": {
-    "activeCoreJobs": 253,
-    "hiringCompanies": 74,
+    "activeCoreJobs": 212,
+    "hiringCompanies": 49,
     "verifiedEmployers": 7
   },
   "generatedAt": "2026-07-22T16:07:07.648Z",
-  "notes": "Seed projection from CTO audit 2026-07-22. Full 74-company dataset pending Codex generator. Render-dedupe by normalized name handles DB duplicate records (Electronic City, KBZ Life, Unicharm, Myanmar Indobest each have scraped+canonical cuid records).",
+  "notes": "Seed projection from CTO audit 2026-07-22. Amended contract: 212 clean-public roles across 49 clean-canonical companies (74 raw minus 19 synthetic-only minus merged dups). Full 49-company dataset pending Codex generator. Render-dedupe by normalized name handles DB duplicate records.",
   "companies": [
     {
       "id": "makro-myanmar",

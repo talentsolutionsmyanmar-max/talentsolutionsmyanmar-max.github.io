@@ -4,11 +4,11 @@
   "timezone": "Asia/Yangon",
   "status": "verified",
   "counts": {
-    "activeCoreJobs": 253,
-    "clientCompanies": 74,
-    "salaryVisibleJobs": 252,
-    "locationTaggedJobs": 253,
-    "levelTaggedJobs": 253,
+    "activeCoreJobs": 212,
+    "clientCompanies": 49,
+    "salaryVisibleJobs": 211,
+    "locationTaggedJobs": 212,
+    "levelTaggedJobs": 212,
     "communityJobsCleared": 0
   },
   "definitions": {
