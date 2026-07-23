@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Warm Layer — ReferTRM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#001F3F; --gold:#D4AF37; --ivory:#F7F5F0; --teal:#0F766E;
+  --mono:'JetBrains Mono',monospace; --disp:'Bricolage Grotesque','Padauk',sans-serif; --body:'Inter','Padauk',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ivory);color:var(--navy);font-family:var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+[lang="my"]{font-family:'Padauk','Inter',sans-serif}
+
+/* ---------- grain (alive texture, light) ---------- */
+.grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:200;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  animation:grain 8s steps(10) infinite}
+@keyframes grain{0%,100%{transform:translate(0,0)}10%{transform:translate(-2%,-3%)}30%{transform:translate(3%,-2%)}50%{transform:translate(-3%,2%)}70%{transform:translate(2%,3%)}90%{transform:translate(-1%,1%)}}
+
+/* ---------- side nav (anchor-native, works without JS) ---------- */
+.nav{position:fixed;right:clamp(12px,2.5vw,28px);top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:14px}
+.nav a{display:flex;align-items:center;gap:9px;flex-direction:row-reverse;text-decoration:none}
+.nav .d{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.35;transition:opacity .3s,transform .3s;flex:none}
+.nav .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;opacity:0;transform:translateX(4px);transition:opacity .3s,transform .3s;color:inherit}
+.nav a:hover .l,.nav a:focus-visible .l{opacity:.75;transform:none}
+.nav a.on .d{opacity:1;transform:scale(1.5)}
+.nav a.on .l{opacity:.8;transform:none}
+
+/* ---------- moments ---------- */
+.snap{scroll-snap-type:y proximity}
+.m{position:relative;min-height:100vh;min-height:100svh;scroll-snap-align:start;display:flex;align-items:center;overflow:hidden;
+  padding:clamp(24px,6vw,80px);color:var(--mi,var(--navy));
+  background:var(--mbg,var(--ivory));transition:background .6s}
+.mInner{position:relative;z-index:5;max-width:760px;width:100%;margin:0 auto}
+
+/* ghost numeral */
+.mNo{position:absolute;left:clamp(8px,3vw,40px);bottom:-4vh;z-index:1;font-family:var(--disp);font-weight:800;
+  font-size:clamp(180px,34vh,420px);line-height:1;letter-spacing:-.05em;color:var(--mno,rgba(0,31,63,.05));pointer-events:none;user-select:none}
+
+/* pointer aura (soul lineage — JS lerped, static fallback) */
+.mAura{position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:radial-gradient(560px circle at var(--px,68%) var(--py,32%),var(--maura,rgba(212,175,55,.08)),transparent 60%)}
+
+/* breathing ambience — 5.5 breaths/min = 10.9s */
+.mBreath{position:absolute;left:50%;top:50%;z-index:1;width:110vmin;height:110vmin;transform:translate(-50%,-50%);pointer-events:none;
+  background:radial-gradient(circle,var(--mb,rgba(212,175,55,.10)),transparent 62%);
+  animation:breath 10.9s ease-in-out infinite}
+@keyframes breath{0%,100%{transform:translate(-50%,-50%) scale(.86);opacity:.55}45%{transform:translate(-50%,-50%) scale(1.06);opacity:1}60%{transform:translate(-50%,-50%) scale(1.04);opacity:.95}}
+
+/* the orb — one abstract light, six weathers (non-human character art) */
+.mOrb{position:absolute;z-index:3;right:clamp(6%,12vw,18%);top:50%;width:clamp(120px,16vmin,190px);height:clamp(120px,16vmin,190px);
+  transform:translateY(-58%);border-radius:50%;pointer-events:none;
+  background:var(--morb,radial-gradient(circle at 36% 32%,#F2DCA6,#D4AF37 68%,#A98418));
+  box-shadow:0 0 80px 10px var(--moglow,rgba(212,175,55,.28));
+  animation:orbBreath 10.9s ease-in-out infinite}
+@keyframes orbBreath{0%,100%{transform:translateY(-58%) scale(.94)}45%{transform:translateY(-58%) scale(1.05)}60%{transform:translateY(-58%) scale(1.03)}}
+
+/* copy */
+.mK{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;opacity:.62;font-weight:500}
+.mK::after{content:"";width:64px;height:1px;background:currentColor;opacity:.4}
+.mWords{margin-top:26px;font-family:var(--disp);font-size:clamp(26px,3.6vw,44px);font-weight:700;letter-spacing:-.02em;line-height:1.22;max-width:14em}
+.mWords em{font-style:normal;color:var(--mem,#96760E)}
+.mSlot{margin-top:30px;display:inline-flex;align-items:center;gap:9px;border:1px dashed currentColor;border-radius:7px;padding:8px 13px;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.55}
+.mSlot i{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+
+/* ---------- the six temperatures (muted saturation always) ---------- */
+/* 01 WELCOME — dawn warmth */
+.m1{--mbg:linear-gradient(180deg,#F7F5F0 0%,#F6EEDB 72%,#F3E4C6 100%);--mi:#001F3F;
+  --maura:rgba(224,172,92,.10);--mb:rgba(222,176,96,.13);--mno:rgba(0,31,63,.05);--mem:#96760E;
+  --morb:radial-gradient(circle at 36% 32%,#F4E0AE,#DDB254 68%,#B08A20);--moglow:rgba(212,175,55,.30)}
+/* 02 REJECTION — dimmed dusk, one ember kept alive */
+.m2{--mbg:linear-gradient(180deg,#081222 0%,#0A1526 60%,#0C1730 100%);--mi:#C2CEE0;
+  --maura:rgba(212,175,55,.05);--mb:rgba(212,175,55,.05);--mno:rgba(255,255,255,.045);--mem:#E3C35B;
+  --morb:radial-gradient(circle at 38% 34%,#F0D692,#C9A02E 62%,#7A5E10);--moglow:rgba(212,175,55,.42)}
+.m2 .mOrb{width:clamp(88px,11vmin,130px);height:clamp(88px,11vmin,130px)}
+.m2 .mWords{font-weight:600}
+/* 03 BEFORE THE INTERVIEW — clear composed light */
+.m3{--mbg:linear-gradient(180deg,#F2F5F7 0%,#EDF1F4 100%);--mi:#0B1D38;
+  --maura:rgba(126,154,172,.10);--mb:rgba(126,154,172,.11);--mno:rgba(0,31,63,.045);--mem:#3E6478;
+  --morb:radial-gradient(circle at 36% 32%,#D7E3EA,#9DB8C6 68%,#6E8E9E);--moglow:rgba(126,154,172,.26)}
+/* 04 STREAK — fullest hearth gold */
+.m4{--mbg:linear-gradient(180deg,#F9F2DF 0%,#F7EBCD 100%);--mi:#001F3F;
+  --maura:rgba(212,175,55,.13);--mb:rgba(212,175,55,.16);--mno:rgba(150,118,14,.07);--mem:#96760E;
+  --morb:radial-gradient(circle at 36% 32%,#F6E3AC,#D4AF37 60%,#96760E);--moglow:rgba(212,175,55,.44)}
+.m4 .mOrb{width:clamp(150px,20vmin,230px);height:clamp(150px,20vmin,230px)}
+/* 05 A HEAVY DAY — darkest, quietest, teal care light */
+.m5{--mbg:linear-gradient(180deg,#030D19 0%,#04101F 100%);--mi:#9FB4C9;
+  --maura:rgba(15,118,110,.08);--mb:rgba(15,118,110,.09);--mno:rgba(255,255,255,.03);--mem:#4FB3A6;
+  --morb:radial-gradient(circle at 38% 34%,#7FB8AE,#0F766E 66%,#0A4A45);--moglow:rgba(15,118,110,.34)}
+.m5 .mOrb{width:clamp(76px,9vmin,110px);height:clamp(76px,9vmin,110px)}
+.m5 .mWords{font-weight:600;opacity:.92}
+/* 06 YDC YOUTH — fresh morning green */
+.m6{--mbg:linear-gradient(180deg,#F2F6EF 0%,#EAF1E4 100%);--mi:#122B1C;
+  --maura:rgba(110,154,114,.10);--mb:rgba(110,154,114,.12);--mno:rgba(18,43,28,.05);--mem:#3F6B45;
+  --morb:radial-gradient(circle at 36% 32%,#D8E8CF,#8FB48C 68%,#5E8560);--moglow:rgba(110,154,114,.30)}
+
+/* ---------- cover & footer ---------- */
+.cover{position:relative;min-height:100vh;min-height:100svh;scroll-snap-align:start;display:flex;align-items:center;overflow:hidden;
+  padding:clamp(24px,6vw,80px);background:linear-gradient(180deg,#F7F5F0,#F4EFE3);color:var(--navy)}
+.cInner{position:relative;z-index:5;max-width:760px;margin:0 auto}
+.cK{font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#96760E;font-weight:700;display:flex;align-items:center;gap:12px}
+.cK::after{content:"";width:64px;height:1px;background:#96760E;opacity:.4}
+.cTitle{margin-top:24px;font-family:var(--disp);font-size:clamp(44px,7vw,86px);font-weight:800;letter-spacing:-.03em;line-height:1.0}
+.cTitle em{font-style:normal;color:#96760E}
+.cSub{margin-top:22px;font-size:15.5px;line-height:1.8;color:#3E5069;max-width:560px}
+.cBreath{margin-top:26px;display:flex;align-items:center;gap:14px}
+.cBreathDot{width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 36% 32%,#F2DCA6,#D4AF37 70%);box-shadow:0 0 18px 3px rgba(212,175,55,.35);animation:dotBreath 10.9s ease-in-out infinite;flex:none}
+@keyframes dotBreath{0%,100%{transform:scale(.82)}45%{transform:scale(1.12)}60%{transform:scale(1.08)}}
+.cBreathT{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#75849A}
+.cIdx{margin-top:38px;display:flex;flex-direction:column;gap:2px;max-width:420px}
+.cIdx a{display:flex;justify-content:space-between;gap:14px;padding:11px 2px;border-bottom:1px solid rgba(0,31,63,.08);text-decoration:none;font-size:13.5px;color:#3E5069;transition:color .2s,padding-left .2s}
+.cIdx a:hover{color:#96760E;padding-left:8px}
+.cIdx a b{font-family:var(--mono);font-weight:700;font-size:11px;color:#96760E;letter-spacing:.1em}
+.cFlags{margin-top:34px;display:flex;gap:8px;flex-wrap:wrap}
+.cF{display:inline-flex;align-items:center;gap:8px;border:1px dashed rgba(150,118,14,.5);border-radius:7px;padding:7px 12px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#96760E;background:rgba(212,175,55,.07)}
+.cF i{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+
+/* ---------- heavy-day opt-ins (native details = noscript-usable, dismissible) ---------- */
+.opt{margin-top:34px;display:flex;flex-direction:column;gap:12px;max-width:520px}
+details.optI{border:1px solid rgba(159,180,201,.25);border-radius:12px;background:rgba(255,255,255,.02);overflow:hidden}
+details.optI summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:15px 18px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#9FB4C9;font-weight:700}
+details.optI summary::-webkit-details-marker{display:none}
+details.optI summary::after{content:"+";margin-left:auto;font-size:15px;color:#4FB3A6;transition:transform .3s}
+details.optI[open] summary::after{transform:rotate(45deg)}
+.optBody{padding:4px 18px 20px}
+.optBody p{font-size:13.5px;line-height:1.8;color:#8BA2B8;max-width:46em}
+.optBody a{color:#4FB3A6;text-decoration:none;border-bottom:1px solid rgba(79,179,166,.4);font-weight:600}
+.optBody a:hover{border-bottom-color:currentColor}
+/* guided breath — the ambience made explicit, opt-in */
+.gBreath{margin-top:18px;display:flex;align-items:center;gap:20px}
+.gC{position:relative;width:86px;height:86px;flex:none}
+.gC::before,.gC::after{content:"";position:absolute;inset:0;border-radius:50%}
+.gC::before{background:radial-gradient(circle,rgba(15,118,110,.30),transparent 66%);animation:breath 10.9s ease-in-out infinite}
+.gC::after{border:1px solid rgba(79,179,166,.55);animation:orbBreath2 10.9s ease-in-out infinite}
+@keyframes orbBreath2{0%,100%{transform:scale(.68)}45%{transform:scale(1)}60%{transform:scale(.97)}}
+.gT{position:relative;height:1.5em;font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase}
+.gT span{position:absolute;left:0;top:0;white-space:nowrap;color:#4FB3A6;opacity:0;animation:gIn 10.9s ease-in-out infinite}
+.gT span.o{animation-name:gOut}
+@keyframes gIn{0%,42%{opacity:.9}52%,100%{opacity:0}}
+@keyframes gOut{0%,50%{opacity:0}58%,92%{opacity:.9}100%{opacity:0}}
+.careNote{margin-top:14px;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(159,180,201,.5)}
+
+/* ---------- footer gate ---------- */
+.gate{padding:26px clamp(24px,6vw,80px);background:#030D19;color:#54677F;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;border-top:1px solid rgba(255,255,255,.05)}
+
+/* ---------- fences: reduced motion collapse, small screens, 3G ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .grain,.mBreath,.mOrb,.cBreathDot,.gC::before,.gC::after,.gT span{animation:none !important}
+  .grain{display:none}
+  .mBreath{opacity:.7;transform:translate(-50%,-50%) scale(.95)}
+  .gT span:first-child{opacity:.9;position:static}
+  .gT span.o{display:none}
+}
+@media(max-width:860px){.grain{display:none}.nav .l{display:none}}
+@media(max-width:640px){
+  .mOrb{position:relative;right:auto;top:auto;transform:none;margin:34px auto 0;animation-name:orbBreathM}
+  @keyframes orbBreathM{0%,100%{transform:scale(.94)}45%{transform:scale(1.05)}60%{transform:scale(1.03)}}
+  .m{align-items:flex-start;padding-top:16vh}.mInner{margin:0}
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<nav class="nav" aria-label="The six moments">
+  <a href="#m1"><span class="l">01 · Welcome</span><span class="d"></span></a>
+  <a href="#m2"><span class="l">02 · Rejection</span><span class="d"></span></a>
+  <a href="#m3"><span class="l">03 · Interview</span><span class="d"></span></a>
+  <a href="#m4"><span class="l">04 · Streak</span><span class="d"></span></a>
+  <a href="#m5"><span class="l">05 · Heavy day</span><span class="d"></span></a>
+  <a href="#m6"><span class="l">06 · Youth</span><span class="d"></span></a>
+</nav>
+
+<main class="snap">
+
+<!-- COVER -->
+<header class="cover" id="top">
+  <div class="mAura" style="--maura:rgba(212,175,55,.08)"></div>
+  <div class="mBreath" style="--mb:rgba(212,175,55,.09)"></div>
+  <div class="cInner">
+    <div class="cK">ReferTRM · The warm layer</div>
+    <h1 class="cTitle">A place<br>that <em>breathes</em></h1>
+    <p class="cSub">Six moments of short, real, dignified warmth — at the times that hurt. Witness, never lecture. Warmth for everyone, pity for no one. The ambience itself is the intervention: it breathes at 5.5 breaths a minute, and you may too.</p>
+    <div class="cBreath"><span class="cBreathDot" aria-hidden="true"></span><span class="cBreathT">5.5 breaths / min · coherent breathing · the ambience is the intervention</span></div>
+    <nav class="cIdx" aria-label="Moment index">
+      <a href="#m1"><span>Welcome — the door opens</span><b>01 · DAWN</b></a>
+      <a href="#m2"><span>Rejection — one ember stays lit</span><b>02 · DUSK</b></a>
+      <a href="#m3"><span>Before the interview — composed light</span><b>03 · CLEAR</b></a>
+      <a href="#m4"><span>Streak — the hearth at its fullest</span><b>04 · HEARTH</b></a>
+      <a href="#m5"><span>A heavy day — the quietest room</span><b>05 · CARE</b></a>
+      <a href="#m6"><span>Youth — the morning is yours</span><b>06 · MORNING</b></a>
+    </nav>
+    <div class="cFlags">
+      <span class="cF"><i></i>MM strings — CCO F50, pending sign-off</span>
+      <span class="cF"><i></i>EN below = layout stand-ins, not final copy</span>
+      <span class="cF"><i></i>Reduced-motion &amp; noscript — fully usable</span>
+    </div>
+  </div>
+</header>
+
+<!-- 01 WELCOME -->
+<section class="m m1" id="m1" aria-label="Moment 01 — Welcome">
+  <div class="mAura"></div><div class="mBreath"></div><div class="mOrb" aria-hidden="true"></div>
+  <div class="mNo" aria-hidden="true">01</div>
+  <div class="mInner">
+    <div class="mK">01 · Welcome — dawn warmth</div>
+    <p class="mWords">You arrived.<br>Before anything begins —<br><em>that already counts.</em></p>
+    <div class="mSlot"><i></i>MM string — CCO F50-01 · pending · EN is layout stand-in</div>
+  </div>
+</section>
+
+<!-- 02 REJECTION -->
+<section class="m m2" id="m2" aria-label="Moment 02 — Rejection">
+  <div class="mAura"></div><div class="mBreath"></div><div class="mOrb" aria-hidden="true"></div>
+  <div class="mNo" aria-hidden="true">02</div>
+  <div class="mInner">
+    <div class="mK">02 · Rejection — dimmed dusk, one ember</div>
+    <p class="mWords">A no lands on one door,<br>not on you.<br><em>The ember stays lit.</em></p>
+    <div class="mSlot"><i></i>MM string — CCO F50-02 · pending · EN is layout stand-in</div>
+  </div>
+</section>
+
+<!-- 03 BEFORE THE INTERVIEW -->
+<section class="m m3" id="m3" aria-label="Moment 03 — Before the interview">
+  <div class="mAura"></div><div class="mBreath"></div><div class="mOrb" aria-hidden="true"></div>
+  <div class="mNo" aria-hidden="true">03</div>
+  <div class="mInner">
+    <div class="mK">03 · Before the interview — clear composed light</div>
+    <p class="mWords">Steady. You prepared.<br>Breathe once —<br><em>and go in as yourself.</em></p>
+    <div class="mSlot"><i></i>MM string — CCO F50-03 · pending · EN is layout stand-in</div>
+  </div>
+</section>
+
+<!-- 04 STREAK -->
+<section class="m m4" id="m4" aria-label="Moment 04 — Streak">
+  <div class="mAura"></div><div class="mBreath"></div><div class="mOrb" aria-hidden="true"></div>
+  <div class="mNo" aria-hidden="true">04</div>
+  <div class="mInner">
+    <div class="mK">04 · Streak — fullest hearth gold</div>
+    <p class="mWords">Another day kept.<br>Quietly, you are becoming<br><em>someone who keeps days.</em></p>
+    <div class="mSlot"><i></i>MM string — CCO F50-04 · pending · EN is layout stand-in</div>
+  </div>
+</section>
+
+<!-- 05 A HEAVY DAY -->
+<section class="m m5" id="m5" aria-label="Moment 05 — A heavy day">
+  <div class="mAura"></div><div class="mBreath"></div><div class="mOrb" aria-hidden="true"></div>
+  <div class="mNo" aria-hidden="true">05</div>
+  <div class="mInner">
+    <div class="mK">05 · A heavy day — darkest, quietest, care light</div>
+    <p class="mWords">Today is heavy.<br>You don't have to<br><em>lift anything here.</em></p>
+    <div class="mSlot"><i></i>MM string — CCO F50-05 · pending · EN is layout stand-in</div>
+    <div class="opt">
+      <details class="optI">
+        <summary>Breathe with this — 5.5 / min</summary>
+        <div class="optBody">
+          <div class="gBreath">
+            <div class="gC" aria-hidden="true"></div>
+            <div class="gT" aria-live="off"><span>Breathe in — slowly</span><span class="o">And let it go</span></div>
+          </div>
+          <p style="margin-top:14px">Follow the circle if it helps. Nothing is measured. Nothing is kept.</p>
+        </div>
+      </details>
+      <details class="optI">
+        <summary>Talk to someone &rarr;</summary>
+        <div class="optBody">
+          <p>Optional, always dismissible. Real people, real help:</p>
+          <p style="margin-top:10px"><a href="https://aungclinicmh.org" target="_blank" rel="noopener">Aung Clinic — aungclinicmh.org</a><br>
+          <a href="https://findahelpline.com/countries/mm" target="_blank" rel="noopener">Find a Helpline Myanmar — findahelpline.com/countries/mm</a></p>
+          <p class="careNote">No score · no diagnosis · no fabricated stories</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- 06 YDC YOUTH -->
+<section class="m m6" id="m6" aria-label="Moment 06 — YDC youth">
+  <div class="mAura"></div><div class="mBreath"></div><div class="mOrb" aria-hidden="true"></div>
+  <div class="mNo" aria-hidden="true">06</div>
+  <div class="mInner">
+    <div class="mK">06 · YDC youth — fresh morning green</div>
+    <p class="mWords">You are not behind.<br>You are at the beginning —<br><em>and the beginning is power.</em></p>
+    <div class="mSlot"><i></i>MM string — CCO F50-06 · pending · EN is layout stand-in</div>
+  </div>
+</section>
+
+</main>
+
+<footer class="gate">
+  <span>FEEL, NEVER STRUCTURE · DIGNITY / MOTHER-TEST · APOLITICAL · NO CULTURAL CLICHÉS · ABSTRACT NON-HUMAN ART · ZERO EMOJI · MM PENDING CCO · 3G-LIGHT · NOSCRIPT + REDUCED-MOTION USABLE · NO PII</span>
+  <span>WARM LAYER · S322 · KOKO RATES · GO×2</span>
+</footer>
+
+<script>
+/* Progressive enhancement only — the page is fully usable without this. */
+(function(){
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  /* pointer soul — lerp'd aura per section (v4 lineage) */
+  if(!reduced && fine){
+    var tx=0.68, ty=0.32, cx=tx, cy=ty;
+    addEventListener('mousemove',function(e){
+      tx=e.clientX/innerWidth; ty=e.clientY/innerHeight;
+    },{passive:true});
+    (function loop(){
+      cx+=(tx-cx)*0.06; cy+=(ty-cy)*0.06;
+      var auras=document.querySelectorAll('.mAura');
+      for(var i=0;i<auras.length;i++){
+        auras[i].style.setProperty('--px',(cx*100).toFixed(2)+'%');
+        auras[i].style.setProperty('--py',(cy*100).toFixed(2)+'%');
+      }
+      requestAnimationFrame(loop);
+    })();
+  }
+
+  /* nav active state */
+  if('IntersectionObserver' in window){
+    var links=document.querySelectorAll('.nav a');
+    var map={};
+    links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(en){
+        if(en.isIntersecting){
+          links.forEach(function(a){a.classList.remove('on');});
+          var a=map[en.target.id]; if(a)a.classList.add('on');
+        }
+      });
+    },{threshold:.5});
+    document.querySelectorAll('.m').forEach(function(s){io.observe(s);});
+  }
+})();
+</script>
+</body>
+</html>
