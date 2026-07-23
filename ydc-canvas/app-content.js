@@ -107,6 +107,49 @@ window.LESSON_CONTENT = {
 };
 window.SLOT_NAMES = { explain_level:'Explain this lesson simply', explain_language:'Explain in my language', quiz_me:'Quiz me before the quest' };
 
+/* ============================================================
+   VIDEO LANE — Phase 1 (S324): curated embeds only, never
+   in-house production this year (KoKo ruling). Fences, verbatim:
+   · embed-only, never re-host        · youtube-nocookie.com
+   · consent facade + data-cost line — iframe loads ONLY on tap
+   · every entry: review gate + CCO sign + rot-recheck + fallback
+   · rel=0, no autoplay · low-data twin under every video
+   Empty Basic/OOS slots stay honest-designed. Phases 2–3 parked.
+   Flags flip only in the review/CCO lanes — never self-approved.
+   ============================================================ */
+window.VIDEO_REGISTRY = {
+  /* key: 'modId:lessonN' — same keying as LESSON_CONTENT */
+  'w-4:2': { id:'hxhbOvR2TGk', channel:'CrashCourse',
+    title:'Evaluating Evidence — Crash Course Navigating Digital Information #6',
+    dur:'13 min', mb:13, lang:'en',
+    review:'pending', cco:'pending', recheck:'2026-10-24', twin:'brief',
+    note:'ID verified 2026-07-24 (resolves, title match).' },
+  'm-w-4:2': { id:'nv4nfCJnHXQ', channel:'Learn and Play Online!',
+    title:'Facts and Opinions',
+    dur:'~5 min', mb:6, lang:'en',
+    review:'pending', cco:'pending', recheck:'2026-10-24', twin:'brief',
+    note:'ID verified 2026-07-24 (resolves, title match).' },
+  'o-w-2:3': { id:'rwbho0CgEAE', channel:'Technology for Teachers and Students',
+    title:'The Beginner’s Guide to Excel — Excel Basics Tutorial',
+    dur:'22 min', mb:22, lang:'en',
+    review:'pending', cco:'pending', recheck:'2026-10-24', twin:'brief',
+    note:'ID verified 2026-07-24 (resolves, title match). Visual-first; language call sits with CCO.' },
+  'b-w-2:2': { id:'p3St51F4kE8', channel:'Peekaboo Kidz',
+    title:'Parts Of A Plant — The Dr. Binocs Show',
+    dur:'~5 min', mb:6, lang:'en',
+    review:'pending', cco:'pending', recheck:'2026-10-24', twin:'brief',
+    note:'ID verified 2026-07-24 (resolves, title match). Basic band is MM-first — CCO language call.' },
+};
+
+/* the gate, mechanical: nothing plays until review + CCO both
+   land AND the rot-recheck date is still in the future */
+function videoEntry(modId, n){
+  const e = (window.VIDEO_REGISTRY || {})[modId + ':' + n];
+  if(!e) return null;
+  const live = e.review === 'approved' && e.cco === 'signed' && Date.parse(e.recheck) > Date.now();
+  return { e, live };
+}
+
 function lessonContent(modId, mod, mj, lesson, tm){
   const hit = LESSON_CONTENT[modId + ':' + lesson.n];
   if(hit) return hit;
@@ -135,11 +178,43 @@ function viewLesson(modId, nStr){
   const next = lessons.find(l=>l.n===lesson.n+1);
 
   let frame = '';
-  if(lesson.type === 'video') frame = `
+  if(lesson.type === 'video'){
+    const ve = videoEntry(modId, lesson.n);
+    const watchList = `<ul class="watch">${(c.watch||[]).map(w=>`<li>${w}</li>`).join('')}</ul>`;
+    if(ve && ve.live){
+      /* curated + gated: consent facade — the iframe exists only after a tap */
+      const e = ve.e;
+      frame = `
+    <div class="lframe"><div class="screen vfacade press" data-vid="${e.id}" onclick="videoAsk(this)"><span class="play">▶</span>
+      <span class="vtitle">${e.title}</span><span class="vdur">Video · ${e.channel} · ${e.dur} · ~${e.mb} MB</span>
+      <span class="vbadges">reviewed ✓ · CCO signed ✓</span></div>
+      <div class="vconsent" style="display:none">
+        <p>Streams from YouTube in privacy mode (youtube-nocookie.com) — about <b>${e.mb} MB</b> of your data. Nothing loads until you choose it.</p>
+        <div class="vrow">
+          <button class="btn primary" onclick="videoGo(this)">Watch the video (~${e.mb} MB)</button>
+          <button class="btn ghost" onclick="videoNo(this)">Not now — keep it light</button>
+        </div>
+      </div>
+      ${watchList}
+      <div class="vtwin">🔋 <b>Low-data twin:</b> the brief below carries this lesson (&lt;0.1 MB). The video waits for your tap — it never loads itself.</div></div>`;
+    } else if(ve){
+      /* curated, moving through the gates — honest, no facade */
+      frame = `
+    <div class="lframe"><div class="screen"><span class="play">▶</span>
+      <span class="vtitle">${ve.e.title}</span><span class="vdur">${ve.e.channel} · ${ve.e.dur} · curated, in review</span></div>
+      ${watchList}
+      <div class="honest">A curated video for this lesson is moving through review + CCO sign — it unlocks right here when both land. The brief below carries the lesson meanwhile.</div>
+      <div class="vtwin">🔋 <b>Low-data twin:</b> the brief below carries this lesson (&lt;0.1 MB).</div></div>`;
+    } else {
+      /* no entry — honest-designed (empty Basic/OOS slots stay this way) */
+      frame = `
     <div class="lframe"><div class="screen press"><span class="play">▶</span>
       <span class="vtitle">${lesson.title}</span><span class="vdur">${tm.label} · ${lesson.dur} min</span></div>
-      <ul class="watch">${(c.watch||[]).map(w=>`<li>${w}</li>`).join('')}</ul>
-      <div class="honest">Designed frame — the real video streams here in production, 3G-light.</div></div>`;
+      ${watchList}
+      <div class="honest">Designed frame — the real video streams here in production, 3G-light.</div>
+      <div class="vtwin">🔋 <b>Low-data twin:</b> the brief below carries this lesson (&lt;0.1 MB).</div></div>`;
+    }
+  }
   else if(lesson.type === 'sim') frame = `
     <div class="lframe"><div class="screen simscreen press"><span class="play">🎮</span>
       <span class="vtitle">${c.goal || lesson.title}</span><span class="vdur">Sim · ${lesson.dur} min</span></div>
@@ -199,6 +274,21 @@ function checkOpt(btn, ok){
     exp.querySelector('.pre').textContent = 'Not yet — ';
   }
   exp.style.display = 'block';
+}
+
+/* video consent facade — the ONLY path from tap to iframe.
+   Two taps by design: consent first, then the player itself. No autoplay. */
+function videoAsk(sc){ const c = sc.parentElement.querySelector('.vconsent'); if(c) c.style.display = 'block'; }
+function videoNo(btn){ const c = btn.closest('.vconsent'); if(c) c.style.display = 'none'; }
+function videoGo(btn){
+  const lf = btn.closest('.lframe');
+  const sc = lf && lf.querySelector('.vfacade');
+  if(!sc) return;
+  const f = document.createElement('div');
+  f.className = 'vframe';
+  f.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${sc.dataset.vid}?rel=0" title="Lesson video" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+  sc.replaceWith(f);
+  const c = lf.querySelector('.vconsent'); if(c) c.remove();
 }
 
 /* Maya’s answers — authored, guardrailed: no profiling, no ages, no identity scores */
