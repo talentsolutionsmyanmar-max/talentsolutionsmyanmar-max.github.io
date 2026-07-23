@@ -4,12 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Warm Layer — ReferTRM</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
 <style>
+/* Fonts self-hosted under /warm/fonts/ (b64 payloads, decoded via FontFace API).
+   Zero external requests. Padauk Myanmar subsets staged for the CCO pass. */
 :root{
-  --mono:'JetBrains Mono',monospace; --disp:'Bricolage Grotesque','Padauk',sans-serif; --body:'Inter','Padauk',sans-serif;
+  --mono:'JetBrains Mono',monospace; --disp:'Bricolage Grotesque','Padauk',sans-serif; --body:system-ui,-apple-system,'Segoe UI',Roboto,'Padauk',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -36,7 +35,7 @@ a{color:inherit}
 .k::after{content:"";width:64px;height:1px;background:currentColor;opacity:.4}
 .words{margin-top:28px;font-family:var(--disp);font-size:clamp(28px,3.8vw,46px);font-weight:700;letter-spacing:-.02em;line-height:1.24;max-width:14em}
 .words em{font-style:normal;color:var(--em,#96760E)}
-.s2 .words,.s5 .words{font-weight:600}
+.s2 .words,.s5 .words{font-weight:700}
 .s2{--em:#E3C35B}.s3{--em:#3E6478}.s5{--em:#4FB3A6}.s6{--em:#3F6B45}
 .hint{margin-top:30px;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;opacity:.75;font-weight:500}
 .hint i{width:9px;height:9px;border-radius:50%;background:var(--em,#96760E);flex:none;animation:hp 2.4s ease-in-out infinite}
@@ -112,6 +111,7 @@ html.js.live .line{display:block;will-change:transform,opacity}
 </style>
 </head>
 <body>
+<noscript><p style="position:fixed;left:0;right:0;bottom:0;z-index:300;margin:0;padding:10px 16px;text-align:center;font:500 11px/1.6 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;background:#001F3F;color:#F7F5F0">The words are all here. The light needs JavaScript.</p></noscript>
 <div class="world" aria-hidden="true"></div>
 <div class="breathWrap" aria-hidden="true"><div class="bw"></div></div>
 <canvas class="fxc" aria-hidden="true"></canvas>
@@ -129,7 +129,7 @@ html.js.live .line{display:block;will-change:transform,opacity}
 
 <header class="cover" id="top">
   <div class="cInner">
-    <div class="cK">The part of the product that holds you</div>
+    <div class="cK">The part of ReferTRM that holds you</div>
     <h1 class="cTitle">A place<br>that <em>breathes</em></h1>
     <p class="cSub">Six small moments, made for the hours that hurt. You don't read them — you do them, with your hands, at your own pace. Nothing is measured. Nothing is kept. It breathes slowly. You can too.</p>
   </div>
@@ -138,7 +138,7 @@ html.js.live .line{display:block;will-change:transform,opacity}
 
 <main>
 
-<section class="sc s1" id="m1" aria-label="Welcome">
+<section class="sc s1" id="m1" aria-label="Welcome — hold Space to fill the morning light" aria-keyshortcuts="Space">
   <div class="scOrb" aria-hidden="true"></div>
   <div class="scIn">
     <div class="k line">01 · Welcome — dawn</div>
@@ -164,7 +164,7 @@ html.js.live .line{display:block;will-change:transform,opacity}
   </div>
 </section>
 
-<section class="sc s3" id="m3" aria-label="Before the interview">
+<section class="sc s3" id="m3" aria-label="Before the interview — tap Space to inhale, tap again to let go" aria-keyshortcuts="Space">
   <div class="scOrb" aria-hidden="true"></div>
   <div class="scIn">
     <div class="k line">03 · Before the interview — clear light</div>
@@ -243,6 +243,18 @@ html.js.live .line{display:block;will-change:transform,opacity}
 </footer>
 <script>
 document.documentElement.classList.add('js');
+/* self-hosted fonts — same-origin b64 payloads, zero external requests */
+(function(){
+  if(!('FontFace' in window)) return;
+  var F=[['Bricolage Grotesque','700','fonts/bric700.b64'],['Bricolage Grotesque','800','fonts/bric800.b64'],['JetBrains Mono','400 800','fonts/jbmono.b64'],['Padauk','400','fonts/padauk400.b64'],['Padauk','700','fonts/padauk700.b64']];
+  F.forEach(function(f){
+    fetch(f[2]).then(function(r){return r.text();}).then(function(t){
+      var b=atob(t.replace(/\s/g,'')), a=new Uint8Array(b.length);
+      for(var i=0;i<b.length;i++)a[i]=b.charCodeAt(i);
+      return new FontFace(f[0],a.buffer,{weight:f[1]}).load();
+    }).then(function(l){document.fonts.add(l);}).catch(function(){});
+  });
+})();
 (function(){
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
@@ -288,6 +300,7 @@ document.documentElement.classList.add('js');
   var dust=[],sparks=[],flyers=[],orbiters=[],rings=[],stayRings=[];
   for(var i=0;i<26;i++)dust.push({x:Math.random(),y:Math.random(),r:Math.random()*1.8+.6,ph:Math.random()*6.28,sp:.12+Math.random()*.25});
   function spawnSparks(x,y,c,n,spread,up){
+    while(sparks.length>140)sparks.shift();
     for(var i=0;i<n;i++){var a=Math.random()*6.28,s=(Math.random()*.5+.5)*spread;
       sparks.push({x:x,y:y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-up,life:1,dec:.014+Math.random()*.012,r:Math.random()*3+2,c:c});}
   }
@@ -312,8 +325,33 @@ document.documentElement.classList.add('js');
     });
   });
 
+  /* ---------- keyboard hold alternative (m1 + m3) ---------- */
+  var kbHeld=false;
+  function currentAct(){
+    var sy=scrollY, cs=scenes.map(function(sc){return sc.offsetTop+sc.offsetHeight/2-vh/2;}), a=0;
+    for(var i=0;i<cs.length-1;i++){if(sy>=cs[i])a=i;}
+    if(a<cs.length-1 && (sy-cs[a])/(cs[a+1]-cs[a])>.72)a++;
+    return a;
+  }
+  addEventListener('keydown',function(e){
+    if(e.code!=='Space'||e.repeat) return;
+    var a=currentAct();
+    if(a===0){ e.preventDefault(); sTarget=1.12; kbHeld=true; }
+    else if(a===2){ e.preventDefault(); if(kbHeld){holding3=false;sTarget=1;kbHeld=false;} else {holding3=true;sTarget=1.06;kbHeld=true;} }
+  });
+  addEventListener('keyup',function(e){
+    if(e.code!=='Space'||!kbHeld) return;
+    var a=currentAct();
+    if(a===0){ sTarget=1; kbHeld=false; }
+    /* m3: Space toggles inhale/exhale — keyup leaves state until next tap */
+  });
+
   /* ---------- main loop ---------- */
-  var last=performance.now();
+  var last=performance.now(), rafId=0;
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){ cancelAnimationFrame(rafId); }
+    else { last=performance.now(); rafId=requestAnimationFrame(frame); }
+  });
   function frame(now){
     var dt=Math.min(50,now-last);last=now;
     var sy=scrollY;
@@ -392,7 +430,7 @@ document.documentElement.classList.add('js');
     /* flyers to orb (m4) */
     for(i=flyers.length-1;i>=0;i--){var f=flyers[i];f.t+=dt/650;
       if(f.t>=1){flyers.splice(i,1);
-        orbiters.push({ang:Math.random()*6.28,ro:Math.random()*26,spd:.6+Math.random()*.9});
+        if(orbiters.length<24)orbiters.push({ang:Math.random()*6.28,ro:Math.random()*26,spd:.6+Math.random()*.9});
         spawnSparks(orbCX,orbCY,[246,227,172],6,2.2,1);impulse(0.05);continue;}
       var e=f.t*f.t*(3-2*f.t);
       var fx2=L(f.x,orbCX,e), fy2=L(f.y,orbCY,e);
@@ -463,9 +501,9 @@ document.documentElement.classList.add('js');
       }
       if(navLinks[i])navLinks[i].classList.toggle('on',on);
     }
-    requestAnimationFrame(frame);
+    rafId=requestAnimationFrame(frame);
   }
-  requestAnimationFrame(frame);
+  rafId=requestAnimationFrame(frame);
 })();
 </script>
 </body>
