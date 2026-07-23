@@ -176,3 +176,34 @@
   box-shadow:0 0 0 3px color-mix(in srgb, var(--c-math) 12%, transparent);
 }
 .submitq{ width:100%; margin-top:14px; }
+
+/* ============================================================
+   VIDEO LANE — consent facade + privacy-mode frame (S324)
+   ============================================================ */
+.vfacade{ cursor:pointer; }
+.vbadges{
+  font-size:11px; font-weight:800; letter-spacing:.06em;
+  color:var(--c-biology);
+}
+.vconsent{
+  margin-top:12px;
+  border-radius:var(--r-md);
+  border:1.5px dashed color-mix(in srgb, var(--c-math) 45%, transparent);
+  background:color-mix(in srgb, var(--c-math) 6%, var(--panel));
+  padding:14px 16px;
+}
+.vconsent p{ font-size:13.5px; color:var(--ink); line-height:1.5; }
+.vconsent .vrow{ margin-top:10px; display:grid; gap:8px; }
+.vframe{
+  margin-top:14px; position:relative; padding-top:56.25%;
+  border-radius:var(--r-lg); overflow:hidden;
+  border:1px solid var(--line); background:#000;
+}
+.vframe iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+.vtwin{
+  margin-top:12px; font-size:12.5px; color:var(--mut); line-height:1.5;
+  background:color-mix(in srgb, var(--c-biology) 7%, var(--panel));
+  border:1px solid color-mix(in srgb, var(--c-biology) 25%, transparent);
+  border-radius:var(--r-md); padding:10px 14px;
+}
+.vtwin b{ color:var(--c-biology); }
