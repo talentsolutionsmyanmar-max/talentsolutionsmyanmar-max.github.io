@@ -9,13 +9,10 @@
    SCREEN 3 · QUEST (module) — lessons, real-world quest, Maya
    ============================================================ */
 function viewModule(modId){
-  const band = getBand();
-  const lib = libraryFor(band);
-  const tierId = modId.split('-').includes('f') ? 'foundation' : 'working';
+  const found = findModule(modId);
+  if(!found) return viewMap();
+  const { band, lib, tierId, idx, mod } = found;
   const tier = TIERS.find(t=>t.id===tierId);
-  const idx = lib[tierId].findIndex(m=>m.id===modId);
-  const mod = idx >= 0 ? lib[tierId][idx] : undefined;
-  if(!mod) return viewMap();
   const mj = MAJORS[mod.major];
   const st = moduleState(tierId, idx, band);
   const lessons = lessonStates(modId, st);
