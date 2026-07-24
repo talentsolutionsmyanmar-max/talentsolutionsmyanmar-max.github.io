@@ -109,14 +109,15 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);-webkit-font-
     <div class="frameIn">
       <div class="fMeta"><span style="color:#8FA3B8">03 · Governance — the part enterprises buy</span><span class="badge bVer">Two-reviewer gate</span></div>
       <h2 class="fTitle">No change moves<br>until <em style="color:#D4AF37">two reviewers</em> say so.</h2>
-      <p class="fSub">Every production change passes two independent reviews, and the author of the change is excluded from reviewing it. This is not a policy page — it is the mechanism, and this week it proved itself.</p>
+      <p class="fSub">Every production change passes two independent reviews, and the author of the change is excluded from reviewing it. This is not a policy page — it is the mechanism, and this week it proved itself on the record.</p>
       <div class="big">
         <div class="bigI"><div class="bigN">2</div><div class="bigK">Independent reviews per change · author excluded</div></div>
-        <div class="bigI"><div class="bigN">5</div><div class="bigK">Flawed candidate builds stopped this week — before any data moved</div></div>
+        <div class="bigI"><div class="bigN">4</div><div class="bigK">Candidate builds rejected by independent review — nothing reached production</div></div>
+        <div class="bigI"><div class="bigN">1</div><div class="bigK">Passed both reviews · applied under a named authorization</div></div>
       </div>
       <div class="spec">
-        <div class="specI"><span class="specK">·</span><span class="specV"><strong>The gate catches.</strong> Five flawed candidate builds were caught and stopped this week. Nothing reached production, no data moved, and the stops are on the same record as the passes.</span></div>
-        <div class="specI"><span class="specK">·</span><span class="specV"><strong>That is the product.</strong> Any vendor can show features. What an enterprise actually buys is the confidence that a bad change cannot get through.</span></div>
+        <div class="specI"><span class="specK">·</span><span class="specV"><strong>The week, on the record.</strong> Four candidate builds were rejected by independent review before anything reached production. The fifth passed both reviews and was applied under a named authorization, with every number read back from the database afterward.</span></div>
+        <div class="specI"><span class="specK">·</span><span class="specV"><strong>Rejection is safe by design.</strong> The rejected builds carried guards that would have aborted cleanly — the gate stops work, it never leaves half-work behind. That confidence is what an enterprise actually buys.</span></div>
       </div>
     </div>
     <div class="fFoot"><span>ReferTRM governance gate</span><span>Verified this week</span></div>
