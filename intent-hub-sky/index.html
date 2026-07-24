@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ReferTRM — intent-hub · sky concept demo</title>
+<meta name="description" content="Concept demo: three-sky motion system for the ReferTRM intent hub. Full / Soft / Still — adaptively served.">
+<style>
+:root{
+  --bg:#0B0B10; --card:#16161E; --card2:#1C1C26;
+  --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.16);
+  --text:#F4F4F6; --text2:#A9A9B4; --text3:#6E6E7A;
+  --blue:#3B82F6; --gold:#C9A84C; --trust:#2FBF8F;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --font:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --r:2px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* ================= THE SKY ================= */
+.sky{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.sky i.aur{position:absolute;border-radius:50%;filter:blur(90px);opacity:0}
+.sky .a1{width:60vmax;height:60vmax;left:-18vmax;top:-22vmax;background:radial-gradient(circle,rgba(59,130,246,.30),transparent 62%)}
+.sky .a2{width:52vmax;height:52vmax;right:-16vmax;top:8vmax;background:radial-gradient(circle,rgba(201,168,76,.20),transparent 62%)}
+.sky .a3{width:48vmax;height:48vmax;left:14vmax;bottom:-26vmax;background:radial-gradient(circle,rgba(47,191,143,.16),transparent 62%)}
+#stars{position:absolute;inset:0}
+#dust{position:absolute;inset:0}
+
+/* tier: FULL — aurora drifts, constellation canvas alive */
+[data-sky="full"] .sky i.aur{opacity:1;animation:drift 46s ease-in-out infinite alternate}
+[data-sky="full"] .a2{animation-duration:58s;animation-delay:-18s}
+[data-sky="full"] .a3{animation-duration:64s;animation-delay:-31s}
+[data-sky="full"] #stars{display:block}
+[data-sky="full"] #dust{display:none}
+
+/* tier: SOFT — aurora drifts slower, CSS starfield twinkles, no canvas */
+[data-sky="soft"] .sky i.aur{opacity:.75;animation:drift 70s ease-in-out infinite alternate}
+[data-sky="soft"] .a2{animation-duration:86s;animation-delay:-24s}
+[data-sky="soft"] .a3{animation-duration:92s;animation-delay:-47s}
+[data-sky="soft"] #stars{display:none}
+[data-sky="soft"] #dust{display:block}
+[data-sky="soft"] #dust s{animation:tw 4.5s ease-in-out infinite}
+
+/* tier: STILL — frozen aurora wash, static stars, zero motion */
+[data-sky="still"] .sky i.aur{opacity:.38}
+[data-sky="still"] #stars{display:none}
+[data-sky="still"] #dust{display:block}
+
+@keyframes drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(6vmax,-4vmax,0) scale(1.12)}}
+@keyframes tw{0%,100%{opacity:.25}50%{opacity:.9}}
+#dust s{position:absolute;width:2px;height:2px;border-radius:50%;background:#E8ECF8}
+
+/* ================= THE PAGE (mirrors intent-hub home) ================= */
+.page{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:0 22px 120px}
+header{display:flex;align-items:center;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}
+.brand{font-weight:800;font-size:18px;letter-spacing:-.03em}
+.brand .tm{font-size:.55em;vertical-align:super;color:var(--gold)}
+.sky-badge{margin-left:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--gold);
+  border:1px solid var(--gold);border-radius:var(--r);padding:5px 10px;background:rgba(201,168,76,.12)}
+.emp{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--text2);border:1px solid var(--line2);border-radius:var(--r);padding:5px 10px}
+.hero{padding:64px 0 40px;max-width:640px}
+.fig{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--gold);margin-bottom:16px}
+h1{font-size:clamp(30px,4.6vw,46px);font-weight:800;letter-spacing:-.03em;line-height:1.08}
+h1 em{font-style:normal;color:var(--gold)}
+.hero p{margin-top:16px;color:var(--text2);font-size:15px;max-width:52ch}
+.proof{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;font-size:12.5px;color:var(--text2)}
+.proof b{color:var(--trust);font-weight:600}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.card{background:color-mix(in srgb, var(--card) 86%, transparent);border:1px solid var(--line);border-radius:var(--r);
+  padding:22px;min-height:150px;display:flex;flex-direction:column;backdrop-filter:blur(6px);transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.card.wide{grid-column:1/-1;min-height:170px}
+.no{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--text3);display:flex;justify-content:space-between}
+.no .arr{color:var(--gold)}
+.card h2{font-size:19px;font-weight:800;letter-spacing:-.02em;margin:auto 0 6px;padding-top:18px}
+.card p{font-size:13px;color:var(--text2);max-width:46ch}
+.paths{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.paths span{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--text2);border:1px solid var(--line);border-radius:var(--r);padding:4px 8px}
+.honest{margin-top:34px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--text3)}
+
+/* ================= THE SKY BAR (demo control) ================= */
+.skybar{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:5;display:flex;align-items:center;gap:8px;
+  background:rgba(11,11,16,.82);border:1px solid var(--line2);border-radius:var(--r);padding:8px 10px;backdrop-filter:blur(10px)}
+.skybar .lab{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--text3);padding:0 4px}
+.skybar button{font-family:var(--mono);font-size:10px;letter-spacing:.1em;background:transparent;color:var(--text2);
+  border:1px solid var(--line);border-radius:var(--r);padding:6px 10px;cursor:pointer}
+.skybar button.on{color:var(--gold);border-color:var(--gold);background:rgba(201,168,76,.12)}
+@media (max-width:760px){ .grid{grid-template-columns:1fr} .hero{padding:44px 0 28px} }
+@media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important} }
+</style>
+</head>
+<body data-sky="still">
+
+<div class="sky" aria-hidden="true">
+  <i class="aur a1"></i><i class="aur a2"></i><i class="aur a3"></i>
+  <canvas id="stars"></canvas>
+  <div id="dust"></div>
+</div>
+
+<div class="page">
+  <header>
+    <a class="brand" href="#">ReferTRM<span class="tm">TM</span></a>
+    <span class="sky-badge" id="skyBadge">SKY · …</span>
+    <a class="emp" href="#">EMPLOYERS</a>
+  </header>
+
+  <div class="hero">
+    <div class="fig">FIG 01 / Your intent</div>
+    <h1>What brings you <em>here today?</em></h1>
+    <p>One career platform, four honest doors. Start with what you need now; your CV, learning, game decisions and job matches meet on the same path.</p>
+    <div class="proof"><span><b>✓</b> Real opportunities</span><span><b>✓</b> No fee to apply</span><span><b>✓</b> Your pace</span></div>
+  </div>
+
+  <div class="grid">
+    <a class="card wide" href="#">
+      <span class="no"><span>01 / JOBS &amp; WORKPLACE TRUTH</span><span class="arr">→</span></span>
+      <h2>Know the work before you say yes.</h2>
+      <p>Real client roles, clear terms and a free path for employers to bring new work forward.</p>
+      <span class="paths"><span>Browse jobs</span><span>Explore companies</span><span>Post a job — free</span></span>
+    </a>
+    <a class="card" href="#">
+      <span class="no"><span>02 / CAREER GAME</span><span class="arr">▶</span></span>
+      <h2>See how you decide under pressure.</h2>
+      <p>Real workplace dilemmas. Your choices shape a career DNA — not a quiz score.</p>
+    </a>
+    <a class="card" href="#">
+      <span class="no"><span>03 / LEARN</span><span class="arr">→</span></span>
+      <h2>Build what comes next.</h2>
+      <p>Bilingual courses, with Maya beside you as an advisor.</p>
+    </a>
+    <a class="card" href="#">
+      <span class="no"><span>04 / RECRUITER PATHWAY</span><span class="arr">→</span></span>
+      <h2>Hire, or refer — with proof.</h2>
+      <p>Verified employers, honest referrals. Trust is the product.</p>
+    </a>
+  </div>
+
+  <p class="honest">CONCEPT DEMO — the sky is the subject. Doors are decorative here; the real hub lives at /intent-hub/. Sky system: full / soft / still, adaptively served.</p>
+</div>
+
+<div class="skybar" role="group" aria-label="Sky tier">
+  <span class="lab">SKY</span>
+  <button data-t="auto">AUTO</button>
+  <button data-t="full">FULL</button>
+  <button data-t="soft">SOFT</button>
+  <button data-t="still">STILL</button>
+</div>
+
+<script>
+(function(){
+'use strict';
+var body = document.body, badge = document.getElementById('skyBadge');
+
+/* ---------- tier detection — the honest axes: data cost + device power ---------- */
+function detect(){
+  try{
+    var c = navigator.connection || {};
+    if(c.saveData) return 'still';                                   // user asked for cheap
+    if(/(^|-)2g/.test(c.effectiveType || '')) return 'still';        // 2g — still air
+    if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return 'still';
+    var mem = navigator.deviceMemory || 8, cores = navigator.hardwareConcurrency || 8;
+    if(mem >= 4 && cores >= 4 && c.effectiveType !== '3g') return 'full';
+    return 'soft';
+  }catch(e){ return 'soft'; }
+}
+
+var mode = 'auto', tier = detect();
+try{ mode = localStorage.getItem('sky-mode') || 'auto'; }catch(e){}
+function active(){ return mode === 'auto' ? tier : mode; }
+
+function apply(){
+  body.setAttribute('data-sky', active());
+  badge.textContent = 'SKY · ' + active().toUpperCase() + (mode === 'auto' ? ' (AUTO)' : '');
+  var btns = document.querySelectorAll('.skybar button');
+  for(var i=0;i<btns.length;i++){
+    var b = btns[i], t = b.getAttribute('data-t');
+    b.classList.toggle('on', t === mode || (mode === 'auto' && t === 'auto'));
+  }
+  if(active() === 'full') startStars(); else stopStars();
+}
+document.querySelector('.skybar').addEventListener('click', function(e){
+  var t = e.target && e.target.getAttribute && e.target.getAttribute('data-t');
+  if(!t) return;
+  mode = t;
+  try{ localStorage.setItem('sky-mode', t); }catch(e){}
+  apply();
+});
+
+/* ---------- CSS starfield (soft + still) ---------- */
+(function dust(){
+  var d = document.getElementById('dust'), html = '';
+  for(var i=0;i<70;i++){
+    html += '<s style="left:'+(Math.random()*100).toFixed(2)+'%;top:'+(Math.random()*100).toFixed(2)+
+            '%;opacity:'+(0.2+Math.random()*0.7).toFixed(2)+';animation-delay:-'+(Math.random()*5).toFixed(1)+'s"></s>';
+  }
+  d.innerHTML = html;
+})();
+
+/* ---------- FULL SKY: the night-trail constellation (canvas 2D in the demo;
+     production Full sky may take the same scene to a WebGL shader) ---------- */
+var cv = document.getElementById('stars'), ctx = cv.getContext('2d');
+var W=0, H=0, pts=[], raf=null, t0=0, px=0, py=0, tx=0, ty=0, meteor=null, nextMeteor=4000;
+var DPR = Math.min(window.devicePixelRatio || 1, 1.5);
+
+function sizeCanvas(){
+  W = window.innerWidth; H = window.innerHeight;
+  cv.width = W*DPR; cv.height = H*DPR;
+  cv.style.width = W+'px'; cv.style.height = H+'px';
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+function seed(){
+  var mem = navigator.deviceMemory || 8;
+  var n = Math.min(mem >= 6 ? 110 : 80, Math.round(W*H/16000));
+  pts = [];
+  for(var i=0;i<n;i++){
+    var waypoint = (i % 9 === 0);   // every ninth star is a trail waypoint — gold or blue
+    pts.push({
+      x:Math.random()*W, y:Math.random()*H,
+      vx:(Math.random()-.5)*0.08, vy:(Math.random()-.5)*0.08,
+      r: waypoint ? 1.9 : 0.7+Math.random()*1.1,
+      wp: waypoint, hue: Math.random()<.5 ? '201,168,76' : '59,130,246',
+      tw: Math.random()*6.28
+    });
+  }
+}
+window.addEventListener('resize', function(){ clearTimeout(window.__rz); window.__rz=setTimeout(function(){ sizeCanvas(); if(raf) seed(); },160); });
+window.addEventListener('pointermove', function(e){ tx = (e.clientX/W-.5)*14; ty = (e.clientY/H-.5)*10; }, {passive:true});
+
+function frame(now){
+  raf = requestAnimationFrame(frame);
+  var dt = Math.min(32, now - t0); t0 = now;
+  px += (tx-px)*0.04; py += (ty-py)*0.04;                 // gentle parallax, never jerky
+  ctx.clearRect(0,0,W,H);
+  var i, j, p, q, dx, dy, d2, maxD = Math.min(W,H)*0.16, a;
+
+  for(i=0;i<pts.length;i++){
+    p = pts[i];
+    p.x += p.vx*dt*0.06; p.y += p.vy*dt*0.06; p.tw += dt*0.001;
+    if(p.x<-20)p.x=W+20; if(p.x>W+20)p.x=-20;
+    if(p.y<-20)p.y=H+20; if(p.y>H+20)p.y=-20;
+  }
+  /* the trail — lines between near stars */
+  ctx.lineWidth = 0.6;
+  for(i=0;i<pts.length;i++){
+    for(j=i+1;j<pts.length;j++){
+      p=pts[i]; q=pts[j]; dx=p.x-q.x; dy=p.y-q.y; d2=dx*dx+dy*dy;
+      if(d2 < maxD*maxD){
+        a = (1 - Math.sqrt(d2)/maxD) * 0.34;
+        ctx.strokeStyle = 'rgba(180,200,255,'+a.toFixed(3)+')';
+        ctx.beginPath(); ctx.moveTo(p.x+px, p.y+py); ctx.lineTo(q.x+px, q.y+py); ctx.stroke();
+      }
+    }
+  }
+  /* the stars — waypoints carry brand color */
+  for(i=0;i<pts.length;i++){
+    p = pts[i];
+    a = 0.45 + Math.sin(p.tw)*0.3;
+    ctx.fillStyle = p.wp ? 'rgba('+p.hue+','+a.toFixed(3)+')' : 'rgba(232,236,248,'+a.toFixed(3)+')';
+    ctx.beginPath(); ctx.arc(p.x+px, p.y+py, p.r, 0, 6.2832); ctx.fill();
+  }
+  /* an occasional meteor — rare enough to feel lucky */
+  nextMeteor -= dt;
+  if(nextMeteor <= 0 && !meteor){
+    meteor = { x: Math.random()*W*0.7 + W*0.15, y: -20, vx: -0.32, vy: 0.42, life: 1 };
+    nextMeteor = 6000 + Math.random()*9000;
+  }
+  if(meteor){
+    meteor.x += meteor.vx*dt; meteor.y += meteor.vy*dt; meteor.life -= dt*0.0011;
+    if(meteor.life <= 0 || meteor.y > H+40){ meteor = null; }
+    else{
+      var g = ctx.createLinearGradient(meteor.x, meteor.y, meteor.x+70, meteor.y-90);
+      g.addColorStop(0, 'rgba(255,255,255,'+(0.7*meteor.life).toFixed(3)+')');
+      g.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.strokeStyle = g; ctx.lineWidth = 1.4;
+      ctx.beginPath(); ctx.moveTo(meteor.x, meteor.y); ctx.lineTo(meteor.x+70, meteor.y-90); ctx.stroke();
+    }
+  }
+}
+function startStars(){
+  if(raf) return;
+  sizeCanvas(); seed(); t0 = performance.now();
+  raf = requestAnimationFrame(frame);
+}
+function stopStars(){
+  if(raf){ cancelAnimationFrame(raf); raf = null; }
+  ctx && ctx.clearRect(0,0,W,H);
+}
+document.addEventListener('visibilitychange', function(){
+  if(document.hidden){ if(raf){ cancelAnimationFrame(raf); raf=null; } }
+  else if(active() === 'full' && !raf){ t0 = performance.now(); raf = requestAnimationFrame(frame); }
+});
+
+/* ---------- first paint first: the sky wakes after the content is on screen ---------- */
+apply();
+if('requestIdleCallback' in window){ requestIdleCallback(function(){ apply(); }, {timeout:900}); }
+})();
+</script>
+</body>
+</html>
