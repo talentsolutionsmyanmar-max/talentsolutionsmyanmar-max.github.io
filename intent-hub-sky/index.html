@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>ReferTRM — intent-hub · sky v4: the tidy truth</title>
-<meta name="description" content="Concept demo v4: one layout law for every door, real public client data on the jobs door, the hub's own dim artwork on the game door, professional backgrounds everywhere. Full / Soft / Still.">
+<title>ReferTRM — intent-hub · sky v5: every path, whole</title>
+<meta name="description" content="Concept demo v5: the layout law, real public client data on door 01, the learning and recruiter paths shown whole on rails, the hub's own dim artwork on the game door. Full / Soft / Still.">
 <style>
 :root{
   --bg:#0B0B10; --card:#16161E; --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.16);
@@ -136,32 +136,26 @@ header{display:flex;align-items:center;gap:14px;padding:18px 0;border-bottom:1px
   background:linear-gradient(90deg,var(--paper),transparent 62%),linear-gradient(0deg,rgba(255,253,248,.18),transparent)}
 .d-game .copy{max-width:52%}
 
-/* ---- door 03: professional course shelf ---- */
+/* ---- the path rail: the whole journey, step by step (doors 03 & 04) ---- */
+.rail{--rac:var(--gold);position:relative;padding-left:26px;display:flex;flex-direction:column;justify-content:center;height:100%}
+.rail::before{content:"";position:absolute;left:7px;top:16px;bottom:16px;width:1px;
+  background:linear-gradient(180deg,transparent,var(--rac) 16%,var(--rac) 84%,transparent);opacity:.55}
+.rstep{position:relative;padding:7.5px 0}
+.rstep::before{content:"";position:absolute;left:-22.5px;top:12px;width:7px;height:7px;border-radius:50%;
+  background:var(--bg);border:1.5px solid var(--rac)}
+.rstep .rn{font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--rac)}
+.rstep .rd{font-size:11.5px;line-height:1.4;color:var(--text2);margin-top:3px;max-width:36ch}
+.rcap{margin-top:12px;font-family:var(--mono);font-size:8.5px;line-height:1.5;color:var(--text3)}
+
+/* ---- door 03: the learning path ---- */
 .d-learn{background:linear-gradient(160deg,#1B1408,#100D07);border-color:rgba(240,180,41,.32)}
 .d-learn .kick{color:var(--amber)}
-.shelf{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:center;height:100%}
-.btile{border:1px solid rgba(240,180,41,.26);border-radius:4px;padding:10px 11px;background:rgba(240,180,41,.05)}
-.btile .bn{font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--amber)}
-.btile .bd{font-size:11px;color:#E8DFC8;margin-top:5px;line-height:1.35}
-.scap{margin-top:10px;font-family:var(--mono);font-size:8.5px;line-height:1.5;color:#9c8f6f}
+.d-learn .rail{--rac:var(--amber)}
 
-/* ---- door 04: stepper in flow + ghost referral slip ---- */
+/* ---- door 04: the recruiter pathway ---- */
 .d-ref{background:linear-gradient(160deg,#0A1F1A,#0A1410);border-color:rgba(47,191,143,.32)}
 .d-ref .kick{color:var(--teal)}
-.ladder{display:flex;align-items:flex-end;gap:6px;margin-top:14px;flex-wrap:wrap}
-.ladder i{font:600 8.5px var(--mono);letter-spacing:.08em;font-style:normal;color:var(--teal);
-  border:1px solid rgba(47,191,143,.4);border-radius:4px;padding:3px 8px;background:rgba(47,191,143,.07)}
-.ladder i:nth-child(2){margin-bottom:7px}
-.ladder i:nth-child(3){margin-bottom:14px}
-.ladder i:nth-child(4){margin-bottom:21px}
-.ladder em{align-self:center;font-style:normal;color:rgba(47,191,143,.5);font-size:10px;margin-bottom:1px}
-.rslip{border:1px dashed rgba(47,191,143,.4);border-radius:4px;padding:13px 14px;background:rgba(47,191,143,.05);
-  display:flex;flex-direction:column;gap:8px;align-self:center}
-.rslip .rn{font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--teal)}
-.rslip .rf{border:1px dashed rgba(47,191,143,.32);border-radius:var(--r);padding:5px 9px;
-  font-family:var(--mono);font-size:9px;color:#9fdcc7}
-.rslip .rq{font-size:11.5px;line-height:1.45;color:#D7EFE6}
-.rslip .rq b{color:var(--teal)}
+.d-ref .rail{--rac:var(--teal)}
 
 /* ---- footer + docked skybar ---- */
 .foot-note{margin:44px auto 0;max-width:760px;text-align:center;font-family:var(--mono);font-size:9.5px;
@@ -185,17 +179,20 @@ header{display:flex;align-items:center;gap:14px;padding:18px 0;border-bottom:1px
   .door .decor{position:relative;inset:auto;left:0;margin-top:16px;min-height:0;order:3;
     -webkit-mask-image:none;mask-image:none}
   /* rotating door: fixed stage, absolute pane stack.
-     single-pane doors: content sizes the stage naturally. */
-  .d-jobs .decor{min-height:252px}
+     path doors: fully static — content sizes the stage, nothing clips. */
+  .d-jobs .decor{min-height:300px}
   .d-jobs .panes{position:absolute;inset:0}
   .pane{padding:4px 0 2px;justify-content:flex-start;gap:8px}
+  .d-learn .panes,.d-ref .panes{position:static}
   .d-learn .pane,.d-ref .pane{position:static}
+  .d-learn .rail,.d-ref .rail{height:auto;padding:6px 0 6px 26px}
   .counters{gap:16px}
   .num{font-size:24px}
-  .shelf{height:auto}
-  /* game door: artwork below, copy gets its paper chip — the hub's own mobile pattern */
-  .d-game{min-height:380px}
-  .gthumb{inset:30% 0 0 0}
+  /* game door: copy chip first, artwork fills below — the hub's own mobile pattern */
+  .d-game{min-height:420px}
+  .d-game .ktop{margin-bottom:0}
+  .d-game .body{margin-top:14px;padding-top:0}
+  .gthumb{inset:34% 0 0 0}
   .gthumb::after{background:linear-gradient(0deg,var(--paper) 0%,rgba(255,253,248,.94) 24%,transparent 55%),
     linear-gradient(180deg,var(--paper),transparent 42%)}
   .d-game .copy{max-width:100%;background:rgba(255,253,248,.94);border-radius:4px;padding:10px 12px}
@@ -297,18 +294,18 @@ header{display:flex;align-items:center;gap:14px;padding:18px 0;border-bottom:1px
       </div>
     </div>
 
-    <!-- 03 LEARN — professional course shelf -->
+    <!-- 03 LEARN — the whole learning path on one rail -->
     <div class="door d-learn" data-accent="240,180,41">
       <div class="decor" aria-hidden="true">
         <div class="panes">
           <div class="pane on">
-            <div class="shelf">
-              <div class="btile"><div class="bn">BASIC</div><div class="bd">first steps, plainly taught</div></div>
-              <div class="btile"><div class="bn">MIDDLE</div><div class="bd">the next level, in reach</div></div>
-              <div class="btile"><div class="bn">HIGH</div><div class="bd">deeper practice, real work</div></div>
-              <div class="btile"><div class="bn">OOS</div><div class="bd">your own pace, your own path</div></div>
+            <div class="rail">
+              <div class="rstep"><div class="rn">01 · BASIC</div><div class="rd">first steps, plainly taught</div></div>
+              <div class="rstep"><div class="rn">02 · MIDDLE</div><div class="rd">the next level, in reach</div></div>
+              <div class="rstep"><div class="rn">03 · HIGH</div><div class="rd">deeper practice, real work</div></div>
+              <div class="rstep"><div class="rn">04 · OOS</div><div class="rd">your own pace, your own path</div></div>
+              <div class="rcap">8 signed video lessons live · every lesson: video · brief · check · text lane carries the Myanmar context</div>
             </div>
-            <div class="scap">8 signed video lessons live · every lesson: video · brief · check · text lane carries the Myanmar context</div>
           </div>
         </div>
       </div>
@@ -321,16 +318,16 @@ header{display:flex;align-items:center;gap:14px;padding:18px 0;border-bottom:1px
       </div>
     </div>
 
-    <!-- 04 RECRUITER PATHWAY — stepper in flow, ghost slip -->
+    <!-- 04 RECRUITER PATHWAY — the whole pathway on one rail -->
     <div class="door d-ref" data-accent="47,191,143">
       <div class="decor" aria-hidden="true">
         <div class="panes">
           <div class="pane on">
-            <div class="rslip">
-              <div class="rn">REFERRAL</div>
-              <div class="rf">CLIENT ————————————</div>
-              <div class="rf">STATUS ————————————</div>
-              <div class="rq">recurring commission on <b>every payroll contract</b></div>
+            <div class="rail">
+              <div class="rstep"><div class="rn">01 · EARN</div><div class="rd">bring a client onto the path</div></div>
+              <div class="rstep"><div class="rn">02 · PLACE</div><div class="rd">the role is filled, on the record</div></div>
+              <div class="rstep"><div class="rn">03 · SCREEN</div><div class="rd">a Reviewer stands between candidate and client</div></div>
+              <div class="rstep"><div class="rn">04 · SHARE</div><div class="rd">recurring commission on every payroll contract</div></div>
             </div>
           </div>
         </div>
@@ -340,7 +337,6 @@ header{display:flex;align-items:center;gap:14px;padding:18px 0;border-bottom:1px
         <div class="copy">
           <h2>Hire, or refer — with proof.</h2>
           <div class="sub">Verified employers, honest referrals. Trust is the product.</div>
-          <span class="ladder"><i>EARN</i><em>→</em><i>PLACE</i><em>→</em><i>SCREEN</i><em>→</em><i>SHARE</i></span>
         </div>
       </div>
     </div>
@@ -348,7 +344,7 @@ header{display:flex;align-items:center;gap:14px;padding:18px 0;border-bottom:1px
   </div>
 
   <div class="foot-note">
-    CONCEPT DEMO v4 — door 01 carries <b>real public data</b> (company cards as of 23 Jul 2026 · verified counts as of 22 Jul 2026:
+    CONCEPT DEMO v5 — door 01 carries <b>real public data</b> (company cards as of 23 Jul 2026 · verified counts as of 22 Jul 2026:
     253 active roles · 252 with salary shown · 74 client companies). The listing card is a shape sample; live listings wire in at integration.
     Doors are decorative here; the real hub lives at /intent-hub/.
   </div>
@@ -429,31 +425,34 @@ function seedDrift(){
 window.addEventListener('resize', function(){ clearTimeout(window.__rz); window.__rz=setTimeout(function(){ sizeCanvas(); if(raf){ seedDrift(); } },160); });
 window.addEventListener('pointermove', function(e){ if(W>0){ tx=(e.clientX/W-.5)*10; ty=(e.clientY/H-.5)*10; } }, {passive:true});
 
-/* door ignition */
+/* door ignition — fine pointers only, and always in the door's own top
+   strip (its calm sky), never across copy or the hero above */
+var hoverable = window.matchMedia && matchMedia('(hover:hover) and (pointer:fine)').matches;
 var doors = document.querySelectorAll('.door');
 for(var d=0; d<doors.length; d++){
   (function(door){
     var wake = function(){
-      if(active() !== 'full') return;
+      if(active() !== 'full' || !hoverable) return;
       var r = door.getBoundingClientRect();
       var stars = [];
-      var cx = r.left + r.width/2, cy = Math.max(70, r.top - 30);
-      var rx = Math.min(r.width*0.46, 300), ry = 60;
+      var cx = r.left + r.width*0.76, cy = r.top + 34;
+      var rx = Math.min(r.width*0.17, 180), ry = 20;
       for(var i=0;i<15;i++){
         var a = (i/15)*Math.PI*2 + Math.random()*0.4;
         stars.push({ x: cx + Math.cos(a)*rx*(0.55+Math.random()*0.45),
-                     y: cy - Math.abs(Math.sin(a))*ry*(0.5+Math.random()*0.5) - Math.random()*24,
+                     y: cy - Math.abs(Math.sin(a))*ry*(0.5+Math.random()*0.5) + Math.random()*14,
                      r: 1.4+Math.random()*1.4, tw: Math.random()*6.28 });
       }
       ignite = { stars: stars, color: door.getAttribute('data-accent') || '212,175,55',
-                 alpha: 0, target: 1, doorTop: r.top, doorCx: cx };
+                 alpha: 0, target: 1, doorTop: r.top + 96, doorCx: cx };
     };
     var sleep = function(){ if(ignite) ignite.target = 0; };
     door.addEventListener('pointerenter', wake);
     door.addEventListener('pointerleave', sleep);
-    door.addEventListener('touchstart', wake, {passive:true});
   })(doors[d]);
 }
+window.__skyPeek = function(){ return ignite ? { n: ignite.stars.length, cx: ignite.doorCx, top: ignite.doorTop } : null; };
+window.__skyInfo = function(){ return { tier: tier, active: active(), hoverable: hoverable, cores: navigator.hardwareConcurrency||0, mem: navigator.deviceMemory||0 }; };
 
 /* the rotating truth — SEQUENTIAL dissolve: the outgoing pane leaves
    completely before the incoming one appears. Text never overlaps text. */
@@ -483,6 +482,7 @@ for(var d=0; d<doors.length; d++){
     })(chips[c], c);
   }
   if(!calm) setInterval(function(){ if(!hovering) show((cur+1)%3); }, 5200);
+  window.__rot = function(){ return { cur: cur, hovering: hovering }; };
 })();
 
 function frame(now){
@@ -537,11 +537,11 @@ function frame(now){
           }
         }
       }
-      var g = ctx.createLinearGradient(ig.doorCx+px, ig.doorTop-120, ig.doorCx+px, ig.doorTop+2);
+      var g = ctx.createLinearGradient(ig.doorCx+px, ig.doorTop-70, ig.doorCx+px, ig.doorTop+2);
       g.addColorStop(0, 'rgba('+col+',0)');
       g.addColorStop(1, 'rgba('+col+','+(0.55*ig.alpha).toFixed(3)+')');
       ctx.strokeStyle = g; ctx.lineWidth = 1.2;
-      ctx.beginPath(); ctx.moveTo(ig.doorCx+px, ig.doorTop-120); ctx.lineTo(ig.doorCx+px, ig.doorTop+2); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(ig.doorCx+px, ig.doorTop-70); ctx.lineTo(ig.doorCx+px, ig.doorTop+2); ctx.stroke();
       ctx.fillStyle = 'rgba('+col+','+(0.8*ig.alpha).toFixed(3)+')';
       ctx.beginPath(); ctx.arc(ig.doorCx+px, ig.doorTop+2, 2.2, 0, 6.2832); ctx.fill();
     }
