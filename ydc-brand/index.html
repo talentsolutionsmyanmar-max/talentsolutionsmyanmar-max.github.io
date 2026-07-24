@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="night">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YDC Brand Reference — the clone kit</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  /* page chrome only — every value below comes from tokens.css */
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:var(--font); background:var(--bg0); color:var(--ink); line-height:1.55; }
+  main{ max-width:920px; margin:0 auto; padding:28px 18px 80px; }
+  header.hero{ padding:38px 0 26px; }
+  .kicker{ color:var(--c-teal); font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; }
+  h1{ font-size:30px; margin:8px 0 10px; }
+  .sub{ color:var(--mut); font-size:15px; max-width:58ch; }
+  h2{ font-size:19px; margin:40px 0 14px; padding-top:22px; border-top:1px solid var(--line); }
+  h2 .n{ color:var(--c-gold); margin-right:10px; }
+  p, li{ font-size:14px; color:var(--mut); }
+  b{ color:var(--ink); }
+  code{ font-family:ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size:12.5px; /* lint-ok — v1.1 --font-mono candidate, recorded exception */
+        background:var(--panel2); padding:2px 7px; border-radius:8px; color:var(--c-teal); }
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; margin-top:14px; }
+  .sw{ background:var(--panel); border:1px solid var(--line); border-radius:var(--r-md); overflow:hidden; }
+  .sw i{ display:block; height:64px; }
+  .sw span{ display:block; padding:8px 10px 3px; font-size:12.5px; color:var(--ink); }
+  .sw em{ display:block; padding:0 10px 9px; font-style:normal; font-size:11.5px; color:var(--dim); }
+  .card{ background:var(--panel); border:1px solid var(--line); border-radius:var(--r-lg); padding:18px; margin-top:12px; }
+  .card h3{ font-size:15px; margin-bottom:6px; }
+  .filegrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; }
+  .law{ display:flex; gap:10px; padding:9px 0; border-bottom:1px dashed var(--line); font-size:13.5px; color:var(--mut); }
+  .law:last-child{ border-bottom:0; }
+  .law b{ color:var(--c-teal); white-space:nowrap; }
+  .pending{ border:1.5px dashed var(--c-gold); border-radius:var(--r-lg); padding:22px; margin-top:12px;
+            background:color-mix(in srgb, var(--c-gold) 6%, var(--panel)); }
+  .pending .t{ color:var(--c-gold); font-size:15px; font-weight:700; }
+  pre{ background:var(--bg1); border:1px solid var(--line); border-radius:var(--r-md); padding:14px 16px;
+       overflow-x:auto; font-size:12.5px; color:var(--mut); margin-top:10px; }
+  .ok{ color:var(--c-biology); } .warn{ color:var(--c-math); }
+  footer{ margin-top:46px; padding-top:18px; border-top:1px solid var(--line); font-size:12px; color:var(--dim); }
+  .scale span{ display:inline-block; margin-right:14px; color:var(--mut); }
+</style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <span class="kicker">YDC · Brand Reference Package · v1 · 2026-07-24</span>
+    <h1>🌙 The clone kit</h1>
+    <p class="sub">One source of truth for how the Night Trail looks, speaks, and behaves.
+    Four files. Clone them — never re-invent them. Source of truth: <code>ydc-canvas/styles.css</code>.</p>
+  </header>
+
+  <h2><span class="n">1</span>The four files</h2>
+  <div class="filegrid">
+    <div class="card"><h3>📋 tokens.css</h3><p>Every custom property, both themes. <code>&lt;link&gt;</code> it or copy the block. Changes land here first, then everywhere.</p></div>
+    <div class="card"><h3>📦 tokens.json</h3><p>The same tokens for non-CSS consumers — native shells, scripts, decks. Includes the type scale and the brand laws.</p></div>
+    <div class="card"><h3>🧹 lint.js</h3><p>Tokens-as-lint. Zero-dependency Node script — point it at any <code>.css / .html / .js</code> file and it reports drift from the tokens and the laws.</p></div>
+    <div class="card"><h3>📖 index.html</h3><p>This page — the human-readable reference for everything above. View source freely; it follows its own laws.</p></div>
+  </div>
+
+  <h2><span class="n">2</span>Color — the territories of the trail</h2>
+  <p>Five majors, each a subject territory. Accents for gold moments, teal glow, and the sunrise.</p>
+  <div class="grid">
+    <div class="sw"><i style="background:#FF7A85"></i><span>--c-english</span><em>#FF7A85 · English</em></div>
+    <div class="sw"><i style="background:#FFC24B"></i><span>--c-math</span><em>#FFC24B · Math</em></div>
+    <div class="sw"><i style="background:#54C8FF"></i><span>--c-physics</span><em>#54C8FF · Physics</em></div>
+    <div class="sw"><i style="background:#B28CFF"></i><span>--c-chemistry</span><em>#B28CFF · Chemistry</em></div>
+    <div class="sw"><i style="background:#4ADE80"></i><span>--c-biology</span><em>#4ADE80 · Biology</em></div>
+    <div class="sw"><i style="background:#FFD166"></i><span>--c-gold</span><em>#FFD166 · achievement</em></div>
+    <div class="sw"><i style="background:#5EEAD4"></i><span>--c-teal</span><em>#5EEAD4 · glow</em></div>
+    <div class="sw"><i style="background:linear-gradient(90deg,#FFB25E,#FF6E7F)"></i><span>--c-sunrise-a/b</span><em>#FFB25E → #FF6E7F</em></div>
+  </div>
+  <div class="card">
+    <h3>Surfaces — two themes, one sky clock</h3>
+    <p><b>Night</b> (default): <code>--bg0 #070B18</code> → <code>--panel2 #1A2342</code>, ink <code>#F2F5FF</code>.
+    <b>Day</b>: <code>--bg0 #E7EFFF</code> → <code>--panel2 #F0F4FF</code>, ink <code>#141B33</code>.
+    Theme rides <code>data-theme</code> on <code>&lt;html&gt;</code>; stars dim to <code>--star-op: 0</code> by day. Full tables in <code>tokens.css</code> / <code>tokens.json</code>.</p>
+  </div>
+
+  <h2><span class="n">3</span>Type — rounded, system-native, free</h2>
+  <div class="card">
+    <p style="font-size:15px;color:var(--ink)">ui-rounded → SF Pro Rounded → system-ui → Segoe UI → Roboto → sans-serif</p>
+    <p>No webfonts, ever — the stack is whatever the device already carries. Rounded where it can, readable everywhere.</p>
+    <p class="scale" style="margin-top:10px">Observed scale (px):
+      <span style="font-size:11.5px">11.5</span><span style="font-size:12.5px">12.5</span><span style="font-size:13px">13</span><span style="font-size:13.5px">13.5</span><span style="font-size:14.5px">14.5</span><span style="font-size:15px">15</span><span style="font-size:20px">20</span><span style="font-size:22px">22</span><span style="font-size:26px">26</span>
+    </p>
+  </div>
+
+  <h2><span class="n">4</span>Shape — soft corners, pill actions</h2>
+  <div class="card">
+    <p><code>--r-md: 16px</code> cards and inputs · <code>--r-lg: 22px</code> heroes and panels · <code>999px</code> pills and chips.
+    Nothing on the trail has a sharp corner — the world is friendly before it is impressive.</p>
+  </div>
+
+  <h2><span class="n">5</span>Voice — the dignity guard</h2>
+  <div class="card">
+    <div class="law"><b>tier stands alone</b><span>A mastery tier never appears beside an age or a score. Stages describe the road, never the person.</span></div>
+    <div class="law"><b>no emoji on struggle</b><span>Revision and retry states speak plainly and warmly. Celebration gets the confetti; struggle gets respect.</span></div>
+    <div class="law"><b>OOS voice</b><span>Never "dropout", never remedial. Out-of-school youth are earners-in-waiting; the road meets them where they are.</span></div>
+    <div class="law"><b>honest frames</b><span>Anything designed-but-not-wired says so, out loud, in the UI. Nothing pretends.</span></div>
+    <div class="law"><b>MM by CCO only</b><span>Every Myanmar string ships with a CCO signature. The lint (R4) flags any glyph that appears without one.</span></div>
+  </div>
+
+  <h2><span class="n">6</span>The fences — non-negotiables</h2>
+  <div class="card">
+    <div class="law"><b>3G law</b><span>Zero images, zero webfonts, zero external asset calls on the learning trail. (This page follows it too — view source.)</span></div>
+    <div class="law"><b>minor-data P0</b><span>All demo learner data is invented (seeded PRNG 20260719). No real minor's data, ever, in any demo.</span></div>
+    <div class="law"><b>publish law</b><span>Every deploy: byte-diff + served checks, and every gate event disclosed.</span></div>
+    <div class="law"><b>consent before data</b><span>Heavy media loads only after a tap, with its MB cost stated first — the video lane is the reference pattern.</span></div>
+  </div>
+
+  <h2><span class="n">7</span>Tokens-as-lint — how to run it</h2>
+  <pre>node lint.js path/to/file.css path/to/page.html</pre>
+  <div class="card">
+    <div class="law"><b class="warn">R1-color</b><span>Hardcoded hex outside the palette. Fix: use the token, or propose the color as a new token.</span></div>
+    <div class="law"><b class="warn">R2-type</b><span>font-family outside <code>var(--font)</code>. (First live run suggests we need a <code>--font-mono</code> token in v1.1 — see mirror below.)</span></div>
+    <div class="law"><b class="warn">R3-3G</b><span><code>&lt;img&gt;</code>, <code>@font-face</code>, remote <code>url()</code> or <code>&lt;link&gt;</code> — the 3G law, enforced mechanically.</span></div><!-- lint-ok: rule text, not usage -->
+    <div class="law"><b class="warn">R4-MM</b><span>Any Myanmar glyph — ships only with CCO sign-off.</span></div>
+  </div>
+  <div class="card">
+    <h3>The honest mirror — lint vs ydc-canvas itself, 2026-07-24</h3>
+    <p><b class="warn">40 findings</b> on the source property: 34× R1 (status greens, gradient stops, one <code>#000</code>), 5× R2 (mono stacks — v1.1 token candidate), 1× R1 in lesson.css. <span class="ok"><b>index.html: clean.</b></span><!-- lint-ok: mirror text, not usage -->
+    The lint is a mirror, not a verdict — findings get fixed or recorded as signed exceptions. The exception register opens with the CTO.</p>
+  </div>
+
+  <h2><span class="n">8</span>Naming &amp; Lockups</h2>
+  <div class="pending">
+    <span class="t">⏳ PENDING — KoKo legal check (S324)</span>
+    <p style="margin-top:8px">Names, lockups, and trademark usage ship only after legal signs.
+    This section is intentionally empty — brand law is not invented.</p>
+  </div>
+
+  <footer>
+    YDC Brand Reference v1 · 2026-07-24 · follows its own fences: zero images, zero webfonts, zero external calls ·
+    clone kit: tokens.css · tokens.json · lint.js · index.html
+  </footer>
+</main>
+</body>
+</html>
