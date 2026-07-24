@@ -1,0 +1,1396 @@
+{
+ "contract": "refertrm-role-catalog-v1",
+ "asOf": "2026-07-24",
+ "status": "DRAFT for KoKo + Z Bo Maung review (no schema/migration/UI — those become Codex briefs after approval)",
+ "ground_truth": {
+  "active_job_listings": 253,
+  "distinct_titles": 196,
+  "companies_with_active_jobs": "see active_jobs_export (top: Makro 20, Thadoe Mahar 18, Innopex 16, The Recruiter 14, EAC 11, New Ever Best 11, TOMO 10)",
+  "makro_active_staff": 134,
+  "makro_offboarded": 43,
+  "makro_distinct_role_titles": 16,
+  "makro_duty_templates": 16,
+  "kb_principles_total": 1938,
+  "source": "Job WHERE status='active' (253); workforce_status WHERE company_id='makro-myanmar-001' AND employment_status='active' (134); performance_duty_templates WHERE company_id='makro-myanmar-001' (16). Read-only, 2026-07-24.",
+  "count_note": "253 is the raw active count in Job. The CTO count-contract amendment (2026-07-23) sets clean-public at ~212 after removing synthetic/expired/duplicate rows; this catalog mines the live active set as-written and does not pad or trim."
+ },
+ "grade_ladder": {
+  "note": "Rungs proposed from title-keyword frequency across the 253 active listings (Manager 34, Staff 31, Assistant 28, Supervisor 24, Executive 19, Junior 14, Senior 12, Officer 8, Coordinator 6). DIFFERS from the imported US-style ladder Junior/Staff/Senior/Manager/Senior Manager/Department Head in two ways: (1) 'Executive' in Myanmar is a MID-level individual-contributor rung, not a senior leader — it is the single most common mid-title and must be its own rung; (2) 'Supervisor' is a distinct first-line/senior-IC rung (24 listings) that the proposed ladder omits. 'Senior' in Myanmar is a prefix within a grade (Senior Accountant), not a standalone grade. Proposed 6 rungs below reconcile the brief's ladder with market reality.",
+  "rungs": [
+   {
+    "rung": "G1",
+    "name": "Junior / Trainee",
+    "proposedEquivalent": "Junior",
+    "marketTitles": [
+     "Junior [X]",
+     "Trainee",
+     "Management Trainee",
+     "Intern",
+     "Basic Staff"
+    ],
+    "scope": "Learns the function; contributes to defined tasks under close guidance.",
+    "autonomy": "Works to detailed instruction; escalates most decisions.",
+    "decisionRights": "None binding; recommends within own task only.",
+    "peopleResponsibility": "None.",
+    "competencies": [
+     "Follows a documented procedure end-to-end without skipping steps",
+     "Asks a clarifying question before acting when a requirement is unclear",
+     "Completes assigned tasks within the agreed timeframe",
+     "Records own work accurately in the required system/log"
+    ]
+   },
+   {
+    "rung": "G2",
+    "name": "Staff / Assistant",
+    "proposedEquivalent": "Staff",
+    "marketTitles": [
+     "[X] Staff",
+     "Assistant",
+     "[X] Assistant",
+     "Officer (entry)",
+     "Representative",
+     "Cashier",
+     "Checker",
+     "Picker",
+     "Driver",
+     "Receptionist",
+     "Office Staff"
+    ],
+    "scope": "Executes a defined set of recurring tasks for the function independently.",
+    "autonomy": "Owns routine execution; escalates exceptions.",
+    "decisionRights": "Decides within established rules (e.g. accepts/rejects an item against a checklist).",
+    "peopleResponsibility": "None, or guides a peer on a specific task.",
+    "competencies": [
+     "Executes the core recurring tasks of the role to the documented standard",
+     "Identifies and flags an exception or discrepancy instead of passing it on silently",
+     "Maintains accurate records for every transaction/task handled",
+     "Meets the daily/weekly throughput expected for the role"
+    ]
+   },
+   {
+    "rung": "G3",
+    "name": "Officer / Executive",
+    "proposedEquivalent": "(proposed ladder had 'Senior' here — market uses Officer/Executive as the mid IC rung)",
+    "marketTitles": [
+     "[X] Executive",
+     "[X] Officer",
+     "Coordinator",
+     "Analyst",
+     "Specialist",
+     "Associate",
+     "Advisor",
+     "Accountant",
+     "Engineer",
+     "Developer",
+     "Designer",
+     "Content Writer"
+    ],
+    "scope": "Owns a workstream or portfolio within the function; the core mid-level individual contributor.",
+    "autonomy": "Plans and executes own workstream; seeks guidance on novel/edge cases.",
+    "decisionRights": "Makes routine operational decisions within policy; commits the function on standard matters.",
+    "peopleResponsibility": "May coordinate peers or juniors on a task; no formal line reports.",
+    "competencies": [
+     "Owns a workstream end-to-end and delivers it without day-to-day supervision",
+     "Analyses a problem and proposes a recommended solution with the trade-offs stated",
+     "Coordinates with one other team/function to get a shared outcome",
+     "Produces accurate, decision-ready output (report, analysis, code, design) for the workstream",
+     "Applies the relevant policy/standard correctly to non-routine cases"
+    ]
+   },
+   {
+    "rung": "G4",
+    "name": "Supervisor / Senior",
+    "proposedEquivalent": "(NOT a separate rung in the proposed ladder — added because the market uses it heavily: 24 Supervisor + 12 Senior titles)",
+    "marketTitles": [
+     "Supervisor",
+     "Senior [X]",
+     "Team Leader",
+     "Lead",
+     "Senior Executive",
+     "Senior Officer",
+     "Assistant Manager (small scope)"
+    ],
+    "scope": "Senior individual contributor and/or first-line lead over a small team or shift.",
+    "autonomy": "Sets the day-to-day approach for own team/workstream; resolves most operational issues.",
+    "decisionRights": "Approves operational decisions within the team; escalates policy/cost exceptions.",
+    "peopleResponsibility": "First-line: assigns and checks the work of 2-10 staff; coaches juniors.",
+    "competencies": [
+     "Plans and assigns the daily/weekly work of the team and checks it is done to standard",
+     "Resolves an operational problem that a G2/G3 would escalate",
+     "Coaches a junior team member to perform a task correctly",
+     "Reports team performance and exceptions accurately to the manager",
+     "Enforces the relevant standard/safety rule consistently across the team"
+    ]
+   },
+   {
+    "rung": "G5",
+    "name": "Manager / Assistant Manager",
+    "proposedEquivalent": "Manager",
+    "marketTitles": [
+     "Manager",
+     "Assistant Manager",
+     "[X] Manager",
+     "Branch Manager",
+     "Shop Manager",
+     "Operation Manager"
+    ],
+    "scope": "Accountable for a function or unit's outcomes, people, and budget within set targets.",
+    "autonomy": "Sets objectives and approach for the unit within the department's direction.",
+    "decisionRights": "Makes hiring, spend, and priority decisions within delegated limits.",
+    "peopleResponsibility": "Manages a team (and/or supervisors); accountable for performance and development.",
+    "competencies": [
+     "Sets clear, measurable objectives for the unit and tracks progress against them",
+     "Makes a resourcing/priority trade-off decision within delegated authority",
+     "Manages performance: gives feedback, addresses underperformance, develops staff",
+     "Owns the unit's budget/cost and delivers within it",
+     "Escalates a risk or decision that exceeds delegated authority with a recommendation"
+    ]
+   },
+   {
+    "rung": "G6",
+    "name": "Senior Manager / Department Head / Chief",
+    "proposedEquivalent": "Senior Manager + Department Head",
+    "marketTitles": [
+     "Senior Manager",
+     "Head of [X]",
+     "Department Head",
+     "Chief [X]",
+     "General Manager",
+     "Director",
+     "Business Unit Manager"
+    ],
+    "scope": "Leads a department or business unit; sets direction across multiple teams/functions.",
+    "autonomy": "Sets department direction and policy within company strategy.",
+    "decisionRights": "Approves significant spend, hiring, and policy decisions for the department.",
+    "peopleResponsibility": "Leads managers; accountable for the department's capability and results.",
+    "competencies": [
+     "Sets the department's direction and priorities aligned to company strategy",
+     "Makes a significant decision (large spend, structure, policy) with the risks weighed",
+     "Builds the capability of the managers reporting in",
+     "Represents the department to the executive/externally and is accountable for its results",
+     "Resolves a cross-department conflict or dependency"
+    ]
+   }
+  ]
+ },
+ "departments": [
+  {
+   "department": "Finance",
+   "functions": [
+    {
+     "function": "Finance & Accounting",
+     "listings": 28,
+     "distinct_titles": 16,
+     "grade_distribution": {
+      "G4 Supervisor / Senior": 3,
+      "G3 Officer / Executive": 22,
+      "G2 Staff / Assistant": 2,
+      "G6 Senior Manager / Head": 1
+     },
+     "duties": [
+      {
+       "duty": "Records transactions in the ledger/system within the required cutoff and to the chart of accounts",
+       "observable": true
+      },
+      {
+       "duty": "Reconciles a balance (bank, stock, ledger) and documents the reconciling items each period",
+       "observable": true
+      },
+      {
+       "duty": "Prepares a tax or statutory submission accurately and files it before the deadline",
+       "observable": true
+      },
+      {
+       "duty": "Flags a discrepancy or an out-of-policy entry to the supervisor before posting",
+       "observable": true
+      },
+      {
+       "duty": "Produces a periodic report (P&L, trial balance, AR/AP ageing) that ties out to source records",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    },
+    {
+     "function": "Banking & Financial Services",
+     "listings": 6,
+     "distinct_titles": 6,
+     "grade_distribution": {
+      "G3 Officer / Executive": 2,
+      "G5 Manager": 4
+     },
+     "duties": [
+      {
+       "duty": "Verifies a customer's identity and documents against KYC requirements before opening/servicing an account",
+       "observable": true
+      },
+      {
+       "duty": "Assesses a loan/credit application against the credit policy and records the decision rationale",
+       "observable": true
+      },
+      {
+       "duty": "Explains a product's terms, fees and risks to the customer in plain language",
+       "observable": true
+      },
+      {
+       "duty": "Escalates a suspected fraud or AML red flag through the defined channel the same day",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    }
+   ]
+  },
+  {
+   "department": "Commercial",
+   "functions": [
+    {
+     "function": "Sales & Business Development",
+     "listings": 36,
+     "distinct_titles": 27,
+     "grade_distribution": {
+      "G2 Staff / Assistant": 21,
+      "G3 Officer / Executive": 5,
+      "G4 Supervisor / Senior": 8,
+      "G5 Manager": 2
+     },
+     "duties": [
+      {
+       "duty": "Contacts the assigned number of prospects/customers per day/week and logs each interaction",
+       "observable": true
+      },
+      {
+       "duty": "Records an order or lead in the system with complete, accurate fields",
+       "observable": true
+      },
+      {
+       "duty": "Achieves the assigned sales/volume target for the period (or documents the gap and cause)",
+       "observable": true
+      },
+      {
+       "duty": "Explains pricing, bulk terms and membership benefits correctly to the customer",
+       "observable": true
+      },
+      {
+       "duty": "Follows up an open lead or quote within the agreed timeframe",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    },
+    {
+     "function": "Marketing & Brand",
+     "listings": 17,
+     "distinct_titles": 12,
+     "grade_distribution": {
+      "G5 Manager": 5,
+      "G2 Staff / Assistant": 4,
+      "G3 Officer / Executive": 8
+     },
+     "duties": [
+      {
+       "duty": "Executes a campaign or promotion to the agreed brief, budget and timeline",
+       "observable": true
+      },
+      {
+       "duty": "Produces/coordinates collateral (asset, listing, material) that meets brand guidelines",
+       "observable": true
+      },
+      {
+       "duty": "Tracks and reports campaign metrics (reach, conversion, spend) accurately",
+       "observable": true
+      },
+      {
+       "duty": "Coordinates with sales/trade so the promotion is available where and when promised",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    },
+    {
+     "function": "Customer Service",
+     "listings": 5,
+     "distinct_titles": 5,
+     "grade_distribution": {
+      "G2 Staff / Assistant": 3,
+      "G3 Officer / Executive": 1,
+      "G5 Manager": 1
+     },
+     "duties": [
+      {
+       "duty": "Greets and serves each customer to the service standard within the expected wait time",
+       "observable": true
+      },
+      {
+       "duty": "Resolves a complaint or query, or escalates it with full context, within the SLA",
+       "observable": true
+      },
+      {
+       "duty": "Processes a transaction/membership/day-pass accurately in the system",
+       "observable": true
+      },
+      {
+       "duty": "Records customer feedback and recurring issues for reporting",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    }
+   ]
+  },
+  {
+   "department": "Technology",
+   "functions": [
+    {
+     "function": "Software & Web Development",
+     "listings": 4,
+     "distinct_titles": 4,
+     "grade_distribution": {
+      "G3 Officer / Executive": 4
+     },
+     "duties": [
+      {
+       "duty": "Delivers a ticket/feature to the agreed acceptance criteria and definition of done",
+       "observable": true
+      },
+      {
+       "duty": "Writes code that passes review and the automated test/build pipeline",
+       "observable": true
+      },
+      {
+       "duty": "Documents what was built and how to run/deploy it",
+       "observable": true
+      },
+      {
+       "duty": "Diagnoses and fixes a reported defect and verifies the fix before closing",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    },
+    {
+     "function": "IT Systems & Networks",
+     "listings": 9,
+     "distinct_titles": 7,
+     "grade_distribution": {
+      "G3 Officer / Executive": 4,
+      "G4 Supervisor / Senior": 2,
+      "G2 Staff / Assistant": 3
+     },
+     "duties": [
+      {
+       "duty": "Resolves a support ticket within the SLA and records the resolution",
+       "observable": true
+      },
+      {
+       "duty": "Performs a scheduled system/network/backup check and logs the result",
+       "observable": true
+      },
+      {
+       "duty": "Provisions or de-provisions access following the access-control procedure",
+       "observable": true
+      },
+      {
+       "duty": "Escalates a security or outage incident through the incident procedure immediately",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    },
+    {
+     "function": "Data & Analytics",
+     "listings": 12,
+     "distinct_titles": 10,
+     "grade_distribution": {
+      "G3 Officer / Executive": 9,
+      "G4 Supervisor / Senior": 1,
+      "G2 Staff / Assistant": 2
+     },
+     "duties": [
+      {
+       "duty": "Collects/captures data according to the defined instrument and quality standard",
+       "observable": true
+      },
+      {
+       "duty": "Cleans and validates a dataset and documents the corrections made",
+       "observable": true
+      },
+      {
+       "duty": "Produces an analysis/report that is reproducible from the source data",
+       "observable": true
+      },
+      {
+       "duty": "Checks an output for obvious errors before submitting it",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    }
+   ]
+  },
+  {
+   "department": "Operations",
+   "functions": [
+    {
+     "function": "Engineering & Technical",
+     "listings": 8,
+     "distinct_titles": 8,
+     "grade_distribution": {
+      "G4 Supervisor / Senior": 1,
+      "G3 Officer / Executive": 6,
+      "G6 Senior Manager / Head": 1
+     },
+     "duties": [
+      {
+       "duty": "Completes a maintenance/inspection task to the technical standard and logs it",
+       "observable": true
+      },
+      {
+       "duty": "Diagnoses a fault and applies a safe, compliant fix",
+       "observable": true
+      },
+      {
+       "duty": "Follows lock-out/tag-out and safety procedures for the task",
+       "observable": true
+      },
+      {
+       "duty": "Records parts used and time taken for the work order",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    },
+    {
+     "function": "Production & Manufacturing",
+     "listings": 2,
+     "distinct_titles": 2,
+     "grade_distribution": {
+      "G4 Supervisor / Senior": 2
+     },
+     "duties": [
+      {
+       "duty": "Runs the production line/shift to the output and quality target",
+       "observable": true
+      },
+      {
+       "duty": "Performs the in-process quality check and records the result",
+       "observable": true
+      },
+      {
+       "duty": "Follows the safety and operating procedure for the equipment",
+       "observable": true
+      },
+      {
+       "duty": "Logs output, downtime and material usage for the shift",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    },
+    {
+     "function": "Quality Control & Assurance",
+     "listings": 2,
+     "distinct_titles": 1,
+     "grade_distribution": {
+      "G2 Staff / Assistant": 2
+     },
+     "duties": [
+      {
+       "duty": "Inspects incoming/in-process/finished product against the specification and records pass/fail",
+       "observable": true
+      },
+      {
+       "duty": "Quarantines and labels a non-conforming item and raises the non-conformance record",
+       "observable": true
+      },
+      {
+       "duty": "Calibrates/uses the test equipment per procedure",
+       "observable": true
+      },
+      {
+       "duty": "Reports the inspection results and defect trends for the period",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    },
+    {
+     "function": "Research & Field Collection",
+     "listings": 1,
+     "distinct_titles": 1,
+     "grade_distribution": {
+      "G3 Officer / Executive": 1
+     },
+     "duties": [
+      {
+       "duty": "Collects field data per the instrument and sampling protocol",
+       "observable": true
+      },
+      {
+       "duty": "Verifies and submits collected data within the reporting window",
+       "observable": true
+      },
+      {
+       "duty": "Follows the ethical/safety protocol for field work",
+       "observable": true
+      },
+      {
+       "duty": "Documents field conditions and exceptions affecting the data",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    }
+   ]
+  },
+  {
+   "department": "People & Admin",
+   "functions": [
+    {
+     "function": "Human Resources",
+     "listings": 16,
+     "distinct_titles": 12,
+     "grade_distribution": {
+      "G5 Manager": 3,
+      "G2 Staff / Assistant": 5,
+      "G3 Officer / Executive": 6,
+      "G4 Supervisor / Senior": 2
+     },
+     "duties": [
+      {
+       "duty": "Processes a hire/movement/exit transaction accurately and on time in the system",
+       "observable": true
+      },
+      {
+       "duty": "Runs a recruitment step (screen, schedule, check) to the defined standard and timeline",
+       "observable": true
+      },
+      {
+       "duty": "Maintains employee records complete and confidential per policy",
+       "observable": true
+      },
+      {
+       "duty": "Answers an employee HR query accurately or routes it within the SLA",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    },
+    {
+     "function": "Administration & Secretarial",
+     "listings": 17,
+     "distinct_titles": 13,
+     "grade_distribution": {
+      "G2 Staff / Assistant": 10,
+      "G4 Supervisor / Senior": 3,
+      "G3 Officer / Executive": 4
+     },
+     "duties": [
+      {
+       "duty": "Handles incoming/outgoing documents, calls and visitors to the office standard",
+       "observable": true
+      },
+      {
+       "duty": "Maintains a filing/record system so a document can be retrieved on request",
+       "observable": true
+      },
+      {
+       "duty": "Schedules and coordinates meetings/travel/logistics accurately",
+       "observable": true
+      },
+      {
+       "duty": "Prepares a routine document/correspondence to the required format",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    },
+    {
+     "function": "Coaching, Training & Sports",
+     "listings": 1,
+     "distinct_titles": 1,
+     "grade_distribution": {
+      "G3 Officer / Executive": 1
+     },
+     "duties": [
+      {
+       "duty": "Plans and delivers a session/lesson to the curriculum or programme standard",
+       "observable": true
+      },
+      {
+       "duty": "Assesses the learner's progress and records it",
+       "observable": true
+      },
+      {
+       "duty": "Maintains a safe environment and follows the safety/safeguarding procedure",
+       "observable": true
+      },
+      {
+       "duty": "Adapts the session to the learner's level and needs",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    }
+   ]
+  },
+  {
+   "department": "Supply Chain",
+   "functions": [
+    {
+     "function": "Procurement & Purchasing",
+     "listings": 8,
+     "distinct_titles": 7,
+     "grade_distribution": {
+      "G3 Officer / Executive": 3,
+      "G2 Staff / Assistant": 3,
+      "G4 Supervisor / Senior": 1,
+      "G5 Manager": 1
+     },
+     "duties": [
+      {
+       "duty": "Raises a purchase order that matches the approved requisition and budget",
+       "observable": true
+      },
+      {
+       "duty": "Obtains the required number of quotes and documents the supplier selection",
+       "observable": true
+      },
+      {
+       "duty": "Verifies a supplier invoice against the PO and goods received before approving",
+       "observable": true
+      },
+      {
+       "duty": "Tracks an open order and follows up a late delivery",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    },
+    {
+     "function": "Warehouse & Logistics",
+     "listings": 19,
+     "distinct_titles": 17,
+     "grade_distribution": {
+      "G4 Supervisor / Senior": 7,
+      "G5 Manager": 2,
+      "G2 Staff / Assistant": 8,
+      "G3 Officer / Executive": 2
+     },
+     "duties": [
+      {
+       "duty": "Receives a delivery and reconciles supplier invoice items/quantities against the purchase order",
+       "observable": true
+      },
+      {
+       "duty": "Picks/packs an order accurately against the picking list and stages it for dispatch",
+       "observable": true
+      },
+      {
+       "duty": "Rotates stock per FIFO/FEFO and records expiry/temperature checks",
+       "observable": true
+      },
+      {
+       "duty": "Reports expired, damaged or discrepant goods with documented findings",
+       "observable": true
+      },
+      {
+       "duty": "Keeps the storage/display area organised, clean and safe",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    }
+   ]
+  },
+  {
+   "department": "Retail",
+   "functions": [
+    {
+     "function": "Retail Store Operations",
+     "listings": 34,
+     "distinct_titles": 21,
+     "grade_distribution": {
+      "G4 Supervisor / Senior": 1,
+      "G2 Staff / Assistant": 22,
+      "G5 Manager": 11
+     },
+     "duties": [
+      {
+       "duty": "Receives and inspects the day's product for quality, quantity and specification",
+       "observable": true
+      },
+      {
+       "duty": "Displays/stores product to planogram with correct pricing and stock rotation (FIFO/FEFO)",
+       "observable": true
+      },
+      {
+       "duty": "Serves the wholesale customer accurately (weighing, pricing, bulk terms) at the counter",
+       "observable": true
+      },
+      {
+       "duty": "Maintains food-safety, hygiene and temperature standards in the section with complete logs",
+       "observable": true
+      },
+      {
+       "duty": "Minimises waste through accurate forecasting and proper rotation, and records waste",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    }
+   ]
+  },
+  {
+   "department": "Hospitality",
+   "functions": [
+    {
+     "function": "Hospitality & Food Service",
+     "listings": 5,
+     "distinct_titles": 5,
+     "grade_distribution": {
+      "G3 Officer / Executive": 2,
+      "G2 Staff / Assistant": 2,
+      "G4 Supervisor / Senior": 1
+     },
+     "duties": [
+      {
+       "duty": "Prepares/serves food or beverage to the recipe and presentation standard",
+       "observable": true
+      },
+      {
+       "duty": "Follows food-safety, hygiene and temperature handling procedures",
+       "observable": true
+      },
+      {
+       "duty": "Serves the guest to the service standard within the expected time",
+       "observable": true
+      },
+      {
+       "duty": "Maintains the cleanliness and safety of the kitchen/service area",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    }
+   ]
+  },
+  {
+   "department": "Creative",
+   "functions": [
+    {
+     "function": "Content, Creative & Design",
+     "listings": 8,
+     "distinct_titles": 6,
+     "grade_distribution": {
+      "G3 Officer / Executive": 8
+     },
+     "duties": [
+      {
+       "duty": "Produces a content/design asset to the brief and brand guidelines",
+       "observable": true
+      },
+      {
+       "duty": "Delivers the asset by the agreed deadline and revision cycle",
+       "observable": true
+      },
+      {
+       "duty": "Checks the asset for accuracy (facts, spelling, links) before publishing",
+       "observable": true
+      },
+      {
+       "duty": "Records the asset and its performance for the content calendar",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    }
+   ]
+  },
+  {
+   "department": "Corporate",
+   "functions": [
+    {
+     "function": "Legal & Compliance",
+     "listings": 2,
+     "distinct_titles": 2,
+     "grade_distribution": {
+      "G5 Manager": 1,
+      "G4 Supervisor / Senior": 1
+     },
+     "duties": [
+      {
+       "duty": "Reviews a contract/document against the legal checklist and flags the risks",
+       "observable": true
+      },
+      {
+       "duty": "Maintains the compliance register and tracks obligations to deadline",
+       "observable": true
+      },
+      {
+       "duty": "Advises a business query with the applicable rule cited",
+       "observable": true
+      },
+      {
+       "duty": "Escalates a material legal/compliance risk promptly",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    },
+    {
+     "function": "Translation & Language",
+     "listings": 1,
+     "distinct_titles": 1,
+     "grade_distribution": {
+      "G3 Officer / Executive": 1
+     },
+     "duties": [
+      {
+       "duty": "Translates a document/utterance accurately between the required languages",
+       "observable": true
+      },
+      {
+       "duty": "Preserves the meaning, tone and technical terms of the source",
+       "observable": true
+      },
+      {
+       "duty": "Delivers the translation by the agreed deadline",
+       "observable": true
+      },
+      {
+       "duty": "Flags an ambiguous or untranslatable segment to the requester",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    },
+    {
+     "function": "Operations & General Management",
+     "listings": 8,
+     "distinct_titles": 8,
+     "grade_distribution": {
+      "G2 Staff / Assistant": 1,
+      "G3 Officer / Executive": 3,
+      "G6 Senior Manager / Head": 1,
+      "G5 Manager": 3
+     },
+     "duties": [
+      {
+       "duty": "Plans and coordinates the unit's activities to the operating plan",
+       "observable": true
+      },
+      {
+       "duty": "Tracks the unit's KPIs and reports performance and exceptions",
+       "observable": true
+      },
+      {
+       "duty": "Resolves a cross-functional coordination issue within the unit",
+       "observable": true
+      },
+      {
+       "duty": "Manages a project/task to scope, timeline and budget",
+       "observable": true
+      }
+     ],
+     "cco_pending_mm": "<!-- CCO-PENDING: Myanmar function name + duty translations -->"
+    }
+   ]
+  }
+ ],
+ "scorecard_rule": {
+  "default_weighting": {
+   "duties_pct": 70,
+   "ksa_pct": 30,
+   "source": "default_weighting on all 16 Makro performance_duty_templates is uniformly duties 70% / ksa 30%"
+  },
+  "assembly": "A scorecard = (function duties, weighted 70%) + (grade competencies, weighted 30%). Take the function's duties for the role's department, score each duty 0-5 on observed behaviour, weight by the duty's weighting (equal by default unless the template specifies otherwise), then add the grade competencies for the role's rung (also 0-5). Final = 0.7*duties_score + 0.3*competency_score.",
+  "hr_override": "HR may override per role: (a) re-weight duties vs competencies (e.g. a safety-critical role may weight duties higher); (b) mark a duty non-scoreable / not-applicable for a specific role; (c) add a role-specific duty. Overrides must be recorded on the assignment (weighting + duties jsonb on performance_assignments) with a reason, and never silently change the function default. The 70/30 default applies wherever HR has not overridden.",
+  "scoring_scale": "0 = not observed / not done; 1-2 = partial / inconsistent; 3 = meets the standard; 4 = consistently exceeds; 5 = exemplary / coaches others.",
+  "evidence_rule": "Each scored duty needs evidence (evidence_types on the template: client_job_jd, manager_sign_off, cco_verify). A duty with no evidence is scored 0 / not-observed, never assumed."
+ },
+ "coverage_map": {
+  "total_listings": 253,
+  "mapped": 250,
+  "unmapped_count": 3,
+  "unmapped": [
+   {
+    "title": "Senior Supervisor",
+    "companyId": "cmmlrjjx50000lqecwx3ftfc9",
+    "level": "Mid",
+    "inferredGrade": "G4 Supervisor / Senior",
+    "reason": "title too generic to assign a function (no function keyword — needs the JD/company to place)"
+   },
+   {
+    "title": "Senior RS Staff",
+    "companyId": "cmmlrk3a90014lqecuyuoyg4i",
+    "level": "Mid",
+    "inferredGrade": "G4 Supervisor / Senior",
+    "reason": "undefined abbreviation in title ('RS' not expanded — needs the JD to place)"
+   },
+   {
+    "title": "Supervisor",
+    "companyId": "cmmlrk3a90014lqecuyuoyg4i",
+    "level": "Mid",
+    "inferredGrade": "G4 Supervisor / Senior",
+    "reason": "title too generic to assign a function (no function keyword — needs the JD/company to place)"
+   }
+  ],
+  "vague_title_flags": [
+   {
+    "title": "Senior Supervisor",
+    "companyId": "cmmlrjjx50000lqecwx3ftfc9",
+    "function": "UNMAPPED",
+    "note": "title too generic to score at function level without the JD"
+   },
+   {
+    "title": "Senior RS Staff",
+    "companyId": "cmmlrk3a90014lqecuyuoyg4i",
+    "function": "UNMAPPED",
+    "note": "title too generic to score at function level without the JD"
+   },
+   {
+    "title": "Supervisor",
+    "companyId": "cmmlrk3a90014lqecuyuoyg4i",
+    "function": "UNMAPPED",
+    "note": "title too generic to score at function level without the JD"
+   }
+  ],
+  "by_function": [
+   {
+    "function": "Finance & Accounting",
+    "department": "Finance",
+    "listings": 28,
+    "distinct_titles": 16,
+    "grade_distribution": {
+     "G4 Supervisor / Senior": 3,
+     "G3 Officer / Executive": 22,
+     "G2 Staff / Assistant": 2,
+     "G6 Senior Manager / Head": 1
+    }
+   },
+   {
+    "function": "Banking & Financial Services",
+    "department": "Finance",
+    "listings": 6,
+    "distinct_titles": 6,
+    "grade_distribution": {
+     "G3 Officer / Executive": 2,
+     "G5 Manager": 4
+    }
+   },
+   {
+    "function": "Sales & Business Development",
+    "department": "Commercial",
+    "listings": 36,
+    "distinct_titles": 27,
+    "grade_distribution": {
+     "G2 Staff / Assistant": 21,
+     "G3 Officer / Executive": 5,
+     "G4 Supervisor / Senior": 8,
+     "G5 Manager": 2
+    }
+   },
+   {
+    "function": "Marketing & Brand",
+    "department": "Commercial",
+    "listings": 17,
+    "distinct_titles": 12,
+    "grade_distribution": {
+     "G5 Manager": 5,
+     "G2 Staff / Assistant": 4,
+     "G3 Officer / Executive": 8
+    }
+   },
+   {
+    "function": "Customer Service",
+    "department": "Commercial",
+    "listings": 5,
+    "distinct_titles": 5,
+    "grade_distribution": {
+     "G2 Staff / Assistant": 3,
+     "G3 Officer / Executive": 1,
+     "G5 Manager": 1
+    }
+   },
+   {
+    "function": "Software & Web Development",
+    "department": "Technology",
+    "listings": 4,
+    "distinct_titles": 4,
+    "grade_distribution": {
+     "G3 Officer / Executive": 4
+    }
+   },
+   {
+    "function": "IT Systems & Networks",
+    "department": "Technology",
+    "listings": 9,
+    "distinct_titles": 7,
+    "grade_distribution": {
+     "G3 Officer / Executive": 4,
+     "G4 Supervisor / Senior": 2,
+     "G2 Staff / Assistant": 3
+    }
+   },
+   {
+    "function": "Data & Analytics",
+    "department": "Technology",
+    "listings": 12,
+    "distinct_titles": 10,
+    "grade_distribution": {
+     "G3 Officer / Executive": 9,
+     "G4 Supervisor / Senior": 1,
+     "G2 Staff / Assistant": 2
+    }
+   },
+   {
+    "function": "Engineering & Technical",
+    "department": "Operations",
+    "listings": 8,
+    "distinct_titles": 8,
+    "grade_distribution": {
+     "G4 Supervisor / Senior": 1,
+     "G3 Officer / Executive": 6,
+     "G6 Senior Manager / Head": 1
+    }
+   },
+   {
+    "function": "Human Resources",
+    "department": "People & Admin",
+    "listings": 16,
+    "distinct_titles": 12,
+    "grade_distribution": {
+     "G5 Manager": 3,
+     "G2 Staff / Assistant": 5,
+     "G3 Officer / Executive": 6,
+     "G4 Supervisor / Senior": 2
+    }
+   },
+   {
+    "function": "Administration & Secretarial",
+    "department": "People & Admin",
+    "listings": 17,
+    "distinct_titles": 13,
+    "grade_distribution": {
+     "G2 Staff / Assistant": 10,
+     "G4 Supervisor / Senior": 3,
+     "G3 Officer / Executive": 4
+    }
+   },
+   {
+    "function": "Procurement & Purchasing",
+    "department": "Supply Chain",
+    "listings": 8,
+    "distinct_titles": 7,
+    "grade_distribution": {
+     "G3 Officer / Executive": 3,
+     "G2 Staff / Assistant": 3,
+     "G4 Supervisor / Senior": 1,
+     "G5 Manager": 1
+    }
+   },
+   {
+    "function": "Warehouse & Logistics",
+    "department": "Supply Chain",
+    "listings": 19,
+    "distinct_titles": 17,
+    "grade_distribution": {
+     "G4 Supervisor / Senior": 7,
+     "G5 Manager": 2,
+     "G2 Staff / Assistant": 8,
+     "G3 Officer / Executive": 2
+    }
+   },
+   {
+    "function": "Retail Store Operations",
+    "department": "Retail",
+    "listings": 34,
+    "distinct_titles": 21,
+    "grade_distribution": {
+     "G4 Supervisor / Senior": 1,
+     "G2 Staff / Assistant": 22,
+     "G5 Manager": 11
+    }
+   },
+   {
+    "function": "Production & Manufacturing",
+    "department": "Operations",
+    "listings": 2,
+    "distinct_titles": 2,
+    "grade_distribution": {
+     "G4 Supervisor / Senior": 2
+    }
+   },
+   {
+    "function": "Quality Control & Assurance",
+    "department": "Operations",
+    "listings": 2,
+    "distinct_titles": 1,
+    "grade_distribution": {
+     "G2 Staff / Assistant": 2
+    }
+   },
+   {
+    "function": "Hospitality & Food Service",
+    "department": "Hospitality",
+    "listings": 5,
+    "distinct_titles": 5,
+    "grade_distribution": {
+     "G3 Officer / Executive": 2,
+     "G2 Staff / Assistant": 2,
+     "G4 Supervisor / Senior": 1
+    }
+   },
+   {
+    "function": "Content, Creative & Design",
+    "department": "Creative",
+    "listings": 8,
+    "distinct_titles": 6,
+    "grade_distribution": {
+     "G3 Officer / Executive": 8
+    }
+   },
+   {
+    "function": "Legal & Compliance",
+    "department": "Corporate",
+    "listings": 2,
+    "distinct_titles": 2,
+    "grade_distribution": {
+     "G5 Manager": 1,
+     "G4 Supervisor / Senior": 1
+    }
+   },
+   {
+    "function": "Translation & Language",
+    "department": "Corporate",
+    "listings": 1,
+    "distinct_titles": 1,
+    "grade_distribution": {
+     "G3 Officer / Executive": 1
+    }
+   },
+   {
+    "function": "Operations & General Management",
+    "department": "Corporate",
+    "listings": 8,
+    "distinct_titles": 8,
+    "grade_distribution": {
+     "G2 Staff / Assistant": 1,
+     "G3 Officer / Executive": 3,
+     "G6 Senior Manager / Head": 1,
+     "G5 Manager": 3
+    }
+   },
+   {
+    "function": "Research & Field Collection",
+    "department": "Operations",
+    "listings": 1,
+    "distinct_titles": 1,
+    "grade_distribution": {
+     "G3 Officer / Executive": 1
+    }
+   },
+   {
+    "function": "Coaching, Training & Sports",
+    "department": "People & Admin",
+    "listings": 1,
+    "distinct_titles": 1,
+    "grade_distribution": {
+     "G3 Officer / Executive": 1
+    }
+   }
+  ]
+ },
+ "makro_reconciliation": {
+  "templates_total": 16,
+  "active_staff_roles_total": 16,
+  "template_to_function": [
+   {
+    "role_type": "Bakery",
+    "function": "Retail Store Operations",
+    "grade": "G2 Staff / Assistant",
+    "exactTitleMatch": true,
+    "activeStaff": 2,
+    "serve_allowed": false,
+    "cco_review_status": "verify_pending"
+   },
+   {
+    "role_type": "Butchery",
+    "function": "Retail Store Operations",
+    "grade": "G2 Staff / Assistant",
+    "exactTitleMatch": true,
+    "activeStaff": 17,
+    "serve_allowed": false,
+    "cco_review_status": "verify_pending"
+   },
+   {
+    "role_type": "Cashier",
+    "function": "Retail Store Operations",
+    "grade": "G2 Staff / Assistant",
+    "exactTitleMatch": true,
+    "activeStaff": 13,
+    "serve_allowed": true,
+    "cco_review_status": "signoff_approved"
+   },
+   {
+    "role_type": "Checker",
+    "function": "Warehouse & Logistics",
+    "grade": "G2 Staff / Assistant",
+    "exactTitleMatch": true,
+    "activeStaff": 5,
+    "serve_allowed": false,
+    "cco_review_status": "verify_pending"
+   },
+   {
+    "role_type": "Cold Chain",
+    "function": "Warehouse & Logistics",
+    "grade": "G2 Staff / Assistant",
+    "exactTitleMatch": false,
+    "activeStaff": 3,
+    "serve_allowed": true,
+    "cco_review_status": "signoff_approved"
+   },
+   {
+    "role_type": "Customer Sales & Service",
+    "function": "Sales & Business Development",
+    "grade": "G2 Staff / Assistant",
+    "exactTitleMatch": true,
+    "activeStaff": 2,
+    "serve_allowed": false,
+    "cco_review_status": "verify_pending"
+   },
+   {
+    "role_type": "Data Cleaning",
+    "function": "Data & Analytics",
+    "grade": "G2 Staff / Assistant",
+    "exactTitleMatch": true,
+    "activeStaff": 1,
+    "serve_allowed": false,
+    "cco_review_status": "verify_pending"
+   },
+   {
+    "role_type": "Day Pass",
+    "function": "Customer Service",
+    "grade": "G2 Staff / Assistant",
+    "exactTitleMatch": true,
+    "activeStaff": 4,
+    "serve_allowed": false,
+    "cco_review_status": "verify_pending"
+   },
+   {
+    "role_type": "Dry Food",
+    "function": "Retail Store Operations",
+    "grade": "G2 Staff / Assistant",
+    "exactTitleMatch": true,
+    "activeStaff": 18,
+    "serve_allowed": false,
+    "cco_review_status": "verify_pending"
+   },
+   {
+    "role_type": "Fish",
+    "function": "Retail Store Operations",
+    "grade": "G2 Staff / Assistant",
+    "exactTitleMatch": true,
+    "activeStaff": 4,
+    "serve_allowed": false,
+    "cco_review_status": "verify_pending"
+   },
+   {
+    "role_type": "Fruit & Vegetable",
+    "function": "Retail Store Operations",
+    "grade": "G2 Staff / Assistant",
+    "exactTitleMatch": true,
+    "activeStaff": 11,
+    "serve_allowed": false,
+    "cco_review_status": "verify_pending"
+   },
+   {
+    "role_type": "Goods Receiving",
+    "function": "Warehouse & Logistics",
+    "grade": "G2 Staff / Assistant",
+    "exactTitleMatch": false,
+    "activeStaff": 1,
+    "serve_allowed": true,
+    "cco_review_status": "verify_approved"
+   },
+   {
+    "role_type": "Non Buying",
+    "function": "Retail Store Operations",
+    "grade": "G2 Staff / Assistant",
+    "exactTitleMatch": true,
+    "activeStaff": 2,
+    "serve_allowed": false,
+    "cco_review_status": "verify_pending"
+   },
+   {
+    "role_type": "O2O",
+    "function": "Retail Store Operations",
+    "grade": "G2 Staff / Assistant",
+    "exactTitleMatch": true,
+    "activeStaff": 45,
+    "serve_allowed": false,
+    "cco_review_status": "verify_pending"
+   },
+   {
+    "role_type": "QA",
+    "function": "Retail Store Operations",
+    "grade": "G2 Staff / Assistant",
+    "exactTitleMatch": true,
+    "activeStaff": 0,
+    "serve_allowed": false,
+    "cco_review_status": "verify_pending"
+   },
+   {
+    "role_type": "Sales Rep",
+    "function": "Sales & Business Development",
+    "grade": "G2 Staff / Assistant",
+    "exactTitleMatch": true,
+    "activeStaff": 4,
+    "serve_allowed": false,
+    "cco_review_status": "verify_pending"
+   }
+  ],
+  "exact_title_matches": 14,
+  "templates_without_exact_title": [
+   {
+    "role_type": "Cold Chain",
+    "function": "Warehouse & Logistics",
+    "note": "template exists but no active Job carries this exact title (roles are filled via the performance system, not a live job posting)"
+   },
+   {
+    "role_type": "Goods Receiving",
+    "function": "Warehouse & Logistics",
+    "note": "template exists but no active Job carries this exact title (roles are filled via the performance system, not a live job posting)"
+   }
+  ],
+  "staff_roles_without_template": [
+   {
+    "role": "Fresh Food",
+    "active_staff": 2,
+    "note": "2 active staff carry role 'Fresh Food' which has NO performance_duty_template — needs a template (or mapping to an existing one) before they can be scored"
+   }
+  ],
+  "templates_without_active_staff": [
+   {
+    "role_type": "QA",
+    "active_staff": 0,
+    "note": "QA template exists but 0 active staff are assigned to it"
+   }
+  ],
+  "cco_status_of_templates": {
+   "signoff_approved": 2,
+   "verify_approved": 1,
+   "verify_pending": 13,
+   "note": "only Cashier, Cold Chain (signoff_approved) and Goods Receiving (verify_approved) are CCO-cleared to serve; the other 13 are verify_pending (serve_allowed=false) per MAKRO-DEPT-FIX-1-S321 PATCH-2"
+  }
+ },
+ "fences": {
+  "myanmar_text": "ALL Myanmar role names/duties are CCO-PENDING. This catalog authors English only. role_type_mm on the 16 templates is client-verbatim or CCO-approved (per template _governance.myanmar_mode); no new Myanmar authored here.",
+  "salary": "zero salary figures invented or carried. Salary is excluded from the catalog entirely.",
+  "market_claims_cited": "grade-ladder rungs and title frequencies are cited to the 253-listing title-keyword analysis (see grade_ladder.note).",
+  "vague_listings": "listings whose title is too generic to score (Supervisor, Senior Supervisor, Senior RS Staff) are flagged in coverage_map.vague_title_flags, NOT silently assigned duties.",
+  "unmapped": "unmapped listings are reported as findings (coverage_map.unmapped), never defaulted.",
+  "out_of_scope": "schema, migration, UI are OUT OF SCOPE — they become Codex briefs after KoKo + Z Bo Maung approve this catalog."
+ }
+}
