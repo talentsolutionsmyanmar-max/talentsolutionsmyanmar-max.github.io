@@ -1,0 +1,52 @@
+/* ============================================================
+   YDC BRAND TOKENS — the clone file · v1 · 2026-07-24
+   Source of truth: ydc-canvas/styles.css. Clone me — never
+   re-invent me. Changes land here first, then everywhere.
+   The lint (lint.js) checks consumers against this file.
+   ============================================================ */
+:root{
+  --r-lg: 22px;
+  --r-md: 16px;
+  --font: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* five major colors — the territories of the trail */
+  --c-english:   #FF7A85;
+  --c-math:      #FFC24B;
+  --c-physics:   #54C8FF;
+  --c-chemistry: #B28CFF;
+  --c-biology:   #4ADE80;
+  --c-gold:      #FFD166;
+  --c-teal:      #5EEAD4;
+  --c-sunrise-a: #FFB25E;
+  --c-sunrise-b: #FF6E7F;
+}
+
+[data-theme="night"]{
+  --bg0: #070B18;
+  --bg1: #0D1428;
+  --panel: #141C36;
+  --panel2: #1A2342;
+  --line: rgba(148,163,224,.16);
+  --ink: #F2F5FF;
+  --mut: #A8B2D8;
+  --dim: #6E789F;
+  --glow: rgba(94,234,212,.5);
+  --shadow: 0 14px 40px rgba(0,0,0,.45);
+  --star-op: .9;
+  color-scheme: dark;
+}
+
+[data-theme="day"]{
+  --bg0: #E7EFFF;
+  --bg1: #F5F9FF;
+  --panel: #FFFFFF;
+  --panel2: #F0F4FF;
+  --line: rgba(30,41,82,.10);
+  --ink: #141B33;
+  --mut: #4A5578;
+  --dim: #8A93B5;
+  --glow: rgba(14,165,164,.35);
+  --shadow: 0 12px 32px rgba(60,72,140,.16);
+  --star-op: 0;
+  color-scheme: light;
+}
