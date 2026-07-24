@@ -23,7 +23,16 @@ window.LEARNER = { firstName:'Nanda', fullName:'Nanda Lin', tierId:'working', me
 
 window.BANDS = { basic:'Basic', middle:'Middle', high:'High', out_of_school:'Out of school' };
 function getBand(){ try{ return localStorage.getItem('ydc-canvas-band') || 'high'; }catch(e){ return 'high'; } }
-function setBand(v){ try{ localStorage.setItem('ydc-canvas-band', v); }catch(e){} route(); }
+/* band pill = switch worlds. From a module/lesson page (band-owned
+   content) land on the new band's map; elsewhere re-render in place */
+function setBand(v){
+  try{ localStorage.setItem('ydc-canvas-band', v); }catch(e){}
+  const h = location.hash.replace(/^#\/?/, '');
+  if(h.startsWith('module/') || h.startsWith('lesson/')){
+    toast((window.BANDS[v] || 'New') + ' world — this is their trail map');
+    location.hash = '#/map';
+  } else route();
+}
 function bandKey(band){ return band==='basic' ? 'basic' : band==='middle' ? 'middle' : band==='out_of_school' ? 'oos' : 'high'; }
 
 window.REGISTER = {
