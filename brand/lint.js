@@ -67,7 +67,7 @@ for(const file of files){
     if(/<link[^>]+href\s*=\s*['"]https?:/i.test(text)){ assets++; report(file, n, 'R3-3G    ', 'remote <link> — no remote assets'); }
 
     /* R4 · MM glyphs — CCO signs every Myanmar string before it ships */
-    if(/[̀-ჟꙠ-ꞿ]/.test(text)){
+    if(/[\u1000-\u109F\uAA60-\uAA7F]/.test(text)){
       glyphs++; report(file, n, 'R4-MM    ', 'Myanmar glyph — ships only with CCO sign-off');
     }
   });
