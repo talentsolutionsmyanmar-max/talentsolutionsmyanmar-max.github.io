@@ -88,8 +88,9 @@
   const lite=document.documentElement.dataset.lite==='true';
   const fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
   const card=$('.jobs-card'), cv=$('.card-sky');
+  let skyPulse=()=>{};
 
-  /* ---- door 01 interior sky: dust, drift, and the hover that answers ---- */
+  /* ---- door 01 interior sky: dust, drift, and the sky that answers ---- */
   if(cv&&card){
     const ctx=cv.getContext('2d');
     const DPR=Math.min(window.devicePixelRatio||1,1.5);
@@ -100,9 +101,9 @@
       ctx.setTransform(DPR,0,0,DPR,0,0);seed();
     }
     function seed(){
-      stars=[];const n=(lite||reduced)?16:26;
+      stars=[];const n=(lite||reduced)?16:30;
       for(let i=0;i<n;i++)stars.push({x:Math.random()*W,y:Math.random()*H,
-        vx:(Math.random()-.5)*.05,vy:(Math.random()-.5)*.05,r:.6+Math.random()*1.1,tw:Math.random()*6.28});
+        vx:(Math.random()-.5)*.05,vy:(Math.random()-.5)*.05,r:.7+Math.random()*1.2,tw:Math.random()*6.28});
     }
     function drawStatic(){
       ctx.clearRect(0,0,W,H);
@@ -117,20 +118,20 @@
       for(const p of stars){
         p.x+=p.vx*dt*.06;p.y+=p.vy*dt*.06;p.tw+=dt*.0011;
         if(p.x<-8)p.x=W+8;if(p.x>W+8)p.x=-8;if(p.y<-8)p.y=H+8;if(p.y>H+8)p.y=-8;
-        const a=(0.30+Math.sin(p.tw)*0.20)*(1+hot*0.9);
+        const a=(0.32+Math.sin(p.tw)*0.22)*(1+hot*0.9);
         ctx.fillStyle='rgba(214,222,240,'+Math.min(1,a).toFixed(3)+')';
         ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.2832);ctx.fill();
       }
       if(hot>0.03){ /* the door answers: nearby stars connect in gold */
-        ctx.lineWidth=.6;
+        ctx.lineWidth=.8;
         for(let i=0;i<stars.length;i++)for(let j=i+1;j<stars.length;j++){
           const p=stars[i],q=stars[j],dx=p.x-q.x,dy=p.y-q.y,d2=dx*dx+dy*dy;
-          if(d2<4900){const a=(1-Math.sqrt(d2)/70)*.5*hot;
+          if(d2<8100){const a=(1-Math.sqrt(d2)/90)*.62*hot;
             ctx.strokeStyle='rgba(212,175,55,'+a.toFixed(3)+')';
             ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();}
         }
         const g=ctx.createRadialGradient(W*.77,H*.55,4,W*.77,H*.55,W*.3);
-        g.addColorStop(0,'rgba(212,175,55,'+(0.14*hot).toFixed(3)+')');g.addColorStop(1,'rgba(212,175,55,0)');
+        g.addColorStop(0,'rgba(212,175,55,'+(0.18*hot).toFixed(3)+')');g.addColorStop(1,'rgba(212,175,55,0)');
         ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
       }
     }
@@ -140,7 +141,11 @@
       if(!visible)stop();else if(!lite&&!reduced)start();},{threshold:.05}).observe(card);
     document.addEventListener('visibilitychange',()=>{document.hidden?stop():(!lite&&!reduced&&start());});
     let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{size();if(lite||reduced)drawStatic();},160);});
-    if(fine){card.addEventListener('pointerenter',()=>{hotT=1;});card.addEventListener('pointerleave',()=>{hotT=0;});}
+    let hovSky=false,pulseT=null;
+    skyPulse=(ms=1700)=>{if(lite||reduced||hovSky)return;hotT=1;clearTimeout(pulseT);pulseT=setTimeout(()=>{if(!hovSky)hotT=0;},ms);};
+    if(fine){card.addEventListener('pointerenter',()=>{hovSky=true;hotT=1;});card.addEventListener('pointerleave',()=>{hovSky=false;hotT=0;});}
+    card.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')skyPulse(1900);},{passive:true});
+    window.__sky=()=>({stars:stars.length,hot,hotT});
     size();
     if(lite||reduced)drawStatic();else start();
   }
@@ -153,7 +158,7 @@
       if(i===cur)return;const ticket=++seq;
       panes[cur].classList.remove('on');paths[cur].classList.remove('on');
       setTimeout(()=>{if(ticket!==seq)return;
-        panes[i].classList.add('on');paths[i].classList.add('on');cur=i;},430);
+        panes[i].classList.add('on');paths[i].classList.add('on');cur=i;skyPulse();},430);
     }
     paths.forEach((el,i)=>{
       el.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();show(i);});
