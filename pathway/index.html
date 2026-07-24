@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Recruiter Pathway — Cockpit · ReferTRM</title>
+<meta name="description" content="The Recruiter Pathway cockpit: Referrer to Pro-Referrer to BD Freelancer to your own book. Evidence-backed progression, RTC library, live requisitions. Demo surface.">
+<style>
+:root{
+  --navy:#001F3F;--navy-deep:#001229;--gold:#D4AF37;--ivory:#F7F5F0;--paper:#FFFDF8;
+  --teal:#0F766E;--ink:#14202B;--slate:#5C6873;--line:rgb(0 31 63 / .14);--line-i:rgb(255 255 255 / .18);
+  --mono:ui-monospace,'JetBrains Mono',Menlo,monospace;--disp:'Bricolage Grotesque',system-ui,sans-serif;--body:system-ui,-apple-system,'Segoe UI',Roboto,'Padauk',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ivory);color:var(--ink);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased}
+[lang="my"]{font-family:'Padauk',var(--body)}
+.wrap{width:min(100% - 32px,1080px);margin-inline:auto}
+header.top{border-bottom:1px solid var(--line);background:rgb(247 245 240 / .96);position:sticky;top:0;z-index:10}
+.top-in{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:14px;letter-spacing:-.01em;text-decoration:none;color:inherit}
+.brand i{width:9px;height:9px;border-radius:50%;background:var(--gold);flex:none}
+.kick{font:600 9px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--teal)}
+h1{font:700 clamp(34px,6vw,56px)/1.02 var(--disp);letter-spacing:-.04em;margin:14px 0 12px}
+h1 em{font-style:normal;color:var(--navy)}
+.lede{color:var(--slate);font-size:15px;max-width:58ch}
+section{padding:34px 0}
+.sect-k{font:600 9px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:#96760E;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.sect-k::after{content:"";width:48px;height:1px;background:currentColor;opacity:.4}
+.ladder{display:grid;gap:8px}
+.rung{position:relative;display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.rung-n{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font:700 13px var(--mono);background:var(--navy);color:var(--gold)}
+.rung h2{font:650 19px/1.15 var(--disp);letter-spacing:-.02em}
+.rung p{font-size:12px;color:var(--slate);margin-top:3px;max-width:56ch}
+.rung .gate{font:600 8.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--teal);border:1px solid rgb(15 118 110 / .3);border-radius:999px;padding:6px 10px;white-space:nowrap}
+.rung.here{border-color:rgb(212 175 55 / .7);box-shadow:0 10px 26px rgb(0 31 63 / .1)}
+.rung.here .rung-n{background:var(--gold);color:var(--navy-deep)}
+.rung.here .gate{color:#96760E;border-color:rgb(212 175 55 / .55)}
+.rule{margin-top:14px;border:1px dashed rgb(15 118 110 / .4);border-radius:14px;padding:14px 16px;background:#F2F9F7;font-size:13px;line-height:1.7;color:#134E4A;max-width:760px}
+.rule strong{color:var(--teal)}
+.earn{background:var(--navy);color:#DCE6F0;border-radius:20px;padding:26px;display:grid;gap:18px}
+.earn h2{font:650 22px/1.15 var(--disp);letter-spacing:-.02em;color:#fff}
+.mech{display:grid;gap:10px}
+.mech div{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;font-size:13px;line-height:1.65}
+.mech b{width:26px;height:26px;border:1px solid var(--line-i);border-radius:50%;display:grid;place-items:center;font:600 10px var(--mono);color:var(--gold)}
+.earn .fine{font:500 9px var(--mono);letter-spacing:.05em;color:#8FA3B8;border-top:1px solid var(--line-i);padding-top:12px}
+.mods{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.mod{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.mod .mno{font:600 9px var(--mono);letter-spacing:.1em;color:var(--gold)}
+.mod h3{font:650 16px/1.2 var(--disp);letter-spacing:-.015em}
+.mod p{font-size:12px;color:var(--slate);line-height:1.65;flex:1}
+.mod .mm-slot{font:400 11px 'Padauk',var(--body);color:#8B93A1;border-top:1px dashed var(--line);padding-top:8px}
+.proofs{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.proof{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px}
+.proof .pk{font:600 8.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+.proof h3{font:650 15px/1.25 var(--disp);margin:8px 0 6px}
+.proof p{font-size:12px;color:var(--slate);line-height:1.65}
+.tasks{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px}
+.task{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:13px 4px;border-bottom:1px solid var(--line)}
+.task:last-child{border-bottom:0}
+.task strong{font-size:13.5px;display:block}
+.task span{font-size:11px;color:var(--slate)}
+.task .st{font:600 8px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#96760E;border:1px solid rgb(212 175 55 / .45);border-radius:999px;padding:5px 9px;white-space:nowrap}
+.tasks .note{font:500 9px var(--mono);color:#8B93A1;padding-top:12px}
+.rtc{background:linear-gradient(180deg,#FFF8DF,#FDF3D0);border:1px solid rgb(212 175 55 / .5);border-radius:20px;padding:26px}
+.rtc h2{font:650 22px/1.15 var(--disp);letter-spacing:-.02em;margin-bottom:10px}
+.rtc p{font-size:13px;line-height:1.75;color:#4A3F1A;max-width:62ch}
+.rtc .reg{margin-top:14px;display:grid;gap:8px}
+.rtc .reg div{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:12.5px;color:#4A3F1A}
+.rtc .reg b{color:#96760E;font:700 11px var(--mono)}
+footer{border-top:1px solid var(--line);padding:22px 0 40px;color:var(--slate);font-size:11px}
+footer a{color:var(--navy)}
+.demo-band{background:#FFF4D6;border-bottom:1px solid rgb(212 175 55 / .4);font:600 9px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#96760E;text-align:center;padding:7px 12px}
+@media(max-width:640px){.rung{grid-template-columns:38px 1fr}.rung .gate{display:none}.task{grid-template-columns:1fr}.task .st{justify-self:start}}
+</style>
+</head>
+<body>
+<div class="demo-band">Demo surface · pathway shape is real, names and requisitions shown are samples · MM copy = CCO slots</div>
+<header class="top"><div class="wrap top-in">
+  <a class="brand" href="../intent-hub/"><i></i>ReferTRM · Recruiter Pathway</a>
+  <span class="kick">Cockpit</span>
+</div></header>
+
+<main class="wrap">
+
+<section id="ladder">
+  <div class="sect-k">01 · Your ladder</div>
+  <h1>Climb by <em>opening doors.</em></h1>
+  <p class="lede">Four bands. Each gate opens on evidence — a verified placement outcome — never on activity, never on time served. You move when the record says you moved.</p>
+  <div class="ladder" style="margin-top:22px">
+    <div class="rung here"><span class="rung-n">R1</span><span><h2>Referrer</h2><p>You refer someone you genuinely know into a real role. The first gate is care: only refer where you believe the fit is true.</p></span><span class="gate">You start here</span></div>
+    <div class="rung"><span class="rung-n">R2</span><span><h2>Pro-Referrer</h2><p>Opened by verified placement outcomes — people you referred who started and were confirmed. Not by counting how many links you shared.</p></span><span class="gate">Gate: verified placements</span></div>
+    <div class="rung"><span class="rung-n">R3</span><span><h2>BD Freelancer</h2><p>You work requisitions end to end with the platform behind you — client truth, candidate care, clean documentation.</p></span><span class="gate">Gate: sustained outcomes + RTC</span></div>
+    <div class="rung"><span class="rung-n">R4</span><span><h2>Your own book</h2><p>A portable record of clients and placements that is yours. The ladder ends where your practice begins.</p></span><span class="gate">The book is yours</span></div>
+  </div>
+  <div class="rule"><strong>Evidence-backed, not activity-backed.</strong> A placement counts when the candidate starts and the client confirms — the P1 verification standard. Shares, clicks and log-ins never open a gate.</div>
+</section>
+
+<section id="earnings">
+  <div class="sect-k">02 · Earnings — the mechanism</div>
+  <div class="earn">
+    <h2>How earning works here.</h2>
+    <div class="mech">
+      <div><b>1</b><span>You refer a real person into a real requisition, with their knowledge and consent.</span></div>
+      <div><b>2</b><span>When a referral becomes a verified placement, the outcome is recorded on your ladder.</span></div>
+      <div><b>3</b><span>Earnings follow the pathway agreement you hold in the app — terms are stated there, in writing, before you begin.</span></div>
+      <div><b>4</b><span>Higher bands carry broader responsibility — and the terms that go with it. The ladder above is the whole map.</span></div>
+    </div>
+    <div class="fine">This panel shows the ladder and the mechanism only. No figures are published on this surface.</div>
+  </div>
+</section>
+
+<section id="library">
+  <div class="sect-k">03 · Library — RTC modules</div>
+  <div class="mods">
+    <div class="mod"><span class="mno">RTC · M1</span><h3>The honest referral</h3><p>What a referral is, consent and dignity first, when not to refer. The foundation every band stands on.</p><div class="mm-slot" lang="my">MM — CCO slot</div></div>
+    <div class="mod"><span class="mno">RTC · M2</span><h3>Reading a real requisition</h3><p>Salary stated, terms stated, employer verified. How to read a live requisition and explain it plainly to a candidate.</p><div class="mm-slot" lang="my">MM — CCO slot</div></div>
+    <div class="mod"><span class="mno">RTC · M3</span><h3>Candidate care under pressure</h3><p>Preparation, rejection days, telling the truth kindly. The human side of the record you are building.</p><div class="mm-slot" lang="my">MM — CCO slot</div></div>
+    <div class="mod"><span class="mno">RTC · M4</span><h3>From referrals to a book</h3><p>Repeat trust with clients, clean documentation, and what it means to hold a book of your own.</p><div class="mm-slot" lang="my">MM — CCO slot</div></div>
+  </div>
+</section>
+
+<section id="proofs">
+  <div class="sect-k">04 · Mastery — proofs that count</div>
+  <div class="proofs">
+    <div class="proof"><span class="pk">Proof · P1-verified</span><h3>First verified placement</h3><p>Someone you referred started the role, and the client confirmed. The first mark on the record.</p></div>
+    <div class="proof"><span class="pk">Proof · P1-verified</span><h3>Repeat outcomes</h3><p>Verified placements across more than one client — evidence the first was not luck.</p></div>
+    <div class="proof"><span class="pk">Proof · P1-verified</span><h3>A client returns</h3><p>A client brings you a new requisition because the last placement worked. The strongest signal there is.</p></div>
+    <div class="proof"><span class="pk">Never here</span><h3>No quiz scores</h3><p>Modules prepare you; outcomes promote you. This cockpit never displays a test score as mastery.</p></div>
+  </div>
+</section>
+
+<section id="tasks">
+  <div class="sect-k">05 · Tasks — live requisitions</div>
+  <div class="tasks">
+    <div class="task"><span><strong>Samples below show the shape of a task.</strong><span>In the app, your tasks are live requisitions from the governed board — real roles, stated salary, verified employer.</span></span><span class="st">Shape only</span></div>
+    <div class="task"><span><strong>Read a requisition with a candidate</strong><span>Walk one real person through the terms — salary, location, hours — before anyone applies.</span></span><span class="st">R1 ready</span></div>
+    <div class="task"><span><strong>Prepare one candidate for interview</strong><span>One honest preparation session. Care is the task, not the outcome.</span></span><span class="st">R2 gate</span></div>
+    <div class="task"><span><strong>Document a placement to P1 standard</strong><span>Start confirmed, client confirmed, record clean. This is what a gate looks like from the inside.</span></span><span class="st">R3 craft</span></div>
+    <div class="note">Live requisitions load inside the app. This surface is static by law — nothing here pretends to be live.</div>
+  </div>
+</section>
+
+<section id="rtc">
+  <div class="sect-k">06 · Certificate — the RTC register</div>
+  <div class="rtc">
+    <h2>The RTC register.</h2>
+    <p>Complete RTC M1–M4 and hold a first verified placement, and your name enters the <strong>Recruiter Training Certificate register</strong>. The RTC certifies that you trained and produced real outcomes on this platform. It is a training credential — it is not an agency licence, and it does not make anyone a broker.</p>
+    <div class="reg">
+      <div><b>·</b><span>Issued on evidence: modules complete, first verified placement on record.</span></div>
+      <div><b>·</b><span>Revocable on conduct: candidate harm or dishonest referral ends the entry.</span></div>
+      <div><b>·</b><span>Named plainly: a certificate of training and outcomes — nothing more claimed, nothing less.</span></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="wrap">
+  ReferTRM · Recruiter Pathway cockpit — demo surface adapted from the cockpit chassis. Pathway terms live in the app. <a href="../intent-hub/">Back to the hub</a> · <a href="../warm/">The warm layer</a>
+</div></footer>
+
+</body>
+</html>
