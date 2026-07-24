@@ -176,3 +176,10 @@
 }
 html[data-lite="true"] .lp-dot{animation:none}
 @media(prefers-reduced-motion:reduce){.tpane,.tpane.on{transition:none}.lp-dot{animation:none}}
+
+/* hub-v2.4: the gold stamp fills the right side of door 01 on wide screens */
+@media(min-width:1060px){
+  .jobs-card .door-symbol{width:84px;height:84px;border-radius:22px;align-self:center;margin-right:8px;
+    box-shadow:0 0 0 1px rgb(212 175 55 / .14),0 12px 32px rgb(0 0 0 / .28)}
+  .jobs-card .door-symbol svg{width:34px;height:34px}
+}
