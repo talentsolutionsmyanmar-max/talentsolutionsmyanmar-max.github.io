@@ -30,9 +30,8 @@
       const connection=navigator.connection||navigator.mozConnection||navigator.webkitConnection||{};
       const effectiveType=connection.effectiveType||'';
       const slowNet=Boolean(connection.saveData)||['slow-2g','2g','3g'].includes(effectiveType);
-      const lowMem=typeof navigator.deviceMemory==='number'&&navigator.deviceMemory<=4;
       const motionQuery=new URLSearchParams(location.search);
-      const lite=motionQuery.get('lite')==='1'||(motionQuery.get('full')!=='1'&&(slowNet||lowMem));
+      const lite=motionQuery.get('lite')==='1'||(motionQuery.get('full')!=='1'&&slowNet);
       const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
       const reduced=reducedMotion.matches;
       const fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
@@ -49,7 +48,7 @@
       if(fine&&!reduced){
         soulSurfaces.forEach(element=>{
           const control=element.querySelector('.intent-arrow');
-          element.addEventListener('pointermove',event=>{const rect=element.getBoundingClientRect(),x=event.clientX-rect.left,y=event.clientY-rect.top;element.style.setProperty('--mx',`${x}px`);element.style.setProperty('--my',`${y}px`);if(control){const dx=(x-rect.width/2)*.18,dy=(y-rect.height/2)*.28;control.style.transform=`translate3d(${Math.max(-7,Math.min(7,dx))}px,${Math.max(-7,Math.min(7,dy))}px,0)`}},{passive:true});
+          element.addEventListener('pointermove',event=>{const rect=element.getBoundingClientRect(),x=event.clientX-rect.left,y=event.clientY-rect.top;element.style.setProperty('--mx',`${x}px`);element.style.setProperty('--my',`${y}px`);if(control){const dx=(x-rect.width/2)*.18,dy=(y-rect.height/2)*.28;control.style.transform=`translate3d(${Math.max(-7,Math.min(7,dx))}px,${Math.max(-7,Math.min(7,dy))}px,${Math.max(-7,Math.min(7,dy))}px,0)`}},{passive:true});
           element.addEventListener('pointerleave',()=>{if(control)control.style.transform='translate3d(0,0,0)'},{passive:true});
         });
       }
