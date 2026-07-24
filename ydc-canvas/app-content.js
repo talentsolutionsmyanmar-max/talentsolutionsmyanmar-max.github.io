@@ -39,6 +39,13 @@ window.LESSON_CONTENT = {
     'State your strongest piece of evidence in thirty seconds.' ], brief:[
     'The final draft is a promise: every claim sourced, every number in a table, every sentence one idea. Read it aloud once — your ear catches what your eye misses. Then submit, and let the rubric do its work.' ],
     check:{ q:'Before submitting, you…', opts:['read the whole report aloud once','add more adjectives','make it longer'], ans:0, why:'the read-aloud test catches what silent reading misses.' } },
+  /* BASIC · b-f-1 Plants Around Us */
+  'b-f-1:1': { watch:['plants are living things','they make their own food','they come in many shapes — tree, bush, grass'], brief:[
+    'Before we talk about plants, we look at them first. This video names the big idea: plants are alive, they feed themselves, and they do not all look the same. After it, we each say one thing we saw — one sentence is enough.' ],
+    check:{ q:'A plant is…', opts:['a living thing','a kind of rock','a toy'], ans:0, why:'plants live — they grow, drink, and make their own food.' } },
+  'b-f-1:2': { watch:['a few plants catch insects for food','they still drink water and catch light like every plant','surprises are worth a second look'], brief:[
+    'Review day — with one surprise to keep curiosity awake: a few plants catch insects for food. Most plants never do, but the surprise makes us look twice at the plants near us. To reflect means to ask: what did I see today that I did not expect?' ],
+    check:{ q:'Carnivorous plants…', opts:['catch insects for food','eat only grass','are not real'], ans:0, why:'a few plants really do catch insects — and they still catch light like every plant.' } },
   /* BASIC · b-w-2 Draw & Tell: A Plant You Found */
   'b-w-2:1': { watch:['leaves drink light','roots drink water','every plant has parts with jobs'], brief:[
     'Watch how the plant is not one thing — it is a team. Each part has a job, and together they keep the plant alive.' ],
@@ -92,6 +99,11 @@ window.LESSON_CONTENT = {
     { w:'YOU', t:'1000. Before I wrote it down, I would have guessed “a good day” — now I know how good.' } ], brief:[
     'Sales feel bigger than costs while they happen — the cash is in your hand and the gas bill is invisible. Writing both down the same way is the whole discipline.' ],
     check:{ q:'Which one is a cost?', opts:['the gas for the stove','a paid order','change given correctly'], ans:0, why:'money out is a cost — even when it buys something you need.' } },
+  /* OOS · o-f-1 Money Math: Prices, Change & Bills */
+  'o-f-1:4': { watch:['count up from the price to the money in your hand','no subtraction under pressure','say the change as you hand it over'], brief:[
+    'The video uses US coins — the method works in kyat exactly the same. Try it: the price is 4,500 Ks, the customer hands you 5,000 Ks. Count up from 4,500: plus 500 makes 5,000. The change is 500 Ks. No subtraction, no panic.',
+    'One more: price 2,300 Ks, they hand 3,000 Ks. Count up: +700 makes 3,000 — change 700 Ks. Say the amount out loud as you hand it over; saying it makes it stick.' ],
+    check:{ q:'Price 1,700 Ks, the customer hands 2,000 Ks. The change is…', opts:['300 Ks','200 Ks','1,300 Ks'], ans:0, why:'count up from 1,700: +300 = 2,000. Change 300 Ks.' } },
   'o-w-2:3': { watch:['the same two columns, now on the phone','one row per day — no merging','the phone adds; you still check'], brief:[
     'A spreadsheet is the same honest notebook with one upgrade: it never gets tired of adding. You still write every line — the phone only does the arithmetic.' ],
     check:{ q:'A spreadsheet helps because…', opts:['it adds without tired mistakes','it looks modern','it replaces thinking'], ans:0, why:'it does the adding. The thinking stays with you.' } },
@@ -139,6 +151,27 @@ window.VIDEO_REGISTRY = {
     dur:'~5 min', mb:6, lang:'en',
     review:'approved', cco:'signed', recheck:'2026-10-24', twin:'brief',
     note:'ID verified 2026-07-24 (resolves, title match). Basic band is MM-first — MM version on the Phase 2 lane. Approved + signed by KoKo, 2026-07-24.' },
+  /* batch 2 — curated + verified 2026-07-24, approved "all four" + signed by KoKo same day */
+  'b-w-2:1': { id:'o0w7jHVzXMY', channel:'Happy Learning English',
+    title:'Types of Plants — Educational Videos for Kids',
+    dur:'~6 min', mb:6, lang:'en',
+    review:'approved', cco:'signed', recheck:'2026-10-24', twin:'brief',
+    note:'ID verified 2026-07-24 (noembed: resolves, title+channel match). Approved + signed by KoKo, 2026-07-24.' },
+  'b-f-1:1': { id:'Z9mOrNcX4j0', channel:'Peekaboo Kidz',
+    title:'Everything You Need To Know About Plants — The Dr. Binocs Show',
+    dur:'~6 min', mb:6, lang:'en',
+    review:'approved', cco:'signed', recheck:'2026-10-24', twin:'brief',
+    note:'ID verified 2026-07-24 (noembed: resolves, title+channel match). Same trusted series as b-w-2:2. Approved + signed by KoKo, 2026-07-24.' },
+  'b-f-1:2': { id:'4yvUjwt2-jI', channel:'Peekaboo Kidz',
+    title:'Carnivorous Plants — The Dr. Binocs Show',
+    dur:'~5 min', mb:5, lang:'en',
+    review:'approved', cco:'signed', recheck:'2026-10-24', twin:'brief',
+    note:'ID verified 2026-07-24 (noembed: resolves, title+channel match). Wonder hook — does not front-run the Middle photosynthesis module. Approved + signed by KoKo, 2026-07-24.' },
+  'o-f-1:4': { id:'Z2ejhmKHY3k', channel:'MooMooMath and Science',
+    title:'Making Change by Counting Up — Money Math',
+    dur:'~4 min', mb:4, lang:'en',
+    review:'approved', cco:'signed', recheck:'2026-10-24', twin:'brief',
+    note:'ID verified 2026-07-24 (noembed: resolves, title+channel match). US currency examples; kyat context carried by the twin brief — per operator 2026-07-24 no MM video production (capacity): the text lane is the MM-context carrier. Approved + signed by KoKo, 2026-07-24.' },
 };
 
 /* the gate, mechanical: nothing plays until review + CCO both
