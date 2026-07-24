@@ -177,12 +177,9 @@ function lessonContent(modId, mod, mj, lesson, tm){
 }
 
 function viewLesson(modId, nStr){
-  const band = getBand();
-  const lib = libraryFor(band);
-  const tierId = modId.split('-').includes('f') ? 'foundation' : 'working';
-  const idx = lib[tierId].findIndex(m=>m.id===modId);
-  const mod = idx >= 0 ? lib[tierId][idx] : undefined;
-  if(!mod) return viewMap();
+  const found = findModule(modId);
+  if(!found) return viewMap();
+  const { band, lib, tierId, idx, mod } = found;
   const mj = MAJORS[mod.major];
   const st = moduleState(tierId, idx, band);
   const lessons = lessonStates(modId, st);
@@ -341,10 +338,8 @@ window.MAYA_RESP = {
   },
 };
 function mayaAsk(modId, slot){
-  const band = getBand();
-  const lib = libraryFor(band);
-  const tierId = modId.split('-').includes('f') ? 'foundation' : 'working';
-  const mod = lib[tierId].find(m=>m.id===modId);
+  const found = findModule(modId);
+  const mod = found ? found.mod : null;
   const mj = mod ? MAJORS[mod.major] : null;
   const resp = (mj && MAYA_RESP[mod.major] && MAYA_RESP[mod.major][slot]) || '';
   const box = document.getElementById('mayaresp');
