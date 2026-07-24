@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Makro — Client Presentation Kit · ReferTRM</title>
+<meta name="description" content="Client presentation kit — Makro Q3 performance cycle, workforce registry, and the governance story. Verified client numbers only.">
+<style>
+:root{
+  --bg:#F7F5F0; --panel:#FFFFFF; --line:rgba(0,31,63,.10); --line2:rgba(0,31,63,.06);
+  --navy:#001F3F; --ink:#0B1D38; --mut:#3E5069; --dim:#75849A;
+  --gold:#D4AF37; --goldT:#96760E; --gold-dim:rgba(212,175,55,.14);
+  --teal:#0F766E; --teal-dim:rgba(15,118,110,.10);
+  --mono:ui-monospace,'JetBrains Mono',Menlo,monospace; --disp:'Bricolage Grotesque',system-ui,sans-serif; --body:system-ui,-apple-system,'Segoe UI',Roboto,'Padauk',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;line-height:1.5}
+[lang="my"]{font-family:'Padauk',var(--body)}
+.deck{max-width:1180px;margin:0 auto;padding:48px 24px 80px;display:flex;flex-direction:column;gap:44px}
+.frame{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 14px 40px rgba(0,31,63,.08)}
+.frameIn{padding:clamp(28px,4.5vw,56px)}
+.fMeta{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:26px}
+.fMeta b{color:var(--goldT);font-weight:600}
+.fTitle{font-family:var(--disp);font-size:clamp(28px,4vw,46px);font-weight:800;letter-spacing:-.025em;line-height:1.04;color:var(--navy)}
+.fTitle em{font-style:normal;color:var(--goldT)}
+.fSub{font-size:15px;color:var(--mut);line-height:1.75;max-width:660px;margin-top:14px}
+.fFoot{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:14px clamp(28px,4.5vw,56px);border-top:1px solid var(--line2);font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border-radius:6px;font-weight:700}
+.bVer{color:var(--teal);background:var(--teal-dim);border:1px solid rgba(15,118,110,.3)}
+.bGold{color:var(--goldT);background:var(--gold-dim);border:1px solid rgba(212,175,55,.4)}
+.big{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:30px}
+.bigI{background:var(--bg);border:1px solid var(--line2);border-radius:14px;padding:22px}
+.bigN{font-family:var(--disp);font-size:clamp(38px,4.6vw,58px);font-weight:800;letter-spacing:-.03em;color:var(--navy);line-height:1}
+.bigK{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-top:10px}
+.spec{display:flex;flex-direction:column;margin-top:26px}
+.specI{display:grid;grid-template-columns:30px 1fr;gap:14px;padding:15px 0;border-bottom:1px solid var(--line2)}
+.specI:last-child{border-bottom:0}
+.specK{width:30px;height:30px;border-radius:9px;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-family:var(--mono);font-size:11px;font-weight:700;flex:none}
+.specV{font-size:13.5px;line-height:1.75;color:var(--mut);max-width:68ch}
+.specV strong{color:var(--ink)}
+.dark{background:var(--navy);color:#DCE6F0}
+.dark .fTitle{color:#fff}
+.dark .fSub{color:#A9BACB}
+.dark .bigI{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.10)}
+.dark .bigN{color:var(--gold)}
+.dark .bigK{color:#8FA3B8}
+.dark .specV{color:#A9BACB}
+.dark .specV strong{color:#fff}
+.dark .fFoot{border-color:rgba(255,255,255,.10);color:#8FA3B8}
+.mm-slot{margin-top:26px;border-top:1px dashed var(--line);padding-top:14px;font-family:'Padauk',var(--body);font-size:12px;color:var(--dim)}
+@media(max-width:640px){.deck{padding:28px 14px 56px;gap:26px}}
+</style>
+</head>
+<body>
+<main class="deck">
+
+  <!-- 1 · COVER -->
+  <section class="frame">
+    <div class="frameIn">
+      <div class="fMeta"><span>ReferTRM · Client presentation kit</span><span class="badge bGold">S324 refresh · verified numbers</span></div>
+      <h1 class="fTitle">Makro, on the record.<br><em>Completed work, verified.</em></h1>
+      <p class="fSub">This kit reports what is finished and on record for Makro — the Q3 performance cycle, the workforce registry, and the governance gate every change passes through. Client's own numbers only. Nothing promised forward; everything shown is done.</p>
+      <div class="mm-slot" lang="my">MM — CCO slot</div>
+    </div>
+    <div class="fFoot"><span>ReferTRM · Makro account</span><span>HTML-first · no scripts required</span></div>
+  </section>
+
+  <!-- 2 · Q3 PERFORMANCE CYCLE -->
+  <section class="frame">
+    <div class="frameIn">
+      <div class="fMeta"><span>01 · Performance cycle</span><span class="badge bVer">Q3 · complete</span></div>
+      <h2 class="fTitle">The Q3 cycle is <em>complete.</em></h2>
+      <p class="fSub">Not drafted, not piloting — closed. Every assignment in the cycle carries an immutable audit trail, and the whole cycle was applied under a six-round, two-reviewer gate.</p>
+      <div class="big">
+        <div class="bigI"><div class="bigN">164</div><div class="bigK">Assignments in the cycle</div></div>
+        <div class="bigI"><div class="bigN">103</div><div class="bigK">Active in Q3</div></div>
+        <div class="bigI"><div class="bigN">6</div><div class="bigK">Review rounds before application</div></div>
+      </div>
+      <div class="spec">
+        <div class="specI"><span class="specK">·</span><span class="specV"><strong>Immutable audit trail.</strong> Every entry in the cycle is on record and cannot be quietly rewritten — the history is the evidence.</span></div>
+        <div class="specI"><span class="specK">·</span><span class="specV"><strong>Two-reviewer gate.</strong> The cycle was applied only after six rounds of review by two independent reviewers.</span></div>
+      </div>
+    </div>
+    <div class="fFoot"><span>Makro Q3 performance cycle</span><span>Client's own numbers</span></div>
+  </section>
+
+  <!-- 3 · WORKFORCE REGISTRY -->
+  <section class="frame">
+    <div class="frameIn">
+      <div class="fMeta"><span>02 · Workforce registry</span><span class="badge bVer">Live end-to-end</span></div>
+      <h2 class="fTitle">One registry, <em>the whole lifecycle.</em></h2>
+      <p class="fSub">The workforce record runs the full employment life — people join, move, leave and return — and every change is audited.</p>
+      <div class="big">
+        <div class="bigI"><div class="bigN">177</div><div class="bigK">Roster rows on record</div></div>
+        <div class="bigI"><div class="bigN">2</div><div class="bigK">Stores covered</div></div>
+      </div>
+      <div class="spec">
+        <div class="specI"><span class="specK">·</span><span class="specV"><strong>Join flow live end-to-end.</strong> A new hire goes from first record to active roster inside the registry — no side spreadsheets.</span></div>
+        <div class="specI"><span class="specK">·</span><span class="specV"><strong>Offboard / rehire lifecycle.</strong> Exit is data, not deletion: people leave on the record and can return on the record.</span></div>
+        <div class="specI"><span class="specK">·</span><span class="specV"><strong>Audited edits.</strong> Changes to the registry are themselves on the record.</span></div>
+      </div>
+      <div class="mm-slot" lang="my">MM — CCO slot</div>
+    </div>
+    <div class="fFoot"><span>Makro workforce registry</span><span>Client's own numbers</span></div>
+  </section>
+
+  <!-- 4 · GOVERNANCE -->
+  <section class="frame dark">
+    <div class="frameIn">
+      <div class="fMeta"><span style="color:#8FA3B8">03 · Governance — the part enterprises buy</span><span class="badge bVer">Two-reviewer gate</span></div>
+      <h2 class="fTitle">No change moves<br>until <em style="color:#D4AF37">two reviewers</em> say so.</h2>
+      <p class="fSub">Every production change passes two independent reviews, and the author of the change is excluded from reviewing it. This is not a policy page — it is the mechanism, and this week it proved itself.</p>
+      <div class="big">
+        <div class="bigI"><div class="bigN">2</div><div class="bigK">Independent reviews per change · author excluded</div></div>
+        <div class="bigI"><div class="bigN">5</div><div class="bigK">Flawed candidate builds stopped this week — before any data moved</div></div>
+      </div>
+      <div class="spec">
+        <div class="specI"><span class="specK">·</span><span class="specV"><strong>The gate catches.</strong> Five flawed candidate builds were caught and stopped this week. Nothing reached production, no data moved, and the stops are on the same record as the passes.</span></div>
+        <div class="specI"><span class="specK">·</span><span class="specV"><strong>That is the product.</strong> Any vendor can show features. What an enterprise actually buys is the confidence that a bad change cannot get through.</span></div>
+      </div>
+    </div>
+    <div class="fFoot"><span>ReferTRM governance gate</span><span>Verified this week</span></div>
+  </section>
+
+  <!-- 5 · CLOSE -->
+  <section class="frame">
+    <div class="frameIn">
+      <div class="fMeta"><span>04 · The honest close</span><span class="badge bGold">Completed work only</span></div>
+      <h2 class="fTitle">What you saw is <em>what exists.</em></h2>
+      <p class="fSub">A completed Q3 cycle with an immutable audit trail. A live workforce registry across both stores. A governance gate that stops bad changes before data moves. This kit makes no forward promises — the next cycle will be presented the same way: when it is done, and on the record.</p>
+      <div class="mm-slot" lang="my">MM — CCO slot</div>
+    </div>
+    <div class="fFoot"><span>ReferTRM · client presentation kit</span><span>S324 refresh</span></div>
+  </section>
+
+</main>
+</body>
+</html>
