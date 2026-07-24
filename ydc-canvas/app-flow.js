@@ -152,11 +152,9 @@ function markLessonDone(modId, n){
   const o = getOv('ydc-canvas-lessons');
   const arr = o[modId] || [];
   if(!arr.includes(n)){ arr.push(n); setOv('ydc-canvas-lessons', modId, arr); }
-  const band = getBand();
-  const lib = libraryFor(band);
-  const tierId = modId.split('-').includes('f') ? 'foundation' : 'working';
-  const idx = lib[tierId].findIndex(m=>m.id===modId);
-  const left = lessonStates(modId, moduleState(tierId, idx, band)).filter(l=>l.state!=='done').length;
+  const found = findModule(modId);
+  if(!found){ route(); return; }
+  const left = lessonStates(modId, moduleState(found.tierId, found.idx, found.band)).filter(l=>l.state!=='done').length;
   route();
   toast(left === 0 ? 'All lessons done — the real-world quest is waiting 🌍' : 'Lesson marked done ✓');
 }
