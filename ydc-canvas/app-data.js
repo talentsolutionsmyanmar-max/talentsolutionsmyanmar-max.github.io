@@ -192,6 +192,19 @@ BAND_MODULES.out_of_school = OOS_MODULES;
 BAND_PROGRESS.out_of_school = OOS_PROGRESS;
 function libraryFor(band){ return band==='basic' ? BAND_MODULES.basic : band==='middle' ? BAND_MODULES.middle : band==='out_of_school' ? OOS_MODULES : MODULES; }
 function progressFor(band){ return band==='basic' ? BAND_PROGRESS.basic : band==='middle' ? BAND_PROGRESS.middle : band==='out_of_school' ? OOS_PROGRESS : PROGRESS; }
+/* deep links are band-agnostic: a module id renders in whichever
+   band world owns it — the band pill is a preference, not a wall */
+function findModule(modId){
+  const tierId = modId.split('-').includes('f') ? 'foundation' : 'working';
+  const cur = getBand();
+  const order = [cur, ...Object.keys(BANDS).filter(b=>b!==cur)];
+  for(const b of order){
+    const lib = libraryFor(b);
+    const idx = lib[tierId].findIndex(m=>m.id===modId);
+    if(idx >= 0) return { band:b, lib, tierId, idx, mod: lib[tierId][idx] };
+  }
+  return null;
+}
 
 window.LESSONS = {
   'w-4': [
