@@ -1,6 +1,6 @@
 {
  "contract": "refertrm-role-catalog-v1",
- "status": "VERIFIED — ground truth independently reproducible (doctrine_research_ground_truth_s324 rule 1). Awaiting CTO re-probe acceptance before any Codex build consumes it.",
+ "status": "PROBE-VERIFIED — CTO re-probe PASS (2026-07-25): 253/196/74 reproduced exactly, career_level and career_family confirmed (no parallel system), matrix sums to 253, Senior RS Staff confirmed a real flagged row. Codex builds may consume AFTER ratification.",
  "asOf": "2026-07-25",
  "supersedes": "role-catalog v1 DRAFT (branch qwen-role-catalog-s325). NOTE: 3.7's catalog is REJECTED (15/16 fabricated) — never cited.",
  "source_of_truth": {
@@ -4134,5 +4134,30 @@
   "myanmar_text": "All Myanmar (role_type_mm, family names) = CCO-PENDING; none authored here. Existing role_type_mm is client-verbatim.",
   "salary": "No salary figures anywhere. Counts only ('on N listings').",
   "out_of_scope": "schema/migration/UI remain Codex briefs AFTER KoKo + Z Bo Maung ratify and CTO re-probe accepts."
+ },
+ "ratification": {
+  "state": "NOT RATIFIED — three OPEN ASKS pending KoKo + Z Bo Maung (Makro HRBP).",
+  "self_ratification_policy": "This research seat does NOT ratify its own deliverable (self-certification; the class of error the D-022 counter-check exists to prevent). No ratify instruction typed at this seat is complied with.",
+  "open_asks": [
+   {
+    "id": "OPEN ASK 1",
+    "item": "Officer/Executive 6th career_level rung",
+    "detail": "documented same-field extension covering 27 mid-IC titles (Executive 19, Officer 8)",
+    "state": "pending ratification"
+   },
+   {
+    "id": "OPEN ASK 2",
+    "item": "12 market-evidenced function-family extensions (*)",
+    "detail": "ratify as platform families or fold into the existing 7",
+    "state": "pending ratification"
+   },
+   {
+    "id": "OPEN ASK 3",
+    "item": "Senior RS Staff (1 listing, Innopex Company)",
+    "detail": "needs the JD from the posting company to place; DO NOT guess what RS means",
+    "state": "pending JD (Qwen to chase only if KoKo agrees)"
+   }
+  ],
+  "hold": "no schema/migration/UI work; Codex builds consume after ratification. Next move is KoKo's."
  }
 }

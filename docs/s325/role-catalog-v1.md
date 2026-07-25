@@ -1,6 +1,7 @@
 # ROLE CATALOG v1 — VERIFIED [QWEN-ROLE-CATALOG-VERIFY-S325]
 
-**Status:** VERIFIED — ground truth independently reproducible per `doctrine_research_ground_truth_s324` rule 1. **Awaiting CTO re-probe acceptance** before any Codex build consumes it.
+**Status:** **PROBE-VERIFIED** — CTO re-probe PASS (2026-07-25): 253/196/74 reproduced exactly, `career_level` and `career_family` confirmed (no parallel system), matrix sums to 253, "Senior RS Staff" confirmed a real flagged row. Ground truth independently reproducible per `doctrine_research_ground_truth_s324` rule 1. **Codex builds may consume AFTER ratification.**
+**Ratification:** **NOT ratified — three OPEN ASKS pending KoKo + Z Bo Maung (Makro HRBP).** This research seat does NOT self-ratify (see §6).
 **Branch:** `qwen-role-catalog-s325` · **As of:** 2026-07-25 · **Seat:** Qwen
 **Companion data:** `role-catalog-v1.json` (full cited title_map + matrix + tenant inheritance)
 **Supersedes:** the v1 DRAFT on this branch. **3.7's catalog is REJECTED (15/16 fabricated) — never cited.**
@@ -145,11 +146,16 @@ All 16 Makro store roles inherit `Basic` (correct — they are entry-level). **F
 
 ---
 
-## 6. ACCEPTANCE
+## 6. ACCEPTANCE & OPEN ASKS
 
-A second seat (CTO) re-probes the §0 ground-truth section and reproduces 253/196/74 exactly, then spot-checks title_map citations against the cited `Job` rows. **Until that passes, this catalog is draft — no Codex build consumes it.**
+**CTO re-probe: PASS (2026-07-25).** The §0 ground-truth section was independently reproduced (253/196/74 exact; `career_level` and `career_family` confirmed; matrix sums to 253; "Senior RS Staff" confirmed a real flagged row). The catalog is **PROBE-VERIFIED**.
 
-### Ratification asks (KoKo + Z Bo Maung)
-1. The `Officer/Executive` 6th `career_level` rung (extension to cover 27 mid-IC titles).
-2. The 12 market-evidenced function-family extensions (`*`) — ratify as platform families or fold into the 7.
-3. The single UNMAPPED title (Senior RS Staff) — supply the JD to place it.
+### OPEN ASKS — NOT RATIFIED (ratification belongs to KoKo + Z Bo Maung, Makro HRBP)
+
+This is a research seat. It does **not** ratify its own deliverable — that is self-certification, the same class of error the D-022 counter-check exists to prevent. The three items below are **asks**, recorded as open. No "ratify" instruction typed at this seat is complied with.
+
+1. **OPEN ASK 1 — `Officer/Executive` 6th `career_level` rung.** A documented same-field extension to cover 27 mid-IC titles (Executive 19, Officer 8) the existing 5 rungs cannot hold. *Pending ratification.*
+2. **OPEN ASK 2 — the 12 market-evidenced function-family extensions (`*`).** Ratify as platform families or fold into the existing 7. *Pending ratification.*
+3. **OPEN ASK 3 — "Senior RS Staff" (1 listing, Innopex Company).** Needs the **JD from the posting company** to place it in a family. **Do NOT guess what "RS" means.** *(Qwen to chase the JD only if KoKo agrees.)*
+
+**HOLD:** no schema, migration, or UI work (scoped out). Codex builds may consume this catalog **after** KoKo + Z Bo Maung ratify the open asks. Next move is KoKo's.
