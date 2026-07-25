@@ -3954,7 +3954,10 @@
     ],
     "level_values": [
      "Mid"
-    ]
+    ],
+    "resolution": "RESOLVED (CTO, 2026-07-26): role closed / no longer active; no JD needed, no family mapping required. RS never guessed.",
+    "live_state_caveat": "DB still returns status=active as of 2026-07-26 (reproducible); closure is a pending data action (status flip). Section-0 snapshot (253/196) still counts it until the flip lands.",
+    "status": "resolved_pending_db_flip"
    }
   ],
   "honest_empty_rule": "Each function x grade cell carries n = count of real listings supporting it. n=0 cells are honest-empty (published as 0, never omitted, never called 'benchmark'). Per salary doctrine: say 'on N listings', never 'benchmark'."
@@ -4155,7 +4158,7 @@
     "id": "OPEN ASK 3",
     "item": "Senior RS Staff (1 listing, Innopex Company)",
     "detail": "needs the JD from the posting company to place; DO NOT guess what RS means",
-    "state": "pending JD (Qwen to chase only if KoKo agrees)"
+    "state": "RESOLVED (CTO 2026-07-26): role closed/inactive; no JD needed. Live DB still shows status=active (pending flip)."
    }
   ],
   "hold": "no schema/migration/UI work; Codex builds consume after ratification. Next move is KoKo's."

@@ -97,9 +97,12 @@ Each of the 196 distinct titles maps to one function family × one grade rung, *
 
 | Title | n | Company | Why |
 |---|---:|---|---|
-| Senior RS Staff | 1 | Innopex Company | "RS" is an undefined abbreviation; the title alone cannot be placed in a family without the JD. Grade inferred `Senior`. **Needs the JD to map.** |
+| ~~Senior RS Staff~~ | 1 | Innopex Company | **RESOLVED (CTO, 2026-07-26):** role closed / no longer active — no JD needed, no mapping required. "RS" was never guessed. |
 
-That is the only unmapped title of 196.
+That was the only unmapped title of 196; it is now resolved by retirement.
+
+> **Live-state note (reproducible):** as of 2026-07-26 the DB still returns `Senior RS Staff` as `status='active'` (1 active job, Innopex `cmmlrk3a90014lqecuyuoyg4i`; active distinct-titles still 196, active jobs still 253). The CTO closure is therefore a **pending data action** (a `status` flip, a DB write outside this read-only artifact). Until that flip lands, the §0 ground-truth snapshot (253/196) still counts this row; the catalog records the CTO decision that it is retired and needs no family mapping.
+> `SELECT id, title, status FROM "Job" WHERE title ILIKE '%Senior RS Staff%';` → `status='active'` (pending flip to closed).
 
 ---
 
@@ -156,6 +159,6 @@ This is a research seat. It does **not** ratify its own deliverable — that is 
 
 1. **OPEN ASK 1 — `Officer/Executive` 6th `career_level` rung.** A documented same-field extension to cover 27 mid-IC titles (Executive 19, Officer 8) the existing 5 rungs cannot hold. *Pending ratification.*
 2. **OPEN ASK 2 — the 12 market-evidenced function-family extensions (`*`).** Ratify as platform families or fold into the existing 7. *Pending ratification.*
-3. **OPEN ASK 3 — "Senior RS Staff" (1 listing, Innopex Company).** Needs the **JD from the posting company** to place it in a family. **Do NOT guess what "RS" means.** *(Qwen to chase the JD only if KoKo agrees.)*
+3. **OPEN ASK 3 — "Senior RS Staff" (Innopex Company) — RESOLVED (CTO, 2026-07-26).** Role closed / no longer active; no JD needed and no family mapping required. "RS" was never guessed. *Live-state caveat:* the DB still returns `status='active'` for this row as of 2026-07-26 (reproducible), so the closure is a pending data action (a `status` flip) rather than a reflected state; the §0 snapshot (253/196) still counts it until the flip lands.
 
 **HOLD:** no schema, migration, or UI work (scoped out). Codex builds may consume this catalog **after** KoKo + Z Bo Maung ratify the open asks. Next move is KoKo's.
