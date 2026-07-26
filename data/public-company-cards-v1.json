@@ -5,7 +5,7 @@
   "status": "verified",
   "source": "job_eligibility_v1.is_clean_public_production — same basis as public-counts-v1.json (job_count_truth_v1.clean_public_production)",
   "normalization": "One card per lowercased, trimmed company name with internal whitespace collapsed; primary company_id prefers canonical comp_* records, then verified status, active-job count, and stable ID order.",
-  "notes": "Clean-public basis only: active, non-synthetic, unexpired, not registry-retired, production-tenant jobs. publishedReviews remains honest-empty; no ratings or reviews are inferred. verified = presence in the curated public.companies.verified registry (approved_by/approved_at governed).",
+  "notes": "Clean-public basis only: active, non-synthetic, unexpired, not registry-retired, production-tenant jobs. publishedReviews remains honest-empty; no ratings or reviews are inferred. verified = presence in the curated public.companies.verified registry (approved_by/approved_at governed). logo field cleared: platform-local paths do not travel; logos are human-managed via company-logos-v1.json (see /data/logos/README.md).",
   "alternateBasis": {
     "distinctCompanyIds": 51,
     "distinctCompanyNames": 43,
@@ -28,7 +28,7 @@
       "activeRoles": 19,
       "salaryVisibleRoles": 19,
       "publishedReviews": 0,
-      "logo": "/partner-logo-1.jpg"
+      "logo": null
     },
     {
       "name": "Thadoe Mahar Co., Ltd",
@@ -208,7 +208,7 @@
       "activeRoles": 5,
       "salaryVisibleRoles": 5,
       "publishedReviews": 0,
-      "logo": "/logos/win-brothers.png"
+      "logo": null
     },
     {
       "name": "Universal Energy",

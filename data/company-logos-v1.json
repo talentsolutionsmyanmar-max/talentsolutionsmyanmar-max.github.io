@@ -1,0 +1,6 @@
+{
+  "contract": "refertrm-company-logos-v1",
+  "asOf": "2026-07-26",
+  "note": "Human-managed logo registry. To add or replace a company logo: (1) upload the image file into /data/logos/ named <company_id>.png|jpg|webp via GitHub web upload, (2) add one line below mapping the company_id to the file. No code change, no deploy pipeline — the commit publishes itself. company_id values come from /data/public-company-cards-v1.json.",
+  "logos": {}
+}

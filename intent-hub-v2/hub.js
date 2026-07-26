@@ -137,8 +137,13 @@
     }
     function start(){if(raf||!visible)return;size();t0=performance.now();raf=requestAnimationFrame(frame);}
     function stop(){if(raf){cancelAnimationFrame(raf);raf=null;}}
-    new IntersectionObserver(es=>{visible=es[0].isIntersecting;
-      if(!visible)stop();else if(!lite&&!reduced)start();},{threshold:.05}).observe(card);
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(es=>{visible=es[0].isIntersecting;
+        if(!visible)stop();else if(!lite&&!reduced)start();},{threshold:.05}).observe(card);
+    } else { /* Viber/Messenger-class in-app fallback: static sky, no crash */
+      visible=true;
+      if(lite||reduced)drawStatic();else start();
+    }
     document.addEventListener('visibilitychange',()=>{document.hidden?stop():(!lite&&!reduced&&start());});
     let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{size();if(lite||reduced)drawStatic();},160);});
     let hovSky=false,pulseT=null;
@@ -167,7 +172,13 @@
     });
     if(card){card.addEventListener('pointerenter',()=>{hov=true;});card.addEventListener('pointerleave',()=>{hov=false;});}
     paths[0].classList.add('on');
-    if(!reduced)setInterval(()=>{if(!hov)show((cur+1)%3);},5200);
+    if(!reduced){
+      let truthTimer=null;
+      const startTruth=()=>{if(!truthTimer)truthTimer=setInterval(()=>{if(!hov)show((cur+1)%3);},5200);};
+      const stopTruth=()=>{if(truthTimer){clearInterval(truthTimer);truthTimer=null;}};
+      document.addEventListener('visibilitychange',()=>{document.hidden?stopTruth():startTruth();});
+      startTruth();   /* battery-respect: the rotation sleeps with the tab */
+    }
     window.__truth=()=>({cur,hov});
   }
 })();

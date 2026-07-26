@@ -458,14 +458,10 @@ noscript ~ .room .light,noscript ~ .room .gesture-hint,noscript ~ .bar{display:n
   addEventListener('hashchange', show);
   show();
 
-  /* gestures — quiet, single-purpose */
-  document.addEventListener('pointerdown', function(ev){
-    var hint = ev.target.closest ? ev.target.closest('[data-gesture]') : null;
-    var room = ev.target.closest ? ev.target.closest('.room') : null;
-    if(!room) return;
-    if(ev.target.closest('a, summary, details, .closex')) return;
-    var g = hint ? hint.getAttribute('data-gesture') : (room.querySelector('[data-gesture]') ? room.querySelector('[data-gesture]').getAttribute('data-gesture') : null);
-    if(!g) return;
+  /* gestures — quiet, single-purpose.
+     Tap ≠ scroll: a gesture fires only when the pointer stays within
+     12px and lifts inside 600ms. Scrolling through a room never fires it. */
+  function fireGesture(room, g){
     if(g === 'warm'){ room.classList.add('warmed'); setTimeout(function(){ room.classList.remove('warmed'); }, 3200); }
     if(g === 'breath1'){ room.classList.remove('breathing'); void room.offsetWidth; room.classList.add('breathing'); }
     if(g === 'spark'){
@@ -478,10 +474,29 @@ noscript ~ .room .light,noscript ~ .room .gesture-hint,noscript ~ .bar{display:n
       var lvl = n ? Math.min(5, parseInt(n[1],10) + 1) : 4;
       room.classList.remove('g4','g5'); room.classList.add('g' + lvl);
     }
-  });
-  /* welcome: hold to open the light */
+  }
+  var tap = null;
+  document.addEventListener('pointerdown', function(ev){
+    var room = ev.target.closest ? ev.target.closest('.room') : null;
+    if(!room || ev.target.closest('a, summary, details, .closex')) { tap = null; return; }
+    tap = { x: ev.clientX, y: ev.clientY, t: Date.now(), room: room };
+  }, { passive: true });
+  document.addEventListener('pointermove', function(ev){
+    if(tap && (Math.abs(ev.clientX - tap.x) > 12 || Math.abs(ev.clientY - tap.y) > 12)) tap = null;
+  }, { passive: true });
+  document.addEventListener('pointerup', function(ev){
+    if(!tap) return;
+    var room = tap.room, dt = Date.now() - tap.t;
+    tap = null;
+    if(dt > 600) return;
+    var hint = room.querySelector('[data-gesture]');
+    if(hint) fireGesture(room, hint.getAttribute('data-gesture'));
+  }, { passive: true });
+  document.addEventListener('pointercancel', function(){ tap = null; }, { passive: true });
+
+  /* welcome: hold to open the light — cancelled the moment the finger travels */
   var wl = document.querySelector('.r-welcome .light');
-  var open = 1, holding = false, raf = null;
+  var open = 1, holding = false, holdXY = null, raf = null;
   function step(){
     open += holding ? 0.012 : -0.012;
     open = Math.max(1, Math.min(2.6, open));
@@ -493,8 +508,14 @@ noscript ~ .room .light,noscript ~ .room .gesture-hint,noscript ~ .bar{display:n
   if(wRoom){
     wRoom.addEventListener('pointerdown', function(ev){
       if(ev.target.closest('a, summary, details, .closex')) return;
+      holdXY = { x: ev.clientX, y: ev.clientY };
       holding = true; if(!raf) raf = requestAnimationFrame(step);
-    });
+    }, { passive: true });
+    wRoom.addEventListener('pointermove', function(ev){
+      if(holding && holdXY && (Math.abs(ev.clientX - holdXY.x) > 12 || Math.abs(ev.clientY - holdXY.y) > 12)){
+        holding = false; holdXY = null; if(!raf) raf = requestAnimationFrame(step);
+      }
+    }, { passive: true });
     ['pointerup','pointercancel','pointerleave'].forEach(function(t){
       wRoom.addEventListener(t, function(){ holding = false; if(!raf) raf = requestAnimationFrame(step); });
     });

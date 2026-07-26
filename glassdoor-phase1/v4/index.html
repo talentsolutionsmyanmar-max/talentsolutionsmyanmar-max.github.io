@@ -140,7 +140,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .ccard:hover{border-color:rgba(212,175,55,.5);box-shadow:0 14px 34px rgba(0,31,63,.08);transform:translateY(-2px)}
 .ccard:hover::before{opacity:1}
 .ccard .ct{display:flex;align-items:center;gap:8px}
-.ccard .cmark{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;font-family:var(--disp);font-weight:800;font-size:13px;color:#fff;background:var(--navy);flex:none}
+.ccard .cmark{position:relative;width:34px;height:34px;border-radius:8px;display:grid;place-items:center;font-family:var(--disp);font-weight:800;font-size:13px;color:#fff;background:var(--navy);flex:none;overflow:hidden}
 .ccard .cv{margin-left:auto;font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:4px 8px;border-radius:3px}
 .ccard .cv.yes{color:var(--teal);border:1px solid rgba(15,118,110,.35);background:var(--teal-soft)}
 .ccard .cv.no{color:var(--amber);border:1px solid rgba(161,98,7,.3);background:var(--amber-soft)}
@@ -450,11 +450,18 @@ html.js .profile.open{display:block}
     });
 
   /* ---------- directory ---------- */
-  var companies=[], dirAsOf='';
+  var companies=[], dirAsOf='', logoMap={};
+  fetch('/data/company-logos-v1.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(d){
+    if(d&&d.logos){logoMap=d.logos;if(companies.length)renderDir();}
+  }).catch(function(){});
   function cardHTML(co){
     var initials=co.name.split(/\s+/).slice(0,2).map(function(w){return w[0]}).join('').toUpperCase();
+    var logoSrc=(logoMap[co.company_id]&&logoMap[co.company_id].src)||co.logo;
+    var mark=logoSrc
+      ?'<span class="cmark">'+esc(initials)+'<img src="'+esc(logoSrc)+'" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:8px" onerror="this.remove()"></span>'
+      :'<span class="cmark">'+esc(initials)+'</span>';
     return '<article class="ccard" data-name="'+esc(co.name.toLowerCase())+'">'
-      +'<div class="ct"><span class="cmark">'+esc(initials)+'</span>'
+      +'<div class="ct">'+mark
       +(co.verified
         ?'<span class="cv yes">Verified partner</span>'
         :'<span class="cv no">Open board</span>')
