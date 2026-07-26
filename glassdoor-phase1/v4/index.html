@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#F7F5F0">
+<title>Jobs & Workplace Truth — ReferTRM</title>
+<meta name="description" content="Know the work before you say yes. Real roles, real companies, evidence shown honestly — never a score manufactured from silence.">
+<script>document.documentElement.className += ' js';</script>
+<style>
+/* ============================================================
+   GLASSDOOR MYANMAR — v4 theme · v2 essence (K2, S327 final)
+   Light editorial + one dark island. Navy/gold/ivory.
+   Teal appears ONLY where something is verified.
+   Every number on this page arrives from /data/*.json at runtime;
+   without JavaScript the page shows its shape, never a stale digit.
+   ============================================================ */
+:root{
+  --bg:#F7F5F0; --bg2:#F1EDE3; --panel:#FFFDF8; --line:rgba(0,31,63,.12); --line-soft:rgba(0,31,63,.07);
+  --navy:#001F3F; --navy-deep:#001229; --ink:#0B1D38; --mut:#3E5069; --dim:#75849A;
+  --gold:#D4AF37; --goldT:#96760E; --gold-dim:rgba(212,175,55,.14);
+  --teal:#0F766E; --teal-soft:rgba(15,118,110,.08);
+  --amber:#A16207; --amber-soft:rgba(161,98,7,.08);
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --disp:'Bricolage Grotesque','Inter','Padauk',system-ui,sans-serif;
+  --body:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,'Padauk',sans-serif;
+  --r:6px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:rgba(212,175,55,.35)}
+[hidden]{display:none!important}
+.wrap{max-width:1160px;margin:0 auto;padding-left:clamp(18px,4.5vw,52px);padding-right:clamp(18px,4.5vw,52px)}
+.mono{font-family:var(--mono)}
+.fig{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.kick{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--goldT);font-weight:600}
+.kick::after{content:"";width:56px;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+.plain{font-size:13.5px;color:var(--mut);line-height:1.75;max-width:60ch}
+
+/* ---------- masthead ---------- */
+.mast{border-bottom:1px solid var(--line);background:var(--bg);position:sticky;top:0;z-index:50;background:color-mix(in srgb, var(--bg) 90%, transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.mastIn{display:flex;align-items:center;gap:16px;height:62px}
+.brand{display:flex;align-items:baseline;gap:8px;font-family:var(--disp);font-weight:800;font-size:17px;letter-spacing:-.01em}
+.brand .r-mark{width:20px;height:20px;border:1.5px solid var(--gold);display:grid;place-items:center;font-family:var(--mono);font-size:9px;font-weight:700;color:var(--goldT);align-self:center}
+.brand small{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:500}
+.mastNav{margin-left:auto;display:flex;gap:2px}
+.mastNav a{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:8px 11px;border-radius:4px}
+.mastNav a:hover{color:var(--ink);background:rgba(0,31,63,.05)}
+.mastCta{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#0A1526;background:var(--gold);padding:9px 15px;border-radius:4px;font-weight:700}
+@media(max-width:760px){.mastNav{display:none}}
+
+/* ---------- 01 hero (light editorial) ---------- */
+.hero{padding:clamp(64px,9vw,120px) 0 clamp(48px,6vw,80px);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-260px;right:-200px;width:720px;height:720px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.10),transparent 62%);pointer-events:none}
+.hero .h1{font-family:var(--disp);font-weight:800;font-size:clamp(40px,6.6vw,78px);line-height:1.0;letter-spacing:-.032em;color:var(--navy);max-width:12em;margin-top:24px}
+.hero .h1 em{font-style:normal;color:var(--goldT)}
+.hero .lede{margin-top:26px;font-size:clamp(15.5px,1.8vw,18px);line-height:1.8;color:var(--mut);max-width:34em}
+.hero .lede b{color:var(--ink);font-weight:600}
+.heroCtas{display:flex;gap:12px;flex-wrap:wrap;margin-top:36px}
+.btnG{display:inline-flex;align-items:center;gap:9px;background:var(--gold);color:#0A1526;font-weight:700;font-size:14px;padding:15px 26px;border-radius:var(--r);transition:box-shadow .25s,transform .25s}
+.btnG:hover{box-shadow:0 10px 30px rgba(212,175,55,.35);transform:translateY(-1px)}
+.btnO{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);color:var(--ink);font-weight:600;font-size:14px;padding:15px 26px;border-radius:var(--r);transition:border-color .25s}
+.btnO:hover{border-color:var(--gold)}
+.btnG svg,.btnO svg{width:15px;height:15px}
+.heroNote{margin-top:20px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--dim)}
+
+/* data strip — the counts, editorial */
+.datastrip{margin-top:clamp(40px,5vw,64px);border-top:2px solid var(--navy);border-bottom:1px solid var(--line)}
+.datastrip .ds-head{display:flex;align-items:baseline;gap:14px;padding:12px 2px;border-bottom:1px solid var(--line-soft)}
+.datastrip .ds-head .asof{margin-left:auto}
+.dgrid{display:grid;grid-template-columns:repeat(4,1fr)}
+.dcell{padding:20px 18px 22px;border-left:1px solid var(--line-soft)}
+.dcell:first-child{border-left:0}
+.dcell .n{font-family:var(--mono);font-size:clamp(26px,3.2vw,40px);font-weight:700;color:var(--navy);line-height:1.05;font-variant-numeric:tabular-nums}
+.dcell .n i{font-style:normal;color:var(--goldT)}
+.dcell .l{font-size:11.5px;color:var(--mut);margin-top:8px;line-height:1.5}
+.dcell .src{margin-top:8px;font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+@media(max-width:760px){.dgrid{grid-template-columns:1fr 1fr}.dcell:nth-child(3){border-left:0}.dcell{border-top:1px solid var(--line-soft)}.dcell:nth-child(-n+2){border-top:0}}
+
+/* ---------- sections ---------- */
+.sec{padding:clamp(56px,8vw,104px) 0;position:relative}
+.sec + .sec{border-top:1px solid var(--line)}
+.secNo{position:absolute;top:clamp(56px,8vw,104px);right:clamp(18px,4.5vw,52px);font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--dim)}
+.h2{font-family:var(--disp);font-size:clamp(28px,4.2vw,48px);font-weight:800;letter-spacing:-.028em;line-height:1.06;color:var(--navy);max-width:16em;margin-top:20px}
+.h2 em{font-style:normal;color:var(--goldT)}
+.lede2{font-size:15px;color:var(--mut);line-height:1.8;max-width:58ch;margin-top:16px}
+
+/* ---------- 02 two provenances (the constraint) ---------- */
+.prov{display:grid;gap:14px;margin-top:44px}
+@media(min-width:860px){.prov{grid-template-columns:1fr 1fr}}
+.provCard{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:26px 26px 24px;display:flex;flex-direction:column}
+.provCard.contacted{border-top:3px solid var(--teal)}
+.provCard.selfrep{border-top:3px solid var(--gold)}
+.provMark{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.provMark svg{width:16px;height:16px}
+.provCard.contacted .provMark{color:var(--teal)}
+.provCard.selfrep .provMark{color:var(--goldT)}
+.provCard h3{font-family:var(--disp);font-size:21px;font-weight:800;letter-spacing:-.015em;margin-top:16px}
+.provCard .proves{margin-top:12px;font-size:13.5px;line-height:1.75;color:var(--mut)}
+.provCard .proves b{color:var(--ink)}
+.provCard .notprove{margin-top:10px;font-size:12.5px;line-height:1.7;color:var(--dim);padding-top:10px;border-top:1px dashed var(--line)}
+.provState{margin-top:auto;padding-top:18px}
+.provState .ps-pill{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);border:1px solid var(--line);border-radius:4px;padding:7px 11px}
+.provState .ps-pill b{color:var(--navy)}
+.provState .ps-note{margin-top:10px;font-size:12px;color:var(--dim);line-height:1.65}
+
+/* framework preview — the shape a real account takes */
+.frame{margin-top:44px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.frame .fr-head{padding:16px 22px;border-bottom:1px solid var(--line-soft);display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.frame .fr-head .fig{flex:none}
+.frame .fr-head .t{font-size:13px;font-weight:700;color:var(--navy)}
+.frame .fr-head .n{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.frow{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:14px 22px;border-bottom:1px solid var(--line-soft)}
+.frow:last-child{border-bottom:0}
+.frow .fl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--goldT);padding-top:2px;font-weight:700}
+.frow .fv{font-size:13px;color:var(--dim);line-height:1.65;font-style:italic}
+@media(max-width:560px){.frow{grid-template-columns:1fr;gap:4px}}
+
+/* ---------- 03 directory ---------- */
+.dirTools{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:34px}
+.dirSearch{flex:1;min-width:220px;display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);padding:0 14px}
+.dirSearch svg{width:15px;height:15px;color:var(--dim);flex:none}
+.dirSearch input{border:0;background:none;outline:none;font:inherit;font-size:14px;padding:13px 0;width:100%;color:var(--ink)}
+.dirCount{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.tier{margin-top:38px}
+.tierHead{display:flex;align-items:baseline;gap:12px;border-bottom:2px solid var(--navy);padding-bottom:10px}
+.tierHead h3{font-family:var(--disp);font-size:19px;font-weight:800;letter-spacing:-.01em}
+.tierHead .tn{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.tierHead .tv{color:var(--teal);font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.tierHead .to{color:var(--amber);font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.tierSub{font-size:12.5px;color:var(--dim);margin-top:8px;line-height:1.6}
+.cgrid{display:grid;gap:12px;margin-top:18px}
+@media(min-width:700px){.cgrid{grid-template-columns:1fr 1fr}}
+@media(min-width:1060px){.cgrid{grid-template-columns:repeat(3,1fr)}}
+.ccard{position:relative;border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:18px 20px;display:flex;flex-direction:column;gap:3px;transition:border-color .2s,box-shadow .2s,transform .2s;overflow:hidden}
+.ccard::before{content:"";position:absolute;inset:0;background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(212,175,55,.10),transparent 62%);opacity:0;transition:opacity .25s;pointer-events:none}
+.ccard:hover{border-color:rgba(212,175,55,.5);box-shadow:0 14px 34px rgba(0,31,63,.08);transform:translateY(-2px)}
+.ccard:hover::before{opacity:1}
+.ccard .ct{display:flex;align-items:center;gap:8px}
+.ccard .cmark{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;font-family:var(--disp);font-weight:800;font-size:13px;color:#fff;background:var(--navy);flex:none}
+.ccard .cv{margin-left:auto;font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:4px 8px;border-radius:3px}
+.ccard .cv.yes{color:var(--teal);border:1px solid rgba(15,118,110,.35);background:var(--teal-soft)}
+.ccard .cv.no{color:var(--amber);border:1px solid rgba(161,98,7,.3);background:var(--amber-soft)}
+.ccard h4{font-family:var(--disp);font-size:16.5px;font-weight:800;letter-spacing:-.01em;margin-top:12px;line-height:1.2}
+.ccard .cm{font-size:11.5px;color:var(--dim);margin-top:2px}
+.ccard .cnums{display:flex;gap:14px;margin-top:12px;padding-top:10px;border-top:1px solid var(--line-soft)}
+.ccard .cn b{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums}
+.ccard .cn span{display:block;font-size:9.5px;color:var(--dim);margin-top:1px}
+.ccard .cl{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:2}
+.clink{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--goldT);display:inline-flex;align-items:center;gap:5px;padding:7px 10px;border:1px solid rgba(212,175,55,.4);border-radius:4px}
+.clink:hover{background:var(--gold-dim)}
+.clink.quiet{color:var(--mut);border-color:var(--line)}
+.clink.quiet:hover{border-color:var(--mut)}
+.clink svg{width:11px;height:11px}
+
+/* ---------- 04 company profile (overlay) ---------- */
+.profile{position:fixed;inset:0;z-index:80;background:var(--bg);overflow-y:auto;overscroll-behavior:contain;display:none}
+html.js .profile.open{display:block}
+.profile .p-top{position:sticky;top:0;z-index:10;background:color-mix(in srgb, var(--bg) 92%, transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.profile .p-topIn{display:flex;align-items:center;gap:12px;height:58px;max-width:1160px;margin:0 auto;padding:0 clamp(18px,4.5vw,52px)}
+.p-close{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);padding:8px 12px;border:1px solid var(--line);border-radius:4px}
+.p-close:hover{color:var(--ink);border-color:var(--mut)}
+.p-hero{padding:clamp(36px,5vw,64px) 0 0}
+.p-name{font-family:var(--disp);font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.03em;line-height:1.05;color:var(--navy);margin-top:18px}
+.p-meta{font-size:13px;color:var(--dim);margin-top:10px}
+.p-tierline{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;padding:7px 11px;border-radius:4px}
+.p-tierline.yes{color:var(--teal);border:1px solid rgba(15,118,110,.35);background:var(--teal-soft)}
+.p-tierline.no{color:var(--amber);border:1px solid rgba(161,98,7,.3);background:var(--amber-soft)}
+.p-grid{display:grid;gap:12px;margin-top:30px;padding-bottom:10px}
+@media(min-width:860px){.p-grid{grid-template-columns:repeat(3,1fr)}}
+.pcell{border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:16px 18px}
+.pcell .k{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.pcell .v{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--navy);margin-top:8px;font-variant-numeric:tabular-nums}
+.pcell .s{font-size:11px;color:var(--dim);margin-top:6px;line-height:1.55}
+.p-sec{padding:clamp(34px,5vw,56px) 0}
+.p-sec + .p-sec{border-top:1px solid var(--line)}
+.qgrid{display:grid;gap:9px;margin-top:22px}
+@media(min-width:760px){.qgrid{grid-template-columns:1fr 1fr}}
+.qcard{border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:15px 17px}
+.qcard .q{margin:0;font-size:13px;font-weight:600;color:var(--navy);line-height:1.6}
+.qcard .src{margin:9px 0 0;font-family:var(--mono);font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim);line-height:1.7}
+.tmgrid{display:grid;gap:9px;margin-top:22px}
+@media(min-width:700px){.tmgrid{grid-template-columns:1fr 1fr}}
+@media(min-width:1060px){.tmgrid{grid-template-columns:repeat(3,1fr)}}
+.tmt{border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:14px 16px}
+.tmt .tq{font-size:12.5px;font-weight:600;color:var(--navy);line-height:1.55}
+.tmt .ts{font-size:10.5px;color:var(--dim);margin-top:8px;line-height:1.55}
+.tmt .ts b{color:var(--goldT);font-weight:700}
+.paytab{margin-top:22px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+.payrow{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:13px 18px;border-bottom:1px solid var(--line-soft)}
+.payrow:last-child{border-bottom:0}
+.payrow .k{font-size:12.5px;color:var(--mut);font-weight:600}
+.payrow .v{font-size:12.5px;color:var(--dim);text-align:right;line-height:1.5}
+.payrow .v.fill{color:var(--teal);font-weight:700}
+
+/* ---------- 05 the dignity wall (THE dark island) ---------- */
+.island{background:var(--navy-deep);color:#C2CEE0;position:relative;overflow:hidden}
+.island::before{content:"";position:absolute;top:-200px;left:-160px;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.10),transparent 60%)}
+.island .kick{color:var(--gold)}
+.island .h2{color:#F4F0E4}
+.island .lede2{color:#8BA2B8}
+.island .plain{color:#8BA2B8}
+.dig-grid{display:grid;gap:12px;margin-top:44px;position:relative;z-index:2}
+@media(min-width:760px){.dig-grid{grid-template-columns:repeat(2,1fr)}}
+.dig{border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:20px 22px;background:rgba(255,255,255,.02)}
+.dig .dn{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.dig h4{font-family:var(--disp);font-size:17px;font-weight:700;color:#F4F0E4;margin-top:12px;letter-spacing:-.01em}
+.dig p{font-size:12.5px;color:#8BA2B8;line-height:1.7;margin-top:8px}
+.mmslot-dark{margin-top:34px;display:inline-block;padding:9px 15px;border:1px dashed rgba(194,206,224,.35);border-radius:4px;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#8BA2B8}
+
+/* ---------- 06 safety ---------- */
+.safe-grid{display:grid;gap:12px;margin-top:40px}
+@media(min-width:860px){.safe-grid{grid-template-columns:repeat(3,1fr)}}
+.safe{border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:22px}
+.safe .sn{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--goldT);font-weight:700}
+.safe h4{font-family:var(--disp);font-size:18px;font-weight:800;margin-top:14px;letter-spacing:-.01em}
+.safe p{font-size:12.5px;color:var(--mut);line-height:1.7;margin-top:8px}
+.feewarn{margin-top:26px;border:1px solid rgba(161,98,7,.35);border-left:4px solid var(--amber);border-radius:8px;background:var(--amber-soft);padding:18px 22px;display:flex;gap:14px;align-items:flex-start}
+.feewarn svg{width:20px;height:20px;color:var(--amber);flex:none;margin-top:2px}
+.feewarn .t{font-size:14px;font-weight:700;color:var(--amber)}
+.feewarn .s{font-size:13px;color:var(--mut);line-height:1.7;margin-top:4px}
+
+/* ---------- 07 employers ---------- */
+.emp-grid{display:grid;gap:12px;margin-top:40px}
+@media(min-width:860px){.emp-grid{grid-template-columns:1fr 1fr}}
+.estep{border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:20px 22px;display:flex;gap:16px;align-items:flex-start}
+.estep .en{width:34px;height:34px;flex:none;display:grid;place-items:center;border:1.5px solid var(--line);border-radius:50%;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--goldT)}
+.estep h4{font-family:var(--disp);font-size:16px;font-weight:800;letter-spacing:-.01em}
+.estep p{font-size:12.5px;color:var(--mut);line-height:1.65;margin-top:5px}
+
+/* ---------- footer ---------- */
+.foot{border-top:1px solid var(--line);padding:26px 0 40px}
+.foot .f1{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.foot .dot{width:3px;height:3px;border-radius:50%;background:var(--dim)}
+.foot .f2{margin-top:12px;font-size:11.5px;color:var(--dim);line-height:1.7}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none}
+}
+
+/* JS-dead: data mounts show their honest shape note instead of digits */
+.dcell .n:empty::after{content:"—";color:var(--dim)}
+</style>
+</head>
+<body>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="mast"><div class="wrap mastIn">
+  <a class="brand" href="#top"><span class="r-mark">R</span>ReferTRM <small>Jobs &amp; Workplace Truth</small></a>
+  <nav class="mastNav">
+    <a href="#truths">Two truths</a>
+    <a href="#directory">Companies</a>
+    <a href="#dignity">Your protection</a>
+    <a href="#safety">Before you apply</a>
+  </nav>
+  <a class="mastCta" href="https://www.refertrm.com/eq/jobs" rel="noopener">Browse jobs</a>
+</div></header>
+
+<main id="top">
+
+<!-- ============ 01 · THE PROMISE ============ -->
+<section class="hero"><div class="wrap">
+  <p class="kick">Jobs &amp; Workplace Truth · Myanmar</p>
+  <h1 class="h1">Know the work <em>before you say yes.</em></h1>
+  <p class="lede">Real roles from real companies, with the salary stated on the listing. Where workplace evidence exists, it is shown with its proof. Where it does not, you will see the honest gap — <b>never a score manufactured from silence.</b></p>
+  <div class="heroCtas">
+    <a class="btnG" href="#directory">See who is hiring <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+    <a class="btnO" href="#truths">How evidence works here</a>
+  </div>
+  <p class="heroNote">FREE FOR JOBSEEKERS · NO FEE TO APPLY, EVER</p>
+
+  <div class="datastrip">
+    <div class="ds-head">
+      <span class="fig">Fig 01 · The live inventory</span>
+      <span class="fig asof" data-asof-line>source loading…</span>
+    </div>
+    <div class="dgrid">
+      <div class="dcell"><div class="n" data-n="activeCoreJobs"></div><div class="l">Active roles from client companies</div><div class="src">job_count_truth_v1 · clean public</div></div>
+      <div class="dcell"><div class="n" data-n="salaryVisibleJobs"></div><div class="l">Roles with the salary stated on the listing</div><div class="src">posting terms, not estimates</div></div>
+      <div class="dcell"><div class="n" data-n="clientCompanies"></div><div class="l">Companies behind those roles</div><div class="src" data-companies-src>distinct employer records</div></div>
+      <div class="dcell"><div class="n" data-n="communityJobsCleared"></div><div class="l">Community listings cleared for publication</div><div class="src">honest-empty today</div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ 02 · TWO KINDS OF TRUTH ============ -->
+<section class="sec" id="truths"><div class="wrap">
+  <span class="secNo">02</span>
+  <p class="kick">Two kinds of truth</p>
+  <h2 class="h2">Applying is not working. <em>The two are never mixed.</em></h2>
+  <p class="lede2">A story about how a company <b>hires</b> and a story about how a company <b>treats its workers</b> are different claims. Each carries its own proof, its own rules, and its own label — so one can never borrow the other's credibility.</p>
+
+  <div class="prov">
+    <article class="provCard contacted rv">
+      <span class="provMark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>Contacted via ReferTRM</span>
+      <h3>A real, timestamped contact.</h3>
+      <p class="proves">The person applied or was contacted through this platform, and the moment is on record. <b>This proves an interaction happened.</b></p>
+      <p class="notprove">It does not prove every word in the account is true. It does not prove the person ever worked there.</p>
+      <div class="provState">
+        <span class="ps-pill">Hiring accounts · <b>&nbsp;n=0</b></span>
+        <p class="ps-note">None published yet. The shape below is exactly what the first one will look like when it is earned — an empty lane is an invitation, not a defect.</p>
+      </div>
+    </article>
+    <article class="provCard selfrep rv">
+      <span class="provMark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Self-reported</span>
+      <h3>An open submission, held to a stricter rule.</h3>
+      <p class="proves">A worker tells their own experience in their own words. <b>Because it claims an employment relationship, it is held until that relationship is proven</b> — and until publishing cannot identify the person.</p>
+      <p class="notprove">Aggregated counts arrive first. Individual stories publish only when small numbers cannot expose a name, a team, or a season.</p>
+      <div class="provState">
+        <span class="ps-pill">Workplace accounts · <b>&nbsp;n=0</b></span>
+        <p class="ps-note">Quiet signals may already be gathering beneath the threshold. Nothing publishes bare.</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="frame rv">
+    <div class="fr-head"><span class="fig">Fig 02</span><span class="t">The shape every verified account takes</span><span class="n">framework preview · zero accounts today</span></div>
+    <div class="frow"><span class="fl">Promised</span><span class="fv">What the process said would happen — filled by a real account, when one exists.</span></div>
+    <div class="frow"><span class="fl">In practice</span><span class="fv">What actually happened — filled by a real account, when one exists.</span></div>
+    <div class="frow"><span class="fl">Pattern</span><span class="fv">A one-time event or a repeated pattern — filled by real accounts, when they exist.</span></div>
+    <div class="frow"><span class="fl">What to ask</span><span class="fv">The question this experience teaches you to ask next time — derived, never invented.</span></div>
+  </div>
+</div></section>
+
+<!-- ============ 03 · THE DIRECTORY ============ -->
+<section class="sec" id="directory"><div class="wrap">
+  <span class="secNo">03</span>
+  <p class="kick">The directory</p>
+  <h2 class="h2">Who is hiring, <em>and what is known about them.</em></h2>
+  <p class="lede2">Every company below has at least one active role in the governed inventory. Verified partners have confirmed identities; the open board is real work whose employer verification is still completing. The difference is always shown.</p>
+
+  <div class="dirTools">
+    <label class="dirSearch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input id="q" type="search" placeholder="Search a company name…" aria-label="Search companies"></label>
+    <span class="dirCount" data-dir-count>loading…</span>
+  </div>
+
+  <div id="dir-root"></div>
+</div></section>
+
+<!-- ============ 05 · THE DIGNITY WALL (dark island) ============ -->
+<section class="sec island" id="dignity"><div class="wrap">
+  <span class="secNo" style="color:#5C6B80">05</span>
+  <p class="kick">Your protection</p>
+  <h2 class="h2">Evidence must protect workers, <em>not expose them.</em></h2>
+  <p class="lede2">A review site that gets a worker fired is not a truth site. Everything this surface shows — and everything it refuses to show — follows from that.</p>
+  <div class="dig-grid">
+    <div class="dig rv"><span class="dn">01 · No PII, ever</span><h4>Your name is never the evidence.</h4><p>No seeker identity is public. Verification records that a contact happened, not who you are.</p></div>
+    <div class="dig rv"><span class="dn">02 · Empty until earned</span><h4>Reviews stay empty until the path is governed.</h4><p>Consent, eligibility, moderation, aggregation and a lifecycle exist first. No stars appear from silence.</p></div>
+    <div class="dig rv"><span class="dn">03 · Aggregation before accounts</span><h4>Small numbers can identify a person.</h4><p>Counts publish before stories. A single account in a small team names its author — so it waits.</p></div>
+    <div class="dig rv"><span class="dn">04 · Never shown to the employer</span><h4>The company never sees who spoke.</h4><p>Identity is shielded from the employer side by design, not by promise.</p></div>
+  </div>
+  <span class="mmslot-dark">MM slot — CCO to author · the dignity wall reads in Myanmar only by CCO hand</span>
+</div></section>
+
+<!-- ============ 06 · BEFORE YOU APPLY ============ -->
+<section class="sec" id="safety"><div class="wrap">
+  <span class="secNo">06</span>
+  <p class="kick">Before you apply</p>
+  <h2 class="h2">Protect the person <em>who depends on that income.</em></h2>
+  <div class="safe-grid">
+    <div class="safe rv"><span class="sn">01</span><h4>Check the employer.</h4><p>Use the exact registered or trading name and an official public source. A claim is not a verification.</p></div>
+    <div class="safe rv"><span class="sn">02</span><h4>Pay nothing to apply.</h4><p>No registration fee, interview fee, placement fee, uniform deposit, or processing payment. Not ever.</p></div>
+    <div class="safe rv"><span class="sn">03</span><h4>Get the work in writing.</h4><p>Salary, hours, location, reporting line, probation, leave — confirmed in writing before you accept.</p></div>
+  </div>
+  <div class="feewarn rv">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 2.8 19h18.4L12 3Z"/><path d="M12 9v4m0 3h.01"/></svg>
+    <div><div class="t">The one warning that matters even with zero data.</div><div class="s">A legitimate employer never asks an applicant for money. If any company asks you for a fee, a deposit, or a "training payment", treat it as a danger sign — and report it.</div></div>
+  </div>
+</div></section>
+
+<!-- ============ 07 · FOR EMPLOYERS ============ -->
+<section class="sec" id="employers"><div class="wrap">
+  <span class="secNo">07</span>
+  <p class="kick">For employers</p>
+  <h2 class="h2">Free to begin. <em>Verified to publish.</em></h2>
+  <p class="lede2">Posting begins with proof and stays free. Verification protects jobseekers; it never turns a posting organisation into a contracted client, and it never opens candidate data.</p>
+  <div class="emp-grid">
+    <div class="estep rv"><span class="en">01</span><div><h4>Start the request</h4><p>The exact company name and an official public source. Identity first, always.</p></div></div>
+    <div class="estep rv"><span class="en">02</span><div><h4>Verify employer control</h4><p>A posting request and a verified status remain separate states until proof completes.</p></div></div>
+    <div class="estep rv"><span class="en">03</span><div><h4>Review the job terms</h4><p>Identity, role terms and worker-safety information must be clear before publication.</p></div></div>
+    <div class="estep rv"><span class="en">04</span><div><h4>A human reviews before it goes live</h4><p>No listing reaches this surface on submission alone. <a class="clink" style="margin-top:10px" href="https://www.refertrm.com/employers?source=board_v4" rel="noopener">Start a free job post</a></p></div></div>
+  </div>
+</div></section>
+
+</main>
+
+<!-- ============ 04 · COMPANY PROFILE (overlay) ============ -->
+<section class="profile" id="profile" aria-label="Company profile">
+  <div class="p-top"><div class="p-topIn">
+    <span class="fig">Fig 03 · Before you say yes</span>
+    <button class="p-close" id="p-close">← All companies</button>
+  </div></div>
+  <div class="wrap p-hero" id="p-hero"></div>
+  <div class="wrap" id="p-body"></div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot"><div class="wrap">
+  <div class="f1">
+    <span>ReferTRM · Talent Resources Myanmar Co., Ltd.</span><span class="dot"></span>
+    <span>Free for jobseekers</span><span class="dot"></span>
+    <span data-foot-source>counts bound to job_count_truth_v1</span>
+  </div>
+  <p class="f2">This surface reads its numbers live from governed public artifacts; when a source is unreachable it shows its shape, not a stale digit. Phase 1 of a wider workplace-truth programme — more companies and the open self-report path arrive when their own gates clear.</p>
+</div></footer>
+
+<noscript>
+  <div style="max-width:640px;margin:0 auto;padding:60px 24px">
+    <p class="fig">Jobs &amp; Workplace Truth · ReferTRM</p>
+    <h1 style="font-family:var(--disp);font-size:32px;margin-top:16px">Know the work before you say yes.</h1>
+    <p style="margin-top:14px;line-height:1.8;color:var(--mut)">Real roles from real companies, salary stated on the listing, evidence shown with its proof. Live counts and the company directory render with JavaScript; the promises on this page do not change without it.</p>
+    <p style="margin-top:14px"><a style="text-decoration:underline" href="https://www.refertrm.com/eq/jobs">Browse ReferTRM jobs</a> · <a style="text-decoration:underline" href="https://www.refertrm.com/employers?source=board_v4">Post a job free</a></p>
+  </div>
+</noscript>
+
+<script>
+/* Glassdoor Myanmar v4 — data binding + profile overlay.
+   Every number comes from /data/*.json. On failure: shape, not digits. */
+(function(){
+  'use strict';
+  var $=function(s,c){return (c||document).querySelector(s)};
+  var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+  var esc=function(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')};
+
+  /* ---------- counts ---------- */
+  fetch('/data/public-counts-v1.json',{cache:'no-store'})
+    .then(function(r){if(!r.ok)throw 0;return r.json()})
+    .then(function(d){
+      var c=d.counts||{};
+      $$('[data-n]').forEach(function(el){
+        var k=el.getAttribute('data-n');
+        if(typeof c[k]==='number') el.textContent=c[k];
+      });
+      var asof=$('[data-asof-line]');
+      if(asof) asof.textContent='bound to job_count_truth_v1 · as of '+d.asOf;
+      var fs=$('[data-foot-source]');
+      if(fs) fs.textContent='counts bound to job_count_truth_v1 · as of '+d.asOf;
+    })
+    .catch(function(){
+      var asof=$('[data-asof-line]');
+      if(asof) asof.textContent='counts source offline — shape shown, no stale digits';
+    });
+
+  /* ---------- directory ---------- */
+  var companies=[], dirAsOf='';
+  function cardHTML(co){
+    var initials=co.name.split(/\s+/).slice(0,2).map(function(w){return w[0]}).join('').toUpperCase();
+    return '<article class="ccard" data-name="'+esc(co.name.toLowerCase())+'">'
+      +'<div class="ct"><span class="cmark">'+esc(initials)+'</span>'
+      +(co.verified
+        ?'<span class="cv yes">Verified partner</span>'
+        :'<span class="cv no">Open board</span>')
+      +'</div>'
+      +'<h4>'+esc(co.name)+'</h4>'
+      +'<p class="cm">'+esc(co.industry)+' · '+esc(co.location)+'</p>'
+      +'<div class="cnums">'
+      +'<span class="cn"><b>'+co.activeRoles+'</b><span>active roles</span></span>'
+      +'<span class="cn"><b>'+co.salaryVisibleRoles+'</b><span>salary stated</span></span>'
+      +'<span class="cn"><b>n=0</b><span>workplace accounts</span></span>'
+      +'</div>'
+      +'<div class="cl">'
+      +'<a class="clink" href="#company='+encodeURIComponent(co.slug)+'">Before you say yes</a>'
+      +'<a class="clink quiet" href="https://www.refertrm.com/eq/jobs?company='+encodeURIComponent(co.slug)+'" rel="noopener">Roles ↗</a>'
+      +'</div></article>';
+  }
+  function renderDir(){
+    var partners=companies.filter(function(c){return c.verified});
+    var open=companies.filter(function(c){return !c.verified});
+    var q=($('#q').value||'').toLowerCase().trim();
+    var show=function(list){
+      return list.filter(function(c){return !q||c.name.toLowerCase().indexOf(q)>=0});
+    };
+    var P=show(partners), O=show(open);
+    var html='';
+    html+='<div class="tier"><div class="tierHead"><h3>Verified partners</h3><span class="tv">identity confirmed</span><span class="tn" data-tn="p"></span></div>'
+      +'<p class="tierSub">These companies completed employer verification. Teal only ever means verified — nowhere else on this page.</p>'
+      +'<div class="cgrid">'+P.map(cardHTML).join('')+'</div></div>';
+    html+='<div class="tier"><div class="tierHead"><h3>The open board</h3><span class="to">verification in progress</span><span class="tn" data-tn="o"></span></div>'
+      +'<p class="tierSub">Real roles from real employers whose verification has not completed. The roles are governed; the badge is simply not earned yet.</p>'
+      +'<div class="cgrid">'+O.map(cardHTML).join('')+'</div></div>';
+    $('#dir-root').innerHTML=html;
+    var tn=function(k,shown,total){var el=document.querySelector('[data-tn="'+k+'"]');if(el)el.textContent=shown+(q?' shown of ':' of ')+total+' companies'};
+    tn('p',P.length,partners.length); tn('o',O.length,open.length);
+    var dc=$('[data-dir-count]');
+    if(dc) dc.textContent=(P.length+O.length)+' of '+companies.length+' companies · cards as of '+dirAsOf;
+    bindSheen();
+  }
+  function bindSheen(){
+    if(!matchMedia('(hover:hover) and (pointer:fine)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    $$('.ccard').forEach(function(card){
+      card.addEventListener('pointermove',function(ev){
+        var r=card.getBoundingClientRect();
+        card.style.setProperty('--mx',(ev.clientX-r.left)+'px');
+        card.style.setProperty('--my',(ev.clientY-r.top)+'px');
+      },{passive:true});
+    });
+  }
+  $('#q').addEventListener('input',renderDir);
+
+  fetch('/data/public-company-cards-v1.json',{cache:'no-store'})
+    .then(function(r){if(!r.ok)throw 0;return r.json()})
+    .then(function(d){
+      if(d.contract!=='refertrm-public-company-cards-v1'||!Array.isArray(d.companies))throw 0;
+      companies=d.companies; dirAsOf=d.asOf;
+      renderDir(); routeProfile();
+    })
+    .catch(function(){
+      $('#dir-root').innerHTML='<p class="plain">The governed company projection could not be loaded. No fallback list was invented. <a href="https://www.refertrm.com/eq/jobs" style="text-decoration:underline">Browse ReferTRM jobs</a>.</p>';
+      var dc=$('[data-dir-count]'); if(dc)dc.textContent='source offline';
+    });
+
+  /* ---------- company profile ---------- */
+  var TM_QUESTIONS=[
+    'Did pay arrive on the promised date?',
+    'What time do people usually finish, compared with the official time?',
+    'Is overtime paid, unpaid, or unclear?',
+    'Can leave be requested without penalty or pressure?',
+    'Were targets explained in writing?',
+    'Were commission or incentive terms given in writing?',
+    'When mistakes happen, are corrections private or public?',
+    'Do people feel respected and safe to speak up?',
+    'Is the promotion path explained and followed?',
+    'Was the hiring outcome communicated?'
+  ];
+  function askCards(co){
+    var out=[];
+    var posted=co.salaryVisibleRoles, total=co.activeRoles;
+    if(posted<total)out.push({q:'“Can you confirm the exact salary band for this role in writing?”',src:'DERIVED FROM: SALARY VISIBILITY · '+(total-posted)+' OF '+total+' ROLES UNSTATED · LIVE CONTRACT'});
+    if(posted>0)out.push({q:'“Can I see the salary breakdown in writing — base, commission, allowances, deductions?”',src:'DERIVED FROM: SALARY VISIBILITY · '+posted+' ROLES STATE SALARY · A POSTING IS NOT A BREAKDOWN'});
+    out.push({q:'“When will I hear the outcome, and who do I follow up with if that date passes?”',src:'HIRING SIDE · NO VERIFIED HIRING REPORTS YET · GENERAL GUIDANCE'});
+    out.push({q:'“What is the official finish time, and what time do people actually leave?”',src:'WORKPLACE SIDE AT n=0 · GENERAL GUIDANCE · NOT COMPANY EVIDENCE'});
+    out.push({q:'“How is leave requested, and who approves it?”',src:'WORKPLACE SIDE AT n=0 · GENERAL GUIDANCE · NOT COMPANY EVIDENCE'});
+    return out;
+  }
+  function openProfile(slug){
+    var co=companies.filter(function(c){return c.slug===slug})[0];
+    if(!co)return;
+    document.title=co.name+' — Before you say yes · ReferTRM';
+    $('#p-hero').innerHTML=
+      '<p class="kick">'+esc(co.industry)+' · '+esc(co.location)+'</p>'
+      +'<h1 class="p-name">'+esc(co.name)+'</h1>'
+      +'<p class="p-meta">What is known, what is not, and what to ask — before you say yes.</p>'
+      +(co.verified
+        ?'<span class="p-tierline yes">Verified partner · identity confirmed</span>'
+        :'<span class="p-tierline no">Open board · employer verification in progress</span>')
+      +'<div class="p-grid">'
+      +'<div class="pcell"><div class="k">Active roles</div><div class="v">'+co.activeRoles+'</div><div class="s">In the governed inventory today</div></div>'
+      +'<div class="pcell"><div class="k">Salary stated</div><div class="v">'+co.salaryVisibleRoles+'</div><div class="s">Roles carrying a salary on the live listing</div></div>'
+      +'<div class="pcell"><div class="k">Workplace accounts</div><div class="v">n=0</div><div class="s">Nothing published yet — the lanes below show the exact shape</div></div>'
+      +'</div>';
+    var asks=askCards(co);
+    $('#p-body').innerHTML=
+      '<div class="p-sec"><p class="kick">Two lanes, both at zero</p>'
+      +'<div class="prov" style="margin-top:22px">'
+      +'<article class="provCard contacted"><span class="provMark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>Contacted via ReferTRM</span><p class="proves" style="margin-top:12px">Hiring accounts from people with a timestamped contact. <b>None yet for this company.</b></p></article>'
+      +'<article class="provCard selfrep"><span class="provMark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Self-reported</span><p class="proves" style="margin-top:12px">Workplace accounts, held until the relationship is proven and the person cannot be identified. <b>None yet for this company.</b></p></article>'
+      +'</div></div>'
+
+      +'<div class="p-sec"><p class="kick">Workplace truth map</p>'
+      +'<h2 class="h2" style="font-size:clamp(22px,3vw,32px)">Every signal visible — <em>even at zero.</em></h2>'
+      +'<div class="tmgrid">'+TM_QUESTIONS.map(function(q,i){
+          return '<div class="tmt"><p class="tq">'+esc(q)+'</p><p class="ts">No signals yet · publishes at the safety threshold · <b>be among the first</b></p></div>';
+        }).join('')+'</div></div>'
+
+      +'<div class="p-sec"><p class="kick">The money, separated</p>'
+      +'<div class="paytab">'
+      +'<div class="payrow"><span class="k">Base salary (posted)</span><span class="v '+(co.salaryVisibleRoles>0?'fill':'')+'">'+(co.salaryVisibleRoles>0?('Stated on '+co.salaryVisibleRoles+' of '+co.activeRoles+' live listings'):'Not stated on the live listings — ask')+'</span></div>'
+      +'<div class="payrow"><span class="k">Commission / incentive</span><span class="v">Not published in the postings — ask</span></div>'
+      +'<div class="payrow"><span class="k">Base, commission, allowances, deductions (reported)</span><span class="v">Publishes at the safety threshold — never a single blended figure</span></div>'
+      +'</div></div>'
+
+      +'<div class="p-sec"><p class="kick">Questions to ask before you decide</p>'
+      +'<div class="qgrid">'+asks.map(function(a){return '<div class="qcard"><p class="q">'+esc(a.q)+'</p><p class="src">'+esc(a.src)+'</p></div>'}).join('')+'</div></div>'
+
+      +'<div class="p-sec"><p class="kick">Open positions</p>'
+      +'<h2 class="h2" style="font-size:clamp(22px,3vw,32px)">'+co.activeRoles+' active roles. <em>Apply via ReferTRM.</em></h2>'
+      +'<p class="plain" style="margin-top:12px">Applying through ReferTRM creates the timestamped contact that later proves an interaction happened — the origin of every verified hiring account on this page.</p>'
+      +'<div class="heroCtas"><a class="btnG" href="https://www.refertrm.com/eq/jobs?company='+encodeURIComponent(co.slug)+'" rel="noopener">Browse these roles</a><a class="btnO" href="https://www.refertrm.com/company/'+encodeURIComponent(co.slug)+'" rel="noopener">Open in ReferTRM</a></div></div>';
+    $('#profile').classList.add('open');
+    document.body.style.overflow='hidden';
+    $('#profile').scrollTop=0;
+  }
+  function closeProfile(){
+    $('#profile').classList.remove('open');
+    document.body.style.overflow='';
+    document.title='Jobs & Workplace Truth — ReferTRM';
+  }
+  function routeProfile(){
+    var h=location.hash||'';
+    if(h.indexOf('#company=')===0) openProfile(decodeURIComponent(h.slice(9)));
+    else closeProfile();
+  }
+  $('#p-close').addEventListener('click',function(){location.hash='';});
+  addEventListener('hashchange',routeProfile);
+  document.addEventListener('keydown',function(ev){if(ev.key==='Escape')location.hash='';});
+  routeProfile();
+
+  /* ---------- reveal ---------- */
+  if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+    },{threshold:.12});
+    $$('.rv').forEach(function(el){io.observe(el)});
+  }else{
+    $$('.rv').forEach(function(el){el.classList.add('in')});
+  }
+})();
+</script>
+<script>
+/* self-hosted fonts — /glassdoor-phase1/v4/fonts/*.b64, zero external requests */
+(function(){
+  if(!('FontFace' in window)||!window.atob)return;
+  var F=[['Bricolage Grotesque',700,'fonts/bric700.b64'],['Bricolage Grotesque',800,'fonts/bric800.b64'],['JetBrains Mono',500,'fonts/jbmono.b64'],['Padauk',400,'fonts/padauk400.b64'],['Padauk',700,'fonts/padauk700.b64']];
+  function b64(b){var s=atob(b.replace(/\s+/g,'')),u=new Uint8Array(s.length);for(var i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return u.buffer}
+  F.forEach(function(f){fetch(f[2]).then(function(r){return r.text()}).then(function(t){return new FontFace(f[0],b64(t),{weight:String(f[1])}).load()}).then(function(face){document.fonts.add(face)}).catch(function(){}));
+})();
+</script>
+</body>
+</html>
