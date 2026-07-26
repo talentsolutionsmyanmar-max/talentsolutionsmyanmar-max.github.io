@@ -171,3 +171,51 @@
     window.__truth=()=>({cur,hov});
   }
 })();
+
+/* ===== hub counts: bound to the count-truth source, never a constant =====
+   Reads /data/public-counts-v1.json (regenerated from job_count_truth_v1)
+   and /data/public-company-cards-v1.json. On any failure: no digits render —
+   an honest empty beats a stale number. */
+(()=>{
+  const $=(s,c=document)=>c.querySelector(s);
+
+  fetch('../data/public-counts-v1.json',{cache:'no-store'})
+    .then(r=>{if(!r.ok)throw 0;return r.json();})
+    .then(d=>{
+      const c=d.counts||{};
+      ['activeCoreJobs','salaryVisibleJobs','clientCompanies'].forEach(k=>{
+        const el=$(`[data-count="${k}"]`);if(el&&typeof c[k]==='number')el.textContent=c[k];
+      });
+      const row=$('[data-counts-row]');if(row)row.hidden=false;
+      const asof=$('[data-counts-asof]');
+      if(asof)asof.textContent=`verified public counts · bound to job_count_truth_v1 · as of ${d.asOf}`;
+    })
+    .catch(()=>{
+      const asof=$('[data-counts-asof]');
+      if(asof)asof.textContent='counts source offline — no number shown rather than a wrong one';
+    });
+
+  fetch('../data/public-company-cards-v1.json',{cache:'no-store'})
+    .then(r=>{if(!r.ok)throw 0;return r.json();})
+    .then(d=>{
+      const host=$('[data-company-cards]');if(!host)return;
+      const top=(d.companies||[]).slice().sort((a,b)=>b.activeRoles-a.activeRoles).slice(0,5);
+      top.forEach(co=>{
+        const row=document.createElement('span');row.className='tl';
+        const b=document.createElement('b');
+        b.textContent=co.name+' ';
+        if(co.verified){const u=document.createElement('u');u.textContent='✓';b.appendChild(u);}
+        const i=document.createElement('i');
+        i.textContent=`${co.verified?'verified · ':''}${co.industry||''} · ${co.location||''} · `;
+        const em=document.createElement('em');em.textContent=`${co.activeRoles} roles`;
+        i.appendChild(em);
+        row.appendChild(b);row.appendChild(i);host.appendChild(row);
+      });
+      const asof=$('[data-companies-asof]');
+      if(asof)asof.textContent=`${top.length} of ${d.cardCount} client companies · cards as of ${d.asOf}`;
+    })
+    .catch(()=>{
+      const asof=$('[data-companies-asof]');
+      if(asof)asof.textContent='company cards source offline — no list shown rather than a stale one';
+    });
+})();

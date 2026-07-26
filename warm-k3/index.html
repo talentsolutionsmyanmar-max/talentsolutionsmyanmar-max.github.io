@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>document.documentElement.className += ' js';</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#F7F5F0">
+<title>The Warm Layer — K3 origination</title>
+<meta name="description" content="ReferTRM warm layer — six care moments. A moment that arrives, not a page you travel.">
+<style>
+/* ============================================================
+   THE WARM LAYER — K3 origination (WARM-LAYER-VISUAL-KIMI-S323)
+   Concept: the warm layer as it will live — a moment that ARRIVES
+   over whatever you were doing, not a page you travel to.
+   One room per moment. One light per room. At most one gesture.
+   Care fences: no score, no streak, no clinical frame, always
+   dismissible, Myanmar only by CCO hand (slots wait).
+   ============================================================ */
+:root{
+  --navy:#001F3F; --navy-deep:#001229; --gold:#D4AF37; --ivory:#F7F5F0; --teal:#0F766E;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --disp:'Bricolage Grotesque','Inter',system-ui,sans-serif;
+  --body:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --breath:10.9s; /* 5.5 breaths per minute — the cycle IS the intervention */
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ivory);font-family:var(--body);color:var(--navy);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+[hidden]{display:none!important}
+
+/* ---------- fonts: self-hosted, decoded below (zero external requests) ---------- */
+
+/* ---------- mono idiom (the demo bar · fleet #decide idiom) ---------- */
+.mono{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:500}
+.bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+  background:color-mix(in srgb, var(--ivory) 88%, transparent);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-top:1px solid rgba(0,31,63,.14);
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(0,31,63,.72);
+}
+.bar .tag{font-weight:700;color:var(--navy)}
+.bar .chips{display:flex;gap:4px;flex-wrap:wrap}
+.bar .chips a{
+  display:inline-flex;align-items:center;gap:6px;padding:6px 9px;
+  border:1px solid rgba(0,31,63,.22);border-radius:3px;text-decoration:none;
+  color:rgba(0,31,63,.72);transition:border-color .2s,color .2s;
+}
+.bar .chips a:hover{border-color:rgba(0,31,63,.55);color:var(--navy)}
+.bar .chips a.on{border-color:var(--gold);color:#7A5E10;background:rgba(212,175,55,.10)}
+.bar .note{margin-left:auto;opacity:.65}
+
+/* ---------- a room ---------- */
+.room{
+  position:relative;min-height:100vh;min-height:100svh;
+  display:flex;align-items:center;overflow:hidden;
+  padding:clamp(24px,7vw,96px) clamp(20px,8vw,120px) 120px;
+  color:var(--ink,var(--navy));background:var(--bg,var(--ivory));
+}
+/* JS upgrade: one room at a time; without JS every room reads, stacked */
+html.js .room{display:none}
+html.js .room.on{display:flex}
+.in{position:relative;z-index:5;max-width:640px;width:100%}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;opacity:.62;display:flex;align-items:center;gap:12px}
+.eyebrow::after{content:"";width:56px;height:1px;background:currentColor;opacity:.4}
+.title{margin-top:26px;font-family:var(--disp);font-size:clamp(30px,4.4vw,52px);font-weight:700;letter-spacing:-.02em;line-height:1.18;max-width:15em}
+.bodyline{margin-top:20px;font-size:clamp(15px,1.6vw,17.5px);line-height:1.85;max-width:34em;opacity:.86}
+.next{margin-top:14px;font-size:clamp(13.5px,1.4vw,15px);line-height:1.8;max-width:36em;opacity:.62}
+.mmslot{
+  margin-top:26px;display:inline-block;padding:8px 14px;
+  border:1px dashed color-mix(in srgb, currentColor 38%, transparent);border-radius:3px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;
+}
+.choices{margin-top:34px;display:flex;gap:10px;flex-wrap:wrap}
+.choice{
+  display:inline-flex;align-items:center;gap:8px;padding:11px 16px;
+  border:1px solid color-mix(in srgb, currentColor 30%, transparent);border-radius:3px;
+  font-size:13px;font-weight:600;letter-spacing:.01em;text-decoration:none;
+  transition:border-color .2s,transform .2s;
+}
+.choice:hover{border-color:color-mix(in srgb, currentColor 65%, transparent);transform:translateY(-1px)}
+.footnote{margin-top:30px;font-size:12px;line-height:1.7;opacity:.5;max-width:44em}
+.closex{
+  position:absolute;top:18px;right:20px;z-index:20;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+  padding:8px 12px;border:1px solid color-mix(in srgb, currentColor 26%, transparent);border-radius:3px;opacity:.66;
+}
+.closex:hover{opacity:1}
+.gesture-hint{margin-top:36px;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;opacity:.55}
+.gesture-hint i{width:8px;height:8px;border-radius:50%;background:currentColor;flex:none;animation:hintp 2.6s ease-in-out infinite}
+@keyframes hintp{0%,100%{transform:scale(.7);opacity:.5}50%{transform:scale(1.2);opacity:1}}
+
+/* ---------- the lights (one per room, abstract, never a face) ---------- */
+.light{position:absolute;z-index:2;pointer-events:none}
+
+/* 01 welcome — dawn at a door edge */
+.r-welcome{--bg:linear-gradient(180deg,#F7F5F0 0%,#F3E7CB 100%);--ink:#001F3F}
+.r-welcome .light{
+  left:clamp(58%,66%,72%);top:0;bottom:0;width:clamp(90px,12vw,170px);
+  background:linear-gradient(90deg,transparent,rgba(212,175,55,.34) 45%,rgba(244,224,174,.72) 60%,rgba(212,175,55,.34) 75%,transparent);
+  filter:blur(2px);transform:scaleX(var(--open,1));transform-origin:center;
+  transition:transform 1.2s cubic-bezier(.22,1,.36,1);
+}
+.r-welcome .light::after{content:"";position:absolute;inset:0;box-shadow:0 0 120px 30px rgba(212,175,55,.25)}
+
+/* 02 after-rejection — one ember, low, never out */
+.r-rejection{--bg:linear-gradient(180deg,#0E0C1C 0%,#171226 100%);--ink:#C2CEE0}
+.r-rejection .light{
+  left:50%;bottom:16%;width:14px;height:14px;border-radius:50%;
+  transform:translateX(-50%);
+  background:radial-gradient(circle,#F6DF9E 0%,#D4AF37 55%,rgba(212,175,55,0) 78%);
+  box-shadow:0 0 40px 14px rgba(212,175,55,.30),0 0 140px 50px rgba(212,175,55,.14);
+  animation:ember var(--breath) ease-in-out infinite;
+}
+@keyframes ember{0%,100%{opacity:.62;transform:translateX(-50%) scale(.92)}50%{opacity:1;transform:translateX(-50%) scale(1.06)}}
+.r-rejection.warmed .light{box-shadow:0 0 60px 22px rgba(212,175,55,.42),0 0 200px 80px rgba(212,175,55,.20)}
+
+/* 03 before-interview — water finding its level */
+.r-interview{--bg:linear-gradient(180deg,#F2F5F7 0%,#E9EEF2 100%);--ink:#0B1D38}
+.r-interview .light{
+  left:0;right:0;bottom:24%;height:1px;background:rgba(62,100,120,.35);
+}
+.r-interview .light::before,.r-interview .light::after{
+  content:"";position:absolute;left:0;right:0;height:1px;background:rgba(62,100,120,.22);
+  animation:settle 7s ease-in-out infinite;
+}
+.r-interview .light::before{top:-9px;animation-delay:-2.2s}
+.r-interview .light::after{top:9px;animation-delay:-4.4s}
+@keyframes settle{0%,100%{transform:scaleY(1) translateY(0);opacity:.35}50%{transform:translateY(2px);opacity:.7}}
+.r-interview .breathdot{
+  position:absolute;left:50%;bottom:calc(24% - 7px);width:13px;height:13px;border-radius:50%;
+  transform:translateX(-50%);
+  background:radial-gradient(circle,#9DB8C6,#3E6478 70%);
+  box-shadow:0 0 30px 8px rgba(62,100,120,.28);
+}
+.r-interview.breathing .breathdot{animation:onebreath var(--breath) ease-in-out 1}
+@keyframes onebreath{0%{transform:translateX(-50%) scale(.7);opacity:.6}45%{transform:translateX(-50%) scale(1.5);opacity:1}100%{transform:translateX(-50%) scale(.7);opacity:.6}}
+
+/* 04 milestone — the hearth, one spark rises */
+.r-milestone{--bg:linear-gradient(180deg,#F9F2DF 0%,#F5E9C6 100%);--ink:#001F3F}
+.r-milestone .light{
+  left:50%;bottom:14%;width:190px;height:120px;transform:translateX(-50%);
+  background:radial-gradient(ellipse at 50% 100%,rgba(212,175,55,.5),rgba(212,175,55,.16) 55%,transparent 75%);
+  animation:hearth 4.6s ease-in-out infinite;
+}
+@keyframes hearth{0%,100%{opacity:.75}50%{opacity:1}}
+.r-milestone .spark{
+  position:absolute;left:50%;bottom:20%;width:7px;height:7px;border-radius:50%;
+  background:radial-gradient(circle,#F6DF9E,#D4AF37 70%);opacity:0;
+}
+.r-milestone .spark.go{animation:rise 3.4s cubic-bezier(.3,.7,.4,1) 1}
+@keyframes rise{0%{opacity:0;transform:translate(0,0) scale(.6)}12%{opacity:1}100%{opacity:0;transform:translate(var(--sx,24px),-46vh) scale(1)}}
+
+/* 05 hard-day — nothing moves but the breath */
+.r-hardday{--bg:linear-gradient(180deg,#0A0E16 0%,#0D1620 100%);--ink:#9FB4C9}
+.r-hardday .light{
+  left:72%;top:52%;width:min(46vmin,380px);height:min(46vmin,380px);
+  transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(circle,rgba(15,118,110,.30),rgba(15,118,110,.10) 52%,transparent 72%);
+  animation:breath var(--breath) ease-in-out infinite;
+}
+@keyframes breath{0%,100%{transform:translate(-50%,-50%) scale(.82);opacity:.6}45%,55%{transform:translate(-50%,-50%) scale(1.12);opacity:1}}
+.r-hardday .breathcap{
+  position:absolute;left:72%;top:52%;transform:translate(-50%,-50%);
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:#4FB3A6;opacity:.85;
+  text-align:center;line-height:2.1;
+}
+@media (max-width:860px){
+  .r-hardday .light{left:50%;top:auto;bottom:6%;width:64vmin;height:64vmin}
+  .r-hardday .breathcap{left:50%;top:auto;bottom:calc(6% + 24vmin)}
+}
+.r-hardday details{
+  border:1px solid rgba(79,179,166,.28);border-radius:4px;background:rgba(15,118,110,.06);
+}
+.r-hardday details summary{
+  list-style:none;cursor:pointer;padding:12px 16px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#9FB4C9;
+}
+.r-hardday details summary::-webkit-details-marker{display:none}
+.r-hardday details .dd{padding:2px 16px 16px;font-size:13px;line-height:1.8;color:#8BA2B8}
+.r-hardday details .dd a{color:#4FB3A6;text-decoration:underline;text-underline-offset:3px}
+.crisis{margin-top:18px;font-size:12px;line-height:1.7;color:#7E94A8;max-width:44em}
+
+/* 06 ydc — first light, a hill finding its contours */
+.r-ydc{--bg:linear-gradient(180deg,#F2F6EF 0%,#E8F0E2 100%);--ink:#122B1C}
+.r-ydc .light{
+  left:50%;bottom:12%;width:min(64vmin,460px);height:min(40vmin,290px);transform:translateX(-50%);
+}
+.r-ydc .contour{
+  position:absolute;left:50%;bottom:0;border:1.5px solid rgba(63,107,69,.30);border-radius:50%;
+  transform:translateX(-50%);opacity:.55;
+}
+.r-ydc .contour.c1{width:120px;height:44px}
+.r-ydc .contour.c2{width:220px;height:80px;opacity:.42}
+.r-ydc .contour.c3{width:330px;height:118px;opacity:.30}
+.r-ydc .contour.c4{width:440px;height:156px;opacity:0;transition:opacity 1.2s}
+.r-ydc .contour.c5{width:550px;height:196px;opacity:0;transition:opacity 1.2s}
+.r-ydc.g4 .c4,.r-ydc.g5 .c4{opacity:.26}
+.r-ydc.g5 .c5{opacity:.20}
+.r-ydc .sun{
+  position:absolute;left:50%;bottom:44px;width:56px;height:56px;border-radius:50%;transform:translateX(-50%);
+  background:radial-gradient(circle at 40% 35%,#E9F3DA,#8FB48C 62%,#5E8560);
+  box-shadow:0 0 50px 16px rgba(110,154,114,.34);
+}
+
+/* ---------- cover (the room you arrive in) ---------- */
+.r-cover{--bg:linear-gradient(180deg,#F7F5F0,#F1EADA);--ink:#001F3F}
+.r-cover .in{text-align:left}
+.r-cover .mark{
+  width:52px;height:52px;border:1.5px solid rgba(212,175,55,.65);border-radius:50%;
+  display:grid;place-items:center;margin-bottom:30px;
+  background:radial-gradient(circle at 38% 32%,rgba(244,224,174,.8),rgba(212,175,55,.28) 70%);
+}
+.r-cover .mark svg{width:22px;height:22px;color:#96760E}
+.moment-index{margin-top:38px;display:grid;gap:0;border-top:1px solid rgba(0,31,63,.12)}
+.moment-index a{
+  display:flex;align-items:baseline;gap:16px;padding:13px 2px;text-decoration:none;
+  border-bottom:1px solid rgba(0,31,63,.12);transition:background .2s;
+}
+.moment-index a:hover{background:rgba(212,175,55,.06)}
+.moment-index .n{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:rgba(0,31,63,.5);flex:none}
+.moment-index .t{font-family:var(--disp);font-size:17px;font-weight:700;letter-spacing:-.01em}
+.moment-index .s{margin-left:auto;font-size:12px;opacity:.55;text-align:right}
+
+/* ---------- noscript: every room readable, stacked ---------- */
+noscript .ns-voice{max-width:640px;margin:0 auto;padding:80px 24px 40px;text-align:left}
+/* noscript: rooms already stack (JS is what singles them out); quiet the chrome */
+noscript ~ .room{min-height:auto;padding-top:80px;padding-bottom:80px}
+noscript ~ .room .light,noscript ~ .room .gesture-hint,noscript ~ .bar{display:none}
+
+/* ---------- reduced motion: every room holds still, still warm ---------- */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .r-rejection .light{opacity:.9}
+  .r-hardday .light{transform:translate(-50%,-50%) scale(1);opacity:.85}
+}
+
+/* ---------- 390px ---------- */
+@media (max-width:560px){
+  .room{padding:88px 22px 130px}
+  .bar{gap:8px;padding:8px 10px calc(8px + env(safe-area-inset-bottom))}
+  .bar .note{display:none}
+  .choices{flex-direction:column;align-items:stretch}
+  .choice{justify-content:center}
+  .moment-index .s{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ COVER — the room you arrive in ============ -->
+<section class="room r-cover on" id="cover">
+  <div class="in">
+    <div class="mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 3v2M12 19v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M3 12h2M19 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/><circle cx="12" cy="12" r="4"/></svg>
+    </div>
+    <p class="eyebrow">The warm layer · ReferTRM</p>
+    <h1 class="title">A place that breathes.</h1>
+    <p class="bodyline">Six small moments, made for the hours that hurt — the first visit, the rejection, the interview morning, the quiet win, the heavy day, and the child beginning. Each one arrives when it is needed and leaves when you are ready.</p>
+    <p class="next">Nothing here is measured. Nothing is kept. Every room closes whenever you say so.</p>
+    <nav class="moment-index" aria-label="The six moments">
+      <a href="#welcome"><span class="n">01</span><span class="t">A gentle welcome</span><span class="s">the first visit</span></a>
+      <a href="#rejection"><span class="n">02</span><span class="t">A moment for you</span><span class="s">after a rejection</span></a>
+      <a href="#interview"><span class="n">03</span><span class="t">Before your interview</span><span class="s">the morning of</span></a>
+      <a href="#milestone"><span class="n">04</span><span class="t">A moment to notice</span><span class="s">the quiet win</span></a>
+      <a href="#hardday"><span class="n">05</span><span class="t">A quiet check-in</span><span class="s">the heavy day</span></a>
+      <a href="#ydc"><span class="n">06</span><span class="t">Room to learn</span><span class="s">the child beginning</span></a>
+    </nav>
+    <p class="footnote" style="margin-top:34px">Warmth for everyone. Pity for no one.</p>
+  </div>
+</section>
+
+<!-- ============ 01 WELCOME — dawn at a door edge ============ -->
+<section class="room r-welcome" id="welcome" data-moment="welcome">
+  <div class="light" aria-hidden="true"></div>
+  <a class="closex" href="#cover">Close — anytime</a>
+  <div class="in">
+    <p class="eyebrow">A gentle welcome</p>
+    <h1 class="title">You are here. That is enough for today.</h1>
+    <p class="bodyline">There is no test to pass. Take a moment, continue when you are ready, or skip this completely.</p>
+    <p class="next">Choose one small thing to explore. You can change direction at any time.</p>
+    <span class="mmslot">MM slot — CCO to author</span>
+    <div class="choices">
+      <a class="choice" href="#cover">A quiet minute</a>
+      <a class="choice" href="https://www.refertrm.com/eq/jobs" rel="noopener">One small next step</a>
+    </div>
+    <p class="footnote">Optional. Your choices are not saved, scored, or used to change what you can access.</p>
+    <span class="gesture-hint" data-gesture="open"><i></i>Hold — let the morning in a little wider</span>
+  </div>
+</section>
+
+<!-- ============ 02 AFTER-REJECTION — one ember, never out ============ -->
+<section class="room r-rejection" id="rejection" data-moment="after-rejection">
+  <div class="light" aria-hidden="true"></div>
+  <a class="closex" href="#cover">Close — anytime</a>
+  <div class="in">
+    <p class="eyebrow">A moment for you</p>
+    <h1 class="title">This outcome is not your worth.</h1>
+    <p class="bodyline">You can pause before deciding what comes next. Nothing here asks you to explain or perform.</p>
+    <p class="next">When you are ready, save one useful note and leave the rest for another day.</p>
+    <span class="mmslot">MM slot — CCO to author</span>
+    <div class="choices">
+      <a class="choice" href="#cover">A quiet minute</a>
+      <a class="choice" href="#hardday">One small next step</a>
+    </div>
+    <p class="footnote">Optional. Your choices are not saved, scored, or used to change what you can access.</p>
+    <span class="gesture-hint" data-gesture="warm"><i></i>Tap — keep the ember warm</span>
+  </div>
+</section>
+
+<!-- ============ 03 BEFORE-INTERVIEW — water finding its level ============ -->
+<section class="room r-interview" id="interview" data-moment="before-interview">
+  <div class="light" aria-hidden="true"></div>
+  <div class="breathdot" aria-hidden="true"></div>
+  <a class="closex" href="#cover">Close — anytime</a>
+  <div class="in">
+    <p class="eyebrow">Before your interview</p>
+    <h1 class="title">You do not need to be perfect.</h1>
+    <p class="bodyline">Take one slow breath. Your job is to be clear, honest, and present — not to know every answer.</p>
+    <p class="next">Review one example you know well, then give yourself permission to stop preparing.</p>
+    <span class="mmslot">MM slot — CCO to author</span>
+    <div class="choices">
+      <a class="choice" href="#cover">A quiet minute</a>
+      <a class="choice" href="https://www.refertrm.com/eq/jobs" rel="noopener">One small next step</a>
+    </div>
+    <p class="footnote">Optional. Your choices are not saved, scored, or used to change what you can access.</p>
+    <span class="gesture-hint" data-gesture="breath1"><i></i>Tap — one slow breath, together</span>
+  </div>
+</section>
+
+<!-- ============ 04 MILESTONE — the hearth, one spark rises ============ -->
+<section class="room r-milestone" id="milestone" data-moment="milestone">
+  <div class="light" aria-hidden="true"></div>
+  <div class="spark" aria-hidden="true"></div>
+  <a class="closex" href="#cover">Close — anytime</a>
+  <div class="in">
+    <p class="eyebrow">A moment to notice</p>
+    <h1 class="title">You finished something that mattered.</h1>
+    <p class="bodyline">Let the moment land before you move on. Progress does not have to be loud to be real.</p>
+    <p class="next">Pause here, or continue with one small next step. Both choices count.</p>
+    <span class="mmslot">MM slot — CCO to author</span>
+    <div class="choices">
+      <a class="choice" href="#cover">Pause here</a>
+      <a class="choice" href="https://www.refertrm.com/eq/academy" rel="noopener">One small next step</a>
+    </div>
+    <p class="footnote">Optional. Your choices are not saved, scored, or used to change what you can access.</p>
+    <span class="gesture-hint" data-gesture="spark"><i></i>Tap — let one spark rise</span>
+  </div>
+</section>
+
+<!-- ============ 05 HARD-DAY — nothing moves but the breath ============ -->
+<section class="room r-hardday" id="hardday" data-moment="hard-day">
+  <div class="light" aria-hidden="true"></div>
+  <div class="breathcap" aria-hidden="true">Breathe with this<br>5.5 / min</div>
+  <a class="closex" href="#cover">Close — anytime</a>
+  <div class="in">
+    <p class="eyebrow">A quiet check-in</p>
+    <h1 class="title">You do not have to solve everything at once.</h1>
+    <p class="bodyline">Choose what would feel useful right now. You can close this at any time.</p>
+    <p class="next">Pick the smallest task, ask for help, or leave it until later if it can wait.</p>
+    <span class="mmslot">MM slot — CCO to author</span>
+    <div class="choices" style="flex-direction:column;align-items:stretch;max-width:420px">
+      <details>
+        <summary>Talk to someone</summary>
+        <div class="dd">
+          <p>Free, confidential, and in your language:</p>
+          <p style="margin-top:8px"><a href="https://findahelpline.com/countries/mm" target="_blank" rel="noopener">Find a Helpline — Myanmar</a><br>
+          <a href="https://www.who.int/myanmar/activities/mind-matters--advancing-mental-health-in-myanmar-through-who-s-mhpss-and-school-health-initiatives" target="_blank" rel="noopener">WHO Myanmar — mind matters</a></p>
+        </div>
+      </details>
+      <details>
+        <summary>One small next step</summary>
+        <div class="dd"><p>Not today&apos;s whole list — one thing. The smallest one. The rest can wait until there is more room.</p></div>
+      </details>
+    </div>
+    <p class="crisis">If you may be in immediate danger, go to the nearest hospital or contact local emergency services.</p>
+    <p class="footnote">Optional. Your choices are not saved, scored, or used to change what you can access.</p>
+  </div>
+</section>
+
+<!-- ============ 06 YDC — first light, a hill finding its contours ============ -->
+<section class="room r-ydc" id="ydc" data-moment="ydc">
+  <div class="light" aria-hidden="true">
+    <span class="contour c1"></span><span class="contour c2"></span><span class="contour c3"></span><span class="contour c4"></span><span class="contour c5"></span>
+    <span class="sun"></span>
+  </div>
+  <a class="closex" href="#cover">Close — anytime</a>
+  <div class="in">
+    <p class="eyebrow">Room to learn</p>
+    <h1 class="title">Learning can pause.</h1>
+    <p class="bodyline">A break is allowed. You can come back when you have more room, with no penalty and no explanation.</p>
+    <p class="next">Try one short lesson, ask someone you trust, or stop for today.</p>
+    <span class="mmslot">MM slot — CCO to author</span>
+    <div class="choices">
+      <a class="choice" href="#cover">A quiet minute</a>
+      <a class="choice" href="https://talentsolutionsmyanmar-max.github.io/ydc/#/" rel="noopener">One short lesson</a>
+    </div>
+    <p class="footnote">Optional. Your choices are not saved, scored, or used to change what you can access.</p>
+    <span class="gesture-hint" data-gesture="grow"><i></i>Tap — one more contour, at your pace</span>
+  </div>
+</section>
+
+<!-- ============ demo bar — the #decide idiom ============ -->
+<footer class="bar" id="bar">
+  <span class="tag">Warm layer · K3</span>
+  <nav class="chips" aria-label="Moments">
+    <a href="#welcome" data-chip="welcome">01 Welcome</a>
+    <a href="#rejection" data-chip="rejection">02 Rejection</a>
+    <a href="#interview" data-chip="interview">03 Interview</a>
+    <a href="#milestone" data-chip="milestone">04 Milestone</a>
+    <a href="#hardday" data-chip="hardday">05 Heavy day</a>
+    <a href="#ydc" data-chip="ydc">06 Youth</a>
+  </nav>
+  <span class="note">EN registry byte-exact · MM slots await CCO · a moment arrives, it is not a page you travel</span>
+</footer>
+
+<noscript>
+  <div class="ns-voice">
+    <p style="font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;opacity:.6">The warm layer · ReferTRM</p>
+    <h1 style="font-family:var(--disp);font-size:34px;margin-top:20px">A place that breathes.</h1>
+    <p style="margin-top:16px;line-height:1.8;opacity:.8">Six small moments, made for the hours that hurt. They are all below — nothing moves without JavaScript, and nothing needs to. Warmth for everyone. Pity for no one.</p>
+  </div>
+</noscript>
+
+<script>
+/* The warm layer — moment router + one gesture per room.
+   No storage. No score. Nothing is kept. */
+(function(){
+  'use strict';
+  var rooms = Array.prototype.slice.call(document.querySelectorAll('.room[data-moment]'));
+  var cover = document.getElementById('cover');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('[data-chip]'));
+  var MAP = { welcome:'welcome', rejection:'after-rejection', interview:'before-interview', milestone:'milestone', hardday:'hard-day', ydc:'ydc' };
+
+  function show(){
+    var h = (location.hash || '#cover').slice(1);
+    var found = false;
+    rooms.forEach(function(r){
+      var on = r.id === h;
+      r.classList.toggle('on', on);
+      if(on) found = true;
+    });
+    cover.classList.toggle('on', !found);
+    chips.forEach(function(c){ c.classList.toggle('on', c.getAttribute('data-chip') === h); });
+  }
+  addEventListener('hashchange', show);
+  show();
+
+  /* gestures — quiet, single-purpose */
+  document.addEventListener('pointerdown', function(ev){
+    var hint = ev.target.closest ? ev.target.closest('[data-gesture]') : null;
+    var room = ev.target.closest ? ev.target.closest('.room') : null;
+    if(!room) return;
+    if(ev.target.closest('a, summary, details, .closex')) return;
+    var g = hint ? hint.getAttribute('data-gesture') : (room.querySelector('[data-gesture]') ? room.querySelector('[data-gesture]').getAttribute('data-gesture') : null);
+    if(!g) return;
+    if(g === 'warm'){ room.classList.add('warmed'); setTimeout(function(){ room.classList.remove('warmed'); }, 3200); }
+    if(g === 'breath1'){ room.classList.remove('breathing'); void room.offsetWidth; room.classList.add('breathing'); }
+    if(g === 'spark'){
+      var s = room.querySelector('.spark');
+      s.style.setProperty('--sx', (Math.random()*96 - 48).toFixed(0) + 'px');
+      s.classList.remove('go'); void s.offsetWidth; s.classList.add('go');
+    }
+    if(g === 'grow'){
+      var n = room.className.match(/g(\d)/);
+      var lvl = n ? Math.min(5, parseInt(n[1],10) + 1) : 4;
+      room.classList.remove('g4','g5'); room.classList.add('g' + lvl);
+    }
+  });
+  /* welcome: hold to open the light */
+  var wl = document.querySelector('.r-welcome .light');
+  var open = 1, holding = false, raf = null;
+  function step(){
+    open += holding ? 0.012 : -0.012;
+    open = Math.max(1, Math.min(2.6, open));
+    if(wl) wl.style.setProperty('--open', open.toFixed(3));
+    if((holding && open < 2.6) || (!holding && open > 1)) raf = requestAnimationFrame(step);
+    else raf = null;
+  }
+  var wRoom = document.querySelector('.r-welcome');
+  if(wRoom){
+    wRoom.addEventListener('pointerdown', function(ev){
+      if(ev.target.closest('a, summary, details, .closex')) return;
+      holding = true; if(!raf) raf = requestAnimationFrame(step);
+    });
+    ['pointerup','pointercancel','pointerleave'].forEach(function(t){
+      wRoom.addEventListener(t, function(){ holding = false; if(!raf) raf = requestAnimationFrame(step); });
+    });
+  }
+  /* keyboard: Escape returns to the cover */
+  document.addEventListener('keydown', function(ev){
+    if(ev.key === 'Escape') location.hash = '#cover';
+  });
+})();
+</script>
+<script>
+/* self-hosted fonts — decoded from /warm-k3/fonts/*.b64, zero external requests */
+(function(){
+  if(!('FontFace' in window) || !window.atob) return;
+  var F = [
+    ['Bricolage Grotesque', 700, 'fonts/bric700.b64'],
+    ['Bricolage Grotesque', 800, 'fonts/bric800.b64'],
+    ['JetBrains Mono', 500, 'fonts/jbmono.b64'],
+    ['Padauk', 400, 'fonts/padauk400.b64'],
+    ['Padauk', 700, 'fonts/padauk700.b64']
+  ];
+  function b64toBuf(b64){
+    var bin = atob(b64.replace(/\s+/g,''));
+    var len = bin.length, buf = new Uint8Array(len);
+    for(var i=0;i<len;i++) buf[i] = bin.charCodeAt(i);
+    return buf.buffer;
+  }
+  F.forEach(function(f){
+    fetch(f[2]).then(function(r){ return r.text(); }).then(function(t){
+      var face = new FontFace(f[0], b64toBuf(t), { weight: String(f[1]) });
+      return face.load();
+    }).then(function(face){ document.fonts.add(face); }).catch(function(){});
+  });
+})();
+</script>
+</body>
+</html>

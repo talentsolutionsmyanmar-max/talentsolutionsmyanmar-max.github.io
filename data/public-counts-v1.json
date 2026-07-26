@@ -1,28 +1,38 @@
 {
   "contract": "refertrm-public-counts-v1",
-  "asOf": "2026-07-22",
+  "asOf": "2026-07-26",
   "timezone": "Asia/Yangon",
   "status": "verified",
   "counts": {
-    "activeCoreJobs": 253,
-    "clientCompanies": 74,
-    "salaryVisibleJobs": 252,
-    "locationTaggedJobs": 253,
-    "levelTaggedJobs": 253,
+    "activeCoreJobs": 215,
+    "clientCompanies": 51,
+    "salaryVisibleJobs": 215,
+    "locationTaggedJobs": 215,
+    "levelTaggedJobs": 215,
     "communityJobsCleared": 0
   },
+  "internalOnly": {
+    "rawOperational": 252,
+    "cleanAllTenant": 219,
+    "note": "internal audit numbers — never rendered on public surfaces"
+  },
   "definitions": {
-    "activeCoreJobs": "COUNT(public.\"Job\") WHERE lower(status) = 'active'; active ReferTRM client-role inventory",
-    "clientCompanies": "COUNT(DISTINCT public.\"Job\".\"companyId\") for active jobs with a matching canonical public.\"Company\" record",
-    "salaryVisibleJobs": "Active jobs with salaryMin, salaryMax, or salaryDisplay present",
-    "locationTaggedJobs": "Active jobs with a recorded location",
-    "levelTaggedJobs": "Active jobs with a recorded job level",
+    "activeCoreJobs": "job_count_truth_v1.clean_public_production: active, non-synthetic, unexpired, not registry-retired, production-tenant jobs. THE public number.",
+    "clientCompanies": "COUNT(DISTINCT companyId) over the same clean-public job set with a matching canonical Company record",
+    "salaryVisibleJobs": "Clean-public jobs with salaryMin, salaryMax, or salaryDisplay present",
+    "locationTaggedJobs": "Clean-public jobs with a recorded location",
+    "levelTaggedJobs": "Clean-public jobs with a recorded job level",
     "communityJobsCleared": "Independently submitted free listings cleared for public publication; currently honest-empty"
   },
   "governance": {
-    "authority": "S322-JOBS-WORKPLACE-TRUTH-PUBLIC-IDENTITY; production read-only audit 2026-07-22",
+    "authority": "S326/S327 count-truth ruling: public surfaces bind to job_count_truth_v1, never a constant; regenerated from live DB by K3 (stopgap — Codex owns the scheduled pipeline)",
     "internalCountsExcluded": [
-      "employer_prospects"
+      "employer_prospects",
+      "synthetic rows (20)",
+      "demo/test rows (4)",
+      "expired",
+      "registry-retired",
+      "non-production tenants"
     ],
     "clientStatusMayInfluenceTransparency": false,
     "nextReview": "CTO re-probe before any production integration"
