@@ -18,22 +18,22 @@
 -- Count-truth split (live view, #422):
 SELECT raw_operational, clean_all_tenant, clean_public_production, calculated_at
 FROM job_count_truth_v1;
--- → raw_operational=253, clean_all_tenant=220, clean_public_production=216  (calculated 2026-07-26)
+-- → raw_operational=252, clean_all_tenant=219, clean_public_production=215  (calculated 2026-07-26, after Senior RS Staff flip)
 
 -- Title/company dimensions of the raw active set:
-SELECT COUNT(DISTINCT title)      FROM "Job" WHERE status='active';  -- 196
+SELECT COUNT(DISTINCT title)      FROM "Job" WHERE status='active';  -- 195
 SELECT COUNT(DISTINCT "companyId") FROM "Job" WHERE status='active';  -- 74
 ```
 
 | Measure | Value | Source |
 |---|---:|---|
-| **raw_operational** (active jobs) | **253** | `job_count_truth_v1` |
-| **clean_all_tenant** (active − synthetic − expired − registry-retired) | **220** | `job_count_truth_v1` |
-| **clean_public_production** (clean_all_tenant ∩ production tenant) | **216** | `job_count_truth_v1` |
-| Distinct titles (raw active set) | 196 | `Job` |
+| **raw_operational** (active jobs) | **252** | `job_count_truth_v1` |
+| **clean_all_tenant** (active − synthetic − expired − registry-retired) | **219** | `job_count_truth_v1` |
+| **clean_public_production** (clean_all_tenant ∩ production tenant) | **215** | `job_count_truth_v1` |
+| Distinct titles (raw active set) | 195 | `Job` |
 | Distinct companies (raw active set) | 74 | `Job` |
 
-The three count-truth numbers come from the live `job_count_truth_v1` view (raw 253 / clean_all_tenant 220 / clean_public_production 216). The 196 distinct titles / 74 companies describe the raw active set the catalog's title_map is built from; public-facing counts must use `clean_public_production` (216), per the #422 contract.
+The three count-truth numbers come from the live `job_count_truth_v1` view (raw 252 / clean_all_tenant 219 / clean_public_production 215). These moved down by 1 from 253/220/216 when the **Senior RS Staff flip landed** (that row is now `status='closed'`; active distinct titles 196→195). The 195 distinct titles / 74 companies describe the raw active set the catalog's title_map is built from; public-facing counts must use `clean_public_production` (215), per the #422 contract.
 
 ---
 
@@ -41,18 +41,18 @@ The three count-truth numbers come from the live `job_count_truth_v1` view (raw 
 
 The grade spine is the **`user_career_grade.career_level`** field. Distinct values currently in use (90 rows): `Basic` (2), `Senior` (3), `Supervisor` (63), `Manager` (20), `Senior Manager` (2).
 
-**6 Myanmar-market rungs** (the 5 existing `career_level` values + the ratified `Officer/Executive` extension):
+**6 Myanmar-market rungs** (the 5 existing `career_level` values + the ratified `Officer/Executive` extension; **Officer/Executive is rung 6 per KoKo's ladder-reorder dispatch**):
 
-| Rung | `career_level` value | Status | Market titles mapped here (from the 196) |
+| Rung | `career_level` value | Status | Market titles mapped here (from the 195) |
 |---|---|---|---|
 | 1 | `Basic` | existing | Trainee, Junior, Staff, Assistant, Helper, Cashier, Checker, Picker, Driver, Office Staff, Kitchen Helper, Waiter |
-| 2 | `Officer/Executive` | **RATIFIED (S325)** — ruled equivalent to Assistant Manager | Executive, Officer, Coordinator, Analyst, Specialist, Associate, Advisor, Accountant, Engineer, Developer, Designer, Writer, Technician, Chef, Purchaser |
-| 3 | `Senior` | existing | Senior [X] (Senior Accountant, Senior Sales Executive, Senior Auditor, …) |
-| 4 | `Supervisor` | existing | Supervisor, Team Leader, Lead |
-| 5 | `Manager` | existing | Manager, Assistant Manager, Branch Manager, Shop Manager |
-| 6 | `Senior Manager` | existing | Senior Manager, Head of [X], Chief [X], General Manager, Director |
+| 2 | `Senior` | existing | Senior [X] (Senior Accountant, Senior Sales Executive, Senior Auditor, …) |
+| 3 | `Supervisor` | existing | Supervisor, Team Leader, Lead |
+| 4 | `Manager` | existing | Manager, Branch Manager, Shop Manager |
+| 5 | `Senior Manager` | existing | Senior Manager, Head of [X], Chief [X], General Manager, Director |
+| 6 | `Officer/Executive` | **RATIFIED (S325)** — ruled equivalent to Assistant Manager | Executive, Officer, Coordinator, Analyst, Specialist, Associate, Advisor, Accountant, Engineer, Developer, Designer, Writer, Technician, Chef, Purchaser, Assistant Manager |
 
-**Ratified extension (seal_role_catalog_v1_ratified_s325):** `Officer/Executive` is **APPROVED** as a value of the **same `career_level` field** (free-text), not a new table or enum — so it binds to `user_career_grade` rather than inventing a parallel grade system. KoKo ruled it **equivalent to Assistant Manager** (the 6th rung of the ratified ladder). It covers the mid-level individual-contributor titles that dominate the Myanmar market — `Executive` (19 listings) and `Officer` (8) — which the original 5 rungs had no home for. *Reconciliation note: the catalog's proposed ordering placed Officer/Executive at rung 2 (mid-IC); the seal rules it equivalent to Assistant Manager. Codex should bind the rung to the Assistant-Manager-equivalent grade when wiring `user_career_grade`.*
+**Ratified extension (seal_role_catalog_v1_ratified_s325 + KoKo ladder-reorder dispatch):** `Officer/Executive` is **APPROVED** as a value of the **same `career_level` field** (free-text), not a new table or enum — so it binds to `user_career_grade` rather than inventing a parallel grade system. KoKo ruled it **equivalent to Assistant Manager** and dispatched it as **rung 6**. It covers the mid-level individual-contributor titles that dominate the Myanmar market — `Executive` (19 listings) and `Officer` (8) — which the original 5 rungs had no home for. *Rung numbering is per KoKo's explicit dispatch (Officer/Executive = rung 6); the seniority equivalence is Assistant Manager. Assistant Manager moved into this rung from the Manager rung accordingly.*
 
 > Note: the platform also has a 3-tier matcher `Band` (Entry/Mid/Senior, `seniority.ts`) and `ksa_career_tracks.level` (STARTER/BEGINNER/MOVER/FLYER). Those are separate concerns (matching gate; learning progression). The catalog's grade spine is `career_level`.
 
@@ -108,8 +108,8 @@ Each of the 196 distinct titles maps to one function family × one grade rung, *
 
 That was the only unmapped title of 196; it is now resolved by retirement.
 
-> **Live-state note (reproducible):** as of 2026-07-26 the DB still returns `Senior RS Staff` as `status='active'` (1 active job, Innopex `cmmlrk3a90014lqecuyuoyg4i`; active distinct-titles still 196, active jobs still 253). The CTO closure is therefore a **pending data action** (a `status` flip, a DB write outside this read-only artifact). Until that flip lands, the §0 ground-truth snapshot (253/196) still counts this row; the catalog records the CTO decision that it is retired and needs no family mapping.
-> `SELECT id, title, status FROM "Job" WHERE title ILIKE '%Senior RS Staff%';` → `status='active'` (pending flip to closed).
+> **Live-state note (reproducible):** the Senior RS Staff flip **has landed** — the DB now returns `status='closed'` for this row (verified 2026-07-26). The §0 snapshot reflects this: raw_operational moved 253→252 and active distinct titles 196→195. The closure is no longer pending; it is reflected in live state and in the count-truth split.
+> `SELECT id, title, status FROM "Job" WHERE title ILIKE '%Senior RS Staff%';` → `status='closed'`.
 
 ---
 
@@ -166,6 +166,6 @@ This is a research seat; it does **not** ratify its own deliverable. Ratificatio
 
 1. **OPEN ASK 1 — `Officer/Executive` `career_level` rung — RATIFIED (APPROVED).** Same-field extension covering 27 mid-IC titles (Executive 19, Officer 8). **Ruled equivalent to Assistant Manager, 6th rung.** (See §1 reconciliation note re: rung ordering.)
 2. **OPEN ASK 2 — the 12 market-evidenced function-family extensions — RATIFIED (APPROVED).** Approved as platform families (see §2).
-3. **OPEN ASK 3 — "Senior RS Staff" (Innopex Company) — RESOLVED (CTO, 2026-07-26).** Role closed / no longer active; no JD needed and no family mapping required. "RS" was never guessed. *Live-state caveat:* the DB still returns `status='active'` for this row as of 2026-07-26 (reproducible), so the closure is a pending data action (a `status` flip) rather than a reflected state; the §0 raw snapshot (253) still counts it until the flip lands.
+3. **OPEN ASK 3 — "Senior RS Staff" (Innopex Company) — RESOLVED (CTO, 2026-07-26).** Role closed / no longer active; no JD needed and no family mapping required. "RS" was never guessed. *Live state:* the `status` flip **has landed** — the DB now returns `status='closed'` (verified 2026-07-26), and the §0 snapshot reflects it (raw 252, active distinct titles 195).
 
 **Status: RATIFIED — Codex builds may consume this catalog.** No schema, migration, or UI work was performed here (scoped out; those are Codex briefs).

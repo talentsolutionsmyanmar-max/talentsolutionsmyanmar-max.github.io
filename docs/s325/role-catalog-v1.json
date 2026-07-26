@@ -6,27 +6,27 @@
  "source_of_truth": {
   "description": "eq/jobs roles reconciled to the count-truth contract (#422, serving). Catalog mines the live active set; public surfaces consume clean_public_production.",
   "count_truth_source": "job_count_truth_v1 (live view)",
-  "raw_operational": 253,
-  "clean_all_tenant": 220,
-  "clean_public_production": 216,
-  "distinct_titles": 196,
+  "raw_operational": 252,
+  "clean_all_tenant": 219,
+  "clean_public_production": 215,
+  "distinct_titles": 195,
   "distinct_companies": 74,
   "reproducible_probe": [
-   "SELECT raw_operational, clean_all_tenant, clean_public_production, calculated_at FROM job_count_truth_v1;  -- 253 / 220 / 216 (calculated 2026-07-26)",
-   "SELECT COUNT(DISTINCT title) FROM \"Job\" WHERE status='active';  -- 196",
+   "SELECT raw_operational, clean_all_tenant, clean_public_production, calculated_at FROM job_count_truth_v1;  -- 252 / 219 / 215 (calculated 2026-07-26, after Senior RS Staff flip)",
+   "SELECT COUNT(DISTINCT title) FROM \"Job\" WHERE status='active';  -- 195",
    "SELECT COUNT(DISTINCT \"companyId\") FROM \"Job\" WHERE status='active';  -- 74"
   ],
-  "note": "raw 253 / clean_all_tenant 220 / clean_public_production 216 from job_count_truth_v1. 196 titles / 74 companies describe the raw active set the title_map is built from; public-facing counts use clean_public_production (216) per #422."
+  "note": "raw 252 / clean_all_tenant 219 / clean_public_production 215 from job_count_truth_v1. Moved down by 1 from 253/220/216 when the Senior RS Staff flip landed (that row now status=closed; active distinct titles 196->195). 195 titles / 74 companies describe the raw active set the title_map is built from; public-facing counts use clean_public_production (215) per #422."
  },
  "grade_spine": {
   "bound_to": "user_career_grade.career_level",
   "rungs": [
    "Basic",
-   "Officer/Executive",
    "Senior",
    "Supervisor",
    "Manager",
-   "Senior Manager"
+   "Senior Manager",
+   "Officer/Executive"
   ],
   "existing_values_in_use": [
    "Basic",
@@ -35,7 +35,7 @@
    "Manager",
    "Senior Manager"
   ],
-  "extension": "RATIFIED (seal_role_catalog_v1_ratified_s325): Officer/Executive APPROVED as a value of the same career_level field (free-text), not a parallel system. KoKo ruled it equivalent to Assistant Manager, 6th rung. Covers 27 mid-IC titles (Executive 19, Officer 8). Reconciliation note: catalog proposed ordering placed it at rung 2; seal rules it Assistant-Manager-equivalent — Codex binds the rung accordingly when wiring user_career_grade."
+  "extension": "RATIFIED (seal_role_catalog_v1_ratified_s325 + KoKo ladder-reorder dispatch): Officer/Executive APPROVED as a value of the same career_level field (free-text), not a parallel system. KoKo ruled it equivalent to Assistant Manager and dispatched it as rung 6. Covers 27 mid-IC titles (Executive 19, Officer 8). Rung order: 1 Basic, 2 Senior, 3 Supervisor, 4 Manager, 5 Senior Manager, 6 Officer/Executive (= Assistant Manager equivalent)."
  },
  "function_families": {
   "existing_ksa7": [
@@ -3961,8 +3961,8 @@
      "Mid"
     ],
     "resolution": "RESOLVED (CTO, 2026-07-26): role closed / no longer active; no JD needed, no family mapping required. RS never guessed.",
-    "live_state_caveat": "DB still returns status=active as of 2026-07-26 (reproducible); closure is a pending data action (status flip). Section-0 snapshot (253/196) still counts it until the flip lands.",
-    "status": "resolved_pending_db_flip"
+    "live_state_caveat": "Flip LANDED: DB now returns status=closed (verified 2026-07-26). Section-0 snapshot reflects it (raw 252, active distinct titles 195). Closure no longer pending.",
+    "status": "resolved_flip_landed"
    }
   ],
   "honest_empty_rule": "Each function x grade cell carries n = count of real listings supporting it. n=0 cells are honest-empty (published as 0, never omitted, never called 'benchmark'). Per salary doctrine: say 'on N listings', never 'benchmark'."
@@ -4163,7 +4163,7 @@
     "id": "OPEN ASK 3",
     "item": "Senior RS Staff (1 listing, Innopex Company)",
     "detail": "needs the JD from the posting company to place; DO NOT guess what RS means",
-    "state": "RESOLVED (CTO 2026-07-26): role closed/inactive; no JD needed. Live DB still shows status=active (pending flip)."
+    "state": "RESOLVED (CTO 2026-07-26): role closed/inactive; no JD needed. Flip LANDED — DB returns status=closed (verified 2026-07-26); section-0 reflects raw 252 / 195 titles."
    }
   ],
   "hold": "RATIFIED — Codex builds may consume this catalog. No schema/migration/UI performed here (Codex briefs)."
