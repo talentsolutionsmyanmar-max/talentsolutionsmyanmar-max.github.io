@@ -41,18 +41,20 @@ The three count-truth numbers come from the live `job_count_truth_v1` view (raw 
 
 The grade spine is the **`user_career_grade.career_level`** field. Distinct values currently in use (90 rows): `Basic` (2), `Senior` (3), `Supervisor` (63), `Manager` (20), `Senior Manager` (2).
 
-**6 Myanmar-market rungs** (the 5 existing `career_level` values + the ratified `Officer/Executive` extension; **Officer/Executive is rung 6 per KoKo's ladder-reorder dispatch**):
+**6 Myanmar-market rungs — SEAL ORDER (`seal_role_catalog_v1_ratified_s325`, verbatim):** Basic · Senior · Supervisor · Officer/Executive (=Assistant Manager) · Manager · Senior Manager.
 
-| Rung | `career_level` value | Status | Market titles mapped here (from the 195) |
+| Rung (seniority) | `career_level` value | Status | Market titles mapped here (from the 195) |
 |---|---|---|---|
 | 1 | `Basic` | existing | Trainee, Junior, Staff, Assistant, Helper, Cashier, Checker, Picker, Driver, Office Staff, Kitchen Helper, Waiter |
 | 2 | `Senior` | existing | Senior [X] (Senior Accountant, Senior Sales Executive, Senior Auditor, …) |
 | 3 | `Supervisor` | existing | Supervisor, Team Leader, Lead |
-| 4 | `Manager` | existing | Manager, Branch Manager, Shop Manager |
-| 5 | `Senior Manager` | existing | Senior Manager, Head of [X], Chief [X], General Manager, Director |
-| 6 | `Officer/Executive` | **RATIFIED (S325)** — ruled equivalent to Assistant Manager | Executive, Officer, Coordinator, Analyst, Specialist, Associate, Advisor, Accountant, Engineer, Developer, Designer, Writer, Technician, Chef, Purchaser, Assistant Manager |
+| 4 | `Officer/Executive` | **RATIFIED (S325)** — = Assistant Manager | Executive, Officer, Coordinator, Analyst, Specialist, Associate, Advisor, Accountant, Engineer, Developer, Designer, Writer, Technician, Chef, Purchaser, Assistant Manager |
+| 5 | `Manager` | existing | Manager, Branch Manager, Shop Manager |
+| 6 | `Senior Manager` | existing | Senior Manager, Head of [X], Chief [X], General Manager, Director |
 
-**Ratified extension (seal_role_catalog_v1_ratified_s325 + KoKo ladder-reorder dispatch):** `Officer/Executive` is **APPROVED** as a value of the **same `career_level` field** (free-text), not a new table or enum — so it binds to `user_career_grade` rather than inventing a parallel grade system. KoKo ruled it **equivalent to Assistant Manager** and dispatched it as **rung 6**. It covers the mid-level individual-contributor titles that dominate the Myanmar market — `Executive` (19 listings) and `Officer` (8) — which the original 5 rungs had no home for. *Rung numbering is per KoKo's explicit dispatch (Officer/Executive = rung 6); the seniority equivalence is Assistant Manager. Assistant Manager moved into this rung from the Manager rung accordingly.*
+> **READ THIS FIRST — "6th value ≠ 6th rung."** `Officer/Executive` is the **6th VALUE added to `career_level`** (the 5 existing values + this one), and it sits **4th in seniority** — between Supervisor (3) and Manager (5). The "6th" in the seal refers to its ordinal as a *value*, not its seniority rank. It is **equivalent to Assistant Manager**. Do not place it above Senior Manager. (A prior revision mis-read "6th value" as "rung 6" and graded it above Senior Manager; that was reverted to seal order.)
+
+**Ratified extension (seal_role_catalog_v1_ratified_s325):** `Officer/Executive` is **APPROVED** as the **6th `career_level` value** of the **same field** (free-text), not a new table or enum — so it binds to `user_career_grade` rather than inventing a parallel grade system. It sits **between Supervisor and Manager in the Myanmar-market ladder** (4th in seniority), **equivalent to Assistant Manager**. It covers the mid-level individual-contributor titles that dominate the Myanmar market — `Executive` (19 listings) and `Officer` (8) — which the original 5 rungs had no home for. *Why this is careful: the catalog feeds tenant `duty template.role_type → platform function + grade → user_career_grade`; mis-ranking Officer/Executive as rung 6 would have graded 27 mid-IC titles above Senior Manager across Makro's 134 staff.*
 
 > Note: the platform also has a 3-tier matcher `Band` (Entry/Mid/Senior, `seniority.ts`) and `ksa_career_tracks.level` (STARTER/BEGINNER/MOVER/FLYER). Those are separate concerns (matching gate; learning progression). The catalog's grade spine is `career_level`.
 
@@ -164,7 +166,7 @@ All 16 Makro store roles inherit `Basic` (correct — they are entry-level). **F
 
 This is a research seat; it does **not** ratify its own deliverable. Ratification is KoKo's, recorded in the seal. The three open asks are resolved as follows:
 
-1. **OPEN ASK 1 — `Officer/Executive` `career_level` rung — RATIFIED (APPROVED).** Same-field extension covering 27 mid-IC titles (Executive 19, Officer 8). **Ruled equivalent to Assistant Manager, 6th rung.** (See §1 reconciliation note re: rung ordering.)
+1. **OPEN ASK 1 — `Officer/Executive` `career_level` rung — RATIFIED (APPROVED).** Same-field extension covering 27 mid-IC titles (Executive 19, Officer 8). **6th `career_level` VALUE, 4th in seniority** (= Assistant Manager, between Supervisor and Manager). **6th value ≠ 6th rung** — see §1.
 2. **OPEN ASK 2 — the 12 market-evidenced function-family extensions — RATIFIED (APPROVED).** Approved as platform families (see §2).
 3. **OPEN ASK 3 — "Senior RS Staff" (Innopex Company) — RESOLVED (CTO, 2026-07-26).** Role closed / no longer active; no JD needed and no family mapping required. "RS" was never guessed. *Live state:* the `status` flip **has landed** — the DB now returns `status='closed'` (verified 2026-07-26), and the §0 snapshot reflects it (raw 252, active distinct titles 195).
 

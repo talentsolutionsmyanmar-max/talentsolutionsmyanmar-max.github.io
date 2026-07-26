@@ -24,9 +24,9 @@
    "Basic",
    "Senior",
    "Supervisor",
+   "Officer/Executive",
    "Manager",
-   "Senior Manager",
-   "Officer/Executive"
+   "Senior Manager"
   ],
   "existing_values_in_use": [
    "Basic",
@@ -35,7 +35,9 @@
    "Manager",
    "Senior Manager"
   ],
-  "extension": "RATIFIED (seal_role_catalog_v1_ratified_s325 + KoKo ladder-reorder dispatch): Officer/Executive APPROVED as a value of the same career_level field (free-text), not a parallel system. KoKo ruled it equivalent to Assistant Manager and dispatched it as rung 6. Covers 27 mid-IC titles (Executive 19, Officer 8). Rung order: 1 Basic, 2 Senior, 3 Supervisor, 4 Manager, 5 Senior Manager, 6 Officer/Executive (= Assistant Manager equivalent)."
+  "extension": "RATIFIED (seal_role_catalog_v1_ratified_s325): Officer/Executive APPROVED as the 6th career_level VALUE (5 existing + this one), same field (free-text), not a parallel system. It sits 4th in seniority — between Supervisor (3) and Manager (5) — equivalent to Assistant Manager. SEAL ORDER (seniority): 1 Basic, 2 Senior, 3 Supervisor, 4 Officer/Executive (=Assistant Manager), 5 Manager, 6 Senior Manager. Covers 27 mid-IC titles (Executive 19, Officer 8).",
+  "value_vs_rung": "Officer/Executive is the 6th VALUE added to career_level, and sits 4th in seniority. 6th value != 6th rung. A prior revision mis-read 6th value as rung 6 and graded it above Senior Manager; reverted to seal order. Do not place it above Senior Manager.",
+  "assistant_manager_equivalence": "Officer/Executive is equivalent to Assistant Manager (between Supervisor and Manager)."
  },
  "function_families": {
   "existing_ksa7": [
@@ -4151,7 +4153,7 @@
     "id": "OPEN ASK 1",
     "item": "Officer/Executive 6th career_level rung",
     "detail": "documented same-field extension covering 27 mid-IC titles (Executive 19, Officer 8)",
-    "state": "RATIFIED (APPROVED) — Officer/Executive ruled equivalent to Assistant Manager, 6th rung"
+    "state": "RATIFIED (APPROVED) — 6th career_level VALUE, 4th in seniority (= Assistant Manager, between Supervisor and Manager). 6th value != 6th rung."
    },
    {
     "id": "OPEN ASK 2",
