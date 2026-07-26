@@ -1,18 +1,22 @@
 {
  "contract": "refertrm-role-catalog-v1",
- "status": "PROBE-VERIFIED — CTO re-probe PASS (2026-07-25): 253/196/74 reproduced exactly, career_level and career_family confirmed (no parallel system), matrix sums to 253, Senior RS Staff confirmed a real flagged row. Codex builds may consume AFTER ratification.",
- "asOf": "2026-07-25",
- "supersedes": "role-catalog v1 DRAFT (branch qwen-role-catalog-s325). NOTE: 3.7's catalog is REJECTED (15/16 fabricated) — never cited.",
+ "status": "RATIFIED — seal_role_catalog_v1_ratified_s325: OPEN ASKs 1 & 2 APPROVED by KoKo in S325 (Officer/Executive ruled equivalent to Assistant Manager, 6th rung; 12 family extensions approved). OPEN ASK 3 (Senior RS Staff) resolved (role closed). Probe-verified ground truth; section-0 reconciled to count-truth split (S326).",
+ "asOf": "2026-07-26",
+ "supersedes": "the v1 DRAFT on this branch. 3.7 catalog REJECTED (9 of 9 fabricated measurements) — never cited.",
  "source_of_truth": {
-  "description": "eq/jobs active roles — every active client role, NOT Makro-only.",
-  "active_jobs": 253,
+  "description": "eq/jobs roles reconciled to the count-truth contract (#422, serving). Catalog mines the live active set; public surfaces consume clean_public_production.",
+  "count_truth_source": "job_count_truth_v1 (live view)",
+  "raw_operational": 253,
+  "clean_all_tenant": 220,
+  "clean_public_production": 216,
   "distinct_titles": 196,
   "distinct_companies": 74,
   "reproducible_probe": [
-   "SELECT COUNT(*) FROM \"Job\" WHERE status='active'  -- 253",
-   "SELECT COUNT(DISTINCT title) FROM \"Job\" WHERE status='active'  -- 196",
-   "SELECT COUNT(DISTINCT \"companyId\") FROM \"Job\" WHERE status='active'  -- 74"
-  ]
+   "SELECT raw_operational, clean_all_tenant, clean_public_production, calculated_at FROM job_count_truth_v1;  -- 253 / 220 / 216 (calculated 2026-07-26)",
+   "SELECT COUNT(DISTINCT title) FROM \"Job\" WHERE status='active';  -- 196",
+   "SELECT COUNT(DISTINCT \"companyId\") FROM \"Job\" WHERE status='active';  -- 74"
+  ],
+  "note": "raw 253 / clean_all_tenant 220 / clean_public_production 216 from job_count_truth_v1. 196 titles / 74 companies describe the raw active set the title_map is built from; public-facing counts use clean_public_production (216) per #422."
  },
  "grade_spine": {
   "bound_to": "user_career_grade.career_level",
@@ -31,7 +35,7 @@
    "Manager",
    "Senior Manager"
   ],
-  "extension": "Officer/Executive added as a 6th rung (same career_level field) — market-justified by 27 mid-IC titles (Executive 19, Officer 8) the existing 5 rungs do not cover. Not a parallel table."
+  "extension": "RATIFIED (seal_role_catalog_v1_ratified_s325): Officer/Executive APPROVED as a value of the same career_level field (free-text), not a parallel system. KoKo ruled it equivalent to Assistant Manager, 6th rung. Covers 27 mid-IC titles (Executive 19, Officer 8). Reconciliation note: catalog proposed ordering placed it at rung 2; seal rules it Assistant-Manager-equivalent — Codex binds the rung accordingly when wiring user_career_grade."
  },
  "function_families": {
   "existing_ksa7": [
@@ -57,7 +61,8 @@
    "Retail Store Operations*",
    "Translation*"
   ],
-  "note": "* = market-evidenced extension beyond the 7 existing ksa_career_tracks families; flagged for KoKo/Z Bo Maung to ratify or fold into the 7."
+  "note": "7 existing ksa_career_tracks.career_family + 12 market-evidenced extensions (APPROVED S325).",
+  "market_extensions_status": "APPROVED (S325, seal_role_catalog_v1_ratified_s325) — ratified as platform families"
  },
  "platform_layer": {
   "description": "196 distinct titles -> function_family x grade_rung. Every mapping cites the real Job row(s): job_ids + company_ids. Zero invented titles or IDs.",
@@ -4139,20 +4144,20 @@
   "out_of_scope": "schema/migration/UI remain Codex briefs AFTER KoKo + Z Bo Maung ratify and CTO re-probe accepts."
  },
  "ratification": {
-  "state": "NOT RATIFIED — three OPEN ASKS pending KoKo + Z Bo Maung (Makro HRBP).",
+  "state": "RATIFIED — seal_role_catalog_v1_ratified_s325 (KoKo, S325). Research seat did not self-ratify.",
   "self_ratification_policy": "This research seat does NOT ratify its own deliverable (self-certification; the class of error the D-022 counter-check exists to prevent). No ratify instruction typed at this seat is complied with.",
   "open_asks": [
    {
     "id": "OPEN ASK 1",
     "item": "Officer/Executive 6th career_level rung",
     "detail": "documented same-field extension covering 27 mid-IC titles (Executive 19, Officer 8)",
-    "state": "pending ratification"
+    "state": "RATIFIED (APPROVED) — Officer/Executive ruled equivalent to Assistant Manager, 6th rung"
    },
    {
     "id": "OPEN ASK 2",
     "item": "12 market-evidenced function-family extensions (*)",
     "detail": "ratify as platform families or fold into the existing 7",
-    "state": "pending ratification"
+    "state": "RATIFIED (APPROVED) — 12 function-family extensions approved as platform families"
    },
    {
     "id": "OPEN ASK 3",
@@ -4161,6 +4166,6 @@
     "state": "RESOLVED (CTO 2026-07-26): role closed/inactive; no JD needed. Live DB still shows status=active (pending flip)."
    }
   ],
-  "hold": "no schema/migration/UI work; Codex builds consume after ratification. Next move is KoKo's."
+  "hold": "RATIFIED — Codex builds may consume this catalog. No schema/migration/UI performed here (Codex briefs)."
  }
 }

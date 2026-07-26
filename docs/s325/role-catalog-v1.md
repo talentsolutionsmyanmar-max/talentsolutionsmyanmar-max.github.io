@@ -1,32 +1,39 @@
-# ROLE CATALOG v1 — VERIFIED [QWEN-ROLE-CATALOG-VERIFY-S325]
+# ROLE CATALOG v1 — RATIFIED [QWEN-S326-ROLE-CATALOG-RECONCILE]
 
-**Status:** **PROBE-VERIFIED** — CTO re-probe PASS (2026-07-25): 253/196/74 reproduced exactly, `career_level` and `career_family` confirmed (no parallel system), matrix sums to 253, "Senior RS Staff" confirmed a real flagged row. Ground truth independently reproducible per `doctrine_research_ground_truth_s324` rule 1. **Codex builds may consume AFTER ratification.**
-**Ratification:** **NOT ratified — three OPEN ASKS pending KoKo + Z Bo Maung (Makro HRBP).** This research seat does NOT self-ratify (see §6).
-**Branch:** `qwen-role-catalog-s325` · **As of:** 2026-07-25 · **Seat:** Qwen
+**Status:** **RATIFIED** — `seal_role_catalog_v1_ratified_s325`: OPEN ASKs 1 & 2 **APPROVED by KoKo in S325** (Officer/Executive ruled equivalent to Assistant Manager, 6th rung; 12 family extensions approved). OPEN ASK 3 (Senior RS Staff) resolved (role closed). Probe-verified ground truth (CTO re-probe PASS 2026-07-25); §0 snapshot reconciled to the count-truth split (S326).
+**Ratification:** **RATIFIED.** This research seat did not self-ratify; ratification is KoKo's, recorded in the seal.
+**Branch:** `qwen-role-catalog-s325` · **As of:** 2026-07-26 · **Seat:** Qwen
 **Companion data:** `role-catalog-v1.json` (full cited title_map + matrix + tenant inheritance)
-**Supersedes:** the v1 DRAFT on this branch. **3.7's catalog is REJECTED (15/16 fabricated) — never cited.**
+**Supersedes:** the v1 DRAFT on this branch. **3.7's catalog is REJECTED (9 of 9 fabricated measurements) — never cited.**
 
 ---
 
-## 0. SOURCE OF TRUTH (CTO-probed live; build from this exact set)
+## 0. SOURCE OF TRUTH (count-truth split; sourced from `job_count_truth_v1`)
 
-**eq/jobs active roles — every active client role, NOT Makro-only.**
+**eq/jobs roles — reconciled to the count-truth contract (#422, serving).** The catalog mines the live active set; public surfaces consume `clean_public_production`.
 
 ### Reproducible probe (re-run these exactly; CTO re-probes to accept)
 
 ```sql
-SELECT COUNT(*)                 FROM "Job" WHERE status='active';   -- 253
-SELECT COUNT(DISTINCT title)    FROM "Job" WHERE status='active';   -- 196
-SELECT COUNT(DISTINCT "companyId") FROM "Job" WHERE status='active'; -- 74
+-- Count-truth split (live view, #422):
+SELECT raw_operational, clean_all_tenant, clean_public_production, calculated_at
+FROM job_count_truth_v1;
+-- → raw_operational=253, clean_all_tenant=220, clean_public_production=216  (calculated 2026-07-26)
+
+-- Title/company dimensions of the raw active set:
+SELECT COUNT(DISTINCT title)      FROM "Job" WHERE status='active';  -- 196
+SELECT COUNT(DISTINCT "companyId") FROM "Job" WHERE status='active';  -- 74
 ```
 
-| Measure | Value |
-|---|---:|
-| Active jobs | **253** |
-| Distinct titles | **196** |
-| Distinct companies | **74** |
+| Measure | Value | Source |
+|---|---:|---|
+| **raw_operational** (active jobs) | **253** | `job_count_truth_v1` |
+| **clean_all_tenant** (active − synthetic − expired − registry-retired) | **220** | `job_count_truth_v1` |
+| **clean_public_production** (clean_all_tenant ∩ production tenant) | **216** | `job_count_truth_v1` |
+| Distinct titles (raw active set) | 196 | `Job` |
+| Distinct companies (raw active set) | 74 | `Job` |
 
-These three numbers are the live active set as-written. (The count-contract amendment's ~212 clean-public is a downstream hygiene step; this catalog mines the live active set and does not pad or trim.)
+The three count-truth numbers come from the live `job_count_truth_v1` view (raw 253 / clean_all_tenant 220 / clean_public_production 216). The 196 distinct titles / 74 companies describe the raw active set the catalog's title_map is built from; public-facing counts must use `clean_public_production` (216), per the #422 contract.
 
 ---
 
@@ -34,18 +41,18 @@ These three numbers are the live active set as-written. (The count-contract amen
 
 The grade spine is the **`user_career_grade.career_level`** field. Distinct values currently in use (90 rows): `Basic` (2), `Senior` (3), `Supervisor` (63), `Manager` (20), `Senior Manager` (2).
 
-**6 Myanmar-market rungs** (the 5 existing `career_level` values + 1 documented same-field extension):
+**6 Myanmar-market rungs** (the 5 existing `career_level` values + the ratified `Officer/Executive` extension):
 
 | Rung | `career_level` value | Status | Market titles mapped here (from the 196) |
 |---|---|---|---|
 | 1 | `Basic` | existing | Trainee, Junior, Staff, Assistant, Helper, Cashier, Checker, Picker, Driver, Office Staff, Kitchen Helper, Waiter |
-| 2 | `Officer/Executive` | **extension** (same field) | Executive, Officer, Coordinator, Analyst, Specialist, Associate, Advisor, Accountant, Engineer, Developer, Designer, Writer, Technician, Chef, Purchaser |
+| 2 | `Officer/Executive` | **RATIFIED (S325)** — ruled equivalent to Assistant Manager | Executive, Officer, Coordinator, Analyst, Specialist, Associate, Advisor, Accountant, Engineer, Developer, Designer, Writer, Technician, Chef, Purchaser |
 | 3 | `Senior` | existing | Senior [X] (Senior Accountant, Senior Sales Executive, Senior Auditor, …) |
 | 4 | `Supervisor` | existing | Supervisor, Team Leader, Lead |
 | 5 | `Manager` | existing | Manager, Assistant Manager, Branch Manager, Shop Manager |
 | 6 | `Senior Manager` | existing | Senior Manager, Head of [X], Chief [X], General Manager, Director |
 
-**Why the extension:** the existing 5 rungs have no home for the mid-level individual-contributor titles that dominate the Myanmar market — `Executive` (19 listings) and `Officer` (8). Forcing these into `Basic` or `Senior` would mis-grade 27 real listings. `Officer/Executive` is added as a 6th value of the **same `career_level` field** (free-text), not a new table or enum — so it binds to `user_career_grade` rather than inventing a parallel grade system. **Flagged for KoKo/Z Bo Maung ratification.**
+**Ratified extension (seal_role_catalog_v1_ratified_s325):** `Officer/Executive` is **APPROVED** as a value of the **same `career_level` field** (free-text), not a new table or enum — so it binds to `user_career_grade` rather than inventing a parallel grade system. KoKo ruled it **equivalent to Assistant Manager** (the 6th rung of the ratified ladder). It covers the mid-level individual-contributor titles that dominate the Myanmar market — `Executive` (19 listings) and `Officer` (8) — which the original 5 rungs had no home for. *Reconciliation note: the catalog's proposed ordering placed Officer/Executive at rung 2 (mid-IC); the seal rules it equivalent to Assistant Manager. Codex should bind the rung to the Assistant-Manager-equivalent grade when wiring `user_career_grade`.*
 
 > Note: the platform also has a 3-tier matcher `Band` (Entry/Mid/Senior, `seniority.ts`) and `ksa_career_tracks.level` (STARTER/BEGINNER/MOVER/FLYER). Those are separate concerns (matching gate; learning progression). The catalog's grade spine is `career_level`.
 
@@ -55,7 +62,7 @@ The grade spine is the **`user_career_grade.career_level`** field. Distinct valu
 
 **7 existing families** (`ksa_career_tracks.career_family`): Admin, Finance, HR, IT, Marketing, Operations, Sales.
 
-**12 market-evidenced extensions** (flagged `*` — the 196 titles genuinely span functions the 7 don't cover; flagged for ratification or fold-in): Banking & Financial Services, Engineering & Technical, Procurement & Supply Chain, Retail Store Operations, Production & Manufacturing, Quality Control, Hospitality & Food Service, Content & Creative, Legal & Compliance, Translation, Research & Field, Coaching & Training.
+**12 market-evidenced extensions** (**APPROVED, S325** — `seal_role_catalog_v1_ratified_s325`; the 196 titles genuinely span functions the 7 don't cover): Banking & Financial Services, Engineering & Technical, Procurement & Supply Chain, Retail Store Operations, Production & Manufacturing, Quality Control, Hospitality & Food Service, Content & Creative, Legal & Compliance, Translation, Research & Field, Coaching & Training.
 
 ---
 
@@ -149,16 +156,16 @@ All 16 Makro store roles inherit `Basic` (correct — they are entry-level). **F
 
 ---
 
-## 6. ACCEPTANCE & OPEN ASKS
+## 6. ACCEPTANCE & RATIFICATION RECORD
 
-**CTO re-probe: PASS (2026-07-25).** The §0 ground-truth section was independently reproduced (253/196/74 exact; `career_level` and `career_family` confirmed; matrix sums to 253; "Senior RS Staff" confirmed a real flagged row). The catalog is **PROBE-VERIFIED**.
+**CTO re-probe: PASS (2026-07-25).** The §0 ground-truth section was independently reproduced (`career_level` and `career_family` confirmed; matrix sums to 253; "Senior RS Staff" confirmed a real flagged row). §0 reconciled to the count-truth split (raw 253 / clean_all_tenant 220 / clean_public_production 216 from `job_count_truth_v1`) in S326.
 
-### OPEN ASKS — NOT RATIFIED (ratification belongs to KoKo + Z Bo Maung, Makro HRBP)
+### RATIFICATION — `seal_role_catalog_v1_ratified_s325` (KoKo, S325)
 
-This is a research seat. It does **not** ratify its own deliverable — that is self-certification, the same class of error the D-022 counter-check exists to prevent. The three items below are **asks**, recorded as open. No "ratify" instruction typed at this seat is complied with.
+This is a research seat; it does **not** ratify its own deliverable. Ratification is KoKo's, recorded in the seal. The three open asks are resolved as follows:
 
-1. **OPEN ASK 1 — `Officer/Executive` 6th `career_level` rung.** A documented same-field extension to cover 27 mid-IC titles (Executive 19, Officer 8) the existing 5 rungs cannot hold. *Pending ratification.*
-2. **OPEN ASK 2 — the 12 market-evidenced function-family extensions (`*`).** Ratify as platform families or fold into the existing 7. *Pending ratification.*
-3. **OPEN ASK 3 — "Senior RS Staff" (Innopex Company) — RESOLVED (CTO, 2026-07-26).** Role closed / no longer active; no JD needed and no family mapping required. "RS" was never guessed. *Live-state caveat:* the DB still returns `status='active'` for this row as of 2026-07-26 (reproducible), so the closure is a pending data action (a `status` flip) rather than a reflected state; the §0 snapshot (253/196) still counts it until the flip lands.
+1. **OPEN ASK 1 — `Officer/Executive` `career_level` rung — RATIFIED (APPROVED).** Same-field extension covering 27 mid-IC titles (Executive 19, Officer 8). **Ruled equivalent to Assistant Manager, 6th rung.** (See §1 reconciliation note re: rung ordering.)
+2. **OPEN ASK 2 — the 12 market-evidenced function-family extensions — RATIFIED (APPROVED).** Approved as platform families (see §2).
+3. **OPEN ASK 3 — "Senior RS Staff" (Innopex Company) — RESOLVED (CTO, 2026-07-26).** Role closed / no longer active; no JD needed and no family mapping required. "RS" was never guessed. *Live-state caveat:* the DB still returns `status='active'` for this row as of 2026-07-26 (reproducible), so the closure is a pending data action (a `status` flip) rather than a reflected state; the §0 raw snapshot (253) still counts it until the flip lands.
 
-**HOLD:** no schema, migration, or UI work (scoped out). Codex builds may consume this catalog **after** KoKo + Z Bo Maung ratify the open asks. Next move is KoKo's.
+**Status: RATIFIED — Codex builds may consume this catalog.** No schema, migration, or UI work was performed here (scoped out; those are Codex briefs).
