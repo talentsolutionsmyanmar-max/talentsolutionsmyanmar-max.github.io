@@ -179,7 +179,7 @@
 (()=>{
   const $=(s,c=document)=>c.querySelector(s);
 
-  fetch('../data/public-counts-v1.json',{cache:'no-store'})
+  fetch('/data/public-counts-v1.json',{cache:'no-store'})
     .then(r=>{if(!r.ok)throw 0;return r.json();})
     .then(d=>{
       const c=d.counts||{};
@@ -195,7 +195,7 @@
       if(asof)asof.textContent='counts source offline — no number shown rather than a wrong one';
     });
 
-  fetch('../data/public-company-cards-v1.json',{cache:'no-store'})
+  fetch('/data/public-company-cards-v1.json',{cache:'no-store'})
     .then(r=>{if(!r.ok)throw 0;return r.json();})
     .then(d=>{
       const host=$('[data-company-cards]');if(!host)return;
