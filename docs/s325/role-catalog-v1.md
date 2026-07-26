@@ -117,32 +117,43 @@ That was the only unmapped title of 196; it is now resolved by retirement.
 
 ## 4. TENANT INHERITANCE — how a duty template gets a real grade
 
-**Model:** a tenant duty template inherits a platform function family + grade rung from its `role_type`, using the **same** `family_of()`/`grade_of()` rules as the platform layer (so the inheritance is reproducible). When PR #429's tenant resolution matches a worker to a template by normalized role, the template's inherited platform function+grade gives the worker a **real grade bound to `user_career_grade.career_level`** — not a guess.
+**Model — SPECIFIED but UNWIRED.** `performance_duty_templates` carries `platform_function` and `career_level` columns, but **all 25 templates have BOTH = NULL** (verified reproducible: `SELECT career_level, COUNT(*) FROM performance_duty_templates GROUP BY career_level;` → `NULL: 25`; same for `platform_function`). The catalog *specifies* the mapping below; **wiring it into the columns is a Codex brief, not done here.** An earlier clean-read mis-read these NULLs as `Basic` — corrected: nothing is graded yet.
 
-**Chain:** `tenant template.role_type → platform function_family + grade_rung (= career_level) → user_career_grade`
+**The consumption chain is designed, not live:** `tenant template.role_type → platform_function + career_level → user_career_grade`. **`user_career_grade`'s 90 rows are fed by a different path** (the career assessment/game), **not** by template inheritance — so the NULL template columns do not currently affect any user's grade. Wiring template → grade is future work.
 
-### Makro's 16 templates → inherited platform function + grade
+### PROPOSED `platform_function` mapping for all 25 templates (PROPOSAL — not applied)
 
-| Template (`role_type`) | Inherits family | Inherits grade (`career_level`) | Active staff | CCO serve |
-|---|---|---|---:|---|
-| O2O | Retail Store Operations* | Basic | 45 | pending |
-| Dry Food | Retail Store Operations* | Basic | 18 | pending |
-| Butchery | Retail Store Operations* | Basic | 17 | pending |
-| Cashier | Retail Store Operations* | Basic | 13 | **approved** |
-| Fruit & Vegetable | Retail Store Operations* | Basic | 11 | pending |
-| Checker | Procurement & Supply Chain* | Basic | 5 | pending |
-| Sales Rep | Sales | Basic | 4 | pending |
-| Fish | Retail Store Operations* | Basic | 4 | pending |
-| Day Pass | Retail Store Operations* | Basic | 4 | pending |
-| Cold Chain | Procurement & Supply Chain* | Basic | 3 | **approved** |
-| Bakery | Retail Store Operations* | Basic | 2 | pending |
-| Customer Sales & Service | Sales | Basic | 2 | pending |
-| Non Buying | Retail Store Operations* | Basic | 2 | pending |
-| Data Cleaning | IT | Basic | 1 | pending |
-| Goods Receiving | Procurement & Supply Chain* | Basic | 1 | **approved** |
-| QA | Retail Store Operations* | Basic | 0 | pending |
+Against the ratified **19 families** (7 existing `ksa_career_tracks.career_family` + 12 ratified extensions). Makro's shop-floor roles map to **Retail Store Operations** — exactly why the seal created Retail as its own family rather than burying it in Operations. **Flagged** where a role spans two families or is generic; **not guessed**.
 
-All 16 Makro store roles inherit `Basic` (correct — they are entry-level). **Future tenants** (TRM's 3 templates, Win Brothers' 5) inherit the same way; TRM currently resolves 0/6 (per the D-022 probe context) because its templates are not yet role-aligned — inheriting platform grades is what closes that.
+| Template (`role_type`) | Company | Proposed `platform_function` | Note |
+|---|---|---|---|
+| Office & Administrative Staff | The Recruiter | Admin | clear |
+| Production & Warehouse Staff | The Recruiter | Production & Manufacturing | **FLAG:** spans Production + Warehouse (Procurement & Supply Chain) |
+| Sales & Distribution Staff | The Recruiter | Sales | **FLAG:** spans Sales + Distribution (Procurement & Supply Chain) |
+| Bakery | Makro | Retail Store Operations | shop-floor |
+| Butchery | Makro | Retail Store Operations | shop-floor |
+| Cashier | Makro | Retail Store Operations | shop-floor |
+| Checker | Makro | Retail Store Operations | checkout checker |
+| Cold Chain | Makro | Retail Store Operations | **FLAG:** cold-chain logistics could be Procurement & Supply Chain |
+| Customer Sales & Service | Makro | Retail Store Operations | **FLAG:** could be Sales |
+| Data Cleaning | Makro | IT | data function |
+| Day Pass | Makro | Retail Store Operations | checkout |
+| Dry Food | Makro | Retail Store Operations | shop-floor |
+| Fish | Makro | Retail Store Operations | shop-floor |
+| Fruit & Vegetable | Makro | Retail Store Operations | shop-floor |
+| Goods Receiving | Makro | Procurement & Supply Chain | **FLAG:** inbound logistics; could be Retail |
+| Non Buying | Makro | Retail Store Operations | Non Food section |
+| O2O | Makro | Retail Store Operations | **FLAG:** online-order picking; could be IT |
+| QA | Makro | Quality Control | quality assurance |
+| Sales Rep | Makro | Sales | sales |
+| Delivery Driver | Win Brothers | Procurement & Supply Chain | delivery/logistics |
+| HR and Admin Officer | Win Brothers | HR | **FLAG:** spans HR + Admin |
+| Key Account Executive | Win Brothers | Sales | sales |
+| Regional Sales Supervisor | Win Brothers | Sales | sales |
+| Warehouse Operations Lead | Win Brothers | Procurement & Supply Chain | warehouse ops |
+| General Staff | *(global)* | **UNMAPPED — FLAG** | generic fallback template; no specific family — do not guess |
+
+**Proposal summary:** 18 map cleanly or with a noted primary; 7 are **FLAGGED** as spanning two families (Production & Warehouse Staff, Sales & Distribution Staff, Cold Chain, Customer Sales & Service, Goods Receiving, O2O, HR and Admin Officer); 1 is **UNMAPPED** (General Staff — generic global fallback). `career_level` is likewise NULL/unwired for all 25 and is **not** proposed here (grade wiring is part of the same future Codex brief). **This is a proposal — nothing is applied to the DB.**
 
 ---
 

@@ -3970,171 +3970,225 @@
   "honest_empty_rule": "Each function x grade cell carries n = count of real listings supporting it. n=0 cells are honest-empty (published as 0, never omitted, never called 'benchmark'). Per salary doctrine: say 'on N listings', never 'benchmark'."
  },
  "tenant_inheritance": {
-  "model": "A tenant duty template inherits a PLATFORM function family + grade rung via its role_type. The inheritance uses the SAME family_of()/grade_of() rules as the platform layer (so it is reproducible). When PR #429's tenant resolution matches a worker to a template by normalized role, the template's inherited platform function+grade gives the worker a REAL grade bound to user_career_grade.career_level — not a guess. Chain: tenant template.role_type -> platform function_family + grade_rung (= career_level) -> user_career_grade.",
-  "tenant": "makro-myanmar-001",
+  "model": "SPECIFIED but UNWIRED. performance_duty_templates has platform_function and career_level columns, but all 25 templates have BOTH=NULL (verified: SELECT career_level,COUNT(*) FROM performance_duty_templates GROUP BY career_level -> NULL:25; same for platform_function). The catalog specifies the mapping; wiring it into the columns is a Codex brief, not done here. An earlier clean-read mis-read these NULLs as Basic — corrected: nothing is graded yet.",
+  "consumption_chain": "tenant template.role_type -> platform_function + career_level -> user_career_grade (designed, not live)",
+  "user_career_grade_note": "user_career_grade's 90 rows are fed by a DIFFERENT path (career assessment/game), NOT by template inheritance — the NULL template columns do not currently affect any user's grade.",
+  "platform_function_proposal_status": "PROPOSAL — not applied to DB. Against the ratified 19 families. Makro shop-floor -> Retail Store Operations (why the seal created Retail as its own family).",
   "templates": [
    {
+    "role_type": "Office & Administrative Staff",
+    "company_id": "comp_the_recruiter_myanmar",
+    "proposed_platform_function": "Admin",
+    "note": "clear",
+    "career_level": null,
+    "platform_function_in_db": null
+   },
+   {
+    "role_type": "Production & Warehouse Staff",
+    "company_id": "comp_the_recruiter_myanmar",
+    "proposed_platform_function": "Production & Manufacturing",
+    "note": "FLAG: spans Production + Warehouse (Procurement & Supply Chain)",
+    "career_level": null,
+    "platform_function_in_db": null
+   },
+   {
+    "role_type": "Sales & Distribution Staff",
+    "company_id": "comp_the_recruiter_myanmar",
+    "proposed_platform_function": "Sales",
+    "note": "FLAG: spans Sales + Distribution (Procurement & Supply Chain)",
+    "career_level": null,
+    "platform_function_in_db": null
+   },
+   {
     "role_type": "Bakery",
-    "role_type_mm": "Bakery",
-    "inherits_function_family": "Retail Store Operations*",
-    "inherits_grade_rung": "Basic",
-    "career_level_binding": "Basic",
-    "active_staff": 2,
-    "cco_review_status": "verify_pending",
-    "serve_allowed": false
+    "company_id": "makro-myanmar-001",
+    "proposed_platform_function": "Retail Store Operations",
+    "note": "shop-floor",
+    "career_level": null,
+    "platform_function_in_db": null
    },
    {
     "role_type": "Butchery",
-    "role_type_mm": "Butchery",
-    "inherits_function_family": "Retail Store Operations*",
-    "inherits_grade_rung": "Basic",
-    "career_level_binding": "Basic",
-    "active_staff": 17,
-    "cco_review_status": "verify_pending",
-    "serve_allowed": false
+    "company_id": "makro-myanmar-001",
+    "proposed_platform_function": "Retail Store Operations",
+    "note": "shop-floor",
+    "career_level": null,
+    "platform_function_in_db": null
    },
    {
     "role_type": "Cashier",
-    "role_type_mm": "Cashier",
-    "inherits_function_family": "Retail Store Operations*",
-    "inherits_grade_rung": "Basic",
-    "career_level_binding": "Basic",
-    "active_staff": 13,
-    "cco_review_status": "signoff_approved",
-    "serve_allowed": true
+    "company_id": "makro-myanmar-001",
+    "proposed_platform_function": "Retail Store Operations",
+    "note": "shop-floor",
+    "career_level": null,
+    "platform_function_in_db": null
    },
    {
     "role_type": "Checker",
-    "role_type_mm": "Checker",
-    "inherits_function_family": "Procurement & Supply Chain*",
-    "inherits_grade_rung": "Basic",
-    "career_level_binding": "Basic",
-    "active_staff": 5,
-    "cco_review_status": "verify_pending",
-    "serve_allowed": false
+    "company_id": "makro-myanmar-001",
+    "proposed_platform_function": "Retail Store Operations",
+    "note": "checkout checker",
+    "career_level": null,
+    "platform_function_in_db": null
    },
    {
     "role_type": "Cold Chain",
-    "role_type_mm": "Cold Chain",
-    "inherits_function_family": "Procurement & Supply Chain*",
-    "inherits_grade_rung": "Basic",
-    "career_level_binding": "Basic",
-    "active_staff": 3,
-    "cco_review_status": "signoff_approved",
-    "serve_allowed": true
+    "company_id": "makro-myanmar-001",
+    "proposed_platform_function": "Retail Store Operations",
+    "note": "FLAG: cold-chain logistics could be Procurement & Supply Chain",
+    "career_level": null,
+    "platform_function_in_db": null
    },
    {
     "role_type": "Customer Sales & Service",
-    "role_type_mm": "Customer Sales & Service",
-    "inherits_function_family": "Sales",
-    "inherits_grade_rung": "Basic",
-    "career_level_binding": "Basic",
-    "active_staff": 2,
-    "cco_review_status": "verify_pending",
-    "serve_allowed": false
+    "company_id": "makro-myanmar-001",
+    "proposed_platform_function": "Retail Store Operations",
+    "note": "FLAG: could be Sales",
+    "career_level": null,
+    "platform_function_in_db": null
    },
    {
     "role_type": "Data Cleaning",
-    "role_type_mm": "Data Cleaning",
-    "inherits_function_family": "IT",
-    "inherits_grade_rung": "Basic",
-    "career_level_binding": "Basic",
-    "active_staff": 1,
-    "cco_review_status": "verify_pending",
-    "serve_allowed": false
+    "company_id": "makro-myanmar-001",
+    "proposed_platform_function": "IT",
+    "note": "data function",
+    "career_level": null,
+    "platform_function_in_db": null
    },
    {
     "role_type": "Day Pass",
-    "role_type_mm": "Day Pass",
-    "inherits_function_family": "Retail Store Operations*",
-    "inherits_grade_rung": "Basic",
-    "career_level_binding": "Basic",
-    "active_staff": 4,
-    "cco_review_status": "verify_pending",
-    "serve_allowed": false
+    "company_id": "makro-myanmar-001",
+    "proposed_platform_function": "Retail Store Operations",
+    "note": "checkout",
+    "career_level": null,
+    "platform_function_in_db": null
    },
    {
     "role_type": "Dry Food",
-    "role_type_mm": "Dry Food",
-    "inherits_function_family": "Retail Store Operations*",
-    "inherits_grade_rung": "Basic",
-    "career_level_binding": "Basic",
-    "active_staff": 18,
-    "cco_review_status": "verify_pending",
-    "serve_allowed": false
+    "company_id": "makro-myanmar-001",
+    "proposed_platform_function": "Retail Store Operations",
+    "note": "shop-floor",
+    "career_level": null,
+    "platform_function_in_db": null
    },
    {
     "role_type": "Fish",
-    "role_type_mm": "Fish",
-    "inherits_function_family": "Retail Store Operations*",
-    "inherits_grade_rung": "Basic",
-    "career_level_binding": "Basic",
-    "active_staff": 4,
-    "cco_review_status": "verify_pending",
-    "serve_allowed": false
+    "company_id": "makro-myanmar-001",
+    "proposed_platform_function": "Retail Store Operations",
+    "note": "shop-floor",
+    "career_level": null,
+    "platform_function_in_db": null
    },
    {
     "role_type": "Fruit & Vegetable",
-    "role_type_mm": "Fruit & Vegetable",
-    "inherits_function_family": "Retail Store Operations*",
-    "inherits_grade_rung": "Basic",
-    "career_level_binding": "Basic",
-    "active_staff": 11,
-    "cco_review_status": "verify_pending",
-    "serve_allowed": false
+    "company_id": "makro-myanmar-001",
+    "proposed_platform_function": "Retail Store Operations",
+    "note": "shop-floor",
+    "career_level": null,
+    "platform_function_in_db": null
    },
    {
     "role_type": "Goods Receiving",
-    "role_type_mm": "Goods Receiving",
-    "inherits_function_family": "Procurement & Supply Chain*",
-    "inherits_grade_rung": "Basic",
-    "career_level_binding": "Basic",
-    "active_staff": 1,
-    "cco_review_status": "verify_approved",
-    "serve_allowed": true
+    "company_id": "makro-myanmar-001",
+    "proposed_platform_function": "Procurement & Supply Chain",
+    "note": "FLAG: inbound logistics; could be Retail",
+    "career_level": null,
+    "platform_function_in_db": null
    },
    {
     "role_type": "Non Buying",
-    "role_type_mm": "Non Buying",
-    "inherits_function_family": "Retail Store Operations*",
-    "inherits_grade_rung": "Basic",
-    "career_level_binding": "Basic",
-    "active_staff": 2,
-    "cco_review_status": "verify_pending",
-    "serve_allowed": false
+    "company_id": "makro-myanmar-001",
+    "proposed_platform_function": "Retail Store Operations",
+    "note": "Non Food section",
+    "career_level": null,
+    "platform_function_in_db": null
    },
    {
     "role_type": "O2O",
-    "role_type_mm": "O2O",
-    "inherits_function_family": "Retail Store Operations*",
-    "inherits_grade_rung": "Basic",
-    "career_level_binding": "Basic",
-    "active_staff": 45,
-    "cco_review_status": "verify_pending",
-    "serve_allowed": false
+    "company_id": "makro-myanmar-001",
+    "proposed_platform_function": "Retail Store Operations",
+    "note": "FLAG: online-order picking; could be IT",
+    "career_level": null,
+    "platform_function_in_db": null
    },
    {
     "role_type": "QA",
-    "role_type_mm": "QA",
-    "inherits_function_family": "Retail Store Operations*",
-    "inherits_grade_rung": "Basic",
-    "career_level_binding": "Basic",
-    "active_staff": 0,
-    "cco_review_status": "verify_pending",
-    "serve_allowed": false
+    "company_id": "makro-myanmar-001",
+    "proposed_platform_function": "Quality Control",
+    "note": "quality assurance",
+    "career_level": null,
+    "platform_function_in_db": null
    },
    {
     "role_type": "Sales Rep",
-    "role_type_mm": "Sales Rep",
-    "inherits_function_family": "Sales",
-    "inherits_grade_rung": "Basic",
-    "career_level_binding": "Basic",
-    "active_staff": 4,
-    "cco_review_status": "verify_pending",
-    "serve_allowed": false
+    "company_id": "makro-myanmar-001",
+    "proposed_platform_function": "Sales",
+    "note": "sales",
+    "career_level": null,
+    "platform_function_in_db": null
+   },
+   {
+    "role_type": "Delivery Driver",
+    "company_id": "win-brothers-group-001",
+    "proposed_platform_function": "Procurement & Supply Chain",
+    "note": "delivery/logistics",
+    "career_level": null,
+    "platform_function_in_db": null
+   },
+   {
+    "role_type": "HR and Admin Officer",
+    "company_id": "win-brothers-group-001",
+    "proposed_platform_function": "HR",
+    "note": "FLAG: spans HR + Admin",
+    "career_level": null,
+    "platform_function_in_db": null
+   },
+   {
+    "role_type": "Key Account Executive",
+    "company_id": "win-brothers-group-001",
+    "proposed_platform_function": "Sales",
+    "note": "sales",
+    "career_level": null,
+    "platform_function_in_db": null
+   },
+   {
+    "role_type": "Regional Sales Supervisor",
+    "company_id": "win-brothers-group-001",
+    "proposed_platform_function": "Sales",
+    "note": "sales",
+    "career_level": null,
+    "platform_function_in_db": null
+   },
+   {
+    "role_type": "Warehouse Operations Lead",
+    "company_id": "win-brothers-group-001",
+    "proposed_platform_function": "Procurement & Supply Chain",
+    "note": "warehouse ops",
+    "career_level": null,
+    "platform_function_in_db": null
+   },
+   {
+    "role_type": "General Staff",
+    "company_id": null,
+    "proposed_platform_function": "UNMAPPED",
+    "note": "FLAG: generic global fallback template; no specific family — do not guess",
+    "career_level": null,
+    "platform_function_in_db": null
    }
   ],
-  "future_tenants": "TRM (the_recruiter) and win_brothers have their own template sets (3 and 5 rows in performance_duty_templates). The same inheritance applies: each template's role_type maps to a platform function+grade. TRM currently resolves 0/6 on both role and dept (per D-022 probe context) because its templates are not yet role-aligned — inheriting platform grades is what closes that."
+  "proposal_summary": "18 map cleanly or with a noted primary; 7 FLAGGED as spanning two families; 1 UNMAPPED (General Staff). career_level likewise NULL/unwired for all 25, not proposed here.",
+  "flagged": [
+   "Production & Warehouse Staff",
+   "Sales & Distribution Staff",
+   "Cold Chain",
+   "Customer Sales & Service",
+   "Goods Receiving",
+   "O2O",
+   "HR and Admin Officer"
+  ],
+  "unmapped": [
+   "General Staff"
+  ]
  },
  "fences": {
   "ground_truth_reproducible": "The 3 SQL queries in source_of_truth.reproducible_probe produce 253/196/74 exactly; CTO re-probes to accept.",
