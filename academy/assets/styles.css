@@ -539,3 +539,40 @@ details.ksa .ksa-body{ border-top:1px solid var(--line); padding:16px 18px; }
   .attn .act{ display:none; }
   .rcard{ padding:16px; }
 }
+
+/* ---------- vocabularyMm glossary drawer (additive, 29 Jul 2026) ----------
+   Static <details> drawer on modules with a signed CCO glossary.
+   Additive only: no existing rule is overridden. */
+details.vocab{ margin-top:14px; }
+details.vocab .vocab-sum{
+  list-style:none; cursor:pointer; user-select:none;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+}
+details.vocab .vocab-sum::-webkit-details-marker{ display:none; }
+details.vocab .vocab-l{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+details.vocab .vocab-l > svg{ width:16px; height:16px; opacity:.7; flex:none; }
+details.vocab .vocab-caret{ width:16px; height:16px; opacity:.6; flex:none; transition:transform .2s ease; }
+details.vocab[open] .vocab-caret{ transform:rotate(180deg); }
+details.vocab .vocab-body{ border-top:1px solid var(--line); }
+.vlist{ list-style:none; margin:14px 0 0; padding:0; }
+.vterm{ padding:12px 0; border-top:1px dashed var(--line); }
+.vterm:first-child{ border-top:0; padding-top:4px; }
+.vterm-h{ display:flex; align-items:center; gap:8px; }
+.vterm-en{ font-weight:700; }
+.vterm-mm{ margin-top:2px; }
+.vterm-d{ margin:6px 0 0; font-size:14px; }
+.vterm-e{ margin:6px 0 0; font-size:13px; opacity:.85; }
+.vocab-sig{ margin:12px 0 0; }
+.vhear{
+  display:inline-flex; align-items:center; justify-content:center; flex:none;
+  width:24px; height:24px; margin-left:6px; padding:0; vertical-align:-6px;
+  border-radius:999px; border:1px solid var(--line);
+  background:transparent; color:inherit; cursor:pointer; opacity:.75;
+}
+.vhear[hidden]{ display:none; }
+.vhear:hover{ opacity:1; }
+.vhear.speaking{ opacity:1; border-color:var(--teal); color:var(--teal); }
+.vhear svg{ width:12px; height:12px; }
+@media (prefers-reduced-motion: reduce){
+  details.vocab .vocab-caret{ transition:none; }
+}
