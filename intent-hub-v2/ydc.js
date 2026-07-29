@@ -19,6 +19,8 @@ var MAYA_QA = [
 ];
 var BACK_SVG = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>';
 var CHEV_SVG = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>';
+var HEAR_SVG = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>';
+var MIC_SVG = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 19v3"/></svg>';
 
 function h(tag, cls, text){
   var n = document.createElement(tag);
@@ -29,7 +31,7 @@ function h(tag, cls, text){
 function clear(n){ while(n.firstChild) n.removeChild(n.firstChild); }
 function shuffle(a){
   a = a.slice();
-  for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=a[i]; a[i]=a[j]; a[j]=t; }
+  for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=a[i]; a[i]=t; a[j]=t; a[i]=a[j]; a[j]=t; }
   return a;
 }
 
@@ -37,6 +39,69 @@ function shuffle(a){
 var PKEY = "ydc.path.v1";
 function pLoad(){ try{ return JSON.parse(localStorage.getItem(PKEY)||"{}"); }catch(e){ return {}; } }
 function pSave(p){ try{ localStorage.setItem(PKEY, JSON.stringify(p)); }catch(e){} }
+
+/* ---------- device voice (honest: this device speaks — studio voice in progress) ---------- */
+var VOICE = { ok: ("speechSynthesis" in window), v: null };
+function voicePick(){
+  if(!VOICE.ok) return;
+  var vs = [];
+  try{ vs = speechSynthesis.getVoices() || []; }catch(e){}
+  var en = vs.filter(function(x){ return /^en([-_]|$)/i.test(x.lang || ""); });
+  VOICE.v = en.filter(function(x){ return /US/i.test(x.lang); })[0] || en[0] || null;
+}
+if(VOICE.ok){
+  voicePick();
+  try{ speechSynthesis.onvoiceschanged = voicePick; }catch(e){}
+}
+function speakLine(text, rate, btn){
+  if(!VOICE.ok) return;
+  try{
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    if(VOICE.v){ try{ u.voice = VOICE.v; }catch(e){} }
+    u.lang = (VOICE.v && VOICE.v.lang) || "en-US";
+    u.rate = rate;
+    if(btn){
+      btn.classList.add("speaking");
+      u.onend = u.onerror = function(){ btn.classList.remove("speaking"); };
+    }
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* ---------- line mastery (this device): 1 met the sound · 2 produced it ---------- */
+var LKEY = "ydc.lines.v1";
+function lLoad(){ try{ return JSON.parse(localStorage.getItem(LKEY)||"{}"); }catch(e){ return {}; } }
+function lSave(m){ try{ localStorage.setItem(LKEY, JSON.stringify(m)); }catch(e){} }
+function lineState(slug, idx){ var m = lLoad(); return (m[slug] && m[slug][idx]) || 0; }
+function lineMet(slug, idx, st){
+  var m = lLoad();
+  if(!m[slug]) m[slug] = {};
+  if((m[slug][idx] || 0) < st){ m[slug][idx] = st; lSave(m); }
+}
+function linesYours(){
+  var m = lLoad(), n = 0;
+  Object.keys(m).forEach(function(s){
+    Object.keys(m[s]).forEach(function(i){ if(m[s][i] >= 2) n++; });
+  });
+  return n;
+}
+function hearBtns(line, slug, idx){
+  var wrap = h("span","ydc-hear");
+  if(!VOICE.ok){ wrap.style.display = "none"; return wrap; }
+  var b1 = h("button","ydc-hear-btn");
+  b1.type = "button";
+  b1.setAttribute("aria-label","hear this line");
+  b1.innerHTML = HEAR_SVG;
+  b1.addEventListener("click", function(){ speakLine(line, 0.95, b1); lineMet(slug, idx, 1); });
+  var b2 = h("button","ydc-hear-btn slow","slow");
+  b2.type = "button";
+  b2.setAttribute("aria-label","hear this line slowly");
+  b2.addEventListener("click", function(){ speakLine(line, 0.6, b2); lineMet(slug, idx, 1); });
+  wrap.appendChild(b1);
+  wrap.appendChild(b2);
+  return wrap;
+}
 function refreshGate(){
   var g = document.getElementById("ydcGateGo");
   if(!g || !window.__ydc) return;
@@ -87,7 +152,11 @@ function renderTrail(){
     });
     host.appendChild(card);
   });
-  host.appendChild(h("p","ydc-progress-note","your walk is kept on this device only · the platform keeps the real record"));
+  var yours = linesYours();
+  var totalLines = D.lessons.reduce(function(n, x){ return n + x.phrases.length; }, 0);
+  host.appendChild(h("p","ydc-progress-note",
+    "your walk is kept on this device only · the platform keeps the real record" +
+    (yours ? " · " + yours + "/" + totalLines + " lines becoming yours" : "")));
 }
 
 /* ---------- lesson overlay ---------- */
@@ -97,6 +166,7 @@ function openLesson(slug, push){
   var l = null;
   window.__ydc.lessons.forEach(function(x){ if(x.slug === slug) l = x; });
   if(!l || !view) return;
+  if(VOICE.ok){ try{ speechSynthesis.cancel(); }catch(e){} }
   cur = { l:l, answered:0 };
   buildLesson();
   view.hidden = false;
@@ -106,6 +176,7 @@ function openLesson(slug, push){
 }
 function closeLesson(){
   if(!view) return;
+  if(VOICE.ok){ try{ speechSynthesis.cancel(); }catch(e){} }
   view.hidden = true;
   document.body.style.overflow = "";
   if(history.replaceState) history.replaceState(null,"",location.pathname);
@@ -144,18 +215,38 @@ function buildLesson(){
   head.appendChild(h("span","ydc-wtag",l.workplace));
   body.appendChild(head);
 
-  /* recall — yesterday's line before today's scene (return loop) */
-  var prog0 = pLoad(), prev = null;
-  window.__ydc.lessons.forEach(function(x){ if(x.order === l.order-1) prev = x; });
-  if(prev && prog0[prev.slug]){
+  /* recall — the weakest line you already met, before the new scene (adaptive return loop) */
+  var prog0 = pLoad(), cand = [];
+  window.__ydc.lessons.forEach(function(x){
+    if(x.slug === l.slug || !prog0[x.slug]) return;
+    x.phrases.forEach(function(p, pi){
+      cand.push({ les:x, idx:pi, st:lineState(x.slug, pi) });
+    });
+  });
+  if(cand.length){
+    cand.sort(function(a, b){ return a.st - b.st; });
+    var pool = cand.filter(function(c){ return c.st === cand[0].st; });
+    var pick = pool[Math.floor(Math.random()*pool.length)];
     var rc = h("div","ydc-recall");
-    rc.appendChild(h("p","ydc-recall-k","before the new scene · one line from "+prev.code));
-    rc.appendChild(h("p","ydc-recall-cue","You walked “"+prev.title_en+"” already. Say its first work line out loud — then peek."));
+    rc.appendChild(h("p","ydc-recall-k","before the new scene · one line from "+pick.les.code));
+    rc.appendChild(h("p","ydc-recall-cue","You walked “"+pick.les.title_en+"” already. Say this line out loud — then peek."));
     var ans = h("div","ydc-recall-ans");
-    ans.appendChild(h("p",null,prev.phrases[0][1]));
+    ans.appendChild(h("p",null,pick.les.phrases[pick.idx][1]));
+    ans.appendChild(hearBtns(pick.les.phrases[pick.idx][1], pick.les.slug, pick.idx));
     var rb = h("button","ydc-recall-btn","show me the line");
     rb.type = "button";
-    rb.addEventListener("click", function(){ rc.classList.add("open"); });
+    rb.addEventListener("click", function(){
+      rc.classList.add("open");
+      rb.remove();
+      var mine = h("button","ydc-recall-mine","I said it — mark it mine");
+      mine.type = "button";
+      mine.addEventListener("click", function(){
+        lineMet(pick.les.slug, pick.idx, 2);
+        mine.remove();
+        rc.appendChild(h("p","ydc-recall-done","yours now — it will come back less often."));
+      });
+      rc.appendChild(mine);
+    });
     rc.appendChild(ans);
     rc.appendChild(rb);
     body.appendChild(rc);
@@ -177,7 +268,8 @@ function buildLesson(){
   var lab2 = h("p","ydc-slabel","the lines");
   lab2.appendChild(h("em",null,"same meaning — the book, then the floor"));
   sec2.appendChild(lab2);
-  l.phrases.forEach(function(ph){
+  if(VOICE.ok) sec2.appendChild(h("p","ydc-voice-note","tap to hear every work line — device voice on your phone · studio voice in progress (CTO lane)"));
+  l.phrases.forEach(function(ph, pi){
     var card = h("article","ydc-ph");
     var book = h("div","ydc-ph-book");
     book.appendChild(h("span","ydc-tag","the book"));
@@ -186,6 +278,8 @@ function buildLesson(){
     var work = h("div","ydc-ph-work");
     work.appendChild(h("span","ydc-tag work","at work"));
     work.appendChild(h("span",null,ph[1]));
+    work.appendChild(hearBtns(ph[1], l.slug, pi));
+    if(lineState(l.slug, pi) >= 2) work.classList.add("mine");
     card.appendChild(work);
     var mt = h("button","ydc-ph-mmt","မြန်မာ မှတ်ချက်");
     mt.type = "button";
@@ -357,9 +451,11 @@ function buildCheck(l){
       body:"That line belongs to a different scene. Reread this one, then pick again." };
   });
 
-  /* Q4 — say it yourself (production, not recognition) */
+  /* Q4 — say it yourself (voice first where the device allows, typing always) */
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition || null;
   var q4 = qBlock(sec, "moment 4 · say it yourself",
-    "No options this time. The moment is in front of you — type the line you would actually say, in your own words. Close counts.");
+    SR ? "No options this time. Speak the line you would actually say — or type it. Close counts."
+       : "No options this time. The moment is in front of you — type the line you would actually say, in your own words. Close counts.");
   var sayRow = h("div","ydc-say-row");
   var sayIn = h("input","ydc-say-in");
   sayIn.type = "text";
@@ -369,7 +465,7 @@ function buildCheck(l){
   var sayGo = h("button","ydc-confirm","try it");
   sayGo.type = "button";
   var sayNote = h("div");
-  var sayMiss = 0, sayDone = false;
+  var sayMiss = 0, sayDone = false, micBtn = null;
   var SAY_STOP = {};
   ("the a an to for of and or is are am do does did you your i we me my our please just can could would will shall should may might how what who it its that this these those on in at by be been being have has had with from about so up down there here not no if as he she they them his her their were was are").split(" ").forEach(function(w){ SAY_STOP[w]=1; });
   function sayTokens(s){
@@ -391,10 +487,19 @@ function buildCheck(l){
       var r = hit / target.length;
       if(r > best){ best = r; bestLine = p[1]; }
     });
+    if(!bestLine) bestLine = l.phrases[0][1];
+    var bestIdx = -1;
+    l.phrases.forEach(function(p, pi){ if(p[1] === bestLine) bestIdx = pi; });
     if(best >= 0.75){
       sayDone = true;
       sayIn.disabled = true;
       sayGo.remove();
+      if(micBtn) micBtn.disabled = true;
+      if(bestIdx >= 0){
+        lineMet(l.slug, bestIdx, 2);
+        var rows = view.querySelectorAll(".ydc-ph-work");
+        if(rows[bestIdx]) rows[bestIdx].classList.add("mine");
+      }
       setNote(sayNote, "best", "Best fit — in your own hands.",
         "You did not pick the line. You produced it. That is the moment it becomes yours.");
       tally(sec, l);
@@ -404,6 +509,8 @@ function buildCheck(l){
         sayDone = true;
         sayIn.disabled = true;
         sayGo.remove();
+        if(micBtn) micBtn.disabled = true;
+        if(bestIdx >= 0) lineMet(l.slug, bestIdx, 1);
         setNote(sayNote, "partial", "Here — take the line.",
           "“"+bestLine+"” — say it out loud once, slowly. It will be yours next time.");
         tally(sec, l);
@@ -419,6 +526,70 @@ function buildCheck(l){
   }
   sayGo.addEventListener("click", sayGrade);
   sayIn.addEventListener("keydown", function(e){ if(e.key === "Enter") sayGrade(); });
+  if(SR){
+    var micRow = h("div","ydc-mic-row");
+    var mic = h("button","ydc-mic");
+    mic.type = "button";
+    mic.innerHTML = MIC_SVG;
+    mic.appendChild(document.createTextNode(" speak the line"));
+    micBtn = mic;
+    var listening = false;
+    mic.addEventListener("click", function(){
+      if(sayDone || listening) return;
+      var rec;
+      try{ rec = new SR(); }catch(e){
+        setNote(sayNote, "notyet", "The mic is not answering.", "Type the line instead — same ground, same line.");
+        return;
+      }
+      try{
+        rec.lang = "en-US";
+        rec.interimResults = false;
+        rec.maxAlternatives = 3;
+      }catch(e){}
+      listening = true;
+      mic.classList.add("listening");
+      mic.lastChild.nodeValue = " listening… speak now";
+      var settled = false;
+      function settle(){
+        if(settled) return;
+        settled = true;
+        listening = false;
+        mic.classList.remove("listening");
+        mic.lastChild.nodeValue = " speak the line";
+      }
+      rec.onresult = function(ev){
+        settle();
+        var bestT = "", bestC = -1;
+        try{
+          for(var i = 0; i < ev.results[0].length; i++){
+            var alt = ev.results[0][i];
+            if(alt.confidence > bestC){ bestC = alt.confidence; bestT = alt.transcript; }
+          }
+        }catch(e){}
+        if(bestT){
+          sayIn.value = bestT;
+          sayGrade();
+        } else {
+          setNote(sayNote, "notyet", "The mic heard nothing.", "Speak a little closer, or type the line — both count the same.");
+        }
+      };
+      rec.onerror = function(ev){
+        settle();
+        setNote(sayNote, "notyet", "The mic missed that one.",
+          (ev && ev.error === "not-allowed")
+            ? "Mic permission is off — typing works exactly the same. Your line, your way."
+            : "No harm done — type the line, or tap the mic and try again.");
+      };
+      rec.onend = function(){ settle(); };
+      try{ rec.start(); }catch(e){
+        settle();
+        setNote(sayNote, "notyet", "The mic is not answering.", "Type the line instead — same ground, same line.");
+      }
+    });
+    micRow.appendChild(mic);
+    micRow.appendChild(h("span","ydc-mic-note","your device listens · typing works too"));
+    q4.appendChild(micRow);
+  }
   sayRow.appendChild(sayIn);
   sayRow.appendChild(sayGo);
   q4.appendChild(sayRow);
