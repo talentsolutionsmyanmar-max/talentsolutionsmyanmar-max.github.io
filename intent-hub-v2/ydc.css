@@ -108,3 +108,20 @@
 .ydc-maya-a em{font-style:italic;color:var(--muted)}
 @media(min-width:700px){.ydc-wrap{padding-bottom:60px}.ydc-sheet ol{grid-template-columns:repeat(2,1fr);display:grid;gap:8px 22px}}
 @media(prefers-reduced-motion:reduce){.ydc-ph.pulse{animation:none}}
+
+/* p1.5 — say-it production, recall loop, device-kept progress */
+.ydc-recall{border:1.5px dashed rgb(15 118 110 / .45);background:#f2faf7;border-radius:var(--r2);padding:12px;margin:14px 0 0}
+.ydc-recall-k{font:600 7px "JetBrains Mono";letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
+.ydc-recall-cue{font-size:12px;line-height:1.6;color:var(--ink);margin:0 0 8px}
+.ydc-recall-ans{display:none;font:600 14px/1.5 "Sora",sans-serif;color:var(--navy)}
+.ydc-recall.open .ydc-recall-ans{display:block}
+.ydc-recall-btn{min-height:36px;border:1px solid rgb(15 118 110 / .4);border-radius:999px;background:transparent;color:var(--teal);padding:0 13px;font-size:9px;font-weight:700}
+.ydc-recall.open .ydc-recall-btn{display:none}
+.ydc-say-row{display:flex;gap:8px;flex-wrap:wrap}
+.ydc-say-in{flex:1 1 220px;min-height:48px;border:1px solid var(--line);border-radius:var(--r2);background:var(--paper);padding:10px 12px;font:500 13px "Inter",sans-serif;color:var(--ink)}
+.ydc-say-in:focus{outline:2px solid rgb(212 175 55 / .55);outline-offset:1px}
+.ydc-row.done{border-color:rgb(212 175 55 / .6);background:#fffdf4}
+.ydc-tick{display:none;flex:0 0 auto;width:18px;height:18px;border-radius:50%;background:var(--verified);color:#fff;font-size:10px;place-items:center}
+.ydc-row.done .ydc-tick{display:grid}
+.ydc-gate.open{border:1px solid rgb(212 175 55 / .6);background:linear-gradient(135deg,var(--navy),#0a2f5c)}
+.ydc-progress-note{font:500 7.5px "JetBrains Mono";color:var(--muted);margin:10px 0 0;letter-spacing:.02em}
