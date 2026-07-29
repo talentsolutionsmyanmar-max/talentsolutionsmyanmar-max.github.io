@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;family=Padauk:wght@400;700&amp;family=Sora:wght@500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="hub.css">
+  <link rel="stylesheet" href="ydc.css">
 </head>
 <body>
   <span class="cur-dot" aria-hidden="true"></span><span class="cur-ring" aria-hidden="true"></span>
@@ -85,14 +86,27 @@
       </div>
     </section>
 
-    <section class="screen" id="screen-learn" data-door="learn" aria-labelledby="learn-title"><div class="wrap screen-inner"><button class="back js-door" type="button" data-target="home"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>All paths</button><div class="door-head"><div><div class="fig">FIG 03 / Learn</div><h1 id="learn-title">Learn with a companion.</h1><p>Academy provides the structured course path. Maya stays beside it as the advisor who helps you turn knowledge into judgment.</p></div></div><div class="door-stack"><article class="route-card dark"><div><span class="route-note">ACADEMY / FREE CAREER COURSES</span><h2>Build career capability.</h2><p>Progress through structured learning and carry earned certificates into your professional record.</p></div><div class="route-actions"><a class="button button-gold" href="https://www.refertrm.com/eq/academy">Open Academy</a></div></article><article class="route-card"><div><span class="route-note">MAYA / AI ADVISOR</span><h2>Ask what to do next.</h2><p>Use Maya across the journey for career guidance, reflection and practical next steps.</p></div><div class="route-actions"><a class="button button-navy" href="https://www.refertrm.com/eq/maya">Talk with Maya</a></div></article></div></div></section>
+    <section class="screen" id="screen-learn" data-door="learn" aria-labelledby="learn-title"><div class="wrap screen-inner"><button class="back js-door" type="button" data-target="home"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>All paths</button>
+      <div class="door-head"><div><div class="fig">FIG 03 / Learn — YDC English</div><h1 id="learn-title">School that fits in your pocket.</h1><p>Eighteen signed lessons. Three bands. One trail from first greeting to job-ready — every line pulled from the real curriculum, every check about mastery, never grades.</p></div></div>
+      <p class="ydc-trust">real curriculum · youth_module · dev branch ydc-schema-foundation-s266 · content md5-verified 18/18 · as of 29 Jul 2026</p>
+      <div class="ydc-trail" id="ydcTrail"><p class="ydc-trust">The path loads with JavaScript — 18 lessons, three bands, one trail.</p></div>
+      <div class="ydc-gate"><div><h3>JOB-READY</h3><p>Walk all eighteen. The gate opens when the work voice is yours — <b>there is nothing to fail here</b>, only ground to stand on.</p></div><button class="ydc-gate-link" id="ydcGateGo" type="button">start at F1<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-6-6 6 6-6 6"/></svg></button></div>
+      <p class="ydc-plat">the trail continues on the platform</p>
+      <div class="door-stack"><article class="route-card dark"><div><span class="route-note">ACADEMY / FREE CAREER COURSES</span><h2>Build career capability.</h2><p>Progress through structured learning and carry earned certificates into your professional record.</p></div><div class="route-actions"><a class="button button-gold" href="https://www.refertrm.com/eq/academy">Open Academy</a></div></article>
+      <article class="route-card"><div><span class="route-note">MAYA / AI ADVISOR</span><h2>Ask what to do next.</h2><p>Use Maya across the journey for career guidance, reflection and practical next steps.</p></div><div class="route-actions"><a class="button button-navy" href="https://www.refertrm.com/eq/maya">Talk with Maya</a></div></article></div></div>
+    </section>
 
     <section class="screen" id="screen-refer" data-door="refer" aria-labelledby="refer-title"><div class="wrap screen-inner"><button class="back js-door" type="button" data-target="home"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>All paths</button><div class="door-head"><div><div class="fig">FIG 04 / Refer &amp; earn</div><h1 id="refer-title">Grow by opening doors.</h1><p>A progression from helping one person discover an opportunity to building professional business-development capability.</p></div></div><div class="tier-list"><div class="tier"><span><strong>Pocket Money</strong><span>Begin with a real referral.</span></span></div><div class="tier"><span><strong>Active Referrer</strong><span>Build consistent activity.</span></span></div><div class="tier"><span><strong>Pro Referrer</strong><span>Develop trusted outcomes.</span></span></div><div class="tier"><span><strong>Certified Recruiter</strong><span>Pair practice with verified learning.</span></span></div><div class="tier"><span><strong>BD Freelancer</strong><span>Grow into business development.</span></span></div></div><div class="route-actions"><a class="button button-navy" href="https://www.refertrm.com/eq/referrals">See my referral path</a></div></div></section>
   </main>
 
+  <div class="ydc-lesson" id="ydcLesson" hidden></div>
+
   <noscript><div class="noscript"><h1>Choose your path</h1><p><a href="https://www.refertrm.com/eq/jobs">Find a job</a> · <a href="https://www.refertrm.com/eq/game">Play the Career Game</a> · <a href="https://www.refertrm.com/eq/academy">Learn</a> · <a href="https://www.refertrm.com/eq/referrals">Refer and earn</a></p><p>The hub lights up with JavaScript; every path stays free.</p></div></noscript>
   <div class="mono" id="announcer" aria-live="polite" hidden></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="ydc-data-a.js"></script>
+  <script src="ydc-data-b.js"></script>
   <script src="hub.js"></script>
+  <script src="ydc.js"></script>
 </body>
 </html>
