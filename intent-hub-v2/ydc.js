@@ -42,6 +42,7 @@ function pSave(p){ try{ localStorage.setItem(PKEY, JSON.stringify(p)); }catch(e)
 
 /* ---------- device voice (honest: this device speaks — studio voice in progress) ---------- */
 var VOICE = { ok: ("speechSynthesis" in window), v: null };
+var IS_IOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && (navigator.maxTouchPoints || 0) > 1);
 function voicePick(){
   if(!VOICE.ok) return;
   var vs = [];
@@ -58,14 +59,23 @@ function speakLine(text, rate, btn){
   try{
     speechSynthesis.cancel();
     var u = new SpeechSynthesisUtterance(text);
-    if(VOICE.v){ try{ u.voice = VOICE.v; }catch(e){} }
+    /* iOS: cancel() swallows an immediate speak(), and a foreign voice object can
+       block playback entirely — speak after a breath, on lang alone. */
+    if(VOICE.v && !IS_IOS){ try{ u.voice = VOICE.v; }catch(e){} }
     u.lang = (VOICE.v && VOICE.v.lang) || "en-US";
     u.rate = rate;
     if(btn){
       btn.classList.add("speaking");
       u.onend = u.onerror = function(){ btn.classList.remove("speaking"); };
     }
-    speechSynthesis.speak(u);
+    if(IS_IOS){
+      setTimeout(function(){
+        try{ speechSynthesis.resume(); }catch(e){}
+        try{ speechSynthesis.speak(u); }catch(e){}
+      }, 60);
+    } else {
+      speechSynthesis.speak(u);
+    }
   }catch(e){}
 }
 
