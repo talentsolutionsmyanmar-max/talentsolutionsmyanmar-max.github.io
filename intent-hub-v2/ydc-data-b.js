@@ -179,7 +179,7 @@ window.__ydc.lessons.push(...[
   "title_en": "I'd Like to Talk About My Pay",
   "title_mm": "လစာအကြောင်း ဆွေးနွေးလိုပါသည်",
   "scenario_en": "You've worked at the restaurant for a year, training new staff and handling weekend rushes. You want to discuss a raise — but bringing it up feels uncomfortable.",
-  "scenario_mm": "Restaurant တွင် တစ်နှစ်လုပ်ကိုင်ပြီး Staff အသစ်များကို်ပြခြင်းနှင့် ပိတ်ရက်အလုပ်များကို ကူညီထားပါသည်။ လစာအကြောင်း ဆွေးနွေးလိုသော်လည်း စတင်ပြောရန် အားနာစိတ်ရှိနိုင်ပါသည်။",
+  "scenario_mm": "Restaurant \u1010\u103d\u1004\u103a \u1010\u1005\u103a\u1014\u103e\u1005\u103a\u101c\u102f\u1015\u103a\u1000\u102d\u102f\u1004\u103a\u1015\u103c\u102e\u1038 Staff \u1021\u101e\u1005\u103a\u1019\u103b\u102c\u1038\u1000\u102d\u102f \u101e\u1004\u103a\u1015\u103c\u1001\u103c\u1004\u103a\u1038\u1014\u103e\u1004\u1037\u103a \u1015\u102d\u1010\u103a\u101b\u1000\u103a\u1021\u101c\u102f\u1015\u103a\u1019\u103b\u102c\u1038\u1000\u102d\u102f \u1000\u1030\u100a\u102e\u1011\u102c\u1038\u1015\u102b\u101e\u100a\u103a\u104b \u101c\u1005\u102c\u1021\u1000\u103c\u1031\u102c\u1004\u103a\u1038 \u1006\u103d\u1031\u1038\u1014\u103d\u1031\u1038\u101c\u102d\u102f\u101e\u1031\u102c\u103a\u101c\u100a\u103a\u1038 \u1005\u1010\u1004\u103a\u1015\u103c\u1031\u102c\u101b\u1014\u103a \u1021\u102c\u1038\u1014\u102c\u1005\u102d\u1010\u103a\u101b\u103e\u102d\u1014\u102d\u102f\u1004\u103a\u1015\u102b\u101e\u100a\u103a\u104b",
   "grammar_en": "Notice \"I was hoping\" is softer than \"I want\" — it makes a request feel less like a demand. Perfect for sensitive topics like pay, or anytime you don't want to put someone on the spot.",
   "grammar_mm": "\"I was hoping\" သည် \"I want\" ထက် ပိုနူးညံ့ပါသည်။ လစာကဲ့သို့ အားနာစိတ်ရှိနိုင်သော အကြောင်းအရာများတွင် တောင်းဆိုမှုကို အမိန့်မဟုတ်ဘဲ ယဉ်ကျေးသော ဆွေးနွေးချက်အဖြစ် ပြောင်းပေးပါသည်။",
   "phrases": [
@@ -206,7 +206,7 @@ window.__ydc.lessons.push(...[
    [
     "I am very committed to this team and want to continue growing here.",
     "I love working here and I want to keep growing with the team.",
-    "အဖွဲ့နှင့် ဆက်လက်ကြီးထွားလိုကြောင်း ပြောရန် ဖြစ်ပါသည်။ လစာဆွေးနွေးခြင်းကို အလုပ်မှထွက်လြင်းအဖြစ် မဟုတ်ဘဲ ကြီးထွားလြင်းအဖြစ် ပြသပါသည်။"
+    "\u1021\u1016\u103d\u1032\u1037\u1014\u103e\u1004\u1037\u103a \u1006\u1000\u103a\u101c\u1000\u103a\u1000\u103c\u102e\u1038\u1011\u103d\u102c\u1038\u101c\u102d\u102f\u1000\u103c\u1031\u102c\u1004\u103a\u1038 \u1015\u103c\u1031\u102c\u101b\u1014\u103a \u1016\u103c\u1005\u103a\u1015\u102b\u101e\u100a\u103a\u104b \u101c\u1005\u102c\u1006\u103d\u1031\u1038\u1014\u103d\u1031\u1038\u1001\u103c\u1004\u103a\u1038\u1000\u102d\u102f \u1021\u101c\u102f\u1015\u103a\u1019\u103e\u1011\u103d\u1000\u103a\u101c\u102d\u102f\u1001\u103c\u1004\u103a\u1038\u1021\u1016\u103c\u1005\u103a \u1019\u101f\u102f\u1010\u103a\u1018\u1032 \u1000\u103c\u102e\u1038\u1011\u103d\u102c\u1038\u101c\u102d\u102f\u1001\u103c\u1004\u103a\u1038\u1021\u1016\u103c\u1005\u103a \u1015\u103c\u101e\u1015\u102b\u101e\u100a\u103a\u104b"
    ]
   ]
  },
@@ -304,7 +304,7 @@ window.__ydc.lessons.push(...[
   "scenario_en": "In a team meeting, your manager asks for ideas to improve customer service. You have a good suggestion — but five senior colleagues are in the room and you've never spoken up before.",
   "scenario_mm": "Team meeting တွင် မန်နေဂျာက Customer service ပိုကောင်းစေရန် အကြံများ မေးပါသည်။ အကြီးတန်းလုပ်ဖော်ကိုင်ဖက်ငါးဦး ရှိနေသောကြောင့် အားနာစိတ်ရှိသော်လည်း သင့်တွင် အသုံးဝင်သော အကြံတစ်ခု ရှိပါသည်။",
   "grammar_en": "Notice \"what if we tried\" uses the past tense — but it's not about the past. It's a soft way to suggest something new. \"What if we tried\" feels less pushy than \"we should try.\" Very useful in meetings.",
-  "grammar_mm": "\"what if we tried\" တွင် Past tense ပုံစံ ပါသော်လည်း အတိတ်အကြောင်း မဟုတ်ပါ။အသစ်ကို နူးညံ့စွာ တင်ပြရန် သုံးသော ပုံစံဖြစ်ပါသည်။ \"we should try\" ထက် ပိုမဖိအားပေးသောကြောင့် Meeting များတွင် အလွန်အသုံးဝင်ပါသည်။",
+  "grammar_mm": "\"what if we tried\" \u1010\u103d\u1004\u103a Past tense \u1015\u102f\u1036\u1005\u1036 \u1015\u102b\u101e\u1031\u102c\u103a\u101c\u100a\u103a\u1038 \u1021\u1010\u102d\u1010\u103a\u1021\u1000\u103c\u1031\u102c\u1004\u103a\u1038 \u1019\u101f\u102f\u1010\u103a\u1015\u102b\u104b \u1021\u1000\u103c\u1036\u1021\u101e\u1005\u103a\u1000\u102d\u102f \u1014\u1030\u1038\u100a\u1036\u1037\u1005\u103d\u102c \u1010\u1004\u103a\u1015\u103c\u101b\u1014\u103a \u101e\u102f\u1036\u1038\u101e\u1031\u102c \u1015\u102f\u1036\u1005\u1036\u1016\u103c\u1005\u103a\u1015\u102b\u101e\u100a\u103a\u104b \"we should try\" \u1011\u1000\u103a \u1015\u102d\u102f\u1019\u1016\u102d\u1021\u102c\u1038\u1015\u1031\u1038\u101e\u1031\u102c\u1000\u103c\u1031\u102c\u1004\u1037\u103a Meeting \u1019\u103b\u102c\u1038\u1010\u103d\u1004\u103a \u1021\u101c\u103d\u1014\u103a\u1021\u101e\u102f\u1036\u1038\u101d\u1004\u103a\u1015\u102b\u101e\u100a\u103a\u104b",
   "phrases": [
    [
     "I would like to suggest something, if I may.",
