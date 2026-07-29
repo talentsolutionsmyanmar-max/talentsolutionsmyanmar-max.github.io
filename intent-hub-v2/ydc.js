@@ -33,30 +33,52 @@ function shuffle(a){
   return a;
 }
 
+/* ---------- device-kept progress (honest: this device only) ---------- */
+var PKEY = "ydc.path.v1";
+function pLoad(){ try{ return JSON.parse(localStorage.getItem(PKEY)||"{}"); }catch(e){ return {}; } }
+function pSave(p){ try{ localStorage.setItem(PKEY, JSON.stringify(p)); }catch(e){} }
+function refreshGate(){
+  var g = document.getElementById("ydcGateGo");
+  if(!g || !window.__ydc) return;
+  var prog = pLoad();
+  var done = window.__ydc.lessons.filter(function(l){ return prog[l.slug]; }).length;
+  var card = g.closest(".ydc-gate");
+  if(done >= window.__ydc.lessons.length){
+    card.classList.add("open");
+    card.querySelector("h3").textContent = "JOB-READY — the gate is open";
+    card.querySelector("p").innerHTML = "You walked all eighteen on this device. The platform keeps the real record — <b>you are the proof now</b>.";
+    if(g.firstChild) g.firstChild.nodeValue = "walk it again";
+  }
+}
+
 /* ---------- trail ---------- */
 function renderTrail(){
   var D = window.__ydc, host = document.getElementById("ydcTrail");
   if(!D || !host) return;
   clear(host);
+  var prog = pLoad();
   D.bands.forEach(function(band){
     var lessons = D.lessons.filter(function(l){ return l.band === band.id; });
+    var walked = lessons.filter(function(l){ return prog[l.slug]; }).length;
     var card = h("section","ydc-band");
     card.setAttribute("data-band", band.id);
     var head = h("div","ydc-band-head");
     head.appendChild(h("span","ydc-band-name",band.name));
     head.appendChild(h("span","ydc-band-sub",band.sub));
-    head.appendChild(h("span","ydc-band-count",lessons.length+" lessons"));
+    head.appendChild(h("span","ydc-band-count", walked ? (walked+"/"+lessons.length+" walked") : (lessons.length+" lessons")));
     card.appendChild(head);
     lessons.forEach(function(l){
       var row = h("button","ydc-row");
       row.type = "button";
       row.setAttribute("aria-label", l.code + " — " + l.title_en);
+      if(prog[l.slug]) row.classList.add("done");
       row.appendChild(h("span","ydc-code",l.code));
       var rt = h("span","ydc-rt");
       rt.appendChild(h("b",null,l.title_en));
       rt.appendChild(h("i",null,l.title_mm));
       row.appendChild(rt);
       row.appendChild(h("span","ydc-rtag",l.workplace));
+      row.appendChild(h("span","ydc-tick","✓"));
       var chev = h("span","ydc-chev");
       chev.innerHTML = CHEV_SVG;
       row.appendChild(chev);
@@ -65,6 +87,7 @@ function renderTrail(){
     });
     host.appendChild(card);
   });
+  host.appendChild(h("p","ydc-progress-note","your walk is kept on this device only · the platform keeps the real record"));
 }
 
 /* ---------- lesson overlay ---------- */
@@ -120,6 +143,23 @@ function buildLesson(){
   head.appendChild(h("p","ydc-hmm",l.title_mm));
   head.appendChild(h("span","ydc-wtag",l.workplace));
   body.appendChild(head);
+
+  /* recall — yesterday's line before today's scene (return loop) */
+  var prog0 = pLoad(), prev = null;
+  window.__ydc.lessons.forEach(function(x){ if(x.order === l.order-1) prev = x; });
+  if(prev && prog0[prev.slug]){
+    var rc = h("div","ydc-recall");
+    rc.appendChild(h("p","ydc-recall-k","before the new scene · one line from "+prev.code));
+    rc.appendChild(h("p","ydc-recall-cue","You walked “"+prev.title_en+"” already. Say its first work line out loud — then peek."));
+    var ans = h("div","ydc-recall-ans");
+    ans.appendChild(h("p",null,prev.phrases[0][1]));
+    var rb = h("button","ydc-recall-btn","show me the line");
+    rb.type = "button";
+    rb.addEventListener("click", function(){ rc.classList.add("open"); });
+    rc.appendChild(ans);
+    rc.appendChild(rb);
+    body.appendChild(rc);
+  }
 
   /* scene */
   var sec1 = h("section","ydc-sec");
@@ -231,7 +271,7 @@ function buildCheck(l){
   lab.appendChild(h("em",null,"mastery, not grades — the re-ask never closes"));
   sec.appendChild(lab);
   sec.appendChild(h("p","ydc-check-intro",
-    "Three moments, no scores. “Best fit” means you picked the working line. Anything else is just a signpost — read the note, try again."));
+    "Four moments, no scores. “Best fit” means you found the working line — and the last one you say yourself. Anything else is just a signpost — read the note, try again."));
   /* Maya steps aside during the check — she never solves it, and never covers it */
   sec.addEventListener("click", function(){
     var p = view.querySelector(".ydc-maya-panel.open");
@@ -317,6 +357,73 @@ function buildCheck(l){
       body:"That line belongs to a different scene. Reread this one, then pick again." };
   });
 
+  /* Q4 — say it yourself (production, not recognition) */
+  var q4 = qBlock(sec, "moment 4 · say it yourself",
+    "No options this time. The moment is in front of you — type the line you would actually say, in your own words. Close counts.");
+  var sayRow = h("div","ydc-say-row");
+  var sayIn = h("input","ydc-say-in");
+  sayIn.type = "text";
+  sayIn.setAttribute("autocomplete","off");
+  sayIn.setAttribute("aria-label","Your line");
+  sayIn.placeholder = "your line, your words…";
+  var sayGo = h("button","ydc-confirm","try it");
+  sayGo.type = "button";
+  var sayNote = h("div");
+  var sayMiss = 0, sayDone = false;
+  var SAY_STOP = {};
+  ("the a an to for of and or is are am do does did you your i we me my our please just can could would will shall should may might how what who it its that this these those on in at by be been being have has had with from about so up down there here not no if as he she they them his her their were was are").split(" ").forEach(function(w){ SAY_STOP[w]=1; });
+  function sayTokens(s){
+    return s.toLowerCase().replace(/[^a-z0-9\s']/g," ").split(/\s+/).filter(function(t){ return t.length>2 && !SAY_STOP[t]; });
+  }
+  function sayGrade(){
+    if(sayDone) return;
+    var t = sayTokens(sayIn.value);
+    if(t.length < 2){
+      setNote(sayNote, "notyet", "Give me the line, not a word.",
+        "Two or three real words at least — the way you would say it to a person.");
+      return;
+    }
+    var best = 0, bestLine = null;
+    l.phrases.forEach(function(p){
+      var target = sayTokens(p[1]);
+      if(!target.length) return;
+      var hit = target.filter(function(x){ return t.indexOf(x) >= 0; }).length;
+      var r = hit / target.length;
+      if(r > best){ best = r; bestLine = p[1]; }
+    });
+    if(best >= 0.75){
+      sayDone = true;
+      sayIn.disabled = true;
+      sayGo.remove();
+      setNote(sayNote, "best", "Best fit — in your own hands.",
+        "You did not pick the line. You produced it. That is the moment it becomes yours.");
+      tally(sec, l);
+    } else {
+      sayMiss++;
+      if(sayMiss >= 3){
+        sayDone = true;
+        sayIn.disabled = true;
+        sayGo.remove();
+        setNote(sayNote, "partial", "Here — take the line.",
+          "“"+bestLine+"” — say it out loud once, slowly. It will be yours next time.");
+        tally(sec, l);
+      } else if(best >= 0.4){
+        setNote(sayNote, "partial", "The bones are there.",
+          "You have the right idea — now say it again with the whole line, every word earning its place.");
+      } else {
+        setNote(sayNote, "notyet", "Not yet — and that is fine.",
+          "Read the “at work” lines once more, then try again. Nobody is counting.");
+        reroute();
+      }
+    }
+  }
+  sayGo.addEventListener("click", sayGrade);
+  sayIn.addEventListener("keydown", function(e){ if(e.key === "Enter") sayGrade(); });
+  sayRow.appendChild(sayIn);
+  sayRow.appendChild(sayGo);
+  q4.appendChild(sayRow);
+  q4.appendChild(sayNote);
+
   function singlePick(q, opts, judge){
     var note = h("div");
     var locked = false;
@@ -368,7 +475,7 @@ function buildCheck(l){
   }
   function tally(host, l){
     cur.answered++;
-    if(cur.answered >= 3) showDone(host, l);
+    if(cur.answered >= 4) showDone(host, l);
   }
 }
 
@@ -378,7 +485,7 @@ function showDone(host, l){
   var d = h("div","ydc-done on");
   d.appendChild(h("h4",null,"You showed you can do this."));
   d.appendChild(h("p",null,
-    "All three moments landed at best fit — no score, just ground under your feet. The lines are yours now: use one today."));
+    "You picked the working lines, then said one in your own words — no score, just ground under your feet. Use one line today."));
   var row = h("div","ydc-done-row");
   var again = h("button","ydc-again","run it again");
   again.type = "button";
@@ -399,6 +506,13 @@ function showDone(host, l){
   }
   d.appendChild(row);
   host.appendChild(d);
+  var prog = pLoad();
+  if(!prog[l.slug]){
+    prog[l.slug] = { at: new Date().toISOString().slice(0,10) };
+    pSave(prog);
+  }
+  renderTrail();
+  refreshGate();
   d.scrollIntoView({block:"center"});
 }
 
@@ -425,6 +539,7 @@ function boot(){
   view = document.getElementById("ydcLesson");
   if(!view || !window.__ydc) return;
   renderTrail();
+  refreshGate();
   var gate = document.getElementById("ydcGateGo");
   if(gate) gate.addEventListener("click", function(){
     var first = window.__ydc.lessons[0];
