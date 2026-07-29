@@ -31,7 +31,7 @@ function h(tag, cls, text){
 function clear(n){ while(n.firstChild) n.removeChild(n.firstChild); }
 function shuffle(a){
   a = a.slice();
-  for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=a[i]; a[i]=t; a[j]=t; a[i]=a[j]; a[j]=t; }
+  for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=a[i]; a[i]=a[j]; a[j]=t; }
   return a;
 }
 
